@@ -1,4 +1,4 @@
-# KP_Code — Professional Web Development Portfolio
+# KP_Code Digital System
 
 <p align="center"><br></p>
 
@@ -8,130 +8,184 @@
 
 <p align="center"><br></p>
 
-> A professional, long-term portfolio showcasing real-world web projects and SaaS-style web applications.
+> Professional project portfolio, live demo catalog, and controlled Netlify release mirror for the KP_Code ecosystem.
 
-**KP_Code** is a long-term, structured **professional portfolio project** focused on building **50 high-quality web projects** across multiple industries and modern technology stacks.
+## Overview
 
-This repository is a **monorepo** documenting real, production-ready work — including both professional websites and **SaaS-style web applications** — built with clean architecture, scalability in mind, and strong attention to UI/UX and code quality.
+**KP_Code Digital System** is the central public portfolio for websites, SaaS-style applications, educational platforms, e-commerce experiences, digital tools, and frontend products developed under the KP_Code brand.
 
-The goal of this portfolio is not quantity, but **depth, consistency, and professional growth**.
+Projects are developed and maintained in dedicated repositories. This repository contains reviewed portfolio snapshots selected for public presentation and controlled Netlify deployment.
 
----
+`kp-code-portfolio` is not the primary development workspace for individual projects. Source changes are implemented, tested, reviewed, and committed in their dedicated repositories before an approved version is synchronized here for publication.
 
-## 🚀 Portfolio Roadmap (50 Projects)
+The public catalog evolves as projects reach a reviewed and portfolio-ready state.
 
-The portfolio is divided into **four technical stages**, each representing a clear step in professional development:
+## KP_Code Ecosystem
 
-1. **HTML / CSS / JavaScript (20 projects)**  
-   Solid fundamentals, semantic HTML, accessibility, performance, clean CSS architecture, and vanilla JS logic.
+### KP_Code Digital Studio
 
-2. **Tailwind CSS (10 projects)**  
-   Utility-first workflows, design systems, rapid prototyping, and scalable UI patterns.
+KP_Code Digital Studio contains public-facing digital projects such as:
 
-3. **React (10 projects)**  
-   Component-based architecture, state management, reusable UI logic, modern frontend practices.
+- business and service websites
+- SaaS-style application demos
+- educational platforms
+- e-commerce experiences
+- industry-focused frontend projects
+- portfolio and brand presentation systems
 
-4. **Full-stack (10 projects)**  
-   Complete applications including backend logic, APIs, databases, authentication, and deployment.
+### KP_Code Digital Vault
 
-Each project belongs to a **specific industry**, ensuring realistic business contexts rather than artificial demos.
+KP_Code Digital Vault contains technical and reusable digital products such as:
 
----
+- frontend audit tools
+- development laboratories
+- educational systems
+- calculators and utilities
+- reusable design and engineering resources
+- browser-based productivity tools
 
-## 🌐 Live Demos
+Together, Digital Studio and Digital Vault form the wider **KP_Code Digital System**.
 
-Completed and actively developed frontend projects are deployed on **Netlify** and publicly available:
+## Live Projects
 
-- [Ceremonial Services — Pr01 — Eternal Rest](https://ceremonial-pr01-eternalrest.netlify.app/)
-- [Ceremonial Services — Pr02 — EverAfter Ring](https://ceremonial-pr02-everafterring.netlify.app/)
-- [Construction — Pr01 — Solid Craft](https://construction-pr01-solidcraft.netlify.app/)
-- [Construction — Pr02 — Axiom](https://construction-pr02-axiom.netlify.app/)
-- [E-commerce — Pr01 — Volt Garage](https://e-commerce-pr01-voltgarage.netlify.app/)
-- [E-commerce — Pr02 — Outland Gear](https://e-commerce-pr02-outlandgear.netlify.app/)
-- [Education — Pr01 — Lauren English](https://education-pr01-laurenenglish.netlify.app/)
-- [Education — Pr02 — Nova Learn Academy](https://education-pr02-novalearn.netlify.app/)
-- [Fasion & Beauty — Pr01 — Studio Noir](https://fashion-pr01-studionoir.netlify.app/)
-- [Fasion & Beauty — Pr02 — Lume Skin](https://fashion-pr02-lumeskin.netlify.app/)
-- [Gastronomy — Pr01 — Ambre](https://gastronomy-pr01-ambre.netlify.app/)
-- [Gastronomy — Pr02 — Atelier No.02](https://gastronomy-pr02-atelier.netlify.app/)
-- [Hospitality — Pr01 — Vista](https://hospitality-pr01-vista.netlify.app/)
-- [Hospitality — Pr02 — Aurora](https://hospitality-pr02-aurora.netlify.app/)
-- [IT Software — Pr01 — Vertex Digital](https://it-pr01-vertexdigital.netlify.app/)
-- [IT Softare — Pr02 — BlackGrid Security](https://it-pr02-blackgrid.netlify.app/)
-- [Medicine — Pr01 — Vireon Clinic](https://medicine-pr01-vireonclinic.netlify.app/)
-- [Medicine — Pr02 — VitaFlex](https://medicine-pr02-vitaflex.netlify.app/)
-- [SaaS Dashboards — Pr01 — Flowdesk](https://saas-pr01-flowdesk.netlify.app/)
-- [SaaS Dashboards — Pr02 — FleetOps](https://saas-pr02-fleetops.netlify.app/)
-- [SaaS Dashboards — Pr03 — Digital Class](https://saas-pr03-digitalclass.netlify.app/)
-- [Sports & Wellness — Pr01 — Active Life](https://sports-pr01-activelife.netlify.app/)
-- [Sports & Wellness — Pr02 — Performance Coach](https://sports-pr02-performancecoach.netlify.app/)
-- [Transport — Pr01 — TransLogix](https://transport-pr01-translogix.netlify.app/)
-- [Transport — Pr02 — Easy Move](https://transport-pr02-easymove.netlify.app/)
-  
-*(More projects are added continuously.)*
+### SaaS Applications
 
----
+- [FlowDesk](https://saas-pr01-flowdesk.netlify.app/) — Service management dashboard
+- [FleetOps](https://saas-pr02-fleetops.netlify.app/) — Fleet and transport operations dashboard
+- [Digital Class](https://saas-pr03-digitalclass.netlify.app/) — Education management interface
 
-## 🧠 Project Philosophy
+### Education
 
-- Clean, readable, and maintainable code  
-- No code generators or shortcuts  
-- Focus on real-world use cases  
-- App-like UI and architecture for SaaS-style web applications  
-- Strong emphasis on structure, consistency, and long-term scalability  
+- [Lauren English](https://education-pr01-laurenenglish.netlify.app/) — Interactive English-learning platform
+- [Nova Learn Academy](https://education-pr02-novalearn.netlify.app/) — Digital education platform
 
-This repository reflects **professional discipline**, not tutorial experiments.
+### E-commerce
 
----
+- [Volt Garage](https://e-commerce-pr01-voltgarage.netlify.app/) — Automotive e-commerce experience
+- [Outland Gear](https://e-commerce-pr02-outlandgear.netlify.app/) — Outdoor equipment storefront
 
-## 🧩 SaaS Focus
+### Ceremonial Services
 
-Selected projects in this portfolio are designed as **SaaS-style web applications**, not traditional marketing websites.
+- [Eternal Rest](https://ceremonial-pr01-eternalrest.netlify.app/)
+- [EverAfter Ring](https://ceremonial-pr02-everafterring.netlify.app/)
 
-These projects include:
-- dashboard-style layouts
-- client-side routing and state management
-- modular UI components
-- authentication and session concepts (where applicable)
-- scalability-oriented frontend architecture
+### Construction
 
-SaaS projects are treated as **application-level products**, reflecting real-world B2B and platform use cases.
+- [Solid Craft](https://construction-pr01-solidcraft.netlify.app/)
+- [Axiom](https://construction-pr02-axiom.netlify.app/)
 
----
+### Fashion and Beauty
 
-## 📁 Repository Organization
+- [Studio Noir](https://fashion-pr01-studionoir.netlify.app/)
+- [Lume Skin](https://fashion-pr02-lumeskin.netlify.app/)
 
-Projects are organized by:
+### Gastronomy
 
-**Industry → Technology Stack → Project**
+- [Ambre](https://gastronomy-pr01-ambre.netlify.app/)
+- [Atelier No.02](https://gastronomy-pr02-atelier.netlify.app/)
 
-```
-industry/
-├─ html-css-js/
-├─ tailwind/
-├─ react/
-└─ fullstack/
-```
+### Hospitality
 
-Each project is fully self-contained and documented.
+- [Vista](https://hospitality-pr01-vista.netlify.app/)
+- [Aurora](https://hospitality-pr02-aurora.netlify.app/)
 
----
+### IT and Software
 
-## 👤 Author & Brand
+- [Vertex Digital](https://it-pr01-vertexdigital.netlify.app/)
+- [BlackGrid Security](https://it-pr02-blackgrid.netlify.app/)
+
+### Medicine and Wellness
+
+- [Vireon Clinic](https://medicine-pr01-vireonclinic.netlify.app/)
+- [VitaFlex](https://medicine-pr02-vitaflex.netlify.app/)
+- [Active Life](https://sports-pr01-activelife.netlify.app/)
+- [Performance Coach](https://sports-pr02-performancecoach.netlify.app/)
+
+### Transport
+
+- [TransLogix](https://transport-pr01-translogix.netlify.app/)
+- [Easy Move](https://transport-pr02-easymove.netlify.app/)
+
+## Repository Role
+
+This repository acts as a controlled publication layer for the KP_Code portfolio.
+
+Its responsibilities include:
+
+- storing reviewed snapshots of selected projects
+- providing the source used for Netlify deployments
+- presenting the public KP_Code project catalog
+- maintaining shared portfolio branding and navigation
+- keeping public releases separate from day-to-day development work
+
+The dedicated project repositories remain the authoritative source for their code, documentation, tests, and development history.
+
+Project code should not be edited directly in `kp-code-portfolio` unless the change concerns the portfolio presentation or deployment layer itself.
+
+## Release Workflow
+
+Each project is developed in its dedicated repository.
+
+The publication workflow is:
+
+1. implement the required changes in the project repository
+2. run the relevant project checks and tests
+3. review and commit the approved project state
+4. synchronize the selected snapshot into `kp-code-portfolio`
+5. inspect the synchronization diff
+6. commit the release mirror update
+7. allow Netlify to publish the new snapshot
+8. verify the public deployment
+
+Where practical, synchronization commits may reference the source project commit SHA to preserve traceability between the development repository and the deployed version.
+
+## Engineering Principles
+
+KP_Code projects are developed according to the following principles:
+
+- dedicated repository for each active project
+- clear separation between development and publication
+- semantic, accessible, and responsive interfaces
+- maintainable HTML, CSS, and JavaScript architecture
+- evidence-based technical documentation
+- controlled and reviewable project changes
+- explicit frontend, backend, and demo boundaries
+- project-specific testing and validation
+- reusable patterns without unnecessary abstraction
+- honest documentation without unsupported production-readiness claims
+
+## Project Categories
+
+The portfolio currently includes projects from areas such as:
+
+- SaaS and operational dashboards
+- education
+- e-commerce
+- construction
+- ceremonial services
+- fashion and beauty
+- gastronomy
+- hospitality
+- IT and software
+- medicine and wellness
+- transport
+
+Categories organize the public catalog but do not restrict future KP_Code products or technologies.
+
+## Author and Brand
 
 **Author:** Kamil Król  
 **Brand:** KP_Code  
-**Focus:** Professional frontend & web application development
+**System:** KP_Code Digital System  
+**Project areas:** KP_Code Digital Studio and KP_Code Digital Vault  
+**Focus:** Frontend development, web applications, digital products, and software engineering
 
-This repository represents an evolving personal brand and a long-term commitment to high-quality software engineering.
+KP_Code Digital System represents a growing collection of independently developed digital products, technical tools, portfolio projects, and reusable systems.
 
----
-
-## 📜 License
+## License
 
 This repository is not distributed as an open-source project.
 
-The code, project structures, layouts, visual assets, documentation, and other materials in this repository are part of the KP_Code portfolio and are not intended for copying, redistribution, modification, publication, or commercial use without prior permission.
+The code, project structures, layouts, visual assets, documentation, branding, and other materials contained in this repository are part of the KP_Code portfolio and are not intended for copying, redistribution, modification, publication, or commercial use without prior permission.
 
-Unless a specific project folder or file states otherwise, this repository should be treated as `UNLICENSED`.
-
+Unless a specific project directory or file states otherwise, this repository should be treated as `UNLICENSED`.
