@@ -4,7 +4,7 @@
   "description": "A static portfolio reference website for a premium wedding and ceremonial services brand.",
   "private": true,
   "author": "Kamil Król",
-  "license": "UNLICENSED",
+  "license": "SEE LICENSE IN LICENSE",
   "type": "module",
   "keywords": [
     "portfolio",
@@ -21,7 +21,7 @@
     "build:js": "node scripts/build.mjs js",
     "build:html": "node scripts/build.mjs html",
     "build:assets": "node scripts/build.mjs assets",
-    "build": "npm run optimize:images && node scripts/build.mjs build"
+    "build": "node scripts/build.mjs build"
   },
   "devDependencies": {
     "esbuild": "^0.28.0",
