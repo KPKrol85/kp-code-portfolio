@@ -4,27 +4,28 @@
 
 ### Przegląd projektu
 
-EverAfter Ring to statyczny, wielostronicowy serwis w języku polskim, zbudowany w HTML, CSS i Vanilla JavaScript, bez zależności runtime. Repozytorium zawiera dziesięć stron w katalogu głównym: stronę główną, ofertę, usługi, realizacje, stronę o zespole, formularz kontaktowy, potwierdzenie wysłania formularza oraz trzy dokumenty prawne.
+EverAfter Ring to statyczny, wielostronicowy serwis w języku polskim, zbudowany w HTML, CSS i Vanilla JavaScript, bez zależności runtime. Repozytorium zawiera jedenaście stron w katalogu głównym: stronę główną, ofertę, usługi, realizacje, stronę o zespole, formularz kontaktowy, potwierdzenie wysłania formularza, trzy dokumenty prawne oraz własną stronę błędu 404.
 
 Projekt jest realizacją referencyjną KP_Code Digital Studio przedstawiającą przykładowy serwis dla branży ślubnej. Charakter demonstracyjny jest zakomunikowany w samym interfejsie — modal „Informacja o projekcie” w `partials/footer.html` oraz strony prawne opisują serwis jako projekt portfolio, a nie działającą firmę.
 
-Wspólny nagłówek i stopka są utrzymywane jako partiale i mają dwa tryby dostarczania: w trybie źródłowym są pobierane przez `fetch`, a w buildzie produkcyjnym wstawiane bezpośrednio do plików HTML. Wersja produkcyjna jest generowana skryptami Node do katalogu `dist/`.
+Wspólny nagłówek i stopka są utrzymywane jako partiale i mają dwa tryby dostarczania: w trybie deweloperskim są pobierane przez `fetch`, a w buildzie produkcyjnym wstawiane bezpośrednio do plików HTML. Vite jest narzędziem developmentu, builda i podglądu — nie jest frameworkiem runtime — a wersja produkcyjna jest generowana do katalogu `dist/`.
 
 ### Wersja online
 
 [https://ceremonial-pr02-everafterring.netlify.app/](https://ceremonial-pr02-everafterring.netlify.app/)
 
-Ten adres jest zadeklarowany jako kanoniczny w metadanych wszystkich stron, w `robots.txt` oraz w `sitemap.xml`. Podczas przygotowania tego dokumentu adres zwracał stronę główną EverAfter Ring.
+Ten adres jest zadeklarowany jako kanoniczny w metadanych stron indeksowanych, w `robots.txt` oraz w `sitemap.xml`. Podczas przygotowania tego dokumentu adres zwracał stronę główną EverAfter Ring.
 
 ### Kluczowe funkcje
 
 - Wielostronicowa struktura oparta na plikach HTML w katalogu głównym, bez routingu klienckiego.
-- Wspólny `header` i `footer` z `partials/`, z automatycznym oznaczaniem aktywnej strony przez `aria-current="page"` — w trybie źródłowym na podstawie `window.location`, a w buildzie na podstawie nazwy pliku.
+- Wspólny `header` i `footer` z `partials/`, z automatycznym oznaczaniem aktywnej strony przez `aria-current="page"` — w trybie deweloperskim na podstawie `window.location`, a w buildzie produkcyjnym na podstawie nazwy pliku.
 - Nawigacja mobilna poniżej progu 1024 px: `aria-expanded`, `aria-controls`, pułapka fokusa, zamykanie klawiszem `Escape`, kliknięciem linku i przy zmianie szerokości okna.
 - Przełącznik motywu jasnego i ciemnego zapisywany w `localStorage` pod kluczem `everafterring-theme`, z synchronizacją między kartami przez zdarzenie `storage` i aktualizacją `meta[name="theme-color"]`.
-- Osobny skrypt `js/theme-bootstrap.js` ładowany synchronicznie w `<head>` przed arkuszem stylów, ustawiający `data-theme` na `<html>`; przy braku zapisanego wyboru bierze pod uwagę `prefers-color-scheme`.
+- Osobny skrypt `js/theme-bootstrap.js` ładowany synchronicznie w `<head>` przed arkuszem stylów, ustawiający `data-theme` na `<html>`; przy braku zapisanego wyboru bierze pod uwagę `prefers-color-scheme`. W buildzie produkcyjnym jest minifikowany i wstawiany w to samo miejsce jako skrypt inline, żeby pozostał synchroniczny i wykonał się przed pierwszym malowaniem.
 - Formularz kontaktowy z walidacją po stronie klienta (`novalidate`, komunikaty per pole, fokus na pierwszym niepoprawnym polu) oraz statusem `aria-live="polite"`; wysyłka jest obsługiwana przez Netlify Forms z honeypotem i przekierowaniem na `dziekujemy.html`.
 - Modal informacji o projekcie (`role="dialog"`, `aria-modal="true"`) z zapisem akceptacji w `localStorage` pod kluczem `everafterringProjectNoticeAccepted` i przywróceniem wcześniejszego fokusa.
+- Lightbox portfolio na `realizacje.html`: dziewięć zdjęć realizacji otwiera się w jednym wspólnym natywnym oknie `dialog` — dwuklikiem myszą, pojedynczym dotknięciem na ekranach dotykowych oraz klawiszem `Enter` lub `Spacja`. Powiększona kopia jest klonem elementu `picture` z karty, więc korzysta z tych samych źródeł AVIF, WebP i JPG oraz z wariantu 1200 px tam, gdzie wymaga tego szerokość ekranu.
 - Zmiana stanu nagłówka przy przewijaniu z histerezą (klasa dodawana powyżej 96 px, usuwana poniżej 48 px), aktualizowana w `requestAnimationFrame`.
 - Ruch obrazu hero sterowany kursorem, uruchamiany i zatrzymywany zgodnie z aktualnym stanem `prefers-reduced-motion`.
 - Osadzona mapa Google Maps na stronie kontaktowej wraz z linkiem otwierającym tę samą lokalizację w nowej karcie.
@@ -41,14 +42,19 @@ Ten adres jest zadeklarowany jako kanoniczny w metadanych wszystkich stron, w `r
 **Build tooling**
 
 - Node.js i npm
-- `esbuild` `^0.28.0`
-- `lightningcss` `^1.32.0`
-- `sharp` `^0.34.5`
-- własne skrypty `scripts/build.mjs` i `scripts/optimize-images.mjs`
+- `vite` `^8.2.1` — serwer deweloperski, build produkcyjny i podgląd builda
+- `sharp` `^0.34.5` — generowanie wariantów obrazów
+- `@playwright/test` `^1.62.1` — smoke testy w przeglądarce Chromium
+- `vite.config.js` — konfiguracja MPA oraz wtyczki builda specyficzne dla projektu
+- `playwright.config.js` — konfiguracja testów uruchamianych na podglądzie produkcyjnym
+- własne skrypty `scripts/html-shell.mjs` i `scripts/optimize-images.mjs`
 
-**Podgląd lokalny**
+`vite`, `sharp` i `@playwright/test` to jedyne bezpośrednie zależności projektu; wszystkie są zależnościami deweloperskimi.
 
-- `python -m http.server` uruchamiany przez `start-local-preview.bat`
+**Development i podgląd lokalny**
+
+- serwer deweloperski Vite na porcie 8181 (`npm run dev`, uruchamiany też przez `start-local-preview.bat`)
+- podgląd zbudowanego katalogu `dist/` na porcie 8182 (`npm run preview`)
 
 **Assety i metadane**
 
@@ -65,13 +71,14 @@ Ten adres jest zadeklarowany jako kanoniczny w metadanych wszystkich stron, w `r
 
 ### Architektura
 
-- **Strony** — każda strona to samodzielny plik HTML w katalogu głównym z pełnym zestawem metadanych i własną treścią; `main` jest celem linku pomijającego `#main`.
-- **Partiale** — `header` i `footer` to hosty z atrybutami `data-partial` i `data-partial-src`. `js/modules/partials.js` pobiera je przez `fetch` i oznacza aktywny link, a `scripts/build.mjs` zastępuje te hosty gotowym markupem podczas builda. Oznacza to, że tryb źródłowy wymaga serwera HTTP.
+- **Strony** — każda strona to samodzielny plik HTML w katalogu głównym z pełnym zestawem metadanych i własną treścią; `main` jest celem linku pomijającego `#main`. Wyjątkiem jest `404.html`, które celowo ma ograniczony zestaw metadanych — opisuje to sekcja SEO.
+- **Partiale** — `header` i `footer` to hosty z atrybutami `data-partial` i `data-partial-src`. W trybie deweloperskim `js/modules/partials.js` pobiera je przez `fetch` i oznacza aktywny link, a serwer Vite wydaje pliki z `partials/` w niezmienionej postaci, bez traktowania ich jak samodzielnych stron. W buildzie produkcyjnym `scripts/html-shell.mjs` zastępuje te hosty gotowym markupem i statycznie ustawia `aria-current="page"`. Oznacza to, że tryb deweloperski wymaga serwera HTTP.
 - **CSS** — `css/main.css` jest jedynym punktem wejścia i importuje kolejno tokeny, fonty, bazę, layout, komponenty i sekcje. Wartości motywu są zdefiniowane jako właściwości custom w `css/tokens.css`, a wariant ciemny jako `:root[data-theme="dark"]`.
-- **JavaScript** — `js/app.js` jest punktem wejścia i po `DOMContentLoaded` uruchamia moduły w ustalonej kolejności: partiale, motyw, nagłówek, nawigacja, formularz, hero, modal projektu. Wspólne selektory są w `js/config.js`, pomocnicze funkcje DOM i pułapka fokusa w `js/utils.js`, a logika interakcji w `js/modules/`.
-- **Dwa punkty wejścia JS** — `js/app.js` bundlowany jako ESM oraz `js/theme-bootstrap.js` bundlowany jako IIFE, ponieważ musi wykonać się synchronicznie przed renderowaniem stylów.
+- **JavaScript** — `js/app.js` jest punktem wejścia i po `DOMContentLoaded` uruchamia moduły w ustalonej kolejności: partiale, motyw, nagłówek, nawigacja, formularz, hero, modal projektu, lightbox portfolio. Każdy moduł sam sprawdza, czy jego markup istnieje, więc lightbox inicjalizuje się wyłącznie na `realizacje.html`. Wspólne selektory są w `js/config.js`, pomocnicze funkcje DOM i pułapka fokusa w `js/utils.js`, a logika interakcji w `js/modules/`.
+- **Dwa punkty wejścia JS** — `js/app.js` jest modułem ES bundlowanym przez Vite, a `js/theme-bootstrap.js` pozostaje osobnym plikiem poza bundlem: w trybie deweloperskim jest ładowany jako klasyczny skrypt, a w buildzie minifikowany i wstawiany inline w to samo miejsce, ponieważ musi wykonać się synchronicznie przed renderowaniem stylów.
 - **Obrazy** — pliki źródłowe znajdują się w `assets/img-src/`, a warianty generowane przez `scripts/optimize-images.mjs` w `assets/img/`. W markupie używany jest element `picture` z kolejnością AVIF, WebP i JPG.
-- **Build** — `scripts/build.mjs` generuje katalog `dist/`, który jest wykluczony z repozytorium przez `.gitignore` i nie powinien być edytowany ręcznie.
+- **Build** — `vite.config.js` deklaruje jedenaście wejść HTML (`appType: "mpa"`), wtyczkę wspólnego shellu opartą o `scripts/html-shell.mjs` oraz kopiowanie plików statycznych z pominięciem `assets/img-src/`. Build generuje katalog `dist/`, który jest wykluczony z repozytorium przez `.gitignore` i nie powinien być edytowany ręcznie.
+- **Nazwy plików wynikowych** — bundlowany CSS i JavaScript trafiają do `dist/css/` i `dist/js/` z hashem treści w nazwie, natomiast pliki z `assets/` są kopiowane pod swoimi oryginalnymi ścieżkami, ponieważ odwołują się do nich `site.webmanifest`, bezwzględne adresy w metadanych i wygenerowane `srcset`.
 
 ### Struktura projektu
 
@@ -85,25 +92,32 @@ Ten adres jest zadeklarowany jako kanoniczny w metadanych wszystkich stron, w `r
 │   ├── logo/               # logo.svg używane w nagłówku i stopce
 │   └── og-img/             # og-img.jpg używany w metadanych Open Graph i Twitter Card
 ├── css/
-│   ├── components/         # nav, buttons, cards, forms, footer, badges, lists, project-notice
+│   ├── components/         # nav, buttons, cards, forms, footer, badges, lists, project-notice, lightbox
 │   ├── sections/           # hero, process, testimonials, callout
 │   ├── base.css
 │   ├── fonts.css
 │   ├── layout.css
 │   ├── main.css            # jedyny punkt wejścia CSS
 │   └── tokens.css
+├── docs/
+│   └── archive/
+│       └── plans/          # zarchiwizowane ukończone plany projektu (PLAN-2026-08-15.md)
 ├── js/
-│   ├── modules/            # partials, nav, theme, form, hero, header-scroll, project-notice, dom
+│   ├── modules/            # partials, nav, theme, form, hero, header-scroll, project-notice, lightbox, dom
 │   ├── app.js              # punkt wejścia ESM
 │   ├── config.js
-│   ├── theme-bootstrap.js  # osobny punkt wejścia (IIFE)
+│   ├── theme-bootstrap.js  # osobny skrypt (IIFE) wstawiany inline w buildzie
 │   └── utils.js
 ├── partials/
 │   ├── footer.html         # stopka i modal informacji o projekcie
 │   └── header.html         # nagłówek, nawigacja, przełącznik motywu
 ├── scripts/
-│   ├── build.mjs           # clean, css, js, html, assets, build
+│   ├── check.mjs           # kontrola spójności źródeł bez builda (npm run check)
+│   ├── html-shell.mjs      # wspólny shell, walidacja nawigacji, inline theme bootstrap
 │   └── optimize-images.mjs
+├── tests/
+│   ├── support/            # wspólne klucze localStorage i przygotowanie stanu testów
+│   └── *.spec.js           # smoke testy Playwright (Chromium)
 ├── index.html
 ├── oferta.html
 ├── uslugi.html
@@ -114,17 +128,21 @@ Ten adres jest zadeklarowany jako kanoniczny w metadanych wszystkich stron, w `r
 ├── polityka-prywatnosci.html
 ├── regulamin.html
 ├── cookies.html
+├── 404.html                # własna strona błędu, wykluczona z sitemap.xml
 ├── robots.txt
 ├── sitemap.xml
 ├── start-local-preview.bat
 ├── package.json
+├── playwright.config.js
+├── vite.config.js
+├── AUDIT.md
 ├── CHANGELOG.md
 └── LICENSE
 ```
 
 ### Instalacja
 
-Zależności są potrzebne wyłącznie do builda produkcyjnego i optymalizacji obrazów. Serwis w trybie źródłowym działa bez nich.
+Zależności są potrzebne do uruchomienia serwera deweloperskiego, builda produkcyjnego, podglądu builda, testów oraz optymalizacji obrazów.
 
 ```bash
 npm install
@@ -141,22 +159,23 @@ start-local-preview.bat
 Skrypt uruchamia w katalogu projektu:
 
 ```bash
-python -m http.server 8181
+npm run dev
 ```
 
 Podgląd jest dostępny pod adresem `http://localhost:8181/`. Serwer HTTP jest wymagany, ponieważ moduły ES i partiale pobierane przez `fetch` nie działają przy otwarciu plików przez `file://`.
+
+W trybie deweloperskim strony są serwowane ze źródeł: partiale są pobierane przez `fetch`, a `js/theme-bootstrap.js` ładuje się jako osobny synchroniczny skrypt. Obie te rzeczy są rozwiązywane statycznie dopiero w buildzie produkcyjnym.
 
 ### Dostępne skrypty
 
 | Skrypt | Działanie |
 | --- | --- |
-| `npm run clean` | Usuwa katalog `dist/`. |
-| `npm run optimize:images` | Generuje warianty obrazów z `assets/img-src/` do `assets/img/`. |
-| `npm run build:css` | Bundluje i minifikuje `css/main.css` do `dist/css/main.min.css`. |
-| `npm run build:js` | Bundluje i minifikuje `js/app.js` oraz `js/theme-bootstrap.js` do `dist/js/`. |
-| `npm run build:html` | Wstawia partiale i podmienia odwołania do plików produkcyjnych. |
-| `npm run build:assets` | Kopiuje `assets/` (bez `img-src/`), `robots.txt` i `sitemap.xml` do `dist/`. |
+| `npm run dev` | Uruchamia serwer deweloperski Vite na porcie 8181. |
 | `npm run build` | Buduje wersję produkcyjną do `dist/`. Nie generuje obrazów. |
+| `npm run preview` | Serwuje zbudowany katalog `dist/` na porcie 8182. |
+| `npm run check` | Sprawdza spójność źródeł bez budowania: kontrakty wspólnego shellu i rozwiązywanie lokalnych referencji. Nie zapisuje plików. |
+| `npm run test:smoke` | Buduje `dist/` i uruchamia smoke testy Playwright (Chromium) na podglądzie produkcyjnym. |
+| `npm run optimize:images` | Generuje warianty obrazów z `assets/img-src/` do `assets/img/`. |
 
 ### Build produkcyjny
 
@@ -166,15 +185,67 @@ npm run build
 
 Przebieg pełnego builda:
 
-1. Usunięcie katalogu `dist/`.
-2. Bundlowanie i minifikacja CSS do `dist/css/main.min.css`.
-3. Bundlowanie i minifikacja JavaScriptu do `dist/js/app.min.js` (ESM) oraz `dist/js/theme-bootstrap.min.js` (IIFE).
-4. Wstawienie partiali do dziesięciu stron HTML i podmiana odwołań `css/main.css`, `js/app.js` i `js/theme-bootstrap.js` na pliki `.min`.
-5. Skopiowanie assetów oraz `robots.txt` i `sitemap.xml` do `dist/`.
+1. Wyczyszczenie katalogu `dist/`.
+2. Transformacja jedenastu stron HTML: wstawienie partiali, statyczne ustawienie `aria-current="page"` na aktywnym linku nawigacji głównej oraz zastąpienie tagu `js/theme-bootstrap.js` zminifikowanym skryptem inline.
+3. Bundlowanie i minifikacja CSS oraz JavaScriptu do `dist/css/` i `dist/js/`, z hashem treści w nazwach plików.
+4. Skopiowanie katalogu `assets/` bez `assets/img-src/` oraz plików `robots.txt` i `sitemap.xml` do `dist/`.
 
-Etap HTML zawiera własne kontrole spójności i przerywa build błędem, gdy w pliku źródłowym brakuje hosta partiala lub gdy na stronie należącej do nawigacji głównej nie ma dokładnie jednego linku `nav__link` z `aria-current="page"`.
+Transformacja HTML zawiera własne kontrole spójności i przerywa build błędem, gdy transformowany plik nie należy do listy `htmlPages`, gdy w pliku źródłowym brakuje hosta partiala lub tagu synchronicznego theme bootstrapu, albo gdy na stronie należącej do nawigacji głównej nie ma dokładnie jednego linku `nav__link` z `aria-current="page"`.
 
 Generowanie obrazów nie jest częścią builda. `npm run build` nie modyfikuje wersjonowanych plików w `assets/img/` — warianty obrazów powstają wyłącznie po jawnym uruchomieniu `npm run optimize:images`.
+
+Zbudowany katalog można sprawdzić lokalnie:
+
+```bash
+npm run preview
+```
+
+Podgląd serwuje `dist/` pod adresem `http://localhost:8182/`.
+
+### Kontrola spójności źródeł
+
+```bash
+npm run check
+```
+
+Komenda sprawdza utrzymywane źródła bez budowania czegokolwiek. Nie tworzy ani nie modyfikuje katalogu `dist/`, nie zapisuje żadnego pliku, nie uruchamia serwera ani przeglądarki i korzysta wyłącznie z modułów wbudowanych Node.js — nie wymaga żadnej dodatkowej zależności.
+
+Zakres kontroli (`scripts/check.mjs`):
+
+- kontrakty wspólnego shellu dla wszystkich jedenastu stron, wykonywane w pamięci na tych samych funkcjach z `scripts/html-shell.mjs`, których używa build: obecność hostów partiali `header` i `footer`, dokładnie jeden link `nav__link` z `aria-current="page"` na stronie należącej do nawigacji głównej oraz obecność tagu synchronicznego theme bootstrapu,
+- rozwiązywanie lokalnych referencji: `src`, `href`, `srcset` (każdy kandydat osobno), `data-partial-src` i `action` formularza w stronach oraz partialach, `url()` i `@import` w plikach CSS, a także wpisy `src` ikon, skrótów i zrzutów ekranu w `assets/favicon/site.webmanifest`.
+
+Referencje są rozwiązywane względem pliku, który je deklaruje: strony i partiale względem katalogu głównego projektu — partiale są wstawiane do stron leżących w katalogu głównym — pliki CSS względem własnej lokalizacji, a ścieżki zaczynające się od `/` względem katalogu głównego. Ciągi zapytań i fragmenty nie wpływają na wyszukiwanie pliku. Adresy zewnętrzne (`http:`, `https:`, `mailto:`, `tel:`, `data:`), linki zawierające wyłącznie fragment oraz deklaracja `<base href="/">` nie są traktowane jako referencje do plików.
+
+Powodzenie kończy się kodem wyjścia `0` i podsumowaniem liczby sprawdzonych stron i referencji. Niespełniony kontrakt kończy się kodem różnym od zera, a każdy problem jest wypisywany z nazwą pliku źródłowego i opisem — dla referencji także z jej treścią i oczekiwaną ścieżką.
+
+Komenda nie zastępuje pozostałych: `npm run build` wymusza te same kontrakty shellu przy generowaniu `dist/`, a `npm run test:smoke` sprawdza zachowanie w przeglądarce Chromium na zbudowanym podglądzie. `npm run check` sprawdza wyłącznie źródła i jest jedyną z nich, która niczego nie zapisuje.
+
+### Testy
+
+```bash
+npm run test:smoke
+```
+
+Komenda buduje `dist/`, uruchamia podgląd produkcyjny i wykonuje na nim jedenaście testów Playwright w przeglądarce Chromium. Testy działają na zbudowanych stronach, więc sprawdzają ten sam rozwiązany shell i wstawiony inline theme bootstrap, które trafiają na hosting. Host i port podglądu są ustalone na stałe, a testy nigdy nie podłączają się do serwera pozostawionego po wcześniejszym buildzie.
+
+Zakres testów (`tests/`):
+
+- ładowanie trzech reprezentatywnych stron (główna, oferta, kontakt): `title`, nagłówek `h1`, obecność nagłówka i stopki ze wspólnego shellu, ustawiony motyw oraz brak błędów JavaScriptu,
+- przejście przez nawigację główną na inną stronę wraz ze statycznym `aria-current="page"` ustawionym przez build,
+- motyw: zapisany wybór ciemny zastosowany przed pierwszym malowaniem oraz przełączanie i utrwalanie wyboru po przeładowaniu,
+- nawigacja mobilna przy szerokości 390 px: otwarcie z przycisku, stan panelu, obsługa fokusa i zamknięcie klawiszem `Escape`,
+- modal informacji o projekcie: pierwsza wizyta oraz zapisana akceptacja,
+- formularz kontaktowy: wysyłka z pustymi polami wymaganymi — stan `aria-invalid`, fokus i komunikat pierwszego niepoprawnego pola oraz wyczyszczenie obu po wpisaniu poprawnej wartości,
+- lightbox portfolio na `realizacje.html`: otwarcie pierwszego zdjęcia dwuklikiem myszy, tytuł, opis i tekst alternatywny w otwartym oknie, dostępny przycisk zamknięcia z fokusem, zamknięcie klawiszem `Escape` i przyciskiem, powrót fokusa na wyzwalacz, ponowne otwarcie klawiszem `Enter` i `Spacja` oraz brak reakcji na pojedyncze kliknięcie myszą.
+
+Jest to celowo wąski zestaw smoke testów, a nie pełne pokrycie E2E. Z formularza kontaktowego obejmuje wyłącznie powyższą ścieżkę stanu niepoprawnego pola — nie obejmuje pozostałych pól walidowanych, pozostałych typów błędów ani wysyłki. Z lightboxa obejmuje wyłącznie pierwszą kartę portfolio i wskazane wyżej ścieżki otwarcia oraz zamknięcia. Nie obejmuje też pozostałych stron, strony `404.html`, layoutu responsywnego, testów wizualnych, audytu dostępności ani silników przeglądarek innych niż Chromium.
+
+Playwright wymaga jednorazowego pobrania przeglądarki — `npm install` nie robi tego automatycznie:
+
+```bash
+npx playwright install chromium
+```
 
 ### Wdrożenie
 
@@ -189,22 +260,27 @@ Generowanie obrazów nie jest częścią builda. `npm run build` nie modyfikuje 
 - Layout korzysta z semantycznych elementów `header`, `nav`, `main` i `footer`; grupy linków w stopce mają własne etykiety `aria-label`.
 - Przycisk nawigacji używa `aria-expanded` i `aria-controls`, a aktywna pozycja menu jest oznaczana `aria-current="page"`.
 - Otwarty panel nawigacji mobilnej przenosi fokus na pierwszy element interaktywny i utrzymuje go w pułapce fokusa (`js/utils.js`), a zamknięcie przywraca fokus na przycisk.
-- Modal informacji o projekcie ma `role="dialog"`, `aria-modal="true"`, powiązany tytuł i opis oraz przywraca poprzedni fokus.
+- Modal informacji o projekcie ma `role="dialog"`, `aria-modal="true"` oraz powiązany tytuł i opis (`aria-labelledby`, `aria-describedby`).
+- Otwarty modal przenosi fokus na kontener dialogu (`tabindex="-1"`) i utrzymuje go w pułapce fokusa (`js/utils.js`); zamknięcie klawiszem `Escape`, przyciskiem akceptacji lub kliknięciem tła zwalnia pułapkę i przywraca fokus na wcześniej aktywny element, jeśli nadal istnieje poza modalem.
+- Każde zdjęcie portfolio na `realizacje.html` jest opakowane w zwykły przycisk z etykietą `aria-label` nazywającą akcję i realizację (na przykład „Powiększ zdjęcie: Royal Classic”), z zachowanym tekstem alternatywnym obrazu, widocznym stanem `:focus-visible` i kursorem `zoom-in`.
+- Lightbox jest natywnym elementem `dialog` otwieranym przez `showModal()`, więc przeglądarka sama oznacza go jako modalny, utrzymuje w nim fokus i obsługuje `Escape`; tytuł i opis realizacji są z nim powiązane przez `aria-labelledby` i `aria-describedby`, a zamknięcie — klawiszem `Escape`, przyciskiem zamknięcia lub kliknięciem tła — przywraca fokus na zdjęcie, z którego został otwarty.
 - `css/base.css` definiuje wspólny styl `:focus-visible` dla linków, przycisków i pól formularza.
-- Redukcja ruchu jest obsługiwana zarówno w CSS (`css/base.css`, `css/components/nav.css`, `css/components/project-notice.css`), jak i w module hero, który nasłuchuje zmian `prefers-reduced-motion`.
+- Redukcja ruchu jest obsługiwana zarówno w CSS (`css/base.css`, `css/components/nav.css`, `css/components/project-notice.css`, `css/components/lightbox.css`), jak i w module hero, który nasłuchuje zmian `prefers-reduced-motion`.
 - Formularz kontaktowy używa powiązanych etykiet, `aria-describedby` dla komunikatów błędów i regionu statusu `aria-live="polite"`.
+- Pole walidowane, które nie przeszło walidacji, dostaje `aria-invalid="true"`; atrybut jest usuwany, gdy pole staje się poprawne — razem z komunikatem błędu.
 - Przełącznik motywu komunikuje stan przez `aria-pressed` i aktualizowaną etykietę `aria-label`.
 
 Zakres nie obejmuje formalnego audytu zgodności — powyższe punkty opisują zaimplementowane mechanizmy.
 
 ### SEO
 
-- Wszystkie dziesięć stron ma własny `title`, `meta name="description"` i `link rel="canonical"`.
-- Każda strona zawiera pełny zestaw metadanych Open Graph (wraz z wymiarami i typem obrazu) oraz Twitter Card `summary_large_image`.
-- Każda strona zawiera dwa bloki JSON-LD: `WebPage` z adresem kanonicznym strony, powiązany przez `isPartOf` ze wspólnym blokiem `WebSite`, którego opis wskazuje demonstracyjny charakter projektu. Dane strukturalne nie deklarują działającego podmiotu gospodarczego ani danych kontaktowych.
+- Wszystkie dziesięć stron indeksowanych ma własny `title`, `meta name="description"` i `link rel="canonical"`.
+- Każda z tych stron zawiera pełny zestaw metadanych Open Graph (wraz z wymiarami i typem obrazu) oraz Twitter Card `summary_large_image`.
+- Każda z tych stron zawiera dwa bloki JSON-LD: `WebPage` z adresem kanonicznym strony, powiązany przez `isPartOf` ze wspólnym blokiem `WebSite`, którego opis wskazuje demonstracyjny charakter projektu. Dane strukturalne nie deklarują działającego podmiotu gospodarczego ani danych kontaktowych.
+- Strona błędu `404.html` jest wyjątkiem: ma własny `title` i `meta name="description"`, ale jako dokument bez własnego adresu nie deklaruje `link rel="canonical"`, metadanych Open Graph, Twitter Card ani danych strukturalnych.
 - `robots.txt` zezwala na indeksowanie całego serwisu i wskazuje `sitemap.xml`.
-- `sitemap.xml` zawiera dziewięć adresów — wszystkie strony poza `dziekujemy.html`.
-- Żadna strona nie używa `meta name="robots"`, więc indeksowanie zależy wyłącznie od `robots.txt` i decyzji wyszukiwarki.
+- `sitemap.xml` zawiera dziewięć adresów — wszystkie strony poza `dziekujemy.html` i `404.html`.
+- `meta name="robots"` występuje wyłącznie na `404.html` (`noindex, follow`). Pozostałe strony nie deklarują tego znacznika, więc ich indeksowanie zależy od `robots.txt` i decyzji wyszukiwarki.
 
 ### PWA i obsługa offline
 
@@ -215,7 +291,7 @@ Zakres nie obejmuje formalnego audytu zgodności — powyższe punkty opisują z
 
 ### Wydajność
 
-- Build produkcyjny minifikuje CSS (`lightningcss`) i JavaScript (`esbuild`).
+- Build produkcyjny (Vite) bundluje i minifikuje CSS oraz JavaScript, a pliki wynikowe otrzymują w nazwie hash treści. `js/theme-bootstrap.js` jest minifikowany i wstawiany inline, więc nie wymaga osobnego żądania przed pierwszym malowaniem.
 - Obrazy są dostarczane przez element `picture` z wariantami AVIF i WebP oraz fallbackiem JPG; `srcset` i `sizes` są zdefiniowane dla każdego wariantu.
 - Obrazy mają jawne atrybuty `width` i `height` oraz `decoding="async"`; obrazy poza pierwszym widokiem używają `loading="lazy"`.
 - `scripts/optimize-images.mjs` zapisuje JPG z `quality: 82` i `mozjpeg`, WebP z `quality: 80` oraz AVIF z `quality: 50`, bez powiększania obrazów źródłowych.
@@ -235,7 +311,7 @@ Repozytorium nie zawiera wyników pomiarów wydajności, dlatego powyższe punkt
 
 - Treść stron edytuje się w plikach HTML w katalogu głównym.
 - Zmiany w nagłówku, nawigacji, stopce lub modalu projektu należy wprowadzać w `partials/header.html` i `partials/footer.html`, nigdy w poszczególnych stronach.
-- Nowa strona wymaga dodania wpisu w tablicy `htmlPages` w `scripts/build.mjs`, a strona należąca do nawigacji głównej dodatkowo w `primaryNavPages` oraz w `partials/header.html`; adresy publiczne dodaje się do `sitemap.xml`.
+- Nowa strona wymaga dodania wpisu w tablicy `htmlPages` w `scripts/html-shell.mjs` — ta sama lista definiuje wejścia MPA w `vite.config.js` — a strona należąca do nawigacji głównej dodatkowo w `primaryNavPages` oraz w `partials/header.html`; adresy publiczne dodaje się do `sitemap.xml`.
 - Nowy plik CSS wymaga zarejestrowania importu w `css/main.css`, a nowy moduł JS — wywołania w `js/app.js`.
 - Selektory współdzielone między modułami są zdefiniowane w `js/config.js`.
 - Nowe obrazy dodaje się do `assets/img-src/` i generuje komendą `npm run optimize:images`; katalog `assets/img/` zawiera pliki wygenerowane, ale wersjonowane w repozytorium.
@@ -256,27 +332,28 @@ Materiały podmiotów trzecich pozostają objęte własnymi licencjami — zasad
 
 ### Project Overview
 
-EverAfter Ring is a static, multi-page website in Polish, built with HTML, CSS, and Vanilla JavaScript, with no runtime dependencies. The repository contains ten top-level pages: home, offer, services, portfolio, about, contact form, form confirmation, and three legal documents.
+EverAfter Ring is a static, multi-page website in Polish, built with HTML, CSS, and Vanilla JavaScript, with no runtime dependencies. The repository contains eleven top-level pages: home, offer, services, portfolio, about, contact form, form confirmation, three legal documents, and a custom 404 error page.
 
 The project is a KP_Code Digital Studio reference build that demonstrates a website for the wedding industry. Its demonstration character is stated in the interface itself — the "Informacja o projekcie" modal in `partials/footer.html` and the legal pages describe the site as a portfolio project rather than an operating business.
 
-The shared header and footer are maintained as partials with two delivery modes: they are fetched at runtime in source mode and inlined into the HTML files during the production build. The production version is generated by Node scripts into `dist/`.
+The shared header and footer are maintained as partials with two delivery modes: they are fetched at runtime in development and inlined into the HTML files during the production build. Vite is the development, build, and preview tool — not a runtime framework — and the production version is generated into `dist/`.
 
 ### Live Version
 
 [https://ceremonial-pr02-everafterring.netlify.app/](https://ceremonial-pr02-everafterring.netlify.app/)
 
-This address is declared as canonical in the metadata of every page, in `robots.txt`, and in `sitemap.xml`. While this document was prepared, the address returned the EverAfter Ring home page.
+This address is declared as canonical in the metadata of the indexable pages, in `robots.txt`, and in `sitemap.xml`. While this document was prepared, the address returned the EverAfter Ring home page.
 
 ### Key Features
 
 - Multi-page structure based on top-level HTML files, without client-side routing.
-- Shared `header` and `footer` from `partials/`, with the active page marked by `aria-current="page"` — derived from `window.location` in source mode and from the file name during the build.
+- Shared `header` and `footer` from `partials/`, with the active page marked by `aria-current="page"` — derived from `window.location` in development and from the file name during the production build.
 - Mobile navigation below the 1024 px threshold: `aria-expanded`, `aria-controls`, focus trap, and closing via `Escape`, a link click, or a window resize.
 - Light/dark theme toggle persisted in `localStorage` under the `everafterring-theme` key, synchronized across tabs through the `storage` event and reflected in `meta[name="theme-color"]`.
-- A separate `js/theme-bootstrap.js` script loaded synchronously in `<head>` before the stylesheet, setting `data-theme` on `<html>`; with no stored choice it falls back to `prefers-color-scheme`.
+- A separate `js/theme-bootstrap.js` script loaded synchronously in `<head>` before the stylesheet, setting `data-theme` on `<html>`; with no stored choice it falls back to `prefers-color-scheme`. The production build minifies it and inlines it in the same position, so it stays synchronous and runs before the first paint.
 - Contact form with client-side validation (`novalidate`, per-field messages, focus on the first invalid field) and an `aria-live="polite"` status region; submission is handled by Netlify Forms with a honeypot and a redirect to `dziekujemy.html`.
 - Project notice modal (`role="dialog"`, `aria-modal="true"`) with acceptance stored in `localStorage` under the `everafterringProjectNoticeAccepted` key and previous focus restored.
+- Portfolio lightbox on `realizacje.html`: the nine portfolio images open in a single shared native `dialog` — from a mouse double-click, a single tap on touch screens, and `Enter` or `Space`. The enlarged copy is a clone of the card's own `picture` element, so it reuses the same AVIF, WebP, and JPG sources and the 1200 px variant where the viewport calls for it.
 - Header scroll state with hysteresis (class added above 96 px, removed below 48 px), updated inside `requestAnimationFrame`.
 - Pointer-driven hero image motion, started and stopped according to the current `prefers-reduced-motion` state.
 - Embedded Google Maps frame on the contact page, together with a link that opens the same location in a new tab.
@@ -293,14 +370,19 @@ This address is declared as canonical in the metadata of every page, in `robots.
 **Build tooling**
 
 - Node.js and npm
-- `esbuild` `^0.28.0`
-- `lightningcss` `^1.32.0`
-- `sharp` `^0.34.5`
-- custom scripts in `scripts/build.mjs` and `scripts/optimize-images.mjs`
+- `vite` `^8.2.1` — development server, production build, and build preview
+- `sharp` `^0.34.5` — image variant generation
+- `@playwright/test` `^1.62.1` — Chromium smoke tests
+- `vite.config.js` — MPA configuration and the project-specific build plugins
+- `playwright.config.js` — configuration for the tests run against the production preview
+- custom scripts in `scripts/html-shell.mjs` and `scripts/optimize-images.mjs`
 
-**Local preview**
+`vite`, `sharp`, and `@playwright/test` are the project's only direct dependencies; all are development dependencies.
 
-- `python -m http.server` started through `start-local-preview.bat`
+**Local development and preview**
+
+- Vite development server on port 8181 (`npm run dev`, also started through `start-local-preview.bat`)
+- preview of the built `dist/` directory on port 8182 (`npm run preview`)
 
 **Assets and metadata**
 
@@ -317,13 +399,14 @@ This address is declared as canonical in the metadata of every page, in `robots.
 
 ### Architecture
 
-- **Pages** — each page is a standalone HTML file at the repository root with a full metadata set and its own content; `main` is the target of the `#main` skip link.
-- **Partials** — `header` and `footer` are host elements carrying `data-partial` and `data-partial-src`. `js/modules/partials.js` fetches them and marks the active link, while `scripts/build.mjs` replaces those hosts with the resolved markup during the build. Source mode therefore requires an HTTP server.
+- **Pages** — each page is a standalone HTML file at the repository root with a full metadata set and its own content; `main` is the target of the `#main` skip link. `404.html` is the exception, carrying a deliberately reduced metadata set — see the SEO section.
+- **Partials** — `header` and `footer` are host elements carrying `data-partial` and `data-partial-src`. In development, `js/modules/partials.js` fetches them and marks the active link, and the Vite server serves the files under `partials/` verbatim instead of treating them as standalone entries. In the production build, `scripts/html-shell.mjs` replaces those hosts with the resolved markup and sets `aria-current="page"` statically. Development therefore requires an HTTP server.
 - **CSS** — `css/main.css` is the single entry point and imports tokens, fonts, base, layout, components, and sections in order. Theme values are defined as custom properties in `css/tokens.css`, with the dark variant under `:root[data-theme="dark"]`.
-- **JavaScript** — `js/app.js` is the entry point and, after `DOMContentLoaded`, runs the modules in a fixed order: partials, theme, header, navigation, form, hero, project notice. Shared selectors live in `js/config.js`, DOM helpers and the focus trap in `js/utils.js`, and interaction logic in `js/modules/`.
-- **Two JS entry points** — `js/app.js` is bundled as ESM and `js/theme-bootstrap.js` as an IIFE, because it must run synchronously before styles render.
+- **JavaScript** — `js/app.js` is the entry point and, after `DOMContentLoaded`, runs the modules in a fixed order: partials, theme, header, navigation, form, hero, project notice, portfolio lightbox. Every module checks for its own markup first, so the lightbox initializes on `realizacje.html` only. Shared selectors live in `js/config.js`, DOM helpers and the focus trap in `js/utils.js`, and interaction logic in `js/modules/`.
+- **Two JS entry points** — `js/app.js` is an ES module bundled by Vite, while `js/theme-bootstrap.js` stays a separate file outside the bundle: development loads it as a classic script, and the build minifies it and inlines it in the same position, because it must run synchronously before styles render.
 - **Images** — source files live in `assets/img-src/`, and the variants generated by `scripts/optimize-images.mjs` in `assets/img/`. The markup uses the `picture` element with AVIF, WebP, and JPG in that order.
-- **Build** — `scripts/build.mjs` generates the `dist/` directory, which is excluded from the repository by `.gitignore` and should not be edited manually.
+- **Build** — `vite.config.js` declares the eleven HTML entries (`appType: "mpa"`), the shared-shell plugin backed by `scripts/html-shell.mjs`, and the static asset copy that excludes `assets/img-src/`. The build generates the `dist/` directory, which is excluded from the repository by `.gitignore` and should not be edited manually.
+- **Output file names** — bundled CSS and JavaScript land in `dist/css/` and `dist/js/` with a content hash in the file name, while files under `assets/` are copied at their authored paths, because `site.webmanifest`, the absolute URLs in the metadata, and the generated `srcset` values all reference them there.
 
 ### Project Structure
 
@@ -337,25 +420,32 @@ This address is declared as canonical in the metadata of every page, in `robots.
 │   ├── logo/               # logo.svg used in the header and the footer
 │   └── og-img/             # og-img.jpg used in the Open Graph and Twitter Card metadata
 ├── css/
-│   ├── components/         # nav, buttons, cards, forms, footer, badges, lists, project-notice
+│   ├── components/         # nav, buttons, cards, forms, footer, badges, lists, project-notice, lightbox
 │   ├── sections/           # hero, process, testimonials, callout
 │   ├── base.css
 │   ├── fonts.css
 │   ├── layout.css
 │   ├── main.css            # single CSS entry point
 │   └── tokens.css
+├── docs/
+│   └── archive/
+│       └── plans/          # archived completed project plans (PLAN-2026-08-15.md)
 ├── js/
-│   ├── modules/            # partials, nav, theme, form, hero, header-scroll, project-notice, dom
+│   ├── modules/            # partials, nav, theme, form, hero, header-scroll, project-notice, lightbox, dom
 │   ├── app.js              # ESM entry point
 │   ├── config.js
-│   ├── theme-bootstrap.js  # separate entry point (IIFE)
+│   ├── theme-bootstrap.js  # separate script (IIFE) inlined by the build
 │   └── utils.js
 ├── partials/
 │   ├── footer.html         # footer and project notice modal
 │   └── header.html         # header, navigation, theme toggle
 ├── scripts/
-│   ├── build.mjs           # clean, css, js, html, assets, build
+│   ├── check.mjs           # source consistency check without a build (npm run check)
+│   ├── html-shell.mjs      # shared shell, navigation validation, theme bootstrap inlining
 │   └── optimize-images.mjs
+├── tests/
+│   ├── support/            # shared localStorage keys and test state setup
+│   └── *.spec.js           # Playwright smoke tests (Chromium)
 ├── index.html
 ├── oferta.html
 ├── uslugi.html
@@ -366,17 +456,21 @@ This address is declared as canonical in the metadata of every page, in `robots.
 ├── polityka-prywatnosci.html
 ├── regulamin.html
 ├── cookies.html
+├── 404.html                # custom error page, excluded from sitemap.xml
 ├── robots.txt
 ├── sitemap.xml
 ├── start-local-preview.bat
 ├── package.json
+├── playwright.config.js
+├── vite.config.js
+├── AUDIT.md
 ├── CHANGELOG.md
 └── LICENSE
 ```
 
 ### Installation
 
-Dependencies are required only for the production build and image optimization. The site runs in source mode without them.
+Dependencies are required to run the development server, the production build, the build preview, the tests, and image optimization.
 
 ```bash
 npm install
@@ -393,22 +487,23 @@ start-local-preview.bat
 The script runs, in the project directory:
 
 ```bash
-python -m http.server 8181
+npm run dev
 ```
 
 The preview is available at `http://localhost:8181/`. An HTTP server is required because ES modules and partials fetched at runtime do not work when files are opened over `file://`.
+
+In development the pages are served from source: the partials are fetched at runtime and `js/theme-bootstrap.js` loads as a separate synchronous script. Both are resolved statically only in the production build.
 
 ### Available Scripts
 
 | Script | Behavior |
 | --- | --- |
-| `npm run clean` | Removes the `dist/` directory. |
-| `npm run optimize:images` | Generates image variants from `assets/img-src/` into `assets/img/`. |
-| `npm run build:css` | Bundles and minifies `css/main.css` into `dist/css/main.min.css`. |
-| `npm run build:js` | Bundles and minifies `js/app.js` and `js/theme-bootstrap.js` into `dist/js/`. |
-| `npm run build:html` | Inlines the partials and switches references to the production files. |
-| `npm run build:assets` | Copies `assets/` (excluding `img-src/`), `robots.txt`, and `sitemap.xml` into `dist/`. |
+| `npm run dev` | Starts the Vite development server on port 8181. |
 | `npm run build` | Builds the production version into `dist/`. Does not generate images. |
+| `npm run preview` | Serves the built `dist/` directory on port 8182. |
+| `npm run check` | Checks source consistency without building: the shared-shell contracts and local-reference resolution. Writes no files. |
+| `npm run test:smoke` | Builds `dist/` and runs the Playwright smoke tests (Chromium) against the production preview. |
+| `npm run optimize:images` | Generates image variants from `assets/img-src/` into `assets/img/`. |
 
 ### Production Build
 
@@ -418,15 +513,67 @@ npm run build
 
 Full build sequence:
 
-1. Removing the `dist/` directory.
-2. Bundling and minifying CSS into `dist/css/main.min.css`.
-3. Bundling and minifying JavaScript into `dist/js/app.min.js` (ESM) and `dist/js/theme-bootstrap.min.js` (IIFE).
-4. Inlining the partials into the ten HTML pages and rewriting `css/main.css`, `js/app.js`, and `js/theme-bootstrap.js` references to the `.min` files.
-5. Copying the assets plus `robots.txt` and `sitemap.xml` into `dist/`.
+1. Emptying the `dist/` directory.
+2. Transforming the eleven HTML pages: inlining the partials, setting `aria-current="page"` statically on the active primary-navigation link, and replacing the `js/theme-bootstrap.js` tag with a minified inline script.
+3. Bundling and minifying CSS and JavaScript into `dist/css/` and `dist/js/`, with a content hash in the file names.
+4. Copying the `assets/` directory without `assets/img-src/`, plus `robots.txt` and `sitemap.xml`, into `dist/`.
 
-The HTML stage includes its own consistency checks and fails the build when a partial host is missing from a source file, or when a page belonging to the primary navigation does not contain exactly one `nav__link` with `aria-current="page"`.
+The HTML transformation includes its own consistency checks and fails the build when a transformed file is not part of the `htmlPages` list, when a partial host or the synchronous theme bootstrap tag is missing from a source file, or when a page belonging to the primary navigation does not contain exactly one `nav__link` with `aria-current="page"`.
 
 Image generation is not part of the build. `npm run build` does not modify version-controlled files in `assets/img/` — image variants are produced only by explicitly running `npm run optimize:images`.
+
+The built directory can be checked locally:
+
+```bash
+npm run preview
+```
+
+The preview serves `dist/` at `http://localhost:8182/`.
+
+### Source Consistency Check
+
+```bash
+npm run check
+```
+
+The command validates the maintained source without building anything. It neither creates nor modifies the `dist/` directory, writes no file, starts no server or browser, and uses Node built-in modules only — it requires no additional dependency.
+
+Check scope (`scripts/check.mjs`):
+
+- the shared-shell contracts for all eleven pages, run in memory through the same functions from `scripts/html-shell.mjs` that the build uses: the presence of the `header` and `footer` partial hosts, exactly one `nav__link` carrying `aria-current="page"` on a page belonging to the primary navigation, and the presence of the synchronous theme bootstrap tag,
+- local reference resolution: `src`, `href`, `srcset` (each candidate separately), `data-partial-src`, and the form `action` in the pages and the partials, `url()` and `@import` in the CSS files, plus the icon, shortcut-icon, and screenshot `src` entries in `assets/favicon/site.webmanifest`.
+
+References are resolved relative to the file that declares them: pages and partials against the project root — the partials are injected into pages that live in the root — CSS files against their own location, and paths starting with `/` against the project root. Query strings and fragments do not affect the filesystem lookup. External addresses (`http:`, `https:`, `mailto:`, `tel:`, `data:`), fragment-only links, and the `<base href="/">` declaration are not treated as file references.
+
+A passing run exits with code `0` and prints a summary of the pages and references checked. A failed contract exits with a non-zero code, and every problem is printed with its source file and description — for a reference, also with the reference itself and the expected path.
+
+The command does not replace the others: `npm run build` enforces the same shell contracts while producing `dist/`, and `npm run test:smoke` verifies behavior in Chromium against the built preview. `npm run check` covers the source only, and it is the only one of the three that writes nothing.
+
+### Testing
+
+```bash
+npm run test:smoke
+```
+
+The command builds `dist/`, starts the production preview, and runs eleven Playwright tests against it in Chromium. The tests run on the built pages, so they exercise the same resolved shell and inlined theme bootstrap that ship to hosting. The preview host and port are pinned, and the tests never attach to a server left running from an earlier build.
+
+Test scope (`tests/`):
+
+- loading three representative pages (home, offer, contact): `title`, the `h1` heading, the header and footer from the shared shell, the applied theme, and the absence of JavaScript errors,
+- a transition through the primary navigation to another page, including the static `aria-current="page"` set by the build,
+- the theme: a stored dark choice applied before the first paint, plus toggling and persisting the choice across a reload,
+- the mobile navigation at a width of 390 px: opening from the button, the panel state, focus handling, and closing with `Escape`,
+- the project notice modal: a first visit and a stored acceptance,
+- the contact form: a submit with the required fields empty — the `aria-invalid` state, focus, and message of the first invalid field, and both cleared once a valid value is entered,
+- the portfolio lightbox on `realizacje.html`: opening the first image with a mouse double-click, the title, description, and alternative text in the open dialog, the focused and accessible close button, closing with `Escape` and with the button, focus returning to the trigger, reopening with `Enter` and `Space`, and a single mouse click leaving it closed.
+
+This is a deliberately narrow smoke suite, not full E2E coverage. Of the contact form it covers only the invalid-state path above — not the other validated fields, the remaining validity types, or the submission. Of the lightbox it covers only the first portfolio card and the open and close paths listed above. It also does not cover the remaining pages, the `404.html` page, responsive layout, visual regression, accessibility auditing, or any browser engine other than Chromium.
+
+Playwright requires a one-time browser download — `npm install` does not perform it:
+
+```bash
+npx playwright install chromium
+```
 
 ### Deployment
 
@@ -441,22 +588,27 @@ Image generation is not part of the build. `npm run build` does not modify versi
 - The layout uses semantic `header`, `nav`, `main`, and `footer` elements; footer link groups carry their own `aria-label`.
 - The navigation button uses `aria-expanded` and `aria-controls`, and the active menu item is marked with `aria-current="page"`.
 - The open mobile navigation panel moves focus to the first interactive element and keeps it in a focus trap (`js/utils.js`), and closing restores focus to the button.
-- The project notice modal uses `role="dialog"`, `aria-modal="true"`, an associated title and description, and restores the previous focus.
+- The project notice modal uses `role="dialog"`, `aria-modal="true"`, and an associated title and description (`aria-labelledby`, `aria-describedby`).
+- The open modal moves focus to the dialog container (`tabindex="-1"`) and keeps it in a focus trap (`js/utils.js`); closing via `Escape`, the accept button, or a backdrop click releases the trap and restores focus to the previously focused element when it still exists outside the modal.
+- Every portfolio image on `realizacje.html` is wrapped in a plain button whose `aria-label` names the action and the portfolio item (for example "Powiększ zdjęcie: Royal Classic"), with the image's alternative text preserved, a visible `:focus-visible` state, and a `zoom-in` cursor.
+- The lightbox is a native `dialog` opened with `showModal()`, so the browser marks it modal, keeps focus inside it, and handles `Escape` itself; the portfolio title and description are associated through `aria-labelledby` and `aria-describedby`, and closing — with `Escape`, the close button, or a backdrop click — restores focus to the image it was opened from.
 - `css/base.css` defines a shared `:focus-visible` style for links, buttons, and form fields.
-- Reduced motion is handled both in CSS (`css/base.css`, `css/components/nav.css`, `css/components/project-notice.css`) and in the hero module, which listens for `prefers-reduced-motion` changes.
+- Reduced motion is handled both in CSS (`css/base.css`, `css/components/nav.css`, `css/components/project-notice.css`, `css/components/lightbox.css`) and in the hero module, which listens for `prefers-reduced-motion` changes.
 - The contact form uses associated labels, `aria-describedby` for error messages, and an `aria-live="polite"` status region.
+- A validated field that fails validation carries `aria-invalid="true"`; the attribute is removed once the field becomes valid, together with its error message.
 - The theme toggle communicates state through `aria-pressed` and an updated `aria-label`.
 
 A formal conformance audit is out of scope — the points above describe implemented mechanisms.
 
 ### SEO
 
-- All ten pages have their own `title`, `meta name="description"`, and `link rel="canonical"`.
-- Every page includes a complete Open Graph metadata set (including image type and dimensions) and a Twitter Card of type `summary_large_image`.
-- Every page includes two JSON-LD blocks: a `WebPage` carrying the page's canonical URL, linked through `isPartOf` to the shared `WebSite` block whose description states the project's demonstration character. The structured data declares no operating business and no contact details.
+- All ten indexable pages have their own `title`, `meta name="description"`, and `link rel="canonical"`.
+- Each of those pages includes a complete Open Graph metadata set (including image type and dimensions) and a Twitter Card of type `summary_large_image`.
+- Each of those pages includes two JSON-LD blocks: a `WebPage` carrying the page's canonical URL, linked through `isPartOf` to the shared `WebSite` block whose description states the project's demonstration character. The structured data declares no operating business and no contact details.
+- The `404.html` error page is the exception: it has its own `title` and `meta name="description"`, but as a document without an address of its own it declares no `link rel="canonical"`, no Open Graph metadata, no Twitter Card, and no structured data.
 - `robots.txt` allows indexing of the whole site and points to `sitemap.xml`.
-- `sitemap.xml` lists nine URLs — every page except `dziekujemy.html`.
-- No page uses `meta name="robots"`, so indexing depends solely on `robots.txt` and search engine decisions.
+- `sitemap.xml` lists nine URLs — every page except `dziekujemy.html` and `404.html`.
+- `meta name="robots"` appears only on `404.html` (`noindex, follow`). No other page declares the tag, so their indexing depends on `robots.txt` and search engine decisions.
 
 ### PWA and Offline Support
 
@@ -467,7 +619,7 @@ A formal conformance audit is out of scope — the points above describe impleme
 
 ### Performance
 
-- The production build minifies CSS (`lightningcss`) and JavaScript (`esbuild`).
+- The production build (Vite) bundles and minifies CSS and JavaScript, and the emitted files carry a content hash in their names. `js/theme-bootstrap.js` is minified and inlined, so it costs no separate request before the first paint.
 - Images are delivered through the `picture` element with AVIF and WebP variants and a JPG fallback; `srcset` and `sizes` are defined for every variant.
 - Images carry explicit `width` and `height` attributes and `decoding="async"`; images below the first viewport use `loading="lazy"`.
 - `scripts/optimize-images.mjs` writes JPG at `quality: 82` with `mozjpeg`, WebP at `quality: 80`, and AVIF at `quality: 50`, without enlarging source images.
@@ -487,7 +639,7 @@ The repository contains no performance measurements, so the points above describ
 
 - Page content is edited in the HTML files at the repository root.
 - Changes to the header, navigation, footer, or project notice modal belong in `partials/header.html` and `partials/footer.html`, never in individual pages.
-- A new page requires an entry in the `htmlPages` array in `scripts/build.mjs`; a page belonging to the primary navigation additionally requires entries in `primaryNavPages` and in `partials/header.html`, and public URLs are added to `sitemap.xml`.
+- A new page requires an entry in the `htmlPages` array in `scripts/html-shell.mjs` — the same list defines the MPA entries in `vite.config.js`; a page belonging to the primary navigation additionally requires entries in `primaryNavPages` and in `partials/header.html`, and public URLs are added to `sitemap.xml`.
 - A new CSS file requires an import registered in `css/main.css`, and a new JS module requires a call in `js/app.js`.
 - Selectors shared between modules are defined in `js/config.js`.
 - New images are added to `assets/img-src/` and generated with `npm run optimize:images`; `assets/img/` holds generated files that are nevertheless version-controlled.

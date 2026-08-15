@@ -3,9 +3,17 @@
   "version": "1.0.0",
   "description": "A static portfolio reference website for a premium wedding and ceremonial services brand.",
   "private": true,
-  "author": "Kamil Król",
+  "author": "Kamil Król — KP_Code Digital Studio",
   "license": "SEE LICENSE IN LICENSE",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KPKrol85/DS-ceremonial-pr02-EverAfterRing.git"
+  },
+  "homepage": "https://ceremonial-pr02-everafterring.netlify.app/",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
   "keywords": [
     "portfolio",
     "static-site",
@@ -15,17 +23,16 @@
     "javascript"
   ],
   "scripts": {
-    "clean": "node scripts/build.mjs clean",
-    "optimize:images": "node scripts/optimize-images.mjs",
-    "build:css": "node scripts/build.mjs css",
-    "build:js": "node scripts/build.mjs js",
-    "build:html": "node scripts/build.mjs html",
-    "build:assets": "node scripts/build.mjs assets",
-    "build": "node scripts/build.mjs build"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "node scripts/check.mjs",
+    "test:smoke": "npm run build && playwright test",
+    "optimize:images": "node scripts/optimize-images.mjs"
   },
   "devDependencies": {
-    "esbuild": "^0.28.0",
-    "lightningcss": "^1.32.0",
-    "sharp": "^0.34.5"
+    "@playwright/test": "^1.62.1",
+    "sharp": "^0.34.5",
+    "vite": "^8.2.1"
   }
 }

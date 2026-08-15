@@ -2,17 +2,20 @@
 
 **Audit date:** 2026-08-13
 **Status re-verified:** 2026-08-13, against the current source and Git history
+**Optional items re-checked:** 2026-08-15, against `404.html`, `scripts/html-shell.mjs`, `js/modules/form.js`, `package.json`, `playwright.config.js` and `tests/`; both items that re-check confirmed — the accessibility-tree state and the standalone check command — have since been delivered, so section 7 lists none
 **Project type:** Static multi-page website in Polish (HTML, CSS, Vanilla JavaScript ES modules) with a Node-based production build into `dist/`; no runtime dependencies, no backend
 **Audit mode:** Final repository and implementation review
 **Active findings:** 0 — no P0, no open P1, no open P2
 
 ## 1. Executive assessment
 
-The repository is coherent and well-maintained. Architecture boundaries are explicit: `css/main.css` is the single stylesheet entry point, `js/app.js` is the single application entry point with a fixed module order, `partials/` holds the only copy of the shared shell, and `scripts/build.mjs` owns the production output. Documentation is unusually accurate: `README.md` describes the delivered mechanisms rather than aspirations, and the legal pages describe the two `localStorage` entries, the Netlify Forms submission path, and the embedded Google Maps frame that the code actually implements.
+The repository is coherent and well-maintained. Architecture boundaries are explicit: `css/main.css` is the single stylesheet entry point, `js/app.js` is the single application entry point with a fixed module order, `partials/` holds the only copy of the shared shell, and the build configuration in `vite.config.js` together with `scripts/html-shell.mjs` owns the production output. Documentation is unusually accurate: `README.md` describes the delivered mechanisms rather than aspirations, and the legal pages describe the two `localStorage` entries, the Netlify Forms submission path, and the embedded Google Maps frame that the code actually implements.
 
-The risk this audit identified was concentrated in client-side interaction state rather than in structure, content, or tooling, alongside two build- and repository-workflow items. All of those findings have since been delivered; the completed changes are recorded in `CHANGELOG.md` and their tasks in `PLAN.md`. No finding remains open here.
+The risk this audit identified was concentrated in client-side interaction state rather than in structure, content, or tooling, alongside two build- and repository-workflow items. All of those findings have since been delivered; the completed changes are recorded in `CHANGELOG.md` and their tasks in `docs/archive/plans/PLAN-2026-08-15.md`. No finding remains open here.
 
 ## 2. Audit scope and verification
+
+The scope and results recorded below are those of the 2026-08-13 run and are kept as that run's record. `404.html` and the suite in `tests/` were added afterwards and were not part of it; where they change the current picture, that is stated in the verification limitations and in section 3.
 
 ### Areas inspected
 
@@ -42,24 +45,26 @@ The risk this audit identified was concentrated in client-side interaction state
 
 ### Verification limitations
 
-- No browser or assistive-technology verification was performed. Findings about rendered layout, paint order, and focus behaviour are derived from the cascade and script sequence in the source; they are labelled accordingly.
+- No browser or assistive-technology verification was performed for this document. Findings about rendered layout, paint order, and focus behaviour are derived from the cascade and script sequence in the source; they are labelled accordingly. The repository has since gained the Chromium smoke suite described below, which closes part of the browser gap when it is run; no assistive-technology verification exists at any level.
 - No deployment URL was supplied for this audit, so no live environment was inspected and no claim is made about whether the project is currently deployed. The origin declared in `robots.txt`, `sitemap.xml`, and the per-page canonical/`og:url` metadata is treated as configuration, not as evidence of an active deployment.
-- The repository contains no automated test suite, so no test results are reported.
+- The repository now carries an automated test suite: ten Chromium tests under `tests/`, run against the Vite production preview by `npm run test:smoke`. No results from it are reported here, because it was not executed for this document. Its scope is a smoke baseline by design — three of the eleven pages, one primary-navigation transition, the theme, the mobile navigation panel, the project notice, and one contact-form path. That last test is the only evidence the suite offers for the form: it submits with the required fields empty and checks the state, focus, and message of the first invalid field, then checks that a valid value clears them. It does not cover the remaining pages, the custom 404 page, the rest of the contact form — the other validated fields, the remaining validity types, or the submission path — responsive layout, visual regression, accessibility conformance, or any browser engine other than Chromium.
 - Contrast was assessed only for deterministic token pairs. Surfaces composed with `color-mix()` over the modal backdrop and the hero gradient overlays were not evaluated.
 
 ## 3. Verified strengths
 
 - Single, unambiguous source of truth per concern: `css/main.css` is the only stylesheet entry (`css/main.css:1-16`), `js/app.js` is the only application entry with an explicit module order (`js/app.js:9-16`), and `partials/` holds the only copy of the header, footer, and project notice.
-- The build enforces its own contracts instead of assuming them: `scripts/build.mjs:119-133` fails the build if a partial host is missing, and `scripts/build.mjs:105-117` fails it if a primary-navigation page does not end up with exactly one `nav__link` carrying `aria-current="page"`.
+- The build enforces its own contracts instead of assuming them: `scripts/html-shell.mjs:86-100` fails the build if a partial host is missing, and `scripts/html-shell.mjs:72-84` fails it if a primary-navigation page does not end up with exactly one `nav__link` carrying `aria-current="page"`.
+- Those contracts are no longer reachable only through a build. `scripts/check.mjs`, run by `npm run check`, imports the same page registry and the same helpers and runs them in memory for all eleven pages, so the partial-host, single-`aria-current` and theme-bootstrap assertions keep one implementation and gain an output-free entry point; the command also resolves the local references declared by the pages, the partials, the stylesheets and the web manifest. Run against the current tree on 2026-08-15 it passes, resolving 390 local references with none missing — the reference check this audit performed ad hoc is now repeatable, and it writes nothing.
 - Reference integrity is complete — all 322 local references resolve, with no duplicate IDs and no dangling ARIA or label targets across all 10 pages with partials injected.
-- Metadata is consistent across every page: each has its own `title`, `description`, `canonical`, full Open Graph set with image dimensions and alt text, Twitter Card, and two JSON-LD blocks, all parsing cleanly.
+- Metadata is consistent across the ten indexable pages: each has its own `title`, `description`, `canonical`, full Open Graph set with image dimensions and alt text, Twitter Card, and two JSON-LD blocks, all parsing cleanly. The eleventh page, `404.html`, deliberately carries none of that beyond its own title and description — an error document has no canonical address of its own, and it is held out of the index by `noindex, follow` and out of `sitemap.xml`.
 - Image delivery is coherent: `<picture>` with AVIF/WebP/JPG, matching `srcset`/`sizes`, explicit `width`/`height` matching the real files, `decoding="async"`, and `loading="lazy"` on below-the-fold images only.
-- Defensive initialisation is the norm in the JS modules: `js/modules/nav.js:4-9`, `js/modules/form.js:22-24`, `js/modules/hero.js:1-14`, and `js/modules/header-scroll.js:7-9` all guard on missing elements and on re-initialisation before binding.
+- Defensive initialisation is the norm in the JS modules: `js/modules/nav.js:4-9`, `js/modules/form.js:27-29`, `js/modules/hero.js:1-14`, and `js/modules/header-scroll.js:7-9` all guard on missing elements and on re-initialisation before binding.
 - Theme persistence degrades safely: `js/theme-bootstrap.js:10-17` and `js/modules/theme.js:10-25` both wrap storage access so the toggle keeps working for the current page when storage is unavailable.
 - Colour tokens hold up under measurement: body text 14.30:1, muted body copy 4.48–5.47:1, accent 7.24:1, primary button 7.73:1, footer text 9.18:1, and the dark theme 8.90–16.24:1 across the pairs checked.
 - Legal documentation matches the implementation rather than a template: `cookies.html` lists exactly the two `localStorage` keys the code writes and explicitly states that no service worker, `sessionStorage`, or Cache Storage is used, which is correct for this repository; `polityka-prywatnosci.html` describes the Netlify Forms path and the Google Maps frame that `kontakt.html` actually contains.
 - Repository hygiene in shipped source is clean: no `TODO`/`FIXME`/`debugger`/`console.log` outside the build scripts' intended output, and `.gitignore` documents which generated paths are intentionally tracked.
-- Asset ownership is complete: every file under `assets/` outside `img-src/` resolves from source, so `scripts/build.mjs:153-166` copies no file the site does not use, and each icon set has exactly one authoritative copy — inline in `partials/header.html` and `partials/footer.html`.
+- Asset ownership is complete: every file under `assets/` outside `img-src/` resolves from source, so `vite.config.js:55-78` copies no file the site does not use, and each icon set has exactly one authoritative copy — inline in `partials/header.html` and `partials/footer.html`.
+- Several of the runtime behaviours this audit could only reason about from source now have executable coverage in the repository. `tests/` holds a Chromium smoke suite that `npm run test:smoke` runs against the built preview rather than the development server, so it exercises the resolved shared shell and the inlined theme bootstrap that `dist/` actually ships. The suite is built to stay deterministic: it pins the preview host and port, refuses to attach to a preview server left over from an older build (`playwright.config.js:24-30`), pins `colorScheme` so the unstored-preference case does not depend on the runner's system setting, and seeds both `localStorage` preconditions through init scripts (`tests/support/app.js:8-13`) because both features read storage before the first paint.
 
 ## 4. P0 — Critical risks
 
@@ -75,41 +80,24 @@ None open. Resolved findings are recorded in `CHANGELOG.md`.
 
 ## 7. Extra quality improvements
 
-### Add a custom 404 page
-
-- **Relevant area:** Routing and shared shell.
-- **Current evidence:** The repository contains ten pages and no `404.html`; `scripts/build.mjs:12-23` lists every page explicitly, and the shared shell is already available to any new page through the partial hosts.
-- **Potential value:** An unknown path would land on a page consistent with the site's own design and navigation instead of the hosting platform's default, using infrastructure that already exists.
-- **Scope boundary:** Optional. The current behaviour is not a defect, and hosting configuration is intentionally maintained outside this repository.
-
-### Reflect invalid form state in the accessibility tree
-
-- **Relevant area:** Contact form validation (`js/modules/form.js:30-45`, `kontakt.html:127-190`).
-- **Current evidence:** Validation is already well built — `novalidate` applied from script, per-field messages written into `aria-describedby` targets, focus moved to the first invalid field, and an `aria-live="polite"` status region. The one signal not exposed is `aria-invalid` on the fields themselves.
-- **Potential value:** Screen readers would announce a field as invalid on entry rather than relying on the description text alone, and the state would be available for styling without an additional class.
-- **Scope boundary:** Optional refinement to a working implementation; no change to the validation logic or the Netlify Forms contract is implied.
-
-### Promote the build's existing consistency checks into a standalone check command
-
-- **Relevant area:** Verification tooling (`scripts/build.mjs:105-117`, `scripts/build.mjs:119-133`, `package.json` scripts).
-- **Current evidence:** The build already asserts partial-host presence and single-`aria-current` correctness, but those assertions can only run as part of a build that produces `dist/`. The repository has no command that validates the pages without producing output.
-- **Potential value:** The same guarantees plus cheap additions such as local-reference resolution could be run routinely and quickly, without writing any files — the checks this audit performed ad hoc would become repeatable.
-- **Scope boundary:** Optional. This proposes reusing logic that already exists rather than introducing a test framework or new dependencies.
+None open. The standalone check command this section proposed has since been delivered as `scripts/check.mjs` behind `npm run check`; it is described in section 3 and recorded in `CHANGELOG.md`.
 
 ## 8. Current readiness conclusion
 
-**Status:** No open findings at any priority.
+**Status:** No open findings at any priority, and no open recommendation.
 
-Nothing blocks the project from being built, served, or read: content, structure, metadata, references, asset ownership, and documentation are all in good order. The remaining entries in this document are the optional improvements in section 7, none of which is a defect.
+Nothing blocks the project from being built, served, or read: content, structure, metadata, references, asset ownership, and documentation are all in good order. The source-level guarantees this document reasoned about are now executable rather than only inspectable — `npm run check` runs the build's own shared-shell contracts and the local-reference resolution without producing output, and `npm run build` still enforces the same contracts on the way to `dist/`.
 
 This status is a repository-state assessment. It is not an accessibility certification, a security assessment, a guarantee of browser or assistive-technology behaviour, or a performance measurement — none of which were performed, as recorded in the verification limitations.
 
 ## 9. Senior rating
 
-**Rating:** 8/10 — reassessed 2026-08-13 against the current repository state, with every finding now closed (7/10 on the audit date)
+**Rating:** 8/10 — held at the 2026-08-15 reassessment made after the standalone check command landed; reassessed 2026-08-13 against the repository state with every finding closed (7/10 on the audit date)
 
 **Active findings behind this rating:** P0 — 0. P1 — 0. P2 — 0.
 
 The source-level work this audit called for is complete. The interaction layer establishes its own defaults instead of depending on scripting to repair them: the theme resolved before first paint survives runtime initialisation, the mobile navigation panel is closed in markup and CSS below the breakpoint, the project-notice dialog contains focus and closes on `Escape` and on the backdrop, and no raw hex literal remains anywhere under `css/` outside `css/tokens.css`. Asset ownership is now complete as well — every shipped file resolves from source, and each icon set has one authoritative copy. The build contract is verifiable as documented — `npm run build` writes only into the ignored `dist/` — and `.gitattributes` keeps diffs reviewable.
 
-The rating holds at 8 rather than rising, because the two factors that gate a higher score are unchanged by this cleanup: the repository still has no automated test suite and no output-free check command, so the build's own contract assertions can only run as part of a build; and runtime, browser, and assistive-technology behaviour remain unverified in this document, as recorded in the verification limitations. This is the standard the previous reassessment set — a rating above this range needs observed behaviour and repeatable checks, not further source-level fixes — and closing the last finding was a source-level fix. What lifts it from here is the standalone check command proposed in section 7, plus verification in a real browser — not more changes to the source.
+The rating holds at 8, and the reason it holds has narrowed again. Both factors the earlier reassessment named as gating a higher score have now been attempted, and the tooling half is genuinely settled: `npm run check` runs the build's own partial-host, single-`aria-current` and theme-bootstrap assertions plus local-reference resolution without writing a file, so those guarantees no longer require a build that produces `dist/`, and the reference sweep this document performed by hand is now a command anyone can repeat. That closes the section 7 condition outright, and it does so by reusing the existing helpers rather than adding a dependency or a second implementation.
+
+What has not moved is the other half, and it is the half that carries the remaining risk. The browser evidence is still the same smoke baseline, with the limits recorded in the verification limitations: one browser engine, three of the eleven pages, a single contact-form path — the invalid state, focus, and message the module produces for the first invalid field — and nothing for the rest of that form, the custom 404 page, responsive layout, or accessibility conformance; assistive-technology behaviour remains unverified at any level. A source-level checker cannot substitute for any of that: it validates what the source declares, not what a browser renders or what a screen reader announces. Those are material limitations rather than formalities, so the rating does not rise on the tooling alone. What lifts it from here is browser and assistive-technology coverage wide enough to stand behind — which is now the only outstanding factor, and not a change to the source.
