@@ -8,7 +8,7 @@
     "email": "kontakt@kp-code.pl"
   },
   "homepage": "https://construction-pr01-solidcraft.netlify.app/",
-  "license": "MIT",
+  "license": "SEE LICENSE IN LICENSE",
   "scripts": {
     "start": "npm run dev",
     "dev": "live-server --port=15500 --open=index.html --quiet",
