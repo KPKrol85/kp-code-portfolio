@@ -1,5 +1,6 @@
 const CONSENT_KEY = "kpc_site_terms_accepted_v1";
-const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+const focusableSelector =
+  'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 const canUseLocalStorage = () => {
   try {
@@ -23,6 +24,7 @@ const buildConsentMarkup = () => {
       <h2 class="site-consent__title" id="site-consent-title">Warunki korzystania z serwisu</h2>
       <p class="site-consent__text" id="site-consent-desc">
         Przed rozpoczęciem korzystania z serwisu zapoznaj się z regulaminem, polityką prywatności oraz polityką cookies.
+        TransLogix jest demonstracyjnym projektem portfolio KP_Code Digital Studio, a prezentowana marka i firma transportowo-logistyczna są fikcyjne.
       </p>
       <p class="site-consent__note">Przed korzystaniem z serwisu zaakceptuj Regulamin.</p>
       <div class="site-consent__actions">
@@ -44,7 +46,8 @@ export function initSiteConsent() {
   if (!document.body) return;
 
   const storageAvailable = canUseLocalStorage();
-  const hasConsent = storageAvailable && localStorage.getItem(CONSENT_KEY) === "true";
+  const hasConsent =
+    storageAvailable && localStorage.getItem(CONSENT_KEY) === "true";
   if (hasConsent) return;
 
   const overlay = buildConsentMarkup();
@@ -55,7 +58,10 @@ export function initSiteConsent() {
   if (!focusableItems.length) return;
   const firstFocusable = focusableItems[0];
   const lastFocusable = focusableItems[focusableItems.length - 1];
-  const previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  const previouslyFocused =
+    document.activeElement instanceof HTMLElement
+      ? document.activeElement
+      : null;
 
   const trapFocus = (event) => {
     if (event.key !== "Tab" || !focusableItems.length) return;
@@ -88,7 +94,9 @@ export function initSiteConsent() {
     overlay.classList.remove("is-visible");
     document.body.classList.remove("no-scroll");
 
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     const delay = prefersReducedMotion ? 0 : 220;
     window.setTimeout(() => overlay.remove(), delay);
 

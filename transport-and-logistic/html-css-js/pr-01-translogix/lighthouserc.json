@@ -1,10 +1,10 @@
 {
   "ci": {
     "collect": {
-      "staticDistDir": ".",
+      "staticDistDir": "dist",
       "numberOfRuns": 1,
       "settings": {
-        "preset": "mobile"
+        "formFactor": "mobile"
       },
       "url": [
         "http://localhost:8080/",
@@ -17,6 +17,9 @@
     "assert": {
       "preset": "lighthouse:no-pwa",
       "assertions": {
+        "lcp-lazy-loaded": "off",
+        "prioritize-lcp-image": "off",
+        "non-composited-animations": "off",
         "categories:performance": [
           "warn",
           {

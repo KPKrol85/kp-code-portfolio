@@ -15,7 +15,12 @@
   inset: 0;
   z-index: 0;
   background-image:
-    linear-gradient(120deg, rgba(15, 23, 42, 0.82), rgba(14, 165, 233, 0.5) 48%, rgba(15, 23, 42, 0.9)),
+    linear-gradient(
+      120deg,
+      rgba(15, 23, 42, 0.82),
+      rgba(14, 165, 233, 0.5) 48%,
+      rgba(15, 23, 42, 0.9)
+    ),
     image-set(
       url("/assets/img/hero/hero-01-1920x1080.avif") type("image/avif"),
       url("/assets/img/hero/hero-01-1920x1080.webp") type("image/webp"),
@@ -62,7 +67,11 @@
 .hero__actions .cta--primary {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-strong));
+  background: linear-gradient(
+    135deg,
+    var(--color-accent),
+    var(--color-accent-strong)
+  );
   color: #0b1020;
   box-shadow: 0 14px 30px rgba(15, 23, 42, 0.28);
 }
@@ -78,7 +87,12 @@
   left: -120%;
   width: 120%;
   height: 100%;
-  background: linear-gradient(115deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.22) 50%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.22) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
   transform: skewX(-22deg);
   transition: left 650ms ease;
   pointer-events: none;
@@ -102,7 +116,12 @@
 @media (min-width: 1600px) {
   .hero::before {
     background-image:
-      linear-gradient(120deg, rgba(15, 23, 42, 0.82), rgba(14, 165, 233, 0.5) 48%, rgba(15, 23, 42, 0.9)),
+      linear-gradient(
+        120deg,
+        rgba(15, 23, 42, 0.82),
+        rgba(14, 165, 233, 0.5) 48%,
+        rgba(15, 23, 42, 0.9)
+      ),
       image-set(
         url("/assets/img/hero/hero-01-2560x1440.avif") type("image/avif"),
         url("/assets/img/hero/hero-01-2560x1440.webp") type("image/webp"),
@@ -114,7 +133,12 @@
 @media (min-width: 2200px) {
   .hero::before {
     background-image:
-      linear-gradient(120deg, rgba(15, 23, 42, 0.82), rgba(14, 165, 233, 0.5) 48%, rgba(15, 23, 42, 0.9)),
+      linear-gradient(
+        120deg,
+        rgba(15, 23, 42, 0.82),
+        rgba(14, 165, 233, 0.5) 48%,
+        rgba(15, 23, 42, 0.9)
+      ),
       image-set(
         url("/assets/img/hero/hero-01-3840x1600.avif") type("image/avif"),
         url("/assets/img/hero/hero-01-3840x1600.webp") type("image/webp"),
@@ -226,12 +250,47 @@ html.theme-dark .card:focus-within {
 .card.fleet-card:hover,
 .card.fleet-card:focus-within {
   transform: translateY(-2px);
-  border-color: color-mix(in srgb, var(--color-border) 70%, var(--color-accent) 30%);
+  border-color: color-mix(
+    in srgb,
+    var(--color-border) 70%,
+    var(--color-accent) 30%
+  );
   box-shadow: 0 14px 34px rgba(15, 23, 42, 0.14);
 }
 
 html.theme-dark .card.fleet-card {
   background: var(--color-surface-elevated, rgba(15, 23, 42, 0.96));
+}
+
+/* Component: Fleet specification list (index.html + fleet.html) */
+
+.fleet-specs {
+  margin: var(--space-01) 0 0;
+  padding: var(--space-03) 0 0;
+  display: grid;
+  gap: var(--space-02);
+  list-style: none;
+  border-top: 1px solid color-mix(in srgb, var(--color-border) 72%, transparent);
+}
+
+.fleet-specs li {
+  position: relative;
+  padding-left: var(--space-03);
+  color: var(--color-muted);
+  font-size: var(--fs-04);
+  line-height: var(--lh-base);
+  text-wrap: pretty;
+}
+
+.fleet-specs li::before {
+  content: "";
+  position: absolute;
+  top: calc((var(--lh-base) * 1em - 0.3rem) / 2);
+  left: 0;
+  width: 0.3rem;
+  height: 0.3rem;
+  border-radius: 50%;
+  background: var(--color-accent);
 }
 
 /* Component: Quote calculator */
@@ -261,7 +320,11 @@ html.theme-dark .calculator {
 
 #quote .summary {
   border-radius: var(--radius-lg);
-  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.03), rgba(14, 165, 233, 0.03));
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.03),
+    rgba(14, 165, 233, 0.03)
+  );
   border: 1px solid rgba(14, 165, 233, 0.15);
   padding: clamp(var(--space-04), 3vw, var(--space-05));
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -272,7 +335,11 @@ html.theme-dark .calculator {
 }
 
 html.theme-dark #quote .summary {
-  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.03), rgba(14, 165, 233, 0.04));
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.03),
+    rgba(14, 165, 233, 0.04)
+  );
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 }
@@ -284,41 +351,10 @@ html.theme-dark #quote .summary {
   font-size: var(--fs-06);
 }
 
-#quick-quote {
-  display: grid;
-  gap: var(--space-03);
-}
+/* The panel is a grid, so its gap is the single source of vertical rhythm. */
 
-#quick-quote fieldset {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-04);
-  margin: var(--space-01) 0;
-  background: var(--color-surface);
-  display: grid;
-}
-
-html.theme-dark #quick-quote fieldset {
-  background: var(--color-surface-elevated, rgba(15, 23, 42, 0.9));
-}
-
-#quick-quote fieldset legend {
-  padding: 0 var(--space-02);
-  font-weight: var(--fw-semibold);
-  color: var(--color-text);
-}
-
-#quick-quote fieldset label {
-  display: flex;
-  align-items: center;
-  gap: var(--space-02);
-  line-height: var(--lh-base);
-  font-size: var(--fs-04);
-}
-
-#quick-quote fieldset input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
+#quote .summary p {
+  margin-bottom: 0;
 }
 
 .quote-history {
@@ -392,21 +428,6 @@ html.theme-dark #quick-quote fieldset {
   transform: translateY(-2px);
 }
 
-.quote-form__submit {
-  align-self: flex-start;
-  justify-self: start;
-  width: fit-content;
-  min-width: 12rem;
-  padding-inline: var(--space-05);
-}
-
-@media (max-width: 520px) {
-  .quote-form__submit {
-    justify-self: stretch;
-    width: 100%;
-  }
-}
-
 /* Component: Buttons */
 
 .btn {
@@ -453,7 +474,13 @@ html.theme-dark #quick-quote fieldset {
   width: 60%;
   height: 1.2px;
   border-radius: var(--radius-pill);
-  background: linear-gradient(to right, transparent 0%, currentColor 18%, currentColor 82%, transparent 100%);
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    currentColor 18%,
+    currentColor 82%,
+    transparent 100%
+  );
   transform: translateX(-50%) scaleX(0);
   transform-origin: center;
   opacity: 0;
@@ -521,6 +548,332 @@ html.theme-dark #quick-quote fieldset {
   overflow: hidden;
 }
 
+/* Component: Form field
+   Wraps a single control so the native spinner / select arrow can be
+   replaced by a project-owned indicator. Must stay after the shared
+   `.form` rules above so the reserved padding wins on equal specificity. */
+
+.form-field {
+  position: relative;
+
+  /* Indicator column reserved at the end of the control. Shared by the
+     numeric steppers and the select arrow so both sit on one optical line. */
+  --field-indicator: 26px;
+  --field-indicator-inset: 2px;
+  --field-chevron: 7px;
+}
+
+/* Number: the native spinner is suppressed only when JS can supply the
+   replacement buttons, so a no-JS visitor keeps the browser control. */
+
+.js .form-field--number input {
+  padding-right: calc(var(--space-03) + var(--field-indicator));
+  appearance: textfield;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.js .form-field--number input::-webkit-outer-spin-button,
+.js .form-field--number input::-webkit-inner-spin-button {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-js .form-field__step {
+  display: none;
+}
+
+.form-field__step {
+  position: absolute;
+  right: var(--field-indicator-inset);
+  width: var(--field-indicator);
+  height: calc(50% - 3px);
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-xs);
+  background: transparent;
+  color: var(--color-muted);
+  cursor: pointer;
+  transition:
+    color var(--transition),
+    background-color var(--transition);
+}
+
+.form-field__step--up {
+  top: 3px;
+}
+
+.form-field__step--down {
+  bottom: 3px;
+}
+
+.form-field__step::before {
+  content: "";
+  width: var(--field-chevron);
+  height: var(--field-chevron);
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  border-radius: 1px;
+}
+
+.form-field__step--up::before {
+  transform: translateY(1.5px) rotate(-135deg);
+}
+
+.form-field__step--down::before {
+  transform: translateY(-1.5px) rotate(45deg);
+}
+
+.form-field__step:hover {
+  color: var(--color-accent-strong);
+  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+}
+
+.form-field__step:active {
+  background: color-mix(in srgb, var(--color-accent) 22%, transparent);
+}
+
+/* Select: keeps the native control, only the arrow is redrawn. */
+
+.form-field--select select {
+  padding-right: calc(var(--space-03) + var(--field-indicator));
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.form-field--select::after {
+  content: "";
+  position: absolute;
+
+  /* Centred on the same column as the numeric steppers. */
+  right: calc(
+    var(--field-indicator-inset) +
+      (var(--field-indicator) - var(--field-chevron)) / 2
+  );
+  top: 50%;
+  width: var(--field-chevron);
+  height: var(--field-chevron);
+  margin-top: calc(var(--field-chevron) / -2 - 1.5px);
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  border-radius: 1px;
+  color: var(--color-muted);
+  transform: rotate(45deg);
+  pointer-events: none;
+  transition: color var(--transition);
+}
+
+.form-field--select:hover::after {
+  color: var(--color-text);
+}
+
+.form-field--select:focus-within::after {
+  color: var(--color-accent-strong);
+}
+
+@media (pointer: coarse) {
+  .form-field {
+    --field-indicator: 34px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form-field__step,
+  .form-field--select::after {
+    transition: none;
+  }
+}
+
+/* Component: Checkbox
+   The native input stays the control and only its presentation is redrawn, so
+   keyboard operation, the label relationship and validation keep working. The
+   check mark is built from the same two-border geometry as the numeric
+   steppers above, which keeps it on `currentColor`, needs no asset and still
+   shows up in forced-colors mode. Component selectors are doubled up so they
+   win over the shared `.form input` rules without reaching for an id. */
+
+.checkbox {
+  --checkbox-size: 1.25rem;
+  --checkbox-line: calc(var(--fs-04) * var(--lh-base));
+
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-03);
+  padding-block: var(--space-02);
+  cursor: pointer;
+}
+
+.checkbox .checkbox__control {
+  flex: none;
+  display: grid;
+  place-content: center;
+  width: var(--checkbox-size);
+  height: var(--checkbox-size);
+
+  /* Optically centred on the first text line rather than on the whole label,
+     so a wrapped option still lines up with its box. */
+  margin: max(0px, calc((var(--checkbox-line) - var(--checkbox-size)) / 2)) 0 0;
+  padding: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1.5px solid color-mix(in srgb, var(--color-text) 50%, transparent);
+  border-radius: var(--radius-xs);
+  background: var(--color-surface);
+  cursor: pointer;
+  transition:
+    background-color var(--transition),
+    border-color var(--transition);
+}
+
+.checkbox .checkbox__control::after {
+  content: "";
+  width: 0.3rem;
+  height: 0.6rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  border-radius: 1px;
+  transform: translateY(-1px) rotate(45deg);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.checkbox .checkbox__control:checked {
+  border-color: var(--color-accent-strong);
+  background: var(--color-accent);
+  color: var(--color-text-on-accent);
+}
+
+.checkbox .checkbox__control:checked::after {
+  opacity: 1;
+}
+
+.checkbox:hover .checkbox__control {
+  border-color: var(--color-accent-strong);
+}
+
+.checkbox:hover .checkbox__control:not(:checked) {
+  background: color-mix(in srgb, var(--color-accent) 12%, var(--color-surface));
+}
+
+.checkbox .checkbox__control.invalid {
+  border-color: #f87171;
+}
+
+.checkbox__label {
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-04);
+  line-height: var(--lh-base);
+}
+
+@media (pointer: coarse) {
+  .checkbox {
+    --checkbox-size: 1.375rem;
+
+    padding-block: var(--space-03);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .checkbox .checkbox__control,
+  .checkbox .checkbox__control::after {
+    transition: none;
+  }
+}
+
+/* Component: Quote form
+   Composition of the quick quote calculator's form column. Must stay after the
+   shared `.form` and `.form-field` rules above so the component wins on equal
+   specificity, the same ordering the form field block relies on. */
+
+.quote-form {
+  gap: var(--space-04);
+  align-content: start;
+}
+
+/* One label, its control and the reserved error slot. */
+
+.quote-form__field {
+  display: grid;
+}
+
+.quote-form__field > label {
+  margin-bottom: var(--space-02);
+}
+
+/* The error element keeps its slot for `aria-describedby`; only a filled one
+   takes vertical space, so an untouched form keeps an even rhythm. */
+
+.quote-form__field > .form__error:not(:empty) {
+  margin-top: var(--space-02);
+}
+
+/* Distance and weight read as one compact numeric pair instead of two
+   full-width controls, and fall back to single column - the better touch
+   target - once the column can no longer hold two. */
+
+.quote-form__row {
+  display: grid;
+  gap: var(--space-04);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+}
+
+.quote-form .form-field--number input {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Add-ons: one hairline-separated group with a quiet title, matching the
+   quote history in the summary column instead of nesting a second card. */
+
+.quote-form__addons {
+  display: grid;
+  gap: var(--space-01);
+  margin: 0;
+  padding: var(--space-04) 0 0;
+  border: 0;
+  border-top: 1px solid var(--color-border);
+}
+
+/* A floated legend is not the fieldset's rendered legend, so the title joins
+   the normal flow: it lines up with the field labels and leaves the separator
+   above unbroken. Browsers that keep the native placement simply fall back to
+   the legend sitting on that border. */
+
+.quote-form__legend {
+  float: left;
+  width: 100%;
+  padding: 0;
+  margin-bottom: var(--space-01);
+  font-size: var(--fs-04);
+  font-weight: var(--fw-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wider);
+  color: var(--color-muted);
+}
+
+.quote-form__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: start;
+  justify-self: start;
+  width: fit-content;
+  min-width: 12rem;
+  min-height: 2.75rem;
+  margin-top: var(--space-01);
+  padding-inline: var(--space-05);
+}
+
+@media (max-width: 520px) {
+  .quote-form__submit {
+    justify-self: stretch;
+    width: 100%;
+  }
+}
+
 /* Component: Pills */
 
 .pill {
@@ -530,7 +883,7 @@ html.theme-dark #quick-quote fieldset {
   padding: var(--space-01) var(--space-03);
   border-radius: var(--radius-sm);
   background: var(--color-accent);
-  color: var(--color-text);
+  color: var(--color-text-on-accent);
   font-weight: var(--fw-bold);
   font-size: var(--fs-04);
   backdrop-filter: blur(4px);
@@ -629,17 +982,45 @@ html.theme-dark #quick-quote fieldset {
 /* Component: Lightbox */
 
 .lightbox {
+  /*
+   * Media chrome keeps a light surface in both themes on purpose: these
+   * controls sit on photography and on the fullscreen black canvas, never on
+   * the page surface, so they must not follow the page palette.
+   */
+  --lightbox-ctrl-size: 48px;
+  --lightbox-ctrl-inset: clamp(var(--space-02), 1.4vw, var(--space-04));
+  --lightbox-ctrl-surface: rgba(250, 248, 243, 0.9);
+  --lightbox-ctrl-surface-blur: rgba(250, 248, 243, 0.66);
+  --lightbox-ctrl-surface-hover: rgba(255, 255, 255, 0.97);
+  --lightbox-ctrl-surface-active: rgba(236, 233, 226, 0.95);
+  --lightbox-ctrl-border: rgba(15, 23, 42, 0.18);
+  --lightbox-ctrl-ink: #0f172a;
+  --lightbox-ctrl-ring: var(--color-accent);
+
   position: fixed;
   inset: 0;
   z-index: 950;
   display: grid;
   place-items: center;
   padding: clamp(var(--space-02), 2vw, var(--space-04));
-  background: radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.18), transparent 34%), rgba(0, 0, 0, 0.2);
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(14, 165, 233, 0.18),
+      transparent 34%
+    ),
+    rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
   visibility: hidden;
   opacity: 0;
   transition: opacity var(--transition);
+}
+
+html.theme-dark .lightbox {
+  --lightbox-ctrl-surface: rgba(241, 245, 249, 0.88);
+  --lightbox-ctrl-surface-blur: rgba(241, 245, 249, 0.64);
+  --lightbox-ctrl-surface-hover: rgba(248, 250, 252, 0.97);
+  --lightbox-ctrl-surface-active: rgba(226, 232, 240, 0.94);
 }
 
 .lightbox.is-open {
@@ -652,7 +1033,7 @@ html.theme-dark #quick-quote fieldset {
   max-height: calc(100dvh - (var(--space-02) * 2));
   overflow: hidden;
   display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
   gap: var(--space-03);
   padding: clamp(var(--space-02), 2vw, var(--space-04));
   border-radius: var(--radius-lg);
@@ -664,7 +1045,28 @@ html.theme-dark #quick-quote fieldset {
 }
 
 html.theme-dark .lightbox__dialog {
-  background: color-mix(in srgb, var(--color-surface-elevated, #0f172a) 60%, #000 7%);
+  background: color-mix(
+    in srgb,
+    var(--color-surface-elevated, #0f172a) 60%,
+    #000 7%
+  );
+}
+
+.lightbox__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-04);
+}
+
+.lightbox__heading {
+  min-width: 0;
+}
+
+.lightbox__actions {
+  display: flex;
+  flex: none;
+  gap: var(--space-02);
 }
 
 .lightbox__title {
@@ -675,7 +1077,7 @@ html.theme-dark .lightbox__dialog {
 }
 
 .lightbox__meta {
-  margin: calc(var(--space-02) * -0.5) 0 0;
+  margin: var(--space-01) 0 0;
   color: var(--color-muted);
   font-size: var(--fs-03);
   font-weight: var(--fw-semibold);
@@ -683,6 +1085,7 @@ html.theme-dark .lightbox__dialog {
 }
 
 .lightbox__hero-frame {
+  position: relative;
   margin: 0;
   padding: 0;
   display: flex;
@@ -695,7 +1098,15 @@ html.theme-dark .lightbox__dialog {
   overflow: hidden;
   border-radius: var(--radius-lg);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), transparent 42%), rgba(0, 0, 0, 0.9);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.06), transparent 42%),
+    rgba(0, 0, 0, 0.9);
+}
+
+.lightbox__hero-frame picture {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .lightbox__hero {
@@ -705,6 +1116,9 @@ html.theme-dark .lightbox__dialog {
   max-height: none;
   object-fit: contain;
   object-position: center;
+}
+
+.lightbox.has-fullscreen .lightbox__hero {
   cursor: zoom-in;
 }
 
@@ -717,188 +1131,133 @@ html.theme-dark .lightbox__dialog {
   padding: 0;
 }
 
-.lightbox__controls {
-  position: absolute;
-  inset: 0;
-  min-height: 0;
-  pointer-events: none;
-}
+/* One control family for close, fullscreen and gallery navigation. */
 
-.lightbox__controls .btn,
-.lightbox__close {
-  width: 48px;
-  height: 48px;
+.lightbox__ctrl {
+  flex: none;
+  inline-size: var(--lightbox-ctrl-size);
+  block-size: var(--lightbox-ctrl-size);
   padding: 0;
+  display: grid;
+  place-items: center;
   border-radius: var(--radius-pill);
-  display: grid;
-  place-items: center;
-  border: none;
-  background: rgba(17, 24, 39, 0.64);
-  color: #fff;
-  backdrop-filter: blur(12px);
-}
-
-.lightbox__controls .btn[data-lightbox-prev] {
-  position: absolute;
-  left: var(--space-04);
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: auto;
-}
-
-.lightbox__controls .btn[data-lightbox-next] {
-  position: absolute;
-  right: var(--space-04);
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: auto;
-}
-
-.lightbox__close {
-  position: absolute;
-  top: var(--space-03);
-  right: var(--space-03);
-  z-index: 30;
-}
-
-.lightbox__close svg,
-.lightbox__zoom-close svg,
-.lightbox__controls .btn svg {
-  width: 24px;
-  height: 24px;
-  display: block;
-}
-
-.lightbox__controls .btn,
-.lightbox__close {
-  transition:
-    background-color 160ms ease,
-    box-shadow 160ms ease,
-    transform 120ms ease;
-}
-
-.lightbox__controls .btn:hover,
-.lightbox__close:hover {
-  background-color: color-mix(in srgb, var(--color-accent) 22%, rgba(17, 24, 39, 0.72));
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
-}
-
-.lightbox__controls .btn:active,
-.lightbox__close:active {
-  transform: translateY(calc(-50% + 1px));
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
-}
-
-.lightbox__close:active {
-  transform: translateY(1px);
-}
-
-.lightbox__controls .btn:focus-visible,
-.lightbox__close:focus-visible {
-  outline: none;
+  border: 1px solid var(--lightbox-ctrl-border);
+  background: var(--lightbox-ctrl-surface);
+  color: var(--lightbox-ctrl-ink);
+  cursor: pointer;
   box-shadow:
-    0 0 0 2px rgba(0, 0, 0, 0.52),
-    0 0 0 4px var(--color-accent);
+    0 1px 2px rgba(2, 6, 23, 0.26),
+    0 8px 24px rgba(2, 6, 23, 0.22);
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition);
 }
 
-.lightbox__zoom {
-  position: fixed;
-  inset: 0;
-  z-index: 1400;
+/* Blur is an enhancement, the surface stays readable without it. */
+@supports (backdrop-filter: blur(6px)) {
+  .lightbox__ctrl {
+    background: var(--lightbox-ctrl-surface-blur);
+    backdrop-filter: blur(12px) saturate(140%);
+  }
+}
+
+.lightbox__ctrl:hover {
+  background: var(--lightbox-ctrl-surface-hover);
+  border-color: rgba(15, 23, 42, 0.26);
+  box-shadow:
+    0 1px 2px rgba(2, 6, 23, 0.3),
+    0 12px 30px rgba(2, 6, 23, 0.3);
+}
+
+.lightbox__ctrl:active {
+  background: var(--lightbox-ctrl-surface-active);
+  box-shadow: 0 1px 2px rgba(2, 6, 23, 0.3);
+}
+
+.lightbox__ctrl:focus-visible {
+  outline: 2px solid var(--lightbox-ctrl-ring);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px rgba(2, 6, 23, 0.55);
+}
+
+.lightbox__ctrl-icon {
   display: grid;
-  place-items: center;
-  padding: max(var(--space-02), env(safe-area-inset-top)) max(var(--space-02), env(safe-area-inset-right)) max(var(--space-02), env(safe-area-inset-bottom))
-    max(var(--space-02), env(safe-area-inset-left));
-  background: #000;
-  overflow: hidden;
-  cursor: zoom-out;
+  inline-size: 24px;
+  block-size: 24px;
 }
 
-.lightbox__zoom[hidden] {
-  display: none;
-}
-
-.lightbox__zoom-img {
+.lightbox__ctrl-icon svg {
+  display: block;
   width: 100%;
   height: 100%;
-  max-width: none;
-  max-height: none;
-  object-fit: contain;
-  object-position: center;
-  border-radius: calc(var(--radius-lg) - 2px);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.44);
-  cursor: zoom-in;
-  transition:
-    transform 180ms ease,
-    object-fit 180ms ease;
 }
 
-.lightbox__zoom.is-zoomed .lightbox__zoom-img {
-  object-fit: cover;
-  cursor: zoom-out;
+.lightbox__nav {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  transform: translateY(-50%);
 }
 
-.lightbox__zoom-close {
-  position: fixed;
-  top: max(var(--space-03), env(safe-area-inset-top));
-  right: max(var(--space-03), env(safe-area-inset-right));
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-pill);
-  display: grid;
-  place-items: center;
+.lightbox__nav--prev {
+  left: var(--lightbox-ctrl-inset);
+}
+
+.lightbox__nav--next {
+  right: var(--lightbox-ctrl-inset);
+}
+
+/*
+ * Fullscreen presentation is driven by the native `:fullscreen` state rather
+ * than a toggled class, so however fullscreen ends - the close control, the
+ * Escape key, the browser chrome - the normal geometry comes back with nothing
+ * left for the script to undo.
+ */
+
+.lightbox:fullscreen {
   padding: 0;
-  font-size: 0;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(8px);
-  cursor: pointer;
-  transition:
-    background-color 160ms ease,
-    box-shadow 160ms ease,
-    transform 120ms ease;
+  background: #05070d;
+  backdrop-filter: none;
 }
 
-.lightbox__zoom:fullscreen {
-  padding: 0;
-  background: #000;
-}
-
-.lightbox__zoom:fullscreen .lightbox__zoom-img {
-  width: 100vw;
-  height: 100dvh;
-  max-width: none;
+.lightbox:fullscreen .lightbox__dialog {
+  width: 100%;
+  height: 100%;
   max-height: none;
+  padding: max(var(--space-03), env(safe-area-inset-top))
+    max(var(--space-03), env(safe-area-inset-right))
+    max(var(--space-03), env(safe-area-inset-bottom))
+    max(var(--space-03), env(safe-area-inset-left));
+  border: 0;
   border-radius: 0;
+  background: transparent;
   box-shadow: none;
 }
 
-.lightbox__zoom.is-zoomed:fullscreen .lightbox__zoom-img {
+.lightbox:fullscreen .lightbox__hero-frame {
+  border-color: transparent;
+  border-radius: 0;
+  background: transparent;
+}
+
+.lightbox:fullscreen .lightbox__title {
+  color: #f8fafc;
+}
+
+.lightbox:fullscreen .lightbox__meta {
+  color: rgba(248, 250, 252, 0.74);
+}
+
+.lightbox.is-zoomed:fullscreen .lightbox__hero {
   object-fit: cover;
-}
-
-.lightbox__zoom:fullscreen .lightbox__zoom-close {
-  top: max(var(--space-03), env(safe-area-inset-top));
-  right: max(var(--space-03), env(safe-area-inset-right));
-}
-
-.lightbox__zoom-close:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.lightbox__zoom-close:active {
-  transform: translateY(1px);
-}
-
-.lightbox__zoom-close:focus-visible {
-  outline: none;
-  box-shadow:
-    0 0 0 2px rgba(0, 0, 0, 0.35),
-    0 0 0 4px rgba(255, 255, 255, 0.65);
+  cursor: zoom-out;
 }
 
 @media (max-width: 700px) {
   .lightbox {
+    --lightbox-ctrl-size: 44px;
+
     padding: var(--space-02);
   }
 
@@ -910,68 +1269,24 @@ html.theme-dark .lightbox__dialog {
     padding: var(--space-02);
   }
 
-  .lightbox__hero-frame {
-    width: 100%;
-    height: 100%;
-    min-height: auto;
-    padding: 0;
+  .lightbox__header {
+    gap: var(--space-02);
   }
 
-  .lightbox__hero {
+  .lightbox:fullscreen .lightbox__dialog {
     width: 100%;
     height: 100%;
     max-height: none;
-    object-fit: contain;
-  }
-
-  .lightbox__controls .btn[data-lightbox-prev] {
-    left: var(--space-02);
-  }
-
-  .lightbox__controls .btn[data-lightbox-next] {
-    right: var(--space-02);
-  }
-
-  .lightbox__controls .btn,
-  .lightbox__close,
-  .lightbox__zoom-close {
-    width: 44px;
-    height: 44px;
-  }
-
-  .lightbox__zoom {
-    padding-top: max(var(--space-02), env(safe-area-inset-top));
-    padding-right: max(var(--space-02), env(safe-area-inset-right));
-    padding-bottom: max(var(--space-02), env(safe-area-inset-bottom));
-    padding-left: max(var(--space-02), env(safe-area-inset-left));
-    box-sizing: border-box;
-    overflow: hidden;
-  }
-
-  .lightbox__zoom-img {
-    width: 100%;
-    height: 100%;
-    max-width: none;
-    max-height: none;
-    object-fit: contain;
-    border-radius: calc(var(--radius-lg) - 2px);
-    box-sizing: border-box;
-  }
-
-  .lightbox__zoom-close {
-    top: max(var(--space-02), env(safe-area-inset-top));
-    right: max(var(--space-02), env(safe-area-inset-right));
+    padding: max(var(--space-02), env(safe-area-inset-top))
+      max(var(--space-02), env(safe-area-inset-right))
+      max(var(--space-02), env(safe-area-inset-bottom))
+      max(var(--space-02), env(safe-area-inset-left));
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lightbox {
-    transition: none;
-  }
-
-  .lightbox__controls .btn,
-  .lightbox__close,
-  .lightbox__zoom-close {
+  .lightbox,
+  .lightbox__ctrl {
     transition: none;
   }
 }
@@ -1054,7 +1369,11 @@ html.theme-dark .lightbox__dialog {
 }
 
 .site-consent__primary {
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-strong) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-accent) 0%,
+    var(--color-accent-strong) 100%
+  );
   color: #fff;
   border-color: var(--color-accent);
   box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
@@ -1064,7 +1383,11 @@ html.theme-dark .lightbox__dialog {
 
 .site-consent__primary:hover,
 .site-consent__primary:focus-visible {
-  background: linear-gradient(135deg, var(--color-accent-strong) 0%, var(--color-accent) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-accent-strong) 0%,
+    var(--color-accent) 100%
+  );
   transform: translateY(-1px);
 }
 

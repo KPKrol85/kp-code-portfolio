@@ -2,10 +2,13 @@
 <footer class="footer">
   <div class="container footer__inner">
     <!-- Stats -->
-    <section class="footer__stats" aria-label="Kluczowe liczby TransLogix">
+    <section class="footer__stats" aria-labelledby="footer-stats-title">
+      <h2 class="visually-hidden" id="footer-stats-title">
+        Kluczowe liczby TransLogix
+      </h2>
       <ul class="stats">
         <li class="stat">
-          <h3 data-stat="deliveries" data-value="550">612+</h3>
+          <h3 data-stat="deliveries">612+</h3>
           <p class="text-muted">Udanych dostaw miesięcznie</p>
         </li>
         <li class="stat">
@@ -22,18 +25,40 @@
     <nav class="footer__nav" aria-label="Nawigacja w stopce">
       <div class="footer__grid">
         <div class="footer__column footer__brand">
-          <a href="index.html" class="brand brand--footer" aria-label="Strona główna TransLogix">
-            <img src="assets/img/logo/logo-translogix-light.svg" alt="" class="brand__logo brand__logo--light" width="128" height="128" />
-            <img src="assets/img/logo/logo-translogix-dark.svg" alt="" class="brand__logo brand__logo--dark" width="128" height="128" />
+          <a
+            href="index.html"
+            class="brand brand--footer"
+            aria-label="Strona główna TransLogix"
+          >
+            <img
+              src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+              alt=""
+              class="brand__logo"
+              data-theme-image="logo"
+              loading="lazy"
+              width="128"
+              height="128"
+            />
+            <noscript
+              ><img
+                src="assets/img/logo/logo-translogix-light.svg"
+                alt=""
+                class="brand__logo"
+                loading="lazy"
+                width="128"
+                height="128"
+            /></noscript>
           </a>
           <p class="footer__brand-text">
-            TransLogix dostarcza nowoczesne rozwiązania transportowe 24/7 — real-time monitoring floty, przewozy krajowe i międzynarodowe oraz pełną transparentność operacyjną.
+            TransLogix dostarcza nowoczesne rozwiązania transportowe 24/7 —
+            real-time monitoring floty, przewozy krajowe i międzynarodowe oraz
+            pełną transparentność operacyjną.
           </p>
         </div>
         <div class="footer__column">
           <h2 class="footer__title">Oferta</h2>
           <ul class="footer__list">
-            <li><a href="index.html">Start</a></li>
+            <li><a href="index.html">Strona główna</a></li>
             <li><a href="services.html">Usługi</a></li>
             <li><a href="fleet.html">Flota</a></li>
             <li><a href="pricing.html">Cennik</a></li>
@@ -48,19 +73,40 @@
           </ul>
         </div>
         <div class="footer__column">
-          <h2 class="footer__title">Dane firmy</h2>
+          <h2 class="footer__title">Operator projektu</h2>
           <address class="footer__address">
-            <ul class="footer__list footer__list--meta">
-              <li>TransLogix Sp. z o.o.</li>
-              <li>
-                ul. Marynarki Wojennej 12,
+            <ul class="footer__list footer__list--meta footer__operator">
+              <li class="footer__operator-name">Kamil Król</li>
+              <li>KP_Code Digital Studio</li>
+              <li class="footer__operator-place">
+                ul. Marynarki Wojennej 12/31,
                 <br />
                 33-100 Tarnów,
                 <br />
                 Polska
               </li>
-              <li><a href="mailto:kontakt@kp-code.pl">kontakt@kp-code.pl</a></li>
-              <li><a href="tel:+48533537091">+48&nbsp;533&nbsp;537&nbsp;091</a></li>
+              <li class="footer__operator-contact">
+                <a
+                  class="footer__operator-link"
+                  href="mailto:kontakt@kp-code.pl"
+                  ><span
+                    class="footer__operator-icon"
+                    data-icon="email"
+                    aria-hidden="true"
+                  ></span
+                  >kontakt@kp-code.pl</a
+                >
+              </li>
+              <li class="footer__operator-contact">
+                <a class="footer__operator-link" href="tel:+48533537091"
+                  ><span
+                    class="footer__operator-icon"
+                    data-icon="phone"
+                    aria-hidden="true"
+                  ></span
+                  >+48&nbsp;533&nbsp;537&nbsp;091</a
+                >
+              </li>
             </ul>
           </address>
         </div>
@@ -70,28 +116,66 @@
     <div class="footer__social">
       <h2 class="footer__title">Social Media</h2>
       <nav class="footer__social-row" aria-label="Social media">
-        <a href="https://www.facebook.com/kpkrol85" class="social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
-          <img src="assets/img/svg/fb.svg" alt="" aria-hidden="true" width="512" height="512" />
-          <span class="visually-hidden">Facebook</span>
+        <a
+          href="https://www.facebook.com/kpkrol85"
+          class="social-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span
+            class="social-link__icon"
+            data-icon="facebook"
+            aria-hidden="true"
+          ></span>
+          <span class="visually-hidden social-link__label">Facebook</span>
         </a>
-        <a href="https://www.instagram.com/kp_code_dv/" class="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-          <img src="assets/img/svg/insta.svg" alt="" aria-hidden="true" width="512" height="512" />
-          <span class="visually-hidden">Instagram</span>
+        <a
+          href="https://www.instagram.com/kp_code_dv/"
+          class="social-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span
+            class="social-link__icon"
+            data-icon="instagram"
+            aria-hidden="true"
+          ></span>
+          <span class="visually-hidden social-link__label">Instagram</span>
         </a>
-        <a href="https://www.linkedin.com/in/kp-code" class="social-link" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-          <img src="assets/img/svg/linkedin.svg" alt="" aria-hidden="true" width="512" height="512" />
-          <span class="visually-hidden">LinkedIn</span>
+        <a
+          href="https://www.linkedin.com/in/kp-code"
+          class="social-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span
+            class="social-link__icon"
+            data-icon="linkedin"
+            aria-hidden="true"
+          ></span>
+          <span class="visually-hidden social-link__label">LinkedIn</span>
         </a>
-        <a href="https://github.com/KPKrol85" class="social-link" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
-          <img src="assets/img/svg/github.svg" alt="" aria-hidden="true" width="512" height="512" />
-          <span class="visually-hidden">GitHub</span>
+        <a
+          href="https://github.com/KPKrol85"
+          class="social-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span
+            class="social-link__icon"
+            data-icon="github"
+            aria-hidden="true"
+          ></span>
+          <span class="visually-hidden social-link__label">GitHub</span>
         </a>
       </nav>
     </div>
 
     <!-- Copyright -->
     <div class="footer__bottom">
-      <p class="footer__bottom-text">© 2026 KP_Code Digital Studio | Wszelkie prawa zastrzeżone.</p>
+      <p class="footer__bottom-text">
+        © 2026 KP_Code Digital Studio | Wszelkie prawa zastrzeżone.
+      </p>
       <ul class="footer__bottom-links">
         <li><a href="privacy.html">Polityka prywatności</a></li>
         <li><a href="terms.html">Regulamin serwisu</a></li>

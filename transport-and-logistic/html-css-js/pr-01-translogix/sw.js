@@ -1,4 +1,7 @@
-const CACHE_NAME = "translogix-static-v3";
+const CACHE_PREFIX = "translogix-static-";
+const CACHE_NAME = "translogix-static-v4";
+
+const VITE_ASSET_URLS = [];
 
 const PRECACHE_URLS = [
   "/",
@@ -15,8 +18,6 @@ const PRECACHE_URLS = [
   "/thankyou.html",
   "/offline.html",
 
-  "/assets/js/main.js",
-
   "/assets/icons/favicon.ico",
   "/assets/icons/favicon-96x96.png",
   "/assets/icons/favicon.svg",
@@ -25,6 +26,8 @@ const PRECACHE_URLS = [
 
   "/robots.txt",
   "/sitemap.xml",
+
+  ...VITE_ASSET_URLS,
 ];
 
 self.addEventListener("install", (event) => {
@@ -44,19 +47,6 @@ self.addEventListener("install", (event) => {
             console.warn("Skipping precache asset", url, assetError);
           }
         }
-
-        const cssCandidates = ["/assets/css/style.min.css", "/assets/css/style.css"];
-        for (const cssUrl of cssCandidates) {
-          try {
-            const cssResponse = await fetch(cssUrl);
-            if (cssResponse && cssResponse.ok) {
-              await cache.put(cssUrl, cssResponse.clone());
-              break;
-            }
-          } catch (cssError) {
-            console.warn("CSS precache fallback failed for", cssUrl, cssError);
-          }
-        }
       } catch (error) {
         console.error("Service worker install failed", error);
       }
@@ -70,7 +60,7 @@ self.addEventListener("activate", (event) => {
       const cacheNames = await caches.keys();
       await Promise.all(
         cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
+          if (cacheName.startsWith(CACHE_PREFIX) && cacheName !== CACHE_NAME) {
             return caches.delete(cacheName);
           }
           return undefined;
@@ -98,7 +88,12 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  if (url.pathname === "/robots.txt" || url.pathname === "/sitemap.xml" || url.pathname === "/site.webmanifest" || url.pathname === "/404.html") {
+  if (
+    url.pathname === "/robots.txt" ||
+    url.pathname === "/sitemap.xml" ||
+    url.pathname === "/site.webmanifest" ||
+    url.pathname === "/404.html"
+  ) {
     event.respondWith(staleWhileRevalidate(request));
     return;
   }
