@@ -1,7 +1,34 @@
 /* Rezerwacja */
+
 .booking {
   padding-inline: clamp(var(--space-04), 5vw, var(--space-06));
+
+  /* Component-scoped knobs, so the card can compact without touching global form styles.
+     The rhythm knobs open up once the fields pair off; a stacked mobile form multiplies
+     every gap by six, so it keeps the tighter step. */
+  --booking-field-h: 48px;
+  --booking-msg-lane: 1.5em;
+  --booking-hairline: color-mix(in oklab, var(--c-border), transparent 25%);
+  --booking-error: #b3261e;
+  --booking-row-gap: var(--space-03);
+  --booking-group-gap: var(--space-04);
+  --booking-action-gap: var(--space-02);
+  --booking-aside-gap: var(--space-03);
+  --booking-info-pad: var(--space-02);
+  --booking-select-icon: 16px;
+  --booking-select-inset: var(--space-03);
 }
+
+html[data-theme="dark"] .booking {
+  --booking-error: #ffb4ab;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .booking {
+    --booking-error: #ffb4ab;
+  }
+}
+
 .booking__layout {
   width: 100%;
   max-width: var(--container-sm);
@@ -10,131 +37,259 @@
   border-radius: var(--radius-xs);
   background: var(--c-surface);
   box-shadow: var(--shadow-md);
-  padding: var(--space-06) var(--space-04);
+  padding: var(--space-05) var(--space-04);
   overflow: hidden;
-  align-items: start;
-  gap: var(--space-06);
 }
+
 .booking__layout > * {
   min-width: 0;
 }
+
+.booking__header {
+  text-align: center;
+}
+
+.booking__title {
+  margin-bottom: var(--space-04);
+}
+
 .booking__lead {
+  margin: 0 auto;
+  max-width: 46ch;
   font-size: var(--fs-sm);
 }
 
+.booking__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-04);
+  margin-top: var(--space-05);
+}
+
 /* Form */
+
 .booking-form {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-03);
-  justify-items: center;
-  margin-top: var(--space-04);
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--booking-row-gap) var(--space-03);
+  align-content: start;
 }
+
 .booking-form__row {
+  grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
   gap: var(--space-02);
   min-width: 0;
-  width: 100%;
-  max-width: 360px;
-  margin-inline: auto;
 }
-.booking-form .booking-form__row--full {
-  grid-column: 1 / -1;
-}
-.booking-form label {
-  font-weight: 450;
+
+/* Source Sans 3 ships 400 and 500 only, so 500 is the heaviest real weight here —
+   anything above it renders as synthesised bold. */
+
+.booking-form__label {
   font-size: var(--fs-sm);
+  font-weight: 500;
+  line-height: var(--lh-normal);
+  color: var(--c-ink);
 }
+
 .booking-form__field {
   width: 100%;
   box-sizing: border-box;
-  padding: var(--space-01) var(--space-02);
-  border: 1px solid var(--c-border);
+  min-height: var(--booking-field-h);
+  padding: var(--space-02);
+  border: 1px solid color-mix(in oklab, var(--c-border), var(--c-ink) 12%);
   border-radius: var(--radius-xs);
   background: var(--c-bg);
   color: var(--c-ink);
-  min-height: 48px;
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
   caret-color: var(--c-ink);
   color-scheme: light dark;
   transition:
-    border-color 0.18s ease,
-    box-shadow 0.18s ease,
-    background-color 0.18s ease;
-}
-.booking-form__field::placeholder {
-  color: color-mix(in oklab, var(--c-ink) 55%, transparent);
-  opacity: 0.95;
+    border-color var(--dur-fast) var(--ease-standard),
+    box-shadow var(--dur-fast) var(--ease-standard),
+    background-color var(--dur-fast) var(--ease-standard);
 }
 
-.booking-form textarea {
-  resize: vertical;
-  font-size: var(--fs-sm);
-  padding: var(--space-02);
+.booking-form__field::placeholder {
+  color: color-mix(in oklab, var(--c-ink) 52%, transparent);
+  opacity: 1;
 }
+
+.booking-form__field--textarea {
+  min-height: calc(var(--booking-field-h) * 1.75);
+  resize: vertical;
+}
+
+/* Native select: the UA arrow is dropped for the registry chevron, and the
+   inline-end padding reserves the inset, the glyph box and a gap after it, so
+   the longest option can never run under the icon.
+   Both wait on `data-icon-ready`, the flag initIcons sets on a hydrated host, so
+   a script-less page keeps the native arrow instead of losing its only indicator. */
+
+.booking-form__select:has([data-icon-ready]) .booking-form__field--select {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-inline-end: calc(var(--booking-select-inset) + var(--booking-select-icon) + var(--space-02));
+}
+
+.booking-form__select {
+  position: relative;
+  min-width: 0;
+}
+
+.booking-form__select-icon {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: var(--booking-select-inset);
+  display: grid;
+  place-items: center;
+  inline-size: var(--booking-select-icon);
+  color: var(--c-muted);
+  pointer-events: none;
+  transition: color var(--dur-fast) var(--ease-standard);
+}
+
+/* Box reserved for a registry icon, so hydration cannot shift the control. */
+
+.booking-form__select-icon svg {
+  display: block;
+  inline-size: var(--booking-select-icon);
+  block-size: var(--booking-select-icon);
+}
+
+.booking-form__select:focus-within .booking-form__select-icon {
+  color: var(--c-accent-contrast);
+}
+
+.booking-form__field:hover {
+  border-color: color-mix(in oklab, var(--c-border), var(--c-ink) 28%);
+}
+
 .booking-form__field:focus-visible {
   outline: 2px solid var(--c-accent-contrast);
   outline-offset: 2px;
-  border-color: color-mix(in oklab, var(--c-border), var(--c-accent-contrast) 40%);
-  box-shadow: var(--shadow-md);
+  border-color: color-mix(in oklab, var(--c-border), var(--c-accent-contrast) 55%);
 }
-.booking-form .booking-form__row:has(:where(input, select, textarea)[aria-invalid="true"]),
-.booking-form .booking-form__row:has(:where(input, select, textarea)[required]:invalid),
-.booking-form .booking-form__row.invalid {
-  --error: #fd8c8d;
+
+/* Error styling is opt-in: it waits for a real submit attempt or a blurred edit,
+   so an untouched required field never opens as an error. */
+
+.booking-form__field[aria-invalid="true"] {
+  border-color: var(--booking-error);
+  box-shadow: inset 0 0 0 1px var(--booking-error);
 }
-.booking-form .booking-form__row:has(:where(input, select, textarea)[aria-invalid="true"]) :where(input, select, textarea),
-.booking-form .booking-form__row:has(:where(input, select, textarea)[required]:invalid) :where(input, select, textarea),
-.booking-form .booking-form__row.invalid :where(input, select, textarea) {
-  border-color: var(--error);
+
+.booking-form__field:user-invalid {
+  border-color: var(--booking-error);
+  box-shadow: inset 0 0 0 1px var(--booking-error);
 }
-.booking-form .booking-form__hint {
-  margin-top: var(--space-01);
-  font-size: var(--fs-sm);
-  color: var(--c-muted);
-}
+
 .booking-form__message {
   margin: 0;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-xs);
   font-weight: 500;
+  line-height: var(--lh-normal);
   color: var(--c-ink);
 }
-.booking-form .booking-form__consent-row {
-  margin-top: var(--space-02);
-  padding: var(--space-02) var(--space-04);
-  border-radius: var(--radius-xs);
-  border: 1px solid color-mix(in oklab, var(--c-border), transparent 25%);
-  background: color-mix(in oklab, var(--c-surface), white 3%);
+
+/* One reserved text line keeps the grid from jumping when a message appears. */
+
+.booking-form__message--error {
+  min-height: var(--booking-msg-lane);
+  color: var(--booking-error);
 }
-.booking-form .booking-form__consent {
-  display: flex;
+
+.booking-form__message--status {
+  min-height: var(--booking-msg-lane);
+  font-size: var(--fs-sm);
+  text-align: center;
+}
+
+/* Consent */
+
+.booking-form__consent-row {
+  margin-top: var(--space-03);
+  padding-top: var(--booking-group-gap);
+  border-top: 1px solid var(--booking-hairline);
+}
+
+.booking-form__consent {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
   gap: var(--space-02);
-  align-items: flex-start;
+  padding-block: var(--space-01);
+  font-size: var(--fs-sm);
+  font-weight: 400;
   line-height: var(--lh-normal);
+  color: var(--c-muted);
+  cursor: pointer;
 }
-.booking-form .booking-form__consent input[type="checkbox"] {
-  margin-top: var(--space-01);
-  width: 16px;
-  height: 16px;
-  accent-color: var(--c-accent);
+
+.booking-form__consent .booking-form__field {
+  width: 18px;
+  height: 18px;
+  min-height: 0;
+  margin: 0;
+  margin-block-start: 0.15em;
+  padding: 0;
+  accent-color: var(--c-accent-contrast);
+  cursor: pointer;
 }
-.booking-form .booking-form__consent-row .booking-form__message {
-  margin-top: var(--space-01);
+
+/* A native checkbox ignores border colour, so its error state needs a ring. */
+
+.booking-form__consent .booking-form__field[aria-invalid="true"] {
+  box-shadow: 0 0 0 2px var(--booking-error);
 }
-.booking-form .booking-form__consent-row a {
+
+.booking-form__consent .booking-form__field:user-invalid {
+  box-shadow: 0 0 0 2px var(--booking-error);
+}
+
+.booking-form__consent a {
+  color: var(--c-link);
   text-decoration-line: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.14em;
   text-decoration-skip-ink: auto;
 }
-.booking-form .booking-form__consent-row a:hover,
-.booking-form .booking-form__consent-row a:focus-visible {
+
+.booking-form__consent a:hover,
+.booking-form__consent a:focus-visible {
   text-decoration-thickness: 2px;
 }
-.booking-form .booking-form__hp {
+
+/* Submit */
+
+.booking-form__actions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-02);
+  margin-top: var(--booking-action-gap);
+}
+
+.booking-form__actions .site-button {
+  width: 100%;
+  min-height: var(--booking-field-h);
+  padding-inline: var(--space-05);
+  letter-spacing: var(--ls-sm);
+}
+
+/* Honeypot */
+
+.booking-form__hp {
   position: absolute;
   left: -9999px;
 }
+
+/* Native control chrome */
+
 .booking-form :is(input, select, textarea):-webkit-autofill,
 .booking-form :is(input, select, textarea):-webkit-autofill:hover,
 .booking-form :is(input, select, textarea):-webkit-autofill:focus {
@@ -144,88 +299,227 @@
   -webkit-box-shadow: 0 0 0 1000px var(--c-bg) inset;
   box-shadow: 0 0 0 1000px var(--c-bg) inset;
 }
+
 html[data-theme="dark"] .booking-form :is(input, select, textarea):-webkit-autofill {
   -webkit-text-fill-color: var(--c-ink);
   -webkit-box-shadow: 0 0 0 1000px #0f0f14 inset;
   box-shadow: 0 0 0 1000px #0f0f14 inset;
 }
+
 html[data-theme="dark"] .booking-form :is(input, select, textarea) {
   background: #0f0f14;
 }
+
+/* The UA paints the calendar / clock glyph from the element's used `color-scheme`.
+   The `light dark` on .booking-form__field hands that decision to the OS preference,
+   which leaves a dark glyph on the dark field (and a white one on the white field)
+   whenever the OS and the site theme disagree. Pinning these two inputs to the
+   visible theme makes the glyph follow the field it sits in. */
+
+.booking-form input[type="date"],
+.booking-form input[type="time"] {
+  color-scheme: light;
+}
+
+html[data-theme="dark"] .booking-form input[type="date"],
+html[data-theme="dark"] .booking-form input[type="time"] {
+  color-scheme: dark;
+}
+
+/* The UA glyph is near-black in light and near-white in dark; these two steps settle
+   it on --c-muted in both, so it carries the same tone as the custom chevron next to it. */
+
 .booking-form input[type="date"]::-webkit-calendar-picker-indicator,
 .booking-form input[type="time"]::-webkit-calendar-picker-indicator {
-  opacity: 0.85;
+  opacity: 0.75;
 }
+
 html[data-theme="dark"] .booking-form input[type="date"]::-webkit-calendar-picker-indicator,
 html[data-theme="dark"] .booking-form input[type="time"]::-webkit-calendar-picker-indicator {
-  filter: invert(1);
+  opacity: 0.62;
 }
-.booking .booking-form > .booking-form__actions {
-  grid-column: 1 / -1;
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .booking-form input[type="date"],
+  html:not([data-theme="light"]) .booking-form input[type="time"] {
+    color-scheme: dark;
+  }
+
+  html:not([data-theme="light"]) .booking-form input[type="date"]::-webkit-calendar-picker-indicator,
+  html:not([data-theme="light"]) .booking-form input[type="time"]::-webkit-calendar-picker-indicator {
+    opacity: 0.62;
+  }
+}
+
+/* Information panel */
+
+.booking__aside {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  justify-content: center;
-  gap: var(--space-03);
-  margin: var(--space-04);
+  gap: var(--booking-aside-gap);
+  padding-top: var(--space-04);
+  border-top: 1px solid var(--booking-hairline);
 }
-.booking .booking-form > .booking-form__actions .site-button {
+
+/* Poppins ships 400 and 600, so 600 is the panel title's real weight —
+   the h3 default of 700 would be synthesised. */
+
+.booking__aside-title {
   margin: 0;
-  width: 100%;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  letter-spacing: var(--ls-sm);
+  text-align: left;
 }
-.booking .booking-form > .booking-form__actions .booking-form__message {
-  text-align: center;
+
+.booking__info-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
-.booking__aside h3 {
-  text-align: center;
-  margin-bottom: var(--space-04);
+
+.booking__info-item {
+  padding-block: var(--booking-info-pad);
+  border-top: 1px solid color-mix(in oklab, var(--c-border), transparent 45%);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
+  color: var(--c-muted);
 }
-.booking__aside .booking__logo {
+
+.booking__info-item:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+/* Label and value break onto their own lines by intent, not by wrapping.
+   Both keep the row's inherited tone and weight. */
+
+.booking__info-label,
+.booking__info-value {
+  display: block;
+}
+
+.booking__info-value {
+  margin-top: var(--space-01);
+}
+
+/* Auto block margins let flexbox split the panel's leftover height evenly above
+   and below the mark, so it settles at the midpoint of the free area rather than
+   sitting on the card's bottom edge. */
+
+.booking__logo {
   display: flex;
   justify-content: center;
-  margin: var(--space-05);
+  margin-block: auto;
 }
-.booking__aside .booking__logo .logo {
-  inline-size: var(--logo-lg);
+
+.booking__logo .logo {
+  inline-size: var(--logo-md);
   block-size: auto;
   max-inline-size: none;
 }
 
-.booking__aside ul {
-  max-width: 360px;
-  margin-inline: auto;
+/* Two-up fields once the card is wide enough for a comfortable half column. */
+
+@media (min-width: 560px) {
+  /* The consent row already ends in a reserved message line, so the submit block
+     keeps the smaller step here and still reads as a separate group. */
+  .booking {
+    --booking-row-gap: var(--space-04);
+    --booking-group-gap: var(--space-05);
+    --booking-aside-gap: var(--space-04);
+    --booking-info-pad: var(--space-03);
+  }
+
+  .booking-form__row--half,
+  .booking-form__row--third {
+    grid-column: span 3;
+  }
+
+  .booking-form__actions {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-04);
+  }
+
+  .booking-form__actions .site-button {
+    width: auto;
+    flex: 0 0 auto;
+  }
+
+  .booking-form__actions .booking-form__message--status {
+    flex: 1 1 auto;
+    min-height: 0;
+    text-align: left;
+  }
+}
+
+/* Date / time / guests fit three-up. */
+
+@media (min-width: 720px) {
+  .booking-form__row--third {
+    grid-column: span 2;
+  }
+}
+
+@media (min-width: 620px) and (max-width: 1023px) {
+  .booking__aside {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "title logo"
+      "list  logo";
+    align-items: center;
+    column-gap: var(--space-05);
+  }
+
+  .booking__aside-title {
+    grid-area: title;
+    align-self: end;
+  }
+
+  .booking__info-list {
+    grid-area: list;
+    align-self: start;
+  }
+
+  .booking__logo {
+    grid-area: logo;
+    align-self: center;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 @media (min-width: 760px) {
-  .booking .booking__layout {
-    padding: var(--space-08) var(--space-06);
-    grid-template-columns: 1fr;
+  .booking__layout {
+    padding: var(--space-06) var(--space-05);
   }
 }
 
 @media (min-width: 1024px) {
-  .booking .booking__layout {
+  .booking__layout {
     max-width: var(--container-md);
+    padding: var(--space-06);
+  }
 
-    column-gap: var(--space-02);
-    grid-template-columns: 1.1fr 0.9fr;
+  .booking__body {
+    grid-template-columns: minmax(0, 1.62fr) minmax(0, 1fr);
+    column-gap: var(--space-05);
+    align-items: stretch;
   }
+
   .booking__aside {
-    align-self: center;
-  }
-  .booking__aside .booking__logo {
-    margin: var(--space-08) 0;
+    padding-top: 0;
+    padding-inline-start: var(--space-05);
+    border-top: 0;
+    border-inline-start: 1px solid var(--booking-hairline);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .booking-form :is(input, select, textarea) {
+  .booking-form__field,
+  .booking-form__select-icon {
     transition: none;
-  }
-  .booking__aside {
-    align-self: center;
-  }
-  .booking__aside .booking__logo {
-    margin: var(--space-08) 0;
   }
 }

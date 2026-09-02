@@ -1,0 +1,74 @@
+.outland-legal-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: center;
+  padding: var(--space-04);
+}
+
+.outland-legal-modal[hidden] {
+  display: none;
+}
+
+.outland-legal-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: rgba(4, 12, 19, 0.22);
+  backdrop-filter: blur(2px);
+}
+
+.outland-legal-modal__panel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 640px);
+  border-radius: var(--radius-ui);
+  border: 1px solid var(--color-border);
+  background: var(--color-modal-bg);
+  color: var(--color-text);
+  box-shadow: 0 24px 48px rgba(2, 10, 16, 0.45);
+  padding: var(--space-06);
+}
+
+.outland-legal-modal__title {
+  margin-top: var(--space-02);
+  color: var(--color-text);
+  font-size: var(--fs-06);
+}
+
+.outland-legal-modal__text {
+  color: var(--color-text);
+  max-width: 42ch;
+}
+
+.outland-legal-modal__text a,
+.outland-legal-modal__links a {
+  color: var(--color-moss);
+}
+.outland-legal-modal__text a:hover,
+.outland-legal-modal__links a:hover {
+  color: var(--color-forest);
+}
+
+.outland-legal-modal__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-04);
+  margin-bottom: var(--space-05);
+}
+
+.outland-legal-modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-03);
+}
+
+.outland-legal-modal__actions .btn--ghost {
+  border-color: rgba(255, 255, 255, 0.35);
+  color: var(--color-white);
+}
+
+.outland-legal-modal__actions .btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.14);
+}

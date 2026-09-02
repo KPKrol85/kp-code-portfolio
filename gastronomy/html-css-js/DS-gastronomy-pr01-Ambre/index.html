@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pl">
   <head>
     <meta charset="utf-8" />
@@ -13,7 +13,7 @@
       content="Ambre to kameralna restauracja fine dining z autorskim, sezonowym menu degustacyjnym i starannie dobraną selekcją win. Zarezerwuj stolik i poznaj smak wieczoru." />
     <meta name="author" content="Kamil Król | KP_Code_" />
     <meta name="color-scheme" content="light dark" />
-    <link rel="canonical" href="https://gastronomy-project-01.netlify.app/" />
+    <link rel="canonical" href="https://gastronomy-pr01-ambre.netlify.app/" />
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0f0f0f" media="(prefers-color-scheme: dark)" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -23,8 +23,8 @@
     <meta property="og:site_name" content="Ambre – Restauracja Fine Dining" />
     <meta property="og:title" content="Ambre – Restauracja Fine Dining | Menu degustacyjne i selekcja win" />
     <meta property="og:description" content="Ambre – autorska kuchnia, sezonowe menu i kameralna atmosfera. Rezerwacje online, menu i galeria w jednym miejscu." />
-    <meta property="og:url" content="https://gastronomy-project-01.netlify.app/" />
-    <meta property="og:image" content="https://gastronomy-project-01.netlify.app/assets/img/og-img/og-1200x630.jpg" />
+    <meta property="og:url" content="https://gastronomy-pr01-ambre.netlify.app/" />
+    <meta property="og:image" content="https://gastronomy-pr01-ambre.netlify.app/assets/img/og-img/og-1200x630.jpg" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -33,7 +33,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Ambre – Restauracja Fine Dining | Menu degustacyjne i selekcja win" />
     <meta name="twitter:description" content="Ambre – autorska kuchnia, sezonowe menu i kameralna atmosfera. Rezerwacje online, menu i galeria w jednym miejscu." />
-    <meta name="twitter:image" content="https://gastronomy-project-01.netlify.app/assets/img/og-img/og-1200x630.jpg" />
+    <meta name="twitter:image" content="https://gastronomy-pr01-ambre.netlify.app/assets/img/og-img/og-1200x630.jpg" />
     <meta name="twitter:image:alt" content="Ambre – logo restauracji i hasła: autorska kuchnia, sezonowe menu, kameralna atmosfera" />
     <!-- Favicons + manifest -->
     <link rel="icon" href="/assets/icons/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
@@ -48,7 +48,7 @@
     <link rel="preload" href="/assets/fonts/poppins-v24-latin-600.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/assets/fonts/source-sans-3-v19-latin-regular.woff2" as="font" type="font/woff2" crossorigin />
     <!-- Styles -->
-    <link rel="stylesheet" href="/css/style.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
     <!-- JSON-LD -->
     <script type="application/ld+json">
       {
@@ -56,48 +56,50 @@
         "@graph": [
           {
             "@type": "WebSite",
-            "@id": "https://gastronomy-project-01.netlify.app/#website",
-            "url": "https://gastronomy-project-01.netlify.app/",
-            "name": "Ambre – Restauracja Fine Dining",
+            "@id": "https://gastronomy-pr01-ambre.netlify.app/#website",
+            "url": "https://gastronomy-pr01-ambre.netlify.app/",
+            "name": "Ambre – demonstracyjny projekt restauracji fine dining",
+            "description": "Demonstracyjna strona internetowa fikcyjnej restauracji Ambre, przygotowana w celach prezentacyjnych i portfolio.",
             "inLanguage": "pl-PL",
             "publisher": {
-              "@id": "https://gastronomy-project-01.netlify.app/#restaurant"
+              "@id": "https://gastronomy-pr01-ambre.netlify.app/#operator"
+            },
+            "about": {
+              "@id": "https://gastronomy-pr01-ambre.netlify.app/#project"
             }
           },
           {
-            "@type": "Restaurant",
-            "@id": "https://gastronomy-project-01.netlify.app/#restaurant",
+            "@type": "Organization",
+            "@id": "https://gastronomy-pr01-ambre.netlify.app/#operator",
+            "name": "KP_Code Digital Studio",
+            "url": "https://kp-code.pl/"
+          },
+          {
+            "@type": "CreativeWork",
+            "@id": "https://gastronomy-pr01-ambre.netlify.app/#project",
             "name": "Ambre",
-            "url": "https://gastronomy-project-01.netlify.app/",
-            "image": ["https://gastronomy-project-01.netlify.app/assets/img/og-img/og-1200x630.jpg"],
-            "telephone": "+48533537091",
-            "email": "kontakt@kp-code.pl",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "ul. Marynarki Wojennej 12",
-              "postalCode": "33-100",
-              "addressLocality": "Tarnów",
-              "addressCountry": "PL"
-            },
-            "servesCuisine": ["Fine Dining", "Polska", "Europejska"],
-            "priceRange": "$$",
-            "description": "Kameralna restauracja fine dining z autorskim, sezonowym menu degustacyjnym i starannie dobraną selekcją win."
+            "url": "https://gastronomy-pr01-ambre.netlify.app/",
+            "image": ["https://gastronomy-pr01-ambre.netlify.app/assets/img/og-img/og-1200x630.jpg"],
+            "description": "Demonstracyjny projekt front-endowy przedstawiający fikcyjną restaurację fine dining, przygotowany w celach prezentacyjnych i portfolio.",
+            "creator": {
+              "@id": "https://gastronomy-pr01-ambre.netlify.app/#operator"
+            }
           },
           {
             "@type": "WebPage",
-            "@id": "https://gastronomy-project-01.netlify.app/#webpage",
-            "url": "https://gastronomy-project-01.netlify.app/",
+            "@id": "https://gastronomy-pr01-ambre.netlify.app/#webpage",
+            "url": "https://gastronomy-pr01-ambre.netlify.app/",
             "name": "Ambre – Restauracja Fine Dining | Menu degustacyjne i selekcja win",
-            "description": "Ambre to kameralna restauracja fine dining z autorskim, sezonowym menu degustacyjnym i starannie dobraną selekcją win. Zarezerwuj stolik i poznaj smak wieczoru.",
+            "description": "Strona główna demonstracyjnego projektu Ambre, przedstawiającego fikcyjną restaurację fine dining, przykładowe menu i atmosferę serwisu.",
             "isPartOf": {
-              "@id": "https://gastronomy-project-01.netlify.app/#website"
+              "@id": "https://gastronomy-pr01-ambre.netlify.app/#website"
             },
             "about": {
-              "@id": "https://gastronomy-project-01.netlify.app/#restaurant"
+              "@id": "https://gastronomy-pr01-ambre.netlify.app/#project"
             },
             "primaryImageOfPage": {
               "@type": "ImageObject",
-              "url": "https://gastronomy-project-01.netlify.app/assets/img/og-img/og-1200x630.jpg"
+              "url": "https://gastronomy-pr01-ambre.netlify.app/assets/img/og-img/og-1200x630.jpg"
             },
             "inLanguage": "pl-PL"
           }
@@ -151,18 +153,23 @@
             <span class="site-header__phone">+48&nbsp;533&nbsp;537&nbsp;091</span>
           </a>
           <button class="site-header__theme-toggle" data-testid="site-header__theme-toggle" type="button" aria-label="Przełącz motyw" aria-pressed="false" title="Motyw">
-            <span aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon icon--sun" aria-hidden="true">
-                <path
-                  d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.061-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z" />
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon icon--moon" aria-hidden="true">
-                <path
-                  fill-rule="evenodd"
-                  d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z"
-                  clip-rule="evenodd" />
-              </svg>
-            </span>
+            <svg class="theme-switch" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+              <mask id="theme-switch-cutout" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+                <rect x="0" y="0" width="24" height="24" fill="#ffffff" />
+                <circle class="theme-switch__cutout" cx="24" cy="9" r="6.5" fill="#000000" />
+              </mask>
+              <circle class="theme-switch__core" cx="12" cy="12" r="5" fill="currentColor" mask="url(#theme-switch-cutout)" />
+              <g class="theme-switch__rays" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                <line x1="12" y1="1.7" x2="12" y2="4.5" />
+                <line x1="12" y1="22.3" x2="12" y2="19.5" />
+                <line x1="22.3" y1="12" x2="19.5" y2="12" />
+                <line x1="1.7" y1="12" x2="4.5" y2="12" />
+                <line x1="19.28" y1="4.72" x2="17.3" y2="6.7" />
+                <line x1="4.72" y1="19.28" x2="6.7" y2="17.3" />
+                <line x1="19.28" y1="19.28" x2="17.3" y2="17.3" />
+                <line x1="4.72" y1="4.72" x2="6.7" y2="6.7" />
+              </g>
+            </svg>
           </button>
           <button class="site-header__nav-toggle" data-testid="site-header__nav-toggle" type="button" aria-controls="site-header-nav" aria-expanded="false" aria-label="Menu">
             <span aria-hidden="true">
@@ -185,7 +192,7 @@
           src="/assets/img/hero/hero-03-1600x900.jpg"
           srcset="/assets/img/hero/hero-03-2560x1440.jpg 2560w, /assets/img/hero/hero-03-1600x900.jpg 1600w"
           sizes="100vw"
-          alt="Wnętrze eleganckiej restauracji z okrągłymi stolikami i złotym oświetleniem – demo strony gastronomicznej"
+          alt=""
           decoding="async"
           fetchpriority="high"
           width="1600"
@@ -214,28 +221,21 @@
             <p class="u-lead about__lead">Łączymy lokalne składniki z finezyjnymi technikami. Krótkie, sezonowe karty pozwalają wybrzmieć każdemu produktowi.</p>
             <ul class="about__bullets">
               <li class="about__bullet">
-                <span class="about__bullet-icon" aria-hidden="true">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-13a.75.75 0 0 0-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 0 0 0-1.5h-3.25V5Z" clip-rule="evenodd" />
-                  </svg>
+                <span class="about__bullet-icon" data-icon="clock" aria-hidden="true"></span>
+                <span class="about__bullet-text">
+                  <span class="about__bullet-label">Godziny:</span>
+                  <time datetime="17:00">17:00</time>
+                  –
+                  <time datetime="23:00">23:00</time>
+                  (wt–nd)
                 </span>
-                Godziny:
-                <time datetime="17:00">17:00</time>
-                –
-                <time datetime="23:00">23:00</time>
-                (wt–nd)
               </li>
               <li class="about__bullet">
-                <span class="about__bullet-icon" aria-hidden="true">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
-                    <path
-                      fill-rule="evenodd"
-                      d="M2 3.5A1.5 1.5 0 0 1 3.5 2h1.148a1.5 1.5 0 0 1 1.465 1.175l.716 3.223a1.5 1.5 0 0 1-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 0 0 6.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 0 1 1.767-1.052l3.223.716A1.5 1.5 0 0 1 18 15.352V16.5a1.5 1.5 0 0 1-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 0 1 2.43 8.326 13.019 13.019 0 0 1 2 5V3.5Z"
-                      clip-rule="evenodd" />
-                  </svg>
+                <span class="about__bullet-icon" data-icon="phone" aria-hidden="true"></span>
+                <span class="about__bullet-text">
+                  <span class="about__bullet-label">Rezerwacje:</span>
+                  <a href="tel:+48533537091" aria-label="Zadzwoń: +48 533 537 091">+48 533 537 091</a>
                 </span>
-                Rezerwacje:
-                <a href="tel:+48533537091" aria-label="Zadzwoń: +48 533 537 091">+48 533 537 091</a>
               </li>
             </ul>
           </div>
@@ -271,12 +271,12 @@
             <p class="u-lead menu__lead">Wybierz kategorię, aby przefiltrować dania.</p>
           </div>
           <div class="tabs menu__tabs" data-testid="menu-tabs" aria-label="Kategorie menu">
-            <button class="site-button site-button--tab tabs__tab" data-testid="tab-all" aria-pressed="true" data-filter="all">Wszystko</button>
-            <button class="site-button site-button--tab tabs__tab" data-testid="tab-przystawki" aria-pressed="false" data-filter="przystawki">Przystawki</button>
-            <button class="site-button site-button--tab tabs__tab" data-testid="tab-dania-glowne" aria-pressed="false" data-filter="dania-glowne">Dania główne</button>
-            <button class="site-button site-button--tab tabs__tab" data-testid="tab-desery" aria-pressed="false" data-filter="desery">Desery</button>
+            <button class="tabs__tab" data-testid="tab-all" aria-pressed="true" data-filter="all">Wszystko</button>
+            <button class="tabs__tab" data-testid="tab-przystawki" aria-pressed="false" data-filter="przystawki">Przystawki</button>
+            <button class="tabs__tab" data-testid="tab-dania-glowne" aria-pressed="false" data-filter="dania-glowne">Dania główne</button>
+            <button class="tabs__tab" data-testid="tab-desery" aria-pressed="false" data-filter="desery">Desery</button>
           </div>
-          <div class="menu__grid" role="region" aria-live="polite" aria-label="Wyniki filtrowania – lista dań">
+          <div class="menu__grid" role="region" aria-live="polite" aria-label="Wyniki filtrowania – lista dań" data-lightbox-mode="single">
             <article class="dish dish--has-thumb" aria-labelledby="dish-ostrygi" data-cat="przystawki">
               <button
                 class="dish__thumb"
@@ -382,15 +382,7 @@
           </div>
         </div>
         <div class="menu__actions">
-          <a href="menu.html" class="site-button site-button--link" aria-label="Przejdź do pełnego menu restauracji">
-            Pełna karta dań &#10143;
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M19 19.002v1.998a1 1 0 0 1 -.883 .993l-.117 .007h-12a1 1 0 0 1 -1 -1v-1.994a1 1 0 0 1 1 -1l12 -.004a1 1 0 0 1 1 1" />
-              <path
-                d="M12 2a5 5 0 0 1 4.533 2.888l.06 .137l.136 -.009a5 5 0 0 1 4.99 3.477l.063 .213a5 5 0 0 1 -2.696 5.831l-.087 .037v1.428a1 1 0 0 1 -1 1l-12 .004a1 1 0 0 1 -.993 -.883l-.007 -.117v-1.433l-.123 -.055a5 5 0 0 1 -2.6 -3.001l-.064 -.223a5 5 0 0 1 5.193 -6.27l.066 -.142a5 5 0 0 1 4.302 -2.877z" />
-            </svg>
-          </a>
+          <a href="menu.html" class="section-cta" aria-label="Przejdź do pełnego menu restauracji">Pełna karta dań</a>
         </div>
       </section>
 
@@ -401,7 +393,7 @@
             <h2 id="gallery-title" class="section-title gallery__title">Galeria</h2>
             <p class="u-lead gallery__lead">Wybrane kompozycje i produkty premium.</p>
           </div>
-          <div class="gallery__grid">
+          <div class="gallery__grid" data-lightbox-mode="gallery">
             <a class="gallery__item" href="/assets/img/gallery/dish-01-1600.jpg" data-full="/assets/img/gallery/dish-01-1600" aria-haspopup="dialog" aria-controls="lb">
               <picture>
                 <source type="image/avif" srcset="/assets/img/_optimized/gallery/dish-01-1200.avif 2x, /assets/img/_optimized/gallery/dish-01-600.avif 1x" />
@@ -465,17 +457,7 @@
           </div>
         </div>
         <div class="gallery__actions">
-          <a href="galeria.html" class="site-button site-button--link" aria-label="Przejdź do galerii restauracji">
-            Zobacz całą galerię &#10143;
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M7 5.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667l0 -8.666" />
-              <path d="M4.012 7.26a2.005 2.005 0 0 0 -1.012 1.737v10c0 1.1 .9 2 2 2h10c.75 0 1.158 -.385 1.5 -1" />
-              <path d="M17 7h.01" />
-              <path d="M7 13l3.644 -3.644a1.21 1.21 0 0 1 1.712 0l3.644 3.644" />
-              <path d="M15 12l1.644 -1.644a1.21 1.21 0 0 1 1.712 0l2.644 2.644" />
-            </svg>
-          </a>
+          <a href="galeria.html" class="section-cta" aria-label="Przejdź do galerii restauracji">Zobacz całą galerię</a>
         </div>
       </section>
 
@@ -485,21 +467,21 @@
           <div class="section-head testimonials__head">
             <h2 id="opinie-title" class="section-title testimonials__title">Opinie</h2>
             <p class="u-lead testimonials__lead">Co mówią nasi goście</p>
-            <div class="testimonials__rating" role="group" aria-label="Średnia ocena 4.8 na podstawie 327 opinii w Google">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path
-                  d="M12 2a9.96 9.96 0 0 1 6.29 2.226a1 1 0 0 1 .04 1.52l-1.51 1.362a1 1 0 0 1 -1.265 .06a6 6 0 1 0 2.103 6.836l.001 -.004h-3.66a1 1 0 0 1 -.992 -.883l-.007 -.117v-2a1 1 0 0 1 1 -1h6.945a1 1 0 0 1 .994 .89c.04 .367 .061 .737 .061 1.11c0 5.523 -4.477 10 -10 10s-10 -4.477 -10 -10s4.477 -10 10 -10z" />
-              </svg>
-              <div class="rating-text">
-                <strong>
-                  4.8
-                  <span class="sr-only">na 5</span>
-                </strong>
-                <span class="testimonials__stars" aria-hidden="true">★★★★★</span>
+            <a
+              class="testimonials__rating"
+              href="https://www.google.com/search?q=Ambre+restaurant+reviews"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Średnia ocena 4.8 na 5 na podstawie 327 opinii w Google — zobacz opinie w Google (otwiera się w nowej karcie)">
+              <span class="testimonials__rating-icon" data-icon="google" aria-hidden="true"></span>
+              <span class="testimonials__rating-text">
+                <span class="testimonials__rating-score">
+                  <strong>4.8</strong>
+                  <span class="testimonials__stars" aria-hidden="true">★★★★★</span>
+                </span>
                 <small aria-hidden="true">na podstawie 327 opinii Google</small>
-              </div>
-            </div>
+              </span>
+            </a>
           </div>
           <div class="testimonials__grid">
             <figure class="testimonials__card">
@@ -551,68 +533,25 @@
               <figcaption class="testimonials__author">— Julia P., recenzja z Google</figcaption>
             </figure>
           </div>
-
-          <div class="testimonials__actions">
-            <a
-              class="site-button site-button--link"
-              href="https://www.google.com/search?q=Ambre+restaurant+reviews"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Zobacz opinie restauracji Ambre w Google (otwiera się w nowej karcie)">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path
-                  d="M12 2a9.96 9.96 0 0 1 6.29 2.226a1 1 0 0 1 .04 1.52l-1.51 1.362a1 1 0 0 1 -1.265 .06a6 6 0 1 0 2.103 6.836l.001 -.004h-3.66a1 1 0 0 1 -.992 -.883l-.007 -.117v-2a1 1 0 0 1 1 -1h6.945a1 1 0 0 1 .994 .89c.04 .367 .061 .737 .061 1.11c0 5.523 -4.477 10 -10 10s-10 -4.477 -10 -10s4.477 -10 10 -10z" />
-              </svg>
-              Opinie Google (327)
-            </a>
-
-            <a
-              class="site-button site-button--link"
-              href="https://www.tripadvisor.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Zobacz opinie restauracji Ambre w serwisie Tripadvisor (otwiera się w nowej karcie)">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="icon icon-tabler icons-tabler-outline icon-tabler-brand-tripadvisor"
-                aria-hidden="true">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M5 13.5a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0" />
-                <path d="M16 13.5a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0" />
-                <path d="M17.5 9a4.5 4.5 0 1 0 3.5 1.671l1 -1.671h-4.5" />
-                <path d="M6.5 9a4.5 4.5 0 1 1 -3.5 1.671l-1 -1.671h4.5" />
-                <path d="M10.5 15.5l1.5 2l1.5 -2" />
-                <path d="M9 6.75c2 -.667 4 -.667 6 0" />
-              </svg>
-              Opinie w Tripadvisor
-            </a>
-          </div>
         </div>
       </section>
 
       <!-- Form -->
       <div id="rezerwacja" class="l-section booking">
-        <div class="container grid-2 booking__layout">
-          <div>
+        <div class="container booking__layout">
+          <div class="booking__header">
             <h2 id="booking-title" class="section-title booking__title">Rezerwacja</h2>
             <p class="u-lead booking__lead">Wypełnij formularz. Oddzwonimy z potwierdzeniem.</p>
-            <form id="booking-form" class="booking-form" data-testid="booking-form" name="reservation" method="POST" data-netlify="true" novalidate>
+          </div>
+          <div class="booking__body">
+            <form id="booking-form" class="booking-form" data-testid="booking-form" name="reservation" method="POST" data-netlify="true">
               <input type="hidden" name="form-name" value="reservation" class="booking-form__field" />
               <input type="text" name="company" class="booking-form__hp booking-form__field" aria-hidden="true" tabindex="-1" autocomplete="off" />
-              <div class="booking-form__row">
+              <div class="booking-form__row booking-form__row--half">
                 <label class="booking-form__label" for="name">Imię i nazwisko</label>
                 <input class="booking-form__field" id="name" name="name" type="text" required autocomplete="name" placeholder="Jan Kowalski" aria-describedby="form-msg" />
               </div>
-              <div class="booking-form__row">
+              <div class="booking-form__row booking-form__row--half">
                 <label class="booking-form__label" for="phone">Telefon</label>
                 <input
                   class="booking-form__field"
@@ -624,27 +563,30 @@
                   inputmode="tel"
                   placeholder="+48 123 456 789"
                   aria-describedby="form-msg phone-error" />
-                <p id="phone-error" class="booking-form__message" aria-live="polite"></p>
+                <p id="phone-error" class="booking-form__message booking-form__message--error" aria-live="polite"></p>
               </div>
-              <div class="booking-form__row">
+              <div class="booking-form__row booking-form__row--third">
                 <label class="booking-form__label" for="date">Data</label>
                 <input class="booking-form__field" id="date" name="date" type="date" required aria-describedby="form-msg" />
               </div>
-              <div class="booking-form__row">
+              <div class="booking-form__row booking-form__row--third">
                 <label class="booking-form__label" for="time">Godzina</label>
                 <input class="booking-form__field" id="time" name="time" type="time" required min="14:00" max="22:00" step="900" aria-describedby="form-msg" />
               </div>
-              <div class="booking-form__row">
+              <div class="booking-form__row booking-form__row--third">
                 <label class="booking-form__label" for="guests">Liczba gości</label>
-                <select class="booking-form__field" id="guests" name="guests" required>
-                  <option value="" disabled selected hidden>Wybierz…</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6+</option>
-                </select>
+                <div class="booking-form__select">
+                  <select class="booking-form__field booking-form__field--select" id="guests" name="guests" required>
+                    <option value="" disabled selected hidden>Wybierz…</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6+</option>
+                  </select>
+                  <span class="booking-form__select-icon" data-icon="chevron-down" aria-hidden="true"></span>
+                </div>
               </div>
               <div class="booking-form__row">
                 <label class="booking-form__label" for="notes">Uwagi (opcjonalnie)</label>
@@ -654,36 +596,39 @@
                 <label class="booking-form__consent booking-form__label" for="consent">
                   <input class="booking-form__field" id="consent" name="consent" type="checkbox" required aria-describedby="consent-error form-msg" />
                   <span>
-                    Wyrazam zgode na przetwarzanie moich danych osobowych zgodnie z
+                    Wyrażam zgodę na przetwarzanie moich danych osobowych zgodnie z
                     <a href="/polityka-prywatnosci.html" target="_blank" rel="noopener noreferrer">Polityka prywatności</a>
                     .
                   </span>
                 </label>
-                <p id="consent-error" class="booking-form__message" aria-live="polite"></p>
+                <p id="consent-error" class="booking-form__message booking-form__message--error" aria-live="polite"></p>
               </div>
               <div class="booking-form__actions">
                 <button class="site-button site-button--form" type="submit">Wyślij rezerwację</button>
                 <p id="form-msg" class="booking-form__message booking-form__message--status" role="status" aria-live="polite"></p>
               </div>
             </form>
+            <aside class="booking__aside">
+              <h3 class="booking__aside-title">Informacje</h3>
+              <ul class="booking__info-list">
+                <li class="booking__info-item">
+                  <span class="booking__info-label">Rezerwacje telefoniczne:</span>
+                  <span class="booking__info-value">
+                    wt–nd
+                    <time datetime="14:00">14:00</time>
+                    –
+                    <time datetime="22:00">22:00</time>
+                  </span>
+                </li>
+                <li class="booking__info-item">Dress code: smart casual</li>
+                <li class="booking__info-item">Menu degustacyjne: 7 dań (opcje vege)</li>
+              </ul>
+              <a href="/#top" class="booking__logo" aria-label="Strona główna Ambre">
+                <img class="logo logo-light" src="/assets/img/logo-img/logo-light.svg" alt="Ambre – logo restauracji" width="140" height="140" decoding="async" />
+                <img class="logo logo-dark" src="/assets/img/logo-img/logo-dark.svg" alt="" aria-hidden="true" width="140" height="140" decoding="async" />
+              </a>
+            </aside>
           </div>
-          <aside class="booking__aside">
-            <h3 class="booking__aside-title">Informacje</h3>
-            <ul class="bullets booking__info-list">
-              <li>
-                Rezerwacje telefoniczne: wt–nd
-                <time datetime="14:00">14:00</time>
-                –
-                <time datetime="22:00">22:00</time>
-              </li>
-              <li>Dress code: smart casual</li>
-              <li>Menu degustacyjne: 7 dań (opcje vege)</li>
-            </ul>
-            <a href="/#top" class="booking__logo" aria-label="Strona główna Ambre">
-              <img class="logo logo-light" src="/assets/img/logo-img/logo-light.svg" alt="Ambre – logo restauracji" width="140" height="140" decoding="async" />
-              <img class="logo logo-dark" src="/assets/img/logo-img/logo-dark.svg" alt="" aria-hidden="true" width="140" height="140" decoding="async" />
-            </a>
-          </aside>
         </div>
       </div>
 
@@ -706,7 +651,7 @@
             <h2 id="faq-title" class="section-title faq__title">FAQ</h2>
             <p class="u-lead faq__lead">Najczęstsze pytania o rezerwacje i menu.</p>
           </div>
-          <div class="grid-2">
+          <div class="grid-2 faq__grid">
             <details class="faq__details">
               <summary class="faq__summary">Jak anulować lub zmienić rezerwację?</summary>
               <div class="faq__content">
@@ -759,9 +704,25 @@
             <li><a href="/#faq">FAQ</a></li>
           </ul>
         </nav>
+        <div class="site-footer__column" aria-labelledby="site-footer__contact">
+          <h3 id="site-footer__contact" class="site-footer__title">Kontakt</h3>
+          <ul class="site-footer__contact" aria-label="Dane kontaktowe">
+            <li>
+              <span class="site-footer__contact-icon" data-icon="clock" aria-hidden="true"></span>
+              wt–nd: 17:00 — 23:00
+            </li>
+            <li>
+              <span class="site-footer__contact-icon" data-icon="phone" aria-hidden="true"></span>
+              <a href="tel:+48533537091" aria-label="Zadzwoń: +48 533 537 091">+48 533 537 091</a>
+            </li>
+            <li>
+              <span class="site-footer__contact-icon" data-icon="envelope" aria-hidden="true"></span>
+              <a href="mailto:kontakt@kp-code.pl">kontakt@kp-code.pl</a>
+            </li>
+          </ul>
+        </div>
         <div class="site-footer__column" aria-labelledby="ft-findus">
           <h3 id="ft-findus" class="site-footer__title">Tu nas znajdziesz</h3>
-
           <address class="site-footer__address">
             <div class="site-footer__address-row">
               <p>
@@ -772,92 +733,47 @@
                 Polska
               </p>
             </div>
-            <p>NIP 000-000-00-00</p>
           </address>
           <div class="site-footer__map">
             <iframe
               title="Mapa lokalizacji – Ambre Restauracja"
-              src="https://www.google.com/maps?q=ul.+Marynarki+Wojennej+12,+33-100+Tarnów,+Polska&z=15&output=embed"
+              data-map-src="https://www.google.com/maps?q=ul.+Marynarki+Wojennej+12,+33-100+Tarnów,+Polska&z=15&output=embed"
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
               allowfullscreen
               width="100%"
               height="260"
+              hidden
               class="map-embed"></iframe>
+            <button class="site-footer__map-loader" type="button" data-map-load hidden>Załaduj interaktywną mapę</button>
+            <noscript>
+              <a
+                class="site-footer__map-fallback"
+                href="https://www.google.com/maps/search/?api=1&amp;query=ul.+Marynarki+Wojennej+12,+33-100+Tarnów,+Polska"
+                target="_blank"
+                rel="noopener noreferrer">
+                Otwórz lokalizację w Google Maps
+              </a>
+            </noscript>
           </div>
         </div>
-        <div class="site-footer__column" aria-labelledby="site-footer__contact">
-          <h3 id="site-footer__contact" class="site-footer__title">Kontakt</h3>
-          <ul class="site-footer__contact" aria-label="Dane kontaktowe">
-            <li>
-              <span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-13a.75.75 0 0 0-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 0 0 0-1.5h-3.25V5Z" clip-rule="evenodd" />
-                </svg>
-              </span>
-              wt–nd: 17:00 — 23:00
-            </li>
-            <li>
-              <span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
-                  <path
-                    fill-rule="evenodd"
-                    d="M2 3.5A1.5 1.5 0 0 1 3.5 2h1.148a1.5 1.5 0 0 1 1.465 1.175l.716 3.223a1.5 1.5 0 0 1-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 0 0 6.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 0 1 1.767-1.052l3.223.716A1.5 1.5 0 0 1 18 15.352V16.5a1.5 1.5 0 0 1-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 0 1 2.43 8.326 13.019 13.019 0 0 1 2 5V3.5Z"
-                    clip-rule="evenodd" />
-                </svg>
-              </span>
-              <a href="tel:+48533537091" aria-label="Zadzwoń: +48 533 537 091">+48 533 537 091</a>
-            </li>
-            <li>
-              <span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M3 4a2 2 0 0 0-2 2v1.161l8.441 4.221a1.25 1.25 0 0 0 1.118 0L19 7.162V6a2 2 0 0 0-2-2H3Z" />
-                  <path d="m19 8.839-7.77 3.885a2.75 2.75 0 0 1-2.46 0L1 8.839V14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.839Z" />
-                </svg>
-              </span>
-              <a href="mailto:kontakt@kp-code.pl">kontakt@kp-code.pl</a>
-            </li>
-          </ul>
-          <h3 class="site-footer__title site-footer__title--sub">Social Media</h3>
-          <ul class="site-footer__social site-footer__social--bare" aria-label="Linki społecznościowe">
-            <li>
-              <a class="site-button site-button--social" href="https://www.facebook.com/kpkrol85" aria-label="Facebook" rel="me external noopener noreferrer" target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path
-                    d="M18 2a1 1 0 0 1 .993 .883l.007 .117v4a1 1 0 0 1 -.883 .993l-.117 .007h-3v1h3a1 1 0 0 1 .991 1.131l-.02 .112l-1 4a1 1 0 0 1 -.858 .75l-.113 .007h-2v6a1 1 0 0 1 -.883 .993l-.117 .007h-4a1 1 0 0 1 -.993 -.883l-.007 -.117v-6h-2a1 1 0 0 1 -.993 -.883l-.007 -.117v-4a1 1 0 0 1 .883 -.993l.117 -.007h2v-1a6 6 0 0 1 5.775 -5.996l.225 -.004h3z" />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a class="site-button site-button--social" href="https://github.com/KPKrol85" aria-label="GitHub" rel="me external noopener noreferrer" target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path
-                    d="M5.315 2.1c.791 -.113 1.9 .145 3.333 .966l.272 .161l.16 .1l.397 -.083a13.3 13.3 0 0 1 4.59 -.08l.456 .08l.396 .083l.161 -.1c1.385 -.84 2.487 -1.17 3.322 -1.148l.164 .008l.147 .017l.076 .014l.05 .011l.144 .047a1 1 0 0 1 .53 .514a5.2 5.2 0 0 1 .397 2.91l-.047 .267l-.046 .196l.123 .163c.574 .795 .93 1.728 1.03 2.707l.023 .295l.007 .272c0 3.855 -1.659 5.883 -4.644 6.68l-.245 .061l-.132 .029l.014 .161l.008 .157l.004 .365l-.002 .213l-.003 3.834a1 1 0 0 1 -.883 .993l-.117 .007h-6a1 1 0 0 1 -.993 -.883l-.007 -.117v-.734c-1.818 .26 -3.03 -.424 -4.11 -1.878l-.535 -.766c-.28 -.396 -.455 -.579 -.589 -.644l-.048 -.019a1 1 0 0 1 .564 -1.918c.642 .188 1.074 .568 1.57 1.239l.538 .769c.76 1.079 1.36 1.459 2.609 1.191l.001 -.678l-.018 -.168a5.03 5.03 0 0 1 -.021 -.824l.017 -.185l.019 -.12l-.108 -.024c-2.976 -.71 -4.703 -2.573 -4.875 -6.139l-.01 -.31l-.004 -.292a5.6 5.6 0 0 1 .908 -3.051l.152 -.222l.122 -.163l-.045 -.196a5.2 5.2 0 0 1 .145 -2.642l.1 -.282l.106 -.253a1 1 0 0 1 .529 -.514l.144 -.047l.154 -.03z" />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a class="site-button site-button--social" href="https://x.com" aria-label="X" rel="me external noopener noreferrer" target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path
-                    d="M8.267 3a1 1 0 0 1 .73 .317l.076 .092l4.274 5.828l5.946 -5.944a1 1 0 0 1 1.497 1.32l-.083 .094l-6.163 6.162l6.262 8.54a1 1 0 0 1 -.697 1.585l-.109 .006h-4.267a1 1 0 0 1 -.73 -.317l-.076 -.092l-4.276 -5.829l-5.944 5.945a1 1 0 0 1 -1.497 -1.32l.083 -.094l6.161 -6.163l-6.26 -8.539a1 1 0 0 1 .697 -1.585l.109 -.006h4.267z" />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a class="site-button site-button--social" href="https://linkedin.com" aria-label="LinkedIn" rel="me external noopener noreferrer" target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path
-                    d="M17 2a5 5 0 0 1 5 5v10a5 5 0 0 1 -5 5h-10a5 5 0 0 1 -5 -5v-10a5 5 0 0 1 5 -5zm-9 8a1 1 0 0 0 -1 1v5a1 1 0 0 0 2 0v-5a1 1 0 0 0 -1 -1m6 0a3 3 0 0 0 -1.168 .236l-.125 .057a1 1 0 0 0 -1.707 .707v5a1 1 0 0 0 2 0v-3a1 1 0 0 1 2 0v3a1 1 0 0 0 2 0v-3a3 3 0 0 0 -3 -3m-6 -3a1 1 0 0 0 -.993 .883l-.007 .127a1 1 0 0 0 1.993 .117l.007 -.127a1 1 0 0 0 -1 -1" />
-                </svg>
-              </a>
-            </li>
-          </ul>
-        </div>
+      </div>
+      <div class="container site-footer__socialbar">
+        <h3 class="site-footer__title site-footer__title--sub">Social Media</h3>
+        <ul class="site-footer__social site-footer__social--bare" aria-label="Linki społecznościowe">
+          <li>
+            <a class="site-button site-button--social" data-icon="facebook" href="https://www.facebook.com/kpkrol85" aria-label="Facebook" rel="me external noopener noreferrer" target="_blank"></a>
+          </li>
+          <li>
+            <a class="site-button site-button--social" data-icon="github" href="https://github.com/KPKrol85" aria-label="GitHub" rel="me external noopener noreferrer" target="_blank"></a>
+          </li>
+          <li>
+            <a class="site-button site-button--social" data-icon="x" href="https://x.com/KP_Code_85" aria-label="X" rel="me external noopener noreferrer" target="_blank"></a>
+          </li>
+          <li>
+            <a class="site-button site-button--social" data-icon="linkedin" href="https://www.linkedin.com/in/kp-code" aria-label="LinkedIn" rel="me external noopener noreferrer" target="_blank"></a>
+          </li>
+        </ul>
       </div>
       <div class="site-footer__legalbar" aria-label="Informacje prawne">
         <div class="container">
@@ -892,9 +808,7 @@
 
     <!-- Scroll to top -->
     <button class="scroll-btn scroll-up" data-testid="scroll-up" type="button" aria-label="Przewiń na górę" title="Na górę" aria-hidden="true" tabindex="-1" hidden>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
-      </svg>
+      <span class="scroll-btn__icon" data-icon="arrow-up" aria-hidden="true"></span>
     </button>
 
     <!-- Mobile drawer -->
@@ -906,7 +820,7 @@
     <!-- Script -->
     <script src="/js/sw-register.js" defer></script>
     <script src="/js/pwa-install.js" defer></script>
-    <script type="module" src="/js/script.min.js"></script>
+    <script type="module" src="/js/script.js"></script>
 
     <!-- Demo Legal Modal -->
     <div class="demo-legal-modal" id="demo-legal-modal" aria-hidden="true" hidden inert>

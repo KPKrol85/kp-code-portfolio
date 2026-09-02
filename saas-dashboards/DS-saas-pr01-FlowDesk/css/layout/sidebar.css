@@ -1,0 +1,85 @@
+.sidebar {
+  background: var(--bg-elev);
+  border-right: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-24) var(--space-16);
+  display: none;
+}
+
+.sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  margin-bottom: var(--space-24);
+  color: var(--text);
+  font-size: var(--fs-16);
+  font-weight: var(--fw-semibold);
+  line-height: 1;
+  text-decoration: none;
+  padding: 0 var(--space-12);
+  border-radius: var(--radius-md);
+  transition:
+    background-color var(--motion-fast) var(--ease-standard),
+    color var(--motion-fast) var(--ease-standard);
+}
+
+.sidebar__brand-logo {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  display: block;
+}
+
+.sidebar__brand-name {
+  letter-spacing: 0;
+}
+
+.sidebar__nav {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.sidebar__link {
+  padding: var(--space-10) var(--space-12);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--space-10);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-medium);
+  line-height: 1.35;
+  transition:
+    background-color var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard),
+    color var(--motion-fast) var(--ease-standard);
+}
+
+.sidebar__link--active {
+  background: var(--state-active);
+  box-shadow: inset 3px 0 0 var(--primary);
+  color: var(--text);
+  font-weight: var(--fw-semibold);
+}
+
+@media (hover: hover) {
+  .sidebar__brand:hover,
+  .sidebar__link:hover {
+    background: var(--state-hover);
+    color: var(--text);
+  }
+}
+
+.sidebar__link:focus-visible {
+  background: var(--state-active);
+}
+
+.sidebar__link:active {
+  background: var(--state-active);
+}
+
+@media (min-width: 64rem) {
+  .sidebar {
+    display: block;
+  }
+}

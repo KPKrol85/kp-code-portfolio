@@ -12,14 +12,17 @@ h6 {
   font-variant-ligatures: contextual;
   text-wrap: balance;
 }
+
 h1 {
   font-size: var(--fs-xxl);
   font-weight: 700;
 }
+
 h2 {
   font-size: var(--fs-xl);
   font-weight: 700;
 }
+
 h3 {
   font-size: var(--fs-lg);
   font-weight: 700;

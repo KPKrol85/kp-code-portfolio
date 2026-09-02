@@ -1,0 +1,6 @@
+# Shared layout templates use {{token}} / {{#if}} syntax Prettier cannot parse
+partials/
+
+dist/
+*.min.css
+*.min.js

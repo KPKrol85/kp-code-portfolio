@@ -1,8 +1,9 @@
 import fs from "fs";
 import http from "http";
 import path from "path";
+import { createGzip } from "zlib";
 
-const rootDir = process.cwd();
+const rootDir = path.resolve(process.cwd(), "dist");
 const host = process.env.LHCI_HOST || "127.0.0.1";
 const port = Number(process.env.LHCI_PORT || 4174);
 
@@ -21,6 +22,17 @@ const mimeTypes = new Map([
   [".ico", "image/x-icon"],
   [".txt", "text/plain; charset=utf-8"],
   [".xml", "application/xml; charset=utf-8"]
+]);
+
+const compressibleExtensions = new Set([
+  ".html",
+  ".css",
+  ".js",
+  ".json",
+  ".webmanifest",
+  ".svg",
+  ".txt",
+  ".xml"
 ]);
 
 const server = http.createServer((req, res) => {
@@ -44,9 +56,24 @@ const server = http.createServer((req, res) => {
 
   const ext = path.extname(filePath).toLowerCase();
   const contentType = mimeTypes.get(ext) || "application/octet-stream";
+  const acceptsGzip = /\bgzip\b/i.test(req.headers["accept-encoding"] || "");
+  const responseHeaders = {
+    "Content-Type": contentType,
+    "Cache-Control": "no-store"
+  };
 
-  res.writeHead(200, { "Content-Type": contentType, "Cache-Control": "no-store" });
-  fs.createReadStream(filePath).pipe(res);
+  if (acceptsGzip && compressibleExtensions.has(ext)) {
+    responseHeaders["Content-Encoding"] = "gzip";
+    responseHeaders.Vary = "Accept-Encoding";
+  }
+
+  res.writeHead(200, responseHeaders);
+  const fileStream = fs.createReadStream(filePath);
+  if (responseHeaders["Content-Encoding"] === "gzip") {
+    fileStream.pipe(createGzip()).pipe(res);
+    return;
+  }
+  fileStream.pipe(res);
 });
 
 server.listen(port, host, () => {

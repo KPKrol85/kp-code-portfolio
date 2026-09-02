@@ -7,11 +7,11 @@
   Cross-Origin-Opener-Policy: same-origin
   X-Frame-Options: SAMEORIGIN
 # CSP_SCRIPT_HASHES_BEGIN
-# 'sha256-ebQ/Ai46wd/+1g47MN8dEqARmArUj9ND6TE2LkTvrnQ='
-# 'sha256-Gxh03BdiaHnuGjIh7PxvdpCu8vYev3yvPpua0ZPpdGw='
-# 'sha256-j5tfyaeL/QuYfOF1e9iyMGPiSJdvlW6V2vq7rXAtYps='
-# 'sha256-K6Sb+CBedozuCmzuPsMJoA+pQWJrsJsJpDlsTSY8MZM='
-# 'sha256-RUSSInGkDjRyu1MeddwlQj0C0IyLR+EFJS6zUCO06+8='
-# 'sha256-X036zOKgD0oYA5Hye9zYX4KRmSrp+WmK9quXFDAEuFI='
+# 'sha256-/BgC/PFSC8IeP0khzHZFqY117JBcp7jTnmcArx6IrDQ='
+# 'sha256-c7XXej8S0n+hUIxkxoWEOfT+Z3mUsKaezlKlPa2I1Co='
+# 'sha256-oBK1aLT3jkmzZBayJKaxa6xujKjxlxAEfB4drhlagz4='
+# 'sha256-pbueqKp+AKlvM+SLY+iWID10b9Wklm6ysolWedmCP7g='
+# 'sha256-vRVhfHAVGWKQq+Qu1HsZoFrHP8PU8Hrgk7Ei1YazRD0='
+# 'sha256-wSMDsPNcoTV3UvdGwjQZjOc8UDjxi46Wa2N3Jr7BqNc='
 # CSP_SCRIPT_HASHES_END
-  Content-Security-Policy: upgrade-insecure-requests; default-src 'self'; img-src 'self' https: data: blob:; style-src 'self'; script-src 'self'; script-src-elem 'self' 'sha256-ebQ/Ai46wd/+1g47MN8dEqARmArUj9ND6TE2LkTvrnQ=' 'sha256-Gxh03BdiaHnuGjIh7PxvdpCu8vYev3yvPpua0ZPpdGw=' 'sha256-j5tfyaeL/QuYfOF1e9iyMGPiSJdvlW6V2vq7rXAtYps=' 'sha256-K6Sb+CBedozuCmzuPsMJoA+pQWJrsJsJpDlsTSY8MZM=' 'sha256-RUSSInGkDjRyu1MeddwlQj0C0IyLR+EFJS6zUCO06+8=' 'sha256-X036zOKgD0oYA5Hye9zYX4KRmSrp+WmK9quXFDAEuFI='; script-src-attr 'none'; font-src 'self' data:; connect-src 'self'; frame-src https://www.google.com/; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'
+  Content-Security-Policy: upgrade-insecure-requests; default-src 'self'; img-src 'self' https: data: blob:; style-src 'self'; script-src 'self'; script-src-elem 'self' 'sha256-/BgC/PFSC8IeP0khzHZFqY117JBcp7jTnmcArx6IrDQ=' 'sha256-c7XXej8S0n+hUIxkxoWEOfT+Z3mUsKaezlKlPa2I1Co=' 'sha256-oBK1aLT3jkmzZBayJKaxa6xujKjxlxAEfB4drhlagz4=' 'sha256-pbueqKp+AKlvM+SLY+iWID10b9Wklm6ysolWedmCP7g=' 'sha256-vRVhfHAVGWKQq+Qu1HsZoFrHP8PU8Hrgk7Ei1YazRD0=' 'sha256-wSMDsPNcoTV3UvdGwjQZjOc8UDjxi46Wa2N3Jr7BqNc='; script-src-attr 'none'; font-src 'self' data:; connect-src 'self'; frame-src https://www.google.com/; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="FlowDesk — frontend-only Service Management Dashboard demo z lokalnymi danymi, demo auth i PWA bez backendu." />
+    <meta name="theme-color" content="#0b0f1a" />
+
+    <!-- The Content-Security-Policy is delivered as an HTTP header from _headers, so it covers
+         every document and can use frame-ancestors, which a meta element cannot express. -->
+
+    <meta property="og:title" content="FlowDesk — frontend-only SaaS demo" />
+    <meta property="og:description" content="Portfolio-ready Service Management Dashboard demo with local demo data, demo auth and no backend." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="FlowDesk" />
+    <meta property="og:url" content="https://saas-pr01-flowdesk.netlify.app/" />
+    <meta property="og:image" content="https://saas-pr01-flowdesk.netlify.app/assets/icons/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content="FlowDesk frontend-only SaaS dashboard preview" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="FlowDesk — frontend-only SaaS demo" />
+    <meta name="twitter:description" content="Service Management Dashboard demo with local data, demo auth and no backend." />
+    <meta name="twitter:image" content="https://saas-pr01-flowdesk.netlify.app/assets/icons/og.png" />
+    <meta name="twitter:image:alt" content="FlowDesk frontend-only SaaS dashboard preview" />
+
+    <link rel="canonical" href="https://saas-pr01-flowdesk.netlify.app/" />
+
+    <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon/favicon.svg" vite-ignore />
+    <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon/favicon-96x96.png" vite-ignore />
+    <link rel="shortcut icon" href="/assets/icons/favicon/favicon.ico" vite-ignore />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/favicon/apple-touch-icon.png" vite-ignore />
+
+    <link rel="manifest" href="/manifest.webmanifest" vite-ignore />
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <title>FlowDesk — frontend-only SaaS demo</title>
+  </head>
+
+  <!-- body -->
+  <body class="theme-light">
+    <a class="skip-link" href="#main">Przejdź do treści</a>
+    <div id="app" class="app"></div>
+
+    <noscript>
+      <div class="noscript">
+        <h1>Włącz JavaScript</h1>
+        <p>FlowDesk wymaga JavaScript do działania.</p>
+      </div>
+    </noscript>
+
+    <!-- scripts -->
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

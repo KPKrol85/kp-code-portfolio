@@ -1,86 +1,156 @@
 /* About */
-.about .grid-2 > div {
+
+.about {
+  /* Box reserved for a registry icon, so hydration cannot shift a bullet row. */
+  --about-icon-size: 18px;
+
+  /* Editorial measure shared by the lead and the detail rows, so the text
+     column keeps one right edge instead of drifting per element. */
+  --about-measure: 42ch;
+}
+
+.about .grid-2 {
+  column-gap: var(--space-06);
+  row-gap: var(--space-07);
+}
+
+.about__content {
   text-align: center;
 }
-.about__lead {
-  margin-inline: auto;
 
-  max-width: 36ch;
+.about__lead {
+  margin-block: 0;
+  margin-inline: auto;
+  max-width: var(--about-measure);
+  line-height: var(--lh-relaxed);
+  text-wrap: pretty;
 }
+
 .about__photo {
-  border-radius: var(--radius-xs);
+  margin: 0;
+  border: var(--border-thin) solid var(--c-border);
+  border-radius: var(--radius-sm);
   overflow: hidden;
-  box-shadow: var(--shadow-xs);
+  background: var(--c-surface);
+  box-shadow: var(--shadow-sm);
 }
+
 .about__photo img {
+  display: block;
   width: 100%;
-  border-radius: var(--radius-xs);
   object-fit: cover;
 }
+
 .about__bullets {
   display: grid;
-  gap: var(--space-02);
+  gap: var(--space-03);
   list-style: none;
-  margin: var(--space-06) 0 0;
-  padding: 0;
+  margin: var(--space-06) auto 0;
+  padding: var(--space-04) 0 0;
+  max-width: var(--about-measure);
+
+  /* The section's one decorative accent: a hairline that closes the copy and
+     opens the practical details, warmed just enough to read as Ambre gold. */
+  border-top: var(--border-thin) solid color-mix(in oklab, var(--c-border), var(--c-accent) 30%);
 }
+
+/* Two flex items only — icon and text. The `.about__bullet-text` wrapper keeps
+   the row gap between them instead of between every word of the row. */
 .about__bullet {
   display: flex;
   align-items: center;
-  gap: var(--space-02);
+  gap: var(--space-03);
   justify-content: center;
 }
+
+.about__bullet-text {
+  color: var(--c-ink);
+}
+
+.about__bullet-label {
+  color: var(--c-muted);
+}
+
 .about__bullets a,
 .about__bullets time {
   white-space: nowrap;
 }
+
 .about__bullets a {
   letter-spacing: var(--ls-normal);
   font-weight: 600;
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color var(--dur-normal) var(--ease-standard);
 }
+
 .about__bullets a:hover,
 .about__bullets a:focus-visible {
   color: var(--c-accent-contrast);
 }
+
 .about__bullets a:visited {
   color: var(--c-ink);
 }
 
 .about__bullet-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 auto;
-  color: var(--c-ink);
-}
-.about__bullet-icon svg {
-  width: 20px;
-  height: 20px;
   display: block;
+  flex: 0 0 auto;
+  inline-size: var(--about-icon-size);
+  block-size: var(--about-icon-size);
+  color: var(--c-accent-contrast);
 }
 
-@media (min-width: 1024px) {
-  .about .grid-2 > div {
+.about__bullet-icon svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* The photo column starts at the same width as the grid, so the copy switches
+   to its left-aligned reading column on the same breakpoint. */
+@media (min-width: 760px) {
+  .about .grid-2 {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+  }
+
+  .about__content,
+  .about__lead,
+  .about__title {
     text-align: left;
   }
-  .about__content {
-    text-align: left;
-  }
-  .about__content .about__title {
-    text-align: left;
-  }
-  .about__content .about__title::after {
+
+  .about__title::after {
     left: 0;
     transform: none;
   }
+
+  .about__lead,
+  .about__bullets {
+    margin-inline: 0;
+  }
+
   .about__bullet {
     justify-content: flex-start;
   }
-  .about .u-lead {
-    margin-inline: 0;
-    text-align: left;
-    padding: 0;
+}
+
+/* At desktop the reading column is sized by the grid itself, so the lead, the
+   accent rule and the detail rows all share one edge and the photo takes the
+   larger share of the composition. */
+@media (min-width: 1024px) {
+  .about .grid-2 {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    column-gap: var(--space-08);
+  }
+
+  .about__lead,
+  .about__bullets {
+    max-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about__bullets a {
+    transition: none;
   }
 }

@@ -1,5 +1,14 @@
 import { $, byTestId, log } from "./utils.js";
 
+const setScrollButtonVisibility = (button, isVisible) => {
+  button.classList.toggle("is-visible", isVisible);
+  button.toggleAttribute("hidden", !isVisible);
+  button.setAttribute("aria-hidden", String(!isVisible));
+
+  if (isVisible) button.removeAttribute("tabindex");
+  else button.setAttribute("tabindex", "-1");
+};
+
 export function initScrollButtons() {
   const down = byTestId("scroll-down") || $(".scroll-down");
   const up = byTestId("scroll-up") || $(".scroll-up");
@@ -38,7 +47,7 @@ export function initScrollButtons() {
         const atBottom = window.innerHeight + offset >= docHeight() - 100;
         down.classList.toggle("is-hidden", atBottom);
       }
-      if (up) up.classList.toggle("is-visible", offset > 300);
+      if (up) setScrollButtonVisibility(up, offset > 300);
       ticking = false;
     });
   };

@@ -1,0 +1,80 @@
+/*
+ * Client-detail-only presentation. Everything structural is still shared:
+ * detail-grid, detail-header-action, meta-grid, detail-block/subtitle/notes, detail-list/item and
+ * tag-row live in views/detail-shared.css (also used by projectDetailView.js) and card, list,
+ * badge, data-*, page-header and empty-state stay components. Only the record header row and the
+ * activity feed below are specific to this route.
+ */
+
+.client-detail__section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+}
+
+/* ---------------------------------------------------------------------------
+   Activity history
+   --------------------------------------------------------------------------- */
+
+/* A compact feed built from the fields selectClientActivityTimeline already returns: the entry
+   date, the collection it came from and its text. The shared .timeline is untouched because the
+   Projects detail view still renders its comments and history with it. */
+.client-activity {
+  display: grid;
+  gap: var(--space-16);
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 var(--space-16);
+  border-left: 1px solid var(--border);
+}
+
+.client-activity__item {
+  display: grid;
+  gap: var(--space-2);
+  position: relative;
+}
+
+/* The marker is drawn on the rail rather than added to the markup, so it stays decorative and out
+   of the accessibility tree. */
+.client-activity__item::before {
+  content: '';
+  position: absolute;
+  top: 0.45rem;
+  left: calc(-1 * var(--space-16) - 3px);
+  width: 5px;
+  height: 5px;
+  border-radius: var(--radius-pill);
+  background: var(--border);
+}
+
+.client-activity__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-4) var(--space-8);
+  min-width: 0;
+}
+
+.client-activity__date {
+  color: var(--text);
+  font-size: var(--fs-12);
+  font-weight: var(--fw-semibold);
+  line-height: 1.3;
+}
+
+/* Names the source collection of the entry. Quiet on purpose: it is context, not the event. */
+.client-activity__source {
+  color: var(--text-muted);
+  font-size: var(--fs-12);
+  line-height: 1.3;
+}
+
+.client-activity__text {
+  color: var(--text-muted);
+  font-size: var(--fs-13);
+  line-height: 1.5;
+  margin: 0;
+  overflow-wrap: anywhere;
+}

@@ -1,0 +1,81 @@
+/* Theme switch — animated sun/moon control rendered inside the header theme toggle.
+   The whole component reads one inherited flag, `--theme-switch-dark` (0 = sun,
+   1 = moon), so the sun core, the rays and the moon cut-out always move as one
+   coordinated state instead of two competing icons. */
+
+.theme-switch {
+  --theme-switch-dark: 0;
+  --theme-switch-size: 20px;
+  --theme-switch-dur: var(--dur-normal, 240ms);
+  --theme-switch-ease: var(--ease-standard, cubic-bezier(0.4, 0, 0.2, 1));
+
+  display: block;
+  width: var(--theme-switch-size);
+  height: var(--theme-switch-size);
+  flex: none;
+  color: var(--c-ink);
+  transition: color var(--dur-fast, 120ms) var(--theme-switch-ease);
+}
+
+.theme-switch__core,
+.theme-switch__rays,
+.theme-switch__cutout {
+  transform-box: view-box;
+  transform-origin: center;
+}
+
+.theme-switch__core {
+  transform: scale(calc(1 + 0.5 * var(--theme-switch-dark)));
+  transition: transform var(--theme-switch-dur) var(--theme-switch-ease);
+}
+
+.theme-switch__rays {
+  opacity: calc(1 - var(--theme-switch-dark));
+  transform: rotate(calc(var(--theme-switch-dark) * -25deg)) scale(calc(1 - 0.4 * var(--theme-switch-dark)));
+  transition:
+    opacity var(--dur-fast, 120ms) var(--ease-standard, ease),
+    transform var(--theme-switch-dur) var(--theme-switch-ease);
+
+  /* Rays leave immediately on the way to the moon and return only once the
+     cut-out has slid back out, so the two shapes never overlap mid-flight. */
+  transition-delay: calc((1 - var(--theme-switch-dark)) * 90ms);
+}
+
+.theme-switch__cutout {
+  transform: translate(calc(var(--theme-switch-dark) * -8.5px), calc(var(--theme-switch-dark) * 1.5px));
+  transition: transform var(--theme-switch-dur) var(--ease-decelerate, ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-switch,
+  .theme-switch__core,
+  .theme-switch__rays,
+  .theme-switch__cutout {
+    transition: none;
+  }
+}
+
+html[data-theme="dark"] .theme-switch {
+  --theme-switch-dark: 1;
+}
+
+/* Until the theme module has applied the stored/system theme and flagged the
+   document ready, the control snaps to its state instead of animating on load. */
+html:not([data-theme-ready]) .theme-switch,
+html:not([data-theme-ready]) .theme-switch__core,
+html:not([data-theme-ready]) .theme-switch__rays,
+html:not([data-theme-ready]) .theme-switch__cutout {
+  transition: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) .theme-switch {
+    --theme-switch-dark: 1;
+  }
+}
+
+@media (hover: hover) {
+  .site-header__theme-toggle:hover .theme-switch {
+    color: var(--c-accent-contrast);
+  }
+}

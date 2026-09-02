@@ -1,7 +1,10 @@
 const CACHE_VERSION = "v1.8";
+const CACHE_NAMESPACE = "ambre-";
 
-const APP_SHELL_CACHE = `app-shell-${CACHE_VERSION}`;
-const RUNTIME_IMG_CACHE = `runtime-img-${CACHE_VERSION}`;
+const APP_SHELL_CACHE = `${CACHE_NAMESPACE}app-shell-${CACHE_VERSION}`;
+const RUNTIME_IMG_CACHE = `${CACHE_NAMESPACE}runtime-img-${CACHE_VERSION}`;
+// Exact Ambre cache keys shipped before the project namespace was introduced.
+const LEGACY_CACHE_KEYS = new Set(["app-shell-v1.8", "runtime-img-v1.8"]);
 
 const OFFLINE_PAGE = "/offline.html";
 const OFFLINE_IMAGE = "/assets/img/offline-image.svg";
@@ -52,7 +55,10 @@ self.addEventListener("activate", (event) => {
       }
       const keep = new Set([APP_SHELL_CACHE, RUNTIME_IMG_CACHE]);
       const keys = await caches.keys();
-      await Promise.all(keys.filter((key) => !keep.has(key)).map((key) => caches.delete(key)));
+      const obsoleteAmbreKeys = keys.filter(
+        (key) => !keep.has(key) && (key.startsWith(CACHE_NAMESPACE) || LEGACY_CACHE_KEYS.has(key)),
+      );
+      await Promise.all(obsoleteAmbreKeys.map((key) => caches.delete(key)));
     })(),
   );
   self.clients.claim();

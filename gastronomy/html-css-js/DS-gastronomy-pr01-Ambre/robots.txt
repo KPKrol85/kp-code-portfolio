@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gastronomy-project-01.netlify.app/sitemap.xml
+Sitemap: https://gastronomy-pr01-ambre.netlify.app/sitemap.xml

@@ -1,0 +1,36 @@
+{
+  "name": "fleetops",
+  "version": "1.0.0",
+  "description": "FleetOps is a conceptual frontend-only SaaS dashboard for transport and fleet operations management. The project is part of a larger professional portfolio and focuses on application architecture, UI state management, and SaaS-style navigation patterns, rather than backend implementation.",
+  "private": true,
+  "main": "index.html",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "preview:dist": "vite preview",
+    "optimize:images": "node optimize-images.js",
+    "qa:css-vars": "node scripts/qa/check-css-vars.js",
+    "test": "npm run qa:css-vars && npm run test:smoke",
+    "test:smoke": "playwright test"
+  },
+  "keywords": [
+    "fleet-management",
+    "transport",
+    "logistics",
+    "saas-dashboard",
+    "frontend",
+    "vanilla-javascript",
+    "portfolio"
+  ],
+  "author": "KP_Code Digital Studio",
+  "license": "SEE LICENSE IN LICENSE",
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "sharp": "^0.35.3",
+    "vite": "^7.3.6"
+  }
+}

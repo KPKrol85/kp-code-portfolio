@@ -1,20 +1,27 @@
 /* FAQ */
+
+.faq__grid {
+  gap: var(--space-01);
+}
+
 .faq__details {
   border: 1px solid var(--c-border);
   border-radius: var(--radius-xs);
   background: color-mix(in oklab, var(--c-surface), white 4%);
-  margin: var(--space-03);
+  margin: var(--space-02);
   overflow: hidden;
   transition:
     border-color 0.18s ease,
     background-color 0.18s ease,
     box-shadow 0.18s ease;
 }
+
 .faq__details[open] {
   background: color-mix(in oklab, var(--c-surface), white 8%);
   border-color: color-mix(in oklab, var(--c-border), var(--c-accent-contrast) 28%);
   box-shadow: var(--shadow-md);
 }
+
 .faq__summary {
   list-style: none;
   display: flex;
@@ -27,17 +34,21 @@
   position: relative;
   outline: none;
 }
+
 .faq__summary::-webkit-details-marker {
   display: none;
 }
+
 .faq__summary::marker {
   content: "";
 }
+
 .faq__summary:focus-visible {
   outline: 2px solid var(--c-accent-contrast);
   outline-offset: 2px;
   border-radius: var(--radius-xs);
 }
+
 .faq__summary::after {
   content: "";
   margin-left: auto;
@@ -53,25 +64,30 @@
     center/contain no-repeat;
   background: currentColor;
 }
+
 .faq__details[open] .faq__summary::after {
   transform: rotate(180deg);
   opacity: 1;
 }
+
 .faq__details a {
   text-decoration: none;
   letter-spacing: var(--ls-normal);
   font-weight: 600;
   transition: color 0.2s ease;
 }
+
 .faq__content {
   background: color-mix(in oklab, var(--c-surface), white 4%);
   padding: var(--space-02) var(--space-04);
   color: var(--c-ink);
   line-height: var(--lh-normal);
 }
+
 .faq__content > * + * {
   margin-top: var(--space-02);
 }
+
 .faq__details + .faq__details {
   margin-top: var(--space-03);
 }
@@ -81,6 +97,7 @@
     background: color-mix(in oklab, var(--c-surface), var(--c-ink) 6%);
   }
 }
+
 @media (prefers-reduced-motion: reduce) {
   .faq__summary::after {
     transition: none;

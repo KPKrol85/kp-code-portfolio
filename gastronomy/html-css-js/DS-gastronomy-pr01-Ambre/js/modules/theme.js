@@ -10,23 +10,22 @@ export function initThemeSwitcher() {
   const prefersDark = media.matches;
   const stored = localStorage.getItem(storageKey);
 
-  const icon = $(".theme-icon", toggle);
-  const glyph = (mode) => (mode === "dark" ? "☾" : "☀");
-
   const apply = (mode) => {
     if (mode === "light" || mode === "dark") {
       root.setAttribute("data-theme", mode);
       toggle.setAttribute("aria-pressed", String(mode === "dark"));
-      if (icon) icon.textContent = glyph(mode);
       return;
     }
 
     root.removeAttribute("data-theme");
     toggle.setAttribute("aria-pressed", "false");
-    if (icon) icon.textContent = glyph(prefersDark ? "dark" : "light");
   };
 
   apply(stored ?? (prefersDark ? "dark" : "light"));
+
+  // The sun/moon control snaps to its state until the document is flagged ready,
+  // so a stored theme applied during boot does not animate on every page load.
+  requestAnimationFrame(() => requestAnimationFrame(() => root.setAttribute("data-theme-ready", "")));
 
   toggle.addEventListener("click", () => {
     const current = root.getAttribute("data-theme") || (prefersDark ? "dark" : "light");

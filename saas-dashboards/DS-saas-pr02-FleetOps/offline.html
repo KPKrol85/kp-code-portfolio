@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#0b0f19" />
+    <meta name="robots" content="noindex" />
+    <title>Brak połączenia z siecią | FleetOps</title>
+
+    <!--
+      PWA infrastructure document, not a public page: the service worker precaches it
+      and serves it only after a navigation request has genuinely failed and the
+      requested document is not in the navigation cache. It therefore has to stay
+      readable with no network at all, so the critical presentation is inline and the
+      page loads no stylesheet, script, font or image. The colors, radii and spacing
+      mirror the design tokens in `styles/src/00-settings.css` on purpose; they are
+      duplicated locally so this page never depends on the bundled stylesheet.
+    -->
+    <style>
+      :root {
+        --offline-bg: #f7f8fb;
+        --offline-surface: #ffffff;
+        --offline-border: #e4e7ed;
+        --offline-text: #0f172a;
+        --offline-text-muted: #4b5563;
+        --offline-accent: #2563eb;
+        --offline-accent-strong: #1d4ed8;
+        --offline-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --offline-bg: #0b0d10;
+          --offline-surface: #10141a;
+          --offline-border: #1f2633;
+          --offline-text: #e9edf5;
+          --offline-text-muted: #9ba7b9;
+          --offline-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        min-height: 100%;
+        background: var(--offline-bg);
+        color: var(--offline-text);
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .offline-page {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 3rem 1rem;
+      }
+
+      .offline-card {
+        width: min(560px, 100%);
+        display: grid;
+        justify-items: center;
+        gap: 1rem;
+        padding: 2rem;
+        border: 1px solid var(--offline-border);
+        border-radius: 18px;
+        background: var(--offline-surface);
+        box-shadow: var(--offline-shadow);
+        text-align: center;
+      }
+
+      .offline-card__brand {
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      .offline-card__title {
+        margin: 0;
+        font-size: 1.75rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+      }
+
+      .offline-card__text,
+      .offline-card__note {
+        margin: 0;
+        max-width: 42ch;
+        line-height: 1.55;
+        color: var(--offline-text-muted);
+      }
+
+      .offline-card__text {
+        font-size: 1rem;
+      }
+
+      .offline-card__note {
+        font-size: 0.875rem;
+      }
+
+      .offline-card__action {
+        margin-top: 0.75rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0.625rem 1.25rem;
+        border-radius: 12px;
+        background: var(--offline-accent);
+        color: #ffffff;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .offline-card__action:hover {
+        background: var(--offline-accent-strong);
+      }
+
+      /* The ring sits on the card surface rather than on the accent fill, so it stays
+         visible in both color schemes. */
+      .offline-card__action:focus-visible {
+        outline: 3px solid var(--offline-text);
+        outline-offset: 3px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="offline-page">
+      <div class="offline-card">
+        <p class="offline-card__brand">FleetOps</p>
+        <h1 class="offline-card__title">Brak połączenia z siecią</h1>
+        <p class="offline-card__text">
+          Nie udało się pobrać tej strony, ponieważ urządzenie jest offline. Sprawdź połączenie z internetem lub wróć do
+          zapisanej wersji FleetOps.
+        </p>
+        <p class="offline-card__note">Ta strona nie została wcześniej zapisana w pamięci offline przeglądarki.</p>
+        <a class="offline-card__action" href="/">Wróć do FleetOps</a>
+      </div>
+    </main>
+  </body>
+</html>

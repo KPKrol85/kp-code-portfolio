@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://education-pr-01-lauren-english.netlify.app/sitemap.xml

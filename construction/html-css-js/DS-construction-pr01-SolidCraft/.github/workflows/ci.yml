@@ -1,0 +1,65 @@
+# Lightweight regression gate for SolidCraft.
+#
+# Runs the project's own npm scripts rather than reproducing their internals
+# here, so the CI contract and the local contract cannot drift: the production
+# build, the documented pre-deploy gate (check:predeploy) and the functional
+# browser suite (qa:functional) stay separate steps, so a red run names which
+# one failed. Lighthouse (qa:lhci), repository-wide formatting (format:check)
+# and deployment are deliberately absent.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Ref-aware, so a new push to a branch or pull request cancels only that ref's
+# obsolete run. Concurrency groups are already scoped to the repository.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality-gate:
+    name: quality-gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      # Node 24 LTS: the repository pins no version of its own (engines is
+      # ">=18" and netlify.toml sets none), so CI tracks the current Active
+      # LTS line.
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      # The build needs no browser, so it runs first: a broken build fails the
+      # job before the Chromium download is paid for.
+      - name: Build production output
+        run: npm run build:dist
+
+      # playwright ships no install script, so npm ci downloads no browser.
+      # Chromium alone is installed because that is the only browser qa:a11y
+      # and qa:functional launch.
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run pre-deploy gate
+        run: npm run check:predeploy
+
+      - name: Run functional regression suite
+        run: npm run qa:functional

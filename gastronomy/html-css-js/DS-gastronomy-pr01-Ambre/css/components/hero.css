@@ -1,118 +1,143 @@
 /* Hero */
+
 .site-hero {
   position: relative;
+  isolation: isolate;
   display: grid;
   place-items: center;
   min-height: 88vh;
   border-bottom: 1px solid var(--c-border);
-  filter: saturate(0.95) brightness(1.05);
   width: 100%;
-  --ov-top: rgba(0, 0, 0, 0.58);
-  --ov-mid: rgba(0, 0, 0, 0.55);
-  --ov-bot: rgba(0, 0, 0, 0.45);
+
+  /* Composition */
+  --hero-measure: 52rem;
+  --hero-logo-h: var(--logo-sm);
+  --hero-title-size: clamp(2.375rem, 1.85rem + 1.65vw, 3rem);
+
+  /* Overlay: one vertical wash + one scrim centred behind the copy */
+  --hero-wash-top: rgba(0, 0, 0, 0.34);
+  --hero-wash-mid: rgba(0, 0, 0, 0.24);
+  --hero-wash-bot: rgba(0, 0, 0, 0.22);
+  --hero-scrim-core: rgba(0, 0, 0, 0.66);
+  --hero-scrim-fade: rgba(0, 0, 0, 0.36);
 }
-.site-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background: radial-gradient(120% 90% at 50% 40%, transparent 0%, transparent 60%, rgba(0, 0, 0, 0.1) 85%, rgba(0, 0, 0, 0.18) 100%);
-}
+
 .site-hero::after {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: 1;
   pointer-events: none;
-  background: linear-gradient(to bottom, var(--ov-top) 0%, var(--ov-mid) 55%, var(--ov-bot) 100%);
+  background:
+    radial-gradient(50% 52% at 50% 50%, var(--hero-scrim-core) 0%, var(--hero-scrim-fade) 55%, transparent 100%),
+    linear-gradient(to bottom, var(--hero-wash-top) 0%, var(--hero-wash-mid) 52%, var(--hero-wash-bot) 100%);
 }
+
 .site-hero__media {
   position: absolute;
   inset: 0;
+  z-index: 0;
   display: block;
   width: 100%;
   height: 100%;
   max-width: none;
-  z-index: -1;
   pointer-events: none;
 }
+
 .site-hero__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  filter: saturate(0.95) brightness(1.12);
+  filter: saturate(1.05);
 }
+
 .site-hero__inner {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--hero-measure);
   text-align: center;
   color: #fff;
 }
+
 .site-hero__brand {
   display: inline-flex;
   align-items: center;
   gap: var(--space-03);
-  margin-bottom: var(--space-03);
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
+  margin-bottom: var(--space-05);
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.25));
 }
+
 .site-hero__brand-logo {
-  height: var(--logo-md);
+  display: block;
+  height: var(--hero-logo-h);
   width: auto;
-  opacity: 0.95;
 }
-.site-hero__lead {
-  text-align: center;
-}
+
 .site-hero__title,
 .site-hero__lead {
   color: #fff;
+  text-align: center;
   text-shadow: var(--text-shadow-hero);
-  margin: 0 auto var(--space-03);
 }
+
+.site-hero__title {
+  font-size: var(--hero-title-size);
+  margin: 0 auto var(--space-04);
+}
+
+.site-hero__lead {
+  margin: 0 auto;
+}
+
 .site-hero__eyebrow {
   color: rgba(255, 255, 255, 0.9);
 }
+
 .site-hero__actions {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-03);
-  margin-top: var(--space-05);
+  margin-top: var(--space-06);
 }
+
 .site-hero__actions .site-button {
   width: 100%;
   max-width: 220px;
 }
-.site-hero--contrast-low {
-  --ov-top: rgba(0, 0, 0, 0.4);
-  --ov-mid: rgba(0, 0, 0, 0.26);
-  --ov-bot: rgba(0, 0, 0, 0.18);
+
+/* The hero backdrop is a dark photograph in both themes, so the ghost CTA
+   keeps its dark-context ink instead of the light theme's dark-on-photo ink. */
+.site-hero__actions .site-button--ghost {
+  background: rgba(0, 0, 0, 0.45);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  backdrop-filter: blur(14px) saturate(1.3);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
 }
-.site-hero--contrast-high {
-  --ov-top: rgba(0, 0, 0, 0.72);
-  --ov-mid: rgba(0, 0, 0, 0.52);
-  --ov-bot: rgba(0, 0, 0, 0.4);
-}
-.site-hero--img-light {
-  --ov-top: rgba(0, 0, 0, 0.7);
-  --ov-mid: rgba(0, 0, 0, 0.5);
-  --ov-bot: rgba(0, 0, 0, 0.38);
-}
+
 .site-hero--img-dark {
-  --ov-top: rgba(0, 0, 0, 0.44);
-  --ov-mid: rgba(0, 0, 0, 0.3);
-  --ov-bot: rgba(0, 0, 0, 0.22);
+  --hero-wash-top: rgba(0, 0, 0, 0.26);
+  --hero-wash-mid: rgba(0, 0, 0, 0.16);
+  --hero-wash-bot: rgba(0, 0, 0, 0.16);
+  --hero-scrim-core: rgba(0, 0, 0, 0.58);
+  --hero-scrim-fade: rgba(0, 0, 0, 0.3);
 }
-.site-hero--img-light::after {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.68), rgba(0, 0, 0, 0.48));
-}
-.site-hero--img-dark::after {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.18));
+
+.site-hero--img-light {
+  --hero-wash-top: rgba(0, 0, 0, 0.42);
+  --hero-wash-mid: rgba(0, 0, 0, 0.32);
+  --hero-wash-bot: rgba(0, 0, 0, 0.28);
+  --hero-scrim-core: rgba(0, 0, 0, 0.72);
+  --hero-scrim-fade: rgba(0, 0, 0, 0.4);
 }
 
 @media (min-width: 480px) {
+  .site-hero {
+    min-height: var(--hero-min-h);
+  }
   .site-hero__actions {
     flex-direction: row;
     justify-content: center;
@@ -120,13 +145,5 @@
   .site-hero__actions .site-button {
     flex: 1;
     max-width: 160px;
-  }
-  .site-hero {
-    min-height: var(--hero-min-h);
-  }
-}
-@media (min-width: 760px) {
-  .site-hero__brand-logo {
-    height: var(--logo-lg);
   }
 }

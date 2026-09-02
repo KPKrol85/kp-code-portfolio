@@ -1,4 +1,5 @@
 /* Demo Legal Modal */
+
 .demo-legal-modal {
   position: fixed;
   inset: 0;
@@ -7,9 +8,11 @@
   place-items: center;
   padding: var(--space-04);
 }
+
 .demo-legal-modal[hidden] {
   display: none;
 }
+
 .demo-legal-modal__backdrop {
   position: absolute;
   inset: 0;
@@ -17,6 +20,7 @@
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
 }
+
 .demo-legal-modal__panel {
   position: relative;
   z-index: 1;
@@ -30,12 +34,14 @@
   gap: var(--space-04);
   text-align: center;
 }
+
 .demo-legal-modal__title {
   margin: 0;
   font-family: var(--font-display);
   font-size: var(--fs-lg);
   line-height: var(--lh-tight);
 }
+
 .demo-legal-modal__text {
   margin: 0;
   max-width: 60ch;
@@ -43,16 +49,19 @@
   line-height: var(--lh-relaxed);
   color: color-mix(in oklab, var(--c-ink) 92%, var(--c-muted) 8%);
 }
+
 .demo-legal-modal__text a,
 .demo-legal-modal__links a {
   color: var(--c-link);
   text-decoration: none;
 }
+
 .demo-legal-modal__text a:hover,
 .demo-legal-modal__links a:hover {
   color: var(--c-link);
   text-decoration: underline;
 }
+
 .demo-legal-modal__links {
   display: flex;
   flex-wrap: wrap;
@@ -62,6 +71,7 @@
   text-align: center;
   margin: auto;
 }
+
 .demo-legal-modal__actions {
   display: flex;
   flex-wrap: wrap;
@@ -70,6 +80,7 @@
   min-width: 200px;
   margin-top: var(--space-02);
 }
+
 .demo-legal-modal__actions .site-button {
   min-width: 200px;
 }

@@ -1,0 +1,16 @@
+# Repository line-ending contract.
+#
+# Tracked text files are stored as LF in the Git index and checked out as LF in
+# the working tree on every platform. `eol=lf` makes this repository-authoritative,
+# so the result no longer depends on a developer's global `core.autocrlf` setting.
+# The generators in scripts/ assemble and compare their output in LF, so an LF
+# working tree keeps `npm run check:html` and `npm run build:html` idempotent.
+* text=auto eol=lf
+
+# Binary assets tracked in this repository: never apply text or EOL conversion.
+*.avif binary
+*.ico binary
+*.jpg binary
+*.png binary
+*.webp binary
+*.woff2 binary

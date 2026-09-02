@@ -11,7 +11,7 @@
     <meta name="description" content="Zapoznaj się z polityką prywatności Ambre: zasady przetwarzania danych, kontakt, cele i podstawy prawne oraz prawa użytkownika." />
     <meta name="author" content="Kamil Król | KP_Code_" />
     <meta name="color-scheme" content="light dark" />
-    <link rel="canonical" href="https://gastronomy-project-01.netlify.app/polityka-prywatnosci.html" />
+    <link rel="canonical" href="https://gastronomy-pr01-ambre.netlify.app/polityka-prywatnosci.html" />
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0f0f0f" media="(prefers-color-scheme: dark)" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -21,8 +21,8 @@
     <meta property="og:site_name" content="Ambre – Restauracja Fine Dining" />
     <meta property="og:title" content="Polityka prywatności – Ambre" />
     <meta property="og:description" content="Zapoznaj się z polityką prywatności Ambre: zasady przetwarzania danych, kontakt, cele i podstawy prawne oraz prawa użytkownika." />
-    <meta property="og:url" content="https://gastronomy-project-01.netlify.app/polityka-prywatnosci.html" />
-    <meta property="og:image" content="https://gastronomy-project-01.netlify.app/assets/img/og-img/og-1200x630.jpg" />
+    <meta property="og:url" content="https://gastronomy-pr01-ambre.netlify.app/polityka-prywatnosci.html" />
+    <meta property="og:image" content="https://gastronomy-pr01-ambre.netlify.app/assets/img/og-img/og-1200x630.jpg" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -31,7 +31,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Polityka prywatności – Ambre" />
     <meta name="twitter:description" content="Zapoznaj się z polityką prywatności Ambre: zasady przetwarzania danych, kontakt, cele i podstawy prawne oraz prawa użytkownika." />
-    <meta name="twitter:image" content="https://gastronomy-project-01.netlify.app/assets/img/og-img/og-1200x630.jpg" />
+    <meta name="twitter:image" content="https://gastronomy-pr01-ambre.netlify.app/assets/img/og-img/og-1200x630.jpg" />
     <meta name="twitter:image:alt" content="Ambre – logo restauracji i hasła: autorska kuchnia, sezonowe menu, kameralna atmosfera" />
     <!-- Favicons + manifest -->
     <link rel="icon" href="/assets/icons/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
@@ -46,7 +46,7 @@
     <link rel="preload" href="/assets/fonts/poppins-v24-latin-600.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/assets/fonts/source-sans-3-v19-latin-regular.woff2" as="font" type="font/woff2" crossorigin />
     <!-- Styles -->
-    <link rel="stylesheet" href="/css/style.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
     <!-- JSON-LD -->
     <script type="application/ld+json">
       {
@@ -54,48 +54,50 @@
         "@graph": [
           {
             "@type": "WebSite",
-            "@id": "https://gastronomy-project-01.netlify.app/#website",
-            "url": "https://gastronomy-project-01.netlify.app/",
-            "name": "Ambre – Restauracja Fine Dining",
+            "@id": "https://gastronomy-pr01-ambre.netlify.app/#website",
+            "url": "https://gastronomy-pr01-ambre.netlify.app/",
+            "name": "Ambre – demonstracyjny projekt restauracji fine dining",
+            "description": "Demonstracyjna strona internetowa fikcyjnej restauracji Ambre, przygotowana w celach prezentacyjnych i portfolio.",
             "inLanguage": "pl-PL",
             "publisher": {
-              "@id": "https://gastronomy-project-01.netlify.app/#restaurant"
+              "@id": "https://gastronomy-pr01-ambre.netlify.app/#operator"
+            },
+            "about": {
+              "@id": "https://gastronomy-pr01-ambre.netlify.app/#project"
             }
           },
           {
-            "@type": "Restaurant",
-            "@id": "https://gastronomy-project-01.netlify.app/#restaurant",
+            "@type": "Organization",
+            "@id": "https://gastronomy-pr01-ambre.netlify.app/#operator",
+            "name": "KP_Code Digital Studio",
+            "url": "https://kp-code.pl/"
+          },
+          {
+            "@type": "CreativeWork",
+            "@id": "https://gastronomy-pr01-ambre.netlify.app/#project",
             "name": "Ambre",
-            "url": "https://gastronomy-project-01.netlify.app/",
-            "image": ["https://gastronomy-project-01.netlify.app/assets/img/og-img/og-1200x630.jpg"],
-            "telephone": "+48533537091",
-            "email": "kontakt@kp-code.pl",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "ul. Marynarki Wojennej 12",
-              "postalCode": "33-100",
-              "addressLocality": "Tarnów",
-              "addressCountry": "PL"
-            },
-            "servesCuisine": ["Fine Dining", "Polska", "Europejska"],
-            "priceRange": "$$",
-            "description": "Kameralna restauracja fine dining z autorskim, sezonowym menu degustacyjnym i starannie dobraną selekcją win."
+            "url": "https://gastronomy-pr01-ambre.netlify.app/",
+            "image": ["https://gastronomy-pr01-ambre.netlify.app/assets/img/og-img/og-1200x630.jpg"],
+            "description": "Demonstracyjny projekt front-endowy przedstawiający fikcyjną restaurację fine dining, przygotowany w celach prezentacyjnych i portfolio.",
+            "creator": {
+              "@id": "https://gastronomy-pr01-ambre.netlify.app/#operator"
+            }
           },
           {
             "@type": "WebPage",
-            "@id": "https://gastronomy-project-01.netlify.app/#webpage",
-            "url": "https://gastronomy-project-01.netlify.app/polityka-prywatnosci.html",
+            "@id": "https://gastronomy-pr01-ambre.netlify.app/polityka-prywatnosci.html#webpage",
+            "url": "https://gastronomy-pr01-ambre.netlify.app/polityka-prywatnosci.html",
             "name": "Polityka prywatności – Ambre",
-            "description": "Zapoznaj się z polityką prywatności Ambre: zasady przetwarzania danych, kontakt, cele i podstawy prawne oraz prawa użytkownika.",
+            "description": "Polityka prywatności demonstracyjnego serwisu Ambre, opisująca zasady przetwarzania danych w rzeczywiście dostępnych funkcjonalnościach projektu.",
             "isPartOf": {
-              "@id": "https://gastronomy-project-01.netlify.app/#website"
+              "@id": "https://gastronomy-pr01-ambre.netlify.app/#website"
             },
             "about": {
-              "@id": "https://gastronomy-project-01.netlify.app/#restaurant"
+              "@id": "https://gastronomy-pr01-ambre.netlify.app/#project"
             },
             "primaryImageOfPage": {
               "@type": "ImageObject",
-              "url": "https://gastronomy-project-01.netlify.app/assets/img/og-img/og-1200x630.jpg"
+              "url": "https://gastronomy-pr01-ambre.netlify.app/assets/img/og-img/og-1200x630.jpg"
             },
             "inLanguage": "pl-PL"
           }
@@ -151,18 +153,23 @@
             <span class="site-header__phone">+48&nbsp;533&nbsp;537&nbsp;091</span>
           </a>
           <button class="site-header__theme-toggle" data-testid="site-header__theme-toggle" type="button" aria-label="Przełącz motyw" aria-pressed="false" title="Motyw">
-            <span aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon icon--sun" aria-hidden="true">
-                <path
-                  d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.061-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z" />
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon icon--moon" aria-hidden="true">
-                <path
-                  fill-rule="evenodd"
-                  d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z"
-                  clip-rule="evenodd" />
-              </svg>
-            </span>
+            <svg class="theme-switch" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+              <mask id="theme-switch-cutout" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+                <rect x="0" y="0" width="24" height="24" fill="#ffffff" />
+                <circle class="theme-switch__cutout" cx="24" cy="9" r="6.5" fill="#000000" />
+              </mask>
+              <circle class="theme-switch__core" cx="12" cy="12" r="5" fill="currentColor" mask="url(#theme-switch-cutout)" />
+              <g class="theme-switch__rays" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                <line x1="12" y1="1.7" x2="12" y2="4.5" />
+                <line x1="12" y1="22.3" x2="12" y2="19.5" />
+                <line x1="22.3" y1="12" x2="19.5" y2="12" />
+                <line x1="1.7" y1="12" x2="4.5" y2="12" />
+                <line x1="19.28" y1="4.72" x2="17.3" y2="6.7" />
+                <line x1="4.72" y1="19.28" x2="6.7" y2="17.3" />
+                <line x1="19.28" y1="19.28" x2="17.3" y2="17.3" />
+                <line x1="4.72" y1="4.72" x2="6.7" y2="6.7" />
+              </g>
+            </svg>
           </button>
           <button class="site-header__nav-toggle" data-testid="site-header__nav-toggle" type="button" aria-controls="site-header-nav" aria-expanded="false" aria-label="Menu">
             <span aria-hidden="true">
@@ -197,144 +204,215 @@
           <p class="legal__lead">
             Niniejsza Polityka prywatności określa zasady przetwarzania danych osobowych w ramach demonstracyjnego projektu strony internetowej „Ambre”, opracowanego przez
             <a href="https://kp-code.pl" class="legal__link">KP_Code Digital Studio</a>
-            . Dokument ma charakter informacyjny i dotyczy sposobu działania funkcjonalności prezentowanych w Serwisie.
+            . Dokument ma charakter informacyjny i opisuje sposób działania funkcjonalności dostępnych w aktualnej wersji Serwisu.
           </p>
           <!-- Spis treści -->
           <nav class="legal__toc" aria-label="Spis treści">
             <ol class="legal__toc-list">
-              <li class="legal__toc-item"><a class="legal__toc-link" href="#tos-1">Administrator danych</a></li>
-              <li class="legal__toc-item"><a class="legal__toc-link" href="#tos-2">Zakres i charakter przetwarzania</a></li>
-              <li class="legal__toc-item"><a class="legal__toc-link" href="#tos-3">Podstawy prawne</a></li>
-              <li class="legal__toc-item"><a class="legal__toc-link" href="#tos-4">Odbiorcy danych</a></li>
-              <li class="legal__toc-item"><a class="legal__toc-link" href="#tos-5">Okres przechowywania</a></li>
-              <li class="legal__toc-item"><a class="legal__toc-link" href="#tos-6">Prawa użytkownika</a></li>
-              <li class="legal__toc-item"><a class="legal__toc-link" href="#tos-7">Bezpieczeństwo</a></li>
-              <li class="legal__toc-item"><a class="legal__toc-link" href="#tos-8">Pliki cookies</a></li>
-              <li class="legal__toc-item"><a class="legal__toc-link" href="#tos-9">Kontakt</a></li>
-              <li class="legal__toc-item"><a class="legal__toc-link" href="#tos-10">Zmiany Polityki prywatnośći</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#privacy-1">Administrator danych</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#privacy-2">Charakter Serwisu</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#privacy-3">Źródła i zakres danych</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#privacy-4">Cele i podstawy prawne</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#privacy-5">Dobrowolność podania danych</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#privacy-6">Odbiorcy danych</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#privacy-7">Transfery poza EOG</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#privacy-8">Okres przechowywania</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#privacy-9">Prawa Użytkownika</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#privacy-10">Profilowanie</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#privacy-11">Cookies i podobne technologie</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#privacy-12">Bezpieczeństwo danych</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#privacy-13">Zmiany Polityki prywatności</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#privacy-14">Kontakt</a></li>
             </ol>
           </nav>
           <!-- Treść Polityki prywatności -->
           <article class="legal__doc">
-            <!-- 1 Administrator danych -->
-            <h2 id="tos-1">1. Administrator danych</h2>
-            <p>
-              Administratorem danych osobowych jest
-              <a href="https://kp-code.pl" class="legal__link">KP_Code Digital Studio</a>
-              (dalej: „Administrator”).
-            </p>
+            <h2 id="privacy-1">1. Administrator danych</h2>
+            <p>Administratorem danych osobowych przetwarzanych w związku z funkcjonowaniem Serwisu jest KP_Code Digital Studio, dalej zwany „Administratorem”.</p>
             <p>
               W sprawach związanych z przetwarzaniem danych osobowych można skontaktować się z Administratorem za pośrednictwem adresu e-mail:
               <a href="mailto:kontakt@kp-code.pl" class="legal__link">kontakt@kp-code.pl</a>
+              .
             </p>
 
-            <!-- 2 Zakres i charakter przetwarzania -->
-            <h2 id="tos-2">2. Zakres i charakter przetwarzania</h2>
+            <h2 id="privacy-2">2. Charakter Serwisu</h2>
+            <p>Serwis „Ambre” ma charakter demonstracyjny i służy prezentacji rozwiązań projektowych oraz implementacji front-end związanych z restauracją fine dining.</p>
             <p>
-              Administrator przetwarza dane osobowe w zakresie niezbędnym do zapewnienia prawidłowego funkcjonowania Serwisu oraz obsługi zapytań kierowanych za pośrednictwem formularza kontaktowego.
+              Serwis nie prowadzi rzeczywistej działalności gastronomicznej, nie prowadzi sprzedaży oraz nie umożliwia składania wiążących zamówień, rezerwacji ani dokonywania płatności.
+              Funkcjonalności dostępne w Serwisie należy traktować zgodnie z ich rzeczywistym przeznaczeniem opisanym na stronie.
             </p>
-            <ul>
-              <li>Dane mogą obejmować w szczególności: imię, adres e-mail oraz inne informacje dobrowolnie podane przez Użytkownika w treści wiadomości.</li>
-              <li>
-                W związku z korzystaniem z Serwisu mogą być przetwarzane również dane techniczne, takie jak adres IP, dane dotyczące przeglądarki, systemu operacyjnego lub identyfikatory plików
-                cookies.
-              </li>
-              <li>Dane nie są wykorzystywane do zautomatyzowanego podejmowania decyzji ani profilowania.</li>
-            </ul>
-            <!-- 3 Podstawy prawne -->
-            <h2 id="tos-3">3. Podstawy prawne</h2>
-            <p>Dane osobowe przetwarzane są zgodnie z obowiązującymi przepisami prawa, w szczególności z Rozporządzeniem Parlamentu Europejskiego i Rady (UE) 2016/679 (RODO).</p>
-            <ul>
-              <li>na podstawie zgody Użytkownika – w przypadku dobrowolnego przesłania danych za pośrednictwem formularza kontaktowego (art. 6 ust. 1 lit. a RODO),</li>
-              <li>
-                na podstawie prawnie uzasadnionego interesu Administratora – w zakresie zapewnienia bezpieczeństwa Serwisu, obsługi zapytań oraz analizy technicznej działania strony (art. 6 ust. 1
-                lit. f RODO),
-              </li>
-              <li>w celu realizacji obowiązków prawnych ciążących na Administratorze – jeżeli taki obowiązek wynika z przepisów prawa np( art. 6 ust. 1 lit. c RODO ).</li>
-            </ul>
-            <!-- 4 Odbiorcy danych -->
-            <h2 id="tos-4">4. Odbiorcy danych</h2>
             <p>
-              Dane osobowe mogą być przekazywane podmiotom współpracującym z Administratorem wyłącznie w zakresie niezbędnym do prawidłowego funkcjonowania Serwisu oraz realizacji wskazanych celów
-              przetwarzania.
+              Formularz rezerwacji rzeczywiście przesyła wiadomość do Netlify Forms, dlatego dane w nim wprowadzone nie mają charakteru wyłącznie testowego. Wysłanie formularza nie tworzy jednak
+              wiążącej rezerwacji ani umowy.
             </p>
+            <p>Użytkownik nie powinien przekazywać za pośrednictwem Serwisu:</p>
             <ul>
-              <li>dostawcom usług hostingowych oraz podmiotom zapewniającym infrastrukturę IT,</li>
-              <li>dostawcom narzędzi technicznych wykorzystywanych do obsługi formularzy lub komunikacji e-mail,</li>
-              <li>podmiotom uprawnionym do otrzymania danych na podstawie przepisów prawa.</li>
+              <li>szczególnych kategorii danych osobowych, takich jak dane dotyczące zdrowia, pochodzenia, przekonań lub życia seksualnego,</li>
+              <li>numerów dokumentów tożsamości,</li>
+              <li>danych finansowych,</li>
+              <li>haseł lub danych uwierzytelniających,</li>
+              <li>innych informacji poufnych, które nie są konieczne do obsługi zapytania.</li>
             </ul>
-            <p>Dane nie są sprzedawane ani udostępniane podmiotom trzecim w celach marketingowych.</p>
-            <!-- 5 Okres przechowywania -->
-            <h2 id="tos-5">5. Okres przechowywania</h2>
-            <p>Dane osobowe przechowywane są przez okres niezbędny do realizacji celów, dla których zostały zebrane, zgodnie z zasadą ograniczenia przechowywania wynikającą z RODO.</p>
+
+            <h2 id="privacy-3">3. Źródła i zakres przetwarzanych danych</h2>
+            <p>Administrator może przetwarzać dane otrzymane:</p>
             <ul>
-              <li>dane przekazane za pośrednictwem formularza kontaktowego – przez czas niezbędny do udzielenia odpowiedzi oraz prowadzenia ewentualnej dalszej korespondencji,</li>
-              <li>dane techniczne oraz informacje związane z bezpieczeństwem Serwisu – przez okres wymagany do zapewnienia prawidłowego funkcjonowania oraz ochrony infrastruktury IT,</li>
-              <li>w przypadkach, w których przetwarzanie wynika z obowiązku prawnego – przez okres wymagany przepisami prawa.</li>
+              <li>bezpośrednio od Użytkownika za pośrednictwem formularza rezerwacji lub wiadomości e-mail,</li>
+              <li>automatycznie podczas korzystania z Serwisu, w zakresie wynikającym z działania hostingu, Netlify Forms oraz aktywnej mapy Google Maps,</li>
+              <li>od dostawców usług technicznych, jeżeli wynika to z działania funkcjonalności rzeczywiście zintegrowanych z Serwisem.</li>
             </ul>
-            <p>Po upływie wskazanych okresów dane są usuwane lub poddawane anonimizacji.</p>
-            <!-- 6 Prawa użytkownika -->
-            <h2 id="tos-6">6. Prawa użytkownika</h2>
-            <p>Użytkownikowi przysługują prawa wynikające z przepisów RODO w zakresie przetwarzania jego danych osobowych.</p>
+            <p>W formularzu rezerwacji przetwarzane mogą być: imię i nazwisko, numer telefonu, wybrana data i godzina, liczba gości oraz dobrowolnie dodane uwagi.</p>
+            <p>
+              W związku z korzystaniem z usług technicznych mogą być przetwarzane dane techniczne związane z połączeniem, w tym adres IP, data i godzina połączenia, rodzaj przeglądarki,
+              system operacyjny oraz informacje niezbędne do dostarczenia strony, formularza lub osadzonej mapy.
+            </p>
+
+            <h3>Dane przechowywane lokalnie w przeglądarce</h3>
+            <p>Serwis wykorzystuje wyłącznie <code>localStorage</code>, Cache Storage oraz Service Worker w zakresie opisanym w <a href="cookies.html" class="legal__link">Polityce cookies</a>.</p>
+            <p>Dane zapisane wyłącznie lokalnie na urządzeniu Użytkownika nie są automatycznie przekazywane Administratorowi ani synchronizowane z Serwisem.</p>
+
+            <h2 id="privacy-4">4. Cele i podstawy prawne przetwarzania</h2>
+            <p>Administrator przetwarza dane osobowe wyłącznie w określonych, zgodnych z prawem celach:</p>
+            <div class="legal__table-scroll" role="region" aria-labelledby="privacy-4" tabindex="0">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Cel przetwarzania</th>
+                    <th scope="col">Zakres danych</th>
+                    <th scope="col">Podstawa prawna</th>
+                    <th scope="col">Okres przechowywania</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Obsługa zapytania przesłanego przez formularz rezerwacji lub e-mail.</td>
+                    <td>Dane kontaktowe, dane dotyczące zapytania oraz dobrowolnie przekazane uwagi.</td>
+                    <td>Art. 6 ust. 1 lit. f RODO – prawnie uzasadniony interes Administratora polegający na prowadzeniu korespondencji i udzielaniu odpowiedzi.</td>
+                    <td>Do zakończenia korespondencji, a następnie przez okres niezbędny do ochrony przed roszczeniami.</td>
+                  </tr>
+                  <tr>
+                    <td>Zapewnienie technicznego działania, bezpieczeństwa i obsługi Serwisu.</td>
+                    <td>Dane techniczne związane z połączeniem oraz działaniem usług technicznych.</td>
+                    <td>Art. 6 ust. 1 lit. f RODO – prawnie uzasadniony interes Administratora polegający na ochronie Serwisu i infrastruktury IT.</td>
+                    <td>Przez okres niezbędny do zapewnienia działania i bezpieczeństwa Serwisu, zgodnie z ustawieniami oraz retencją właściwego dostawcy usługi.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Dane nie są wykorzystywane do innych, niezgodnych celów bez odpowiedniej podstawy prawnej i przekazania Użytkownikowi wymaganych informacji.</p>
+
+            <h2 id="privacy-5">5. Dobrowolność podania danych</h2>
+            <p>Podanie danych osobowych jest co do zasady dobrowolne.</p>
+            <p>Podanie danych oznaczonych jako wymagane w formularzu jest konieczne do przesłania wiadomości i obsługi konkretnego zapytania. Niepodanie wymaganych danych może uniemożliwić wysłanie formularza lub udzielenie odpowiedzi.</p>
+            <p>Podanie pola „Uwagi” jest dobrowolne i nie wpływa na możliwość wysłania formularza.</p>
+
+            <h2 id="privacy-6">6. Odbiorcy danych</h2>
+            <p>Dane osobowe mogą być udostępniane lub powierzane podmiotom wspierającym działanie Serwisu wyłącznie w zakresie niezbędnym do realizacji określonych celów.</p>
+            <div class="legal__table-scroll" role="region" aria-labelledby="privacy-6" tabindex="0">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Dostawca</th>
+                    <th scope="col">Usługa</th>
+                    <th scope="col">Zakres otrzymywanych danych</th>
+                    <th scope="col">Rola</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Netlify</td>
+                    <td>Hosting statycznego Serwisu i Netlify Forms.</td>
+                    <td>Dane formularza rezerwacji oraz dane techniczne związane z dostarczeniem i obsługą usługi.</td>
+                    <td>Dostawca usług technicznych działający na rzecz Administratora.</td>
+                  </tr>
+                  <tr>
+                    <td>Google</td>
+                    <td>Osadzona mapa Google Maps.</td>
+                    <td>Dane techniczne związane z połączeniem z mapą oraz dane przetwarzane bezpośrednio przez Google w ramach tej usługi.</td>
+                    <td>Odrębny administrator dla usługi Google Maps.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Dane osobowe nie są sprzedawane ani udostępniane innym podmiotom do ich własnych celów marketingowych.</p>
+            <p>Samo umieszczenie w Serwisie zwykłego odnośnika do zewnętrznej strony nie oznacza, że jej operator otrzymuje dane osobowe przed wybraniem tego odnośnika przez Użytkownika.</p>
+
+            <h2 id="privacy-7">7. Przekazywanie danych poza Europejski Obszar Gospodarczy</h2>
+            <p>
+              Korzystanie z Netlify oraz Google Maps może wiązać się z przetwarzaniem danych poza Europejskim Obszarem Gospodarczym, w tym w Stanach Zjednoczonych lub w innych lokalizacjach infrastruktury tych dostawców.
+            </p>
+            <p>
+              Netlify wskazuje w swoich dokumentach stosowanie mechanizmów przewidzianych dla transferów międzynarodowych, w tym standardowych klauzul umownych Komisji Europejskiej oraz, w odpowiednich przypadkach,
+              EU–US Data Privacy Framework. Google określa zasady przetwarzania danych i korzystania z Google Maps w swoich dokumentach dotyczących tej usługi.
+            </p>
+            <p>Informacje o aktualnych zabezpieczeniach stosowanych przez dostawców można uzyskać w ich dokumentach lub kontaktując się z Administratorem.</p>
+
+            <h2 id="privacy-8">8. Okres przechowywania danych</h2>
+            <p>Dane osobowe są przechowywane nie dłużej, niż jest to konieczne do realizacji celów, dla których zostały zebrane.</p>
             <ul>
-              <li>prawo dostępu do danych oraz uzyskania ich kopii,</li>
-              <li>prawo do sprostowania (poprawiania) danych,</li>
-              <li>prawo do usunięcia danych („prawo do bycia zapomnianym”),</li>
-              <li>prawo do ograniczenia przetwarzania danych,</li>
+              <li>dane związane z pojedynczym zapytaniem są przechowywane do zakończenia korespondencji, a następnie przez okres niezbędny do zabezpieczenia lub dochodzenia roszczeń,</li>
+              <li>dane techniczne są przechowywane zgodnie z okresem niezbędnym do działania i bezpieczeństwa usług oraz z retencją stosowaną przez ich dostawców,</li>
+              <li>dane zapisane wyłącznie lokalnie w przeglądarce pozostają na urządzeniu Użytkownika do momentu ich zastąpienia, usunięcia przez Serwis albo samodzielnego usunięcia przez Użytkownika.</li>
+            </ul>
+            <p>Po zakończeniu właściwego okresu dane są usuwane, anonimizowane albo pozostają przechowywane wyłącznie wtedy, gdy istnieje dalsza podstawa prawna.</p>
+
+            <h2 id="privacy-9">9. Prawa Użytkownika</h2>
+            <p>Użytkownikowi mogą przysługiwać następujące prawa:</p>
+            <ul>
+              <li>prawo dostępu do danych i uzyskania ich kopii,</li>
+              <li>prawo do sprostowania nieprawidłowych danych,</li>
+              <li>prawo do uzupełnienia niekompletnych danych,</li>
+              <li>prawo do usunięcia danych,</li>
+              <li>prawo do ograniczenia przetwarzania,</li>
               <li>prawo do przenoszenia danych,</li>
-              <li>prawo do wniesienia sprzeciwu wobec przetwarzania danych,</li>
-              <li>prawo do cofnięcia zgody w dowolnym momencie, jeżeli przetwarzanie odbywa się na podstawie zgody (bez wpływu na zgodność z prawem przetwarzania dokonanego przed jej cofnięciem),</li>
-              <li>prawo wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych.</li>
+              <li>prawo do wniesienia sprzeciwu wobec przetwarzania,</li>
+              <li>prawo do cofnięcia zgody, jeżeli przetwarzanie odbywa się na podstawie zgody,</li>
+              <li>prawo do wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych.</li>
             </ul>
-            <p>W celu realizacji swoich praw Użytkownik może skontaktować się z Administratorem za pośrednictwem adresu e-mail wskazanego w niniejszej Polityce prywatności.</p>
-            <!-- 7 Bezpieczeństwo -->
-            <h2 id="tos-7">7. Bezpieczeństwo</h2>
+            <p>Poszczególne prawa przysługują w sytuacjach i na warunkach określonych w RODO. Nie każde prawo ma zastosowanie do każdego procesu przetwarzania.</p>
+            <h3>Prawo do sprzeciwu</h3>
+            <p>Jeżeli dane są przetwarzane na podstawie art. 6 ust. 1 lit. f RODO, Użytkownik może wnieść sprzeciw z przyczyn związanych z jego szczególną sytuacją.</p>
+            <h3>Skarga do organu nadzorczego</h3>
+            <p>Jeżeli Użytkownik uzna, że jego dane są przetwarzane niezgodnie z prawem, może wnieść skargę do Prezesa Urzędu Ochrony Danych Osobowych.</p>
+
+            <h2 id="privacy-10">10. Zautomatyzowane podejmowanie decyzji i profilowanie</h2>
+            <p>Dane osobowe nie są wykorzystywane do podejmowania decyzji opartych wyłącznie na zautomatyzowanym przetwarzaniu, które wywoływałyby wobec Użytkownika skutki prawne lub w podobny sposób istotnie na niego wpływały.</p>
+            <p>Administrator nie stosuje profilowania wobec Użytkowników Serwisu.</p>
+
+            <h2 id="privacy-11">11. Pliki cookies i podobne technologie</h2>
+            <p>Serwis korzysta z technologii przechowywania danych wyłącznie w zakresie odpowiadającym jego rzeczywistemu działaniu, w tym <code>localStorage</code>, Cache Storage i Service Workera.</p>
+            <p>Szczegółowy wykaz technologii, ich cele, dostawcy i okresy przechowywania znajdują się w dokumencie <a href="cookies.html" class="legal__link">Polityka cookies</a>.</p>
+
+            <h2 id="privacy-12">12. Bezpieczeństwo danych</h2>
+            <p>Administrator stosuje środki techniczne i organizacyjne odpowiednie do charakteru, zakresu, kontekstu oraz ryzyka związanego z przetwarzaniem danych osobowych.</p>
             <p>
-              Administrator stosuje odpowiednie środki techniczne i organizacyjne mające na celu zapewnienie ochrony przetwarzanych danych osobowych, adekwatne do charakteru, zakresu oraz ryzyka
-              związanego z przetwarzaniem.
+              Repozytorium zawiera konfigurację nagłówków bezpieczeństwa dla hostingu statycznego. Formularz jest chroniony także przez mechanizm honeypot, a dostawca Netlify Forms
+              deklaruje automatyczną sanitację przesłanych treści.
             </p>
+            <p>Opis środków bezpieczeństwa nie stanowi gwarancji całkowitego wyeliminowania ryzyka związanego z korzystaniem z Internetu. Użytkownik powinien unikać przesyłania informacji, które nie są konieczne do realizacji konkretnego celu.</p>
+
+            <h2 id="privacy-13">13. Zmiany Polityki prywatności</h2>
+            <p>Administrator może wprowadzać zmiany w niniejszej Polityce prywatności, w szczególności w przypadku:</p>
             <ul>
-              <li>stosowanie zabezpieczeń infrastruktury serwerowej i systemów informatycznych,</li>
-              <li>ograniczenie dostępu do danych wyłącznie do osób upoważnionych,</li>
-              <li>monitorowanie działania Serwisu w celu wykrywania potencjalnych zagrożeń.</li>
+              <li>zmian obowiązujących przepisów prawa,</li>
+              <li>aktualizacji funkcjonalności Serwisu,</li>
+              <li>zmiany zakresu lub celu przetwarzania danych,</li>
+              <li>wdrożenia albo usunięcia usług podmiotów trzecich,</li>
+              <li>zmiany sposobu działania formularzy, cookies lub pamięci przeglądarki.</li>
             </ul>
-            <p>Administrator podejmuje działania mające na celu ochronę danych przed ich nieuprawnionym ujawnieniem, utratą, zniszczeniem lub nieautoryzowaną modyfikacją.</p>
-            <!-- 8 Pliki cookies -->
-            <h2 id="tos-8">8. Pliki cookies</h2>
+            <p>Aktualna wersja Polityki prywatności jest publikowana w Serwisie. Zmiany wchodzą w życie z dniem ich opublikowania, o ile w treści dokumentu nie wskazano innego terminu.</p>
+
+            <h2 id="privacy-14">14. Kontakt</h2>
             <p>
-              Serwis może wykorzystywać pliki cookies (tzw. „ciasteczka”), czyli niewielkie informacje tekstowe zapisywane na urządzeniu końcowym Użytkownika w celu zapewnienia prawidłowego działania
-              strony oraz poprawy jakości świadczonych usług.
-            </p>
-            <ul>
-              <li>cookies techniczne – niezbędne do prawidłowego funkcjonowania Serwisu,</li>
-              <li>cookies analityczne – umożliwiające analizę sposobu korzystania z Serwisu w celu jego optymalizacji,</li>
-              <li>cookies funkcjonalne – zapamiętujące wybrane ustawienia Użytkownika.</li>
-            </ul>
-            <p>
-              Użytkownik może w każdej chwili zmienić ustawienia dotyczące plików cookies w swojej przeglądarce internetowej, w tym ograniczyć lub całkowicie wyłączyć ich obsługę. Ograniczenie
-              stosowania cookies może wpłynąć na niektóre funkcjonalności Serwisu.
-            </p>
-            <!-- 9 Kontakt-->
-            <h2 id="tos-9">9. Kontakt</h2>
-            <p>
-              W sprawach związanych z przetwarzaniem danych osobowych, realizacją praw Użytkownika lub w celu uzyskania dodatkowych informacji dotyczących niniejszej Polityki prywatności można
-              skontaktować się z Administratorem za pośrednictwem adresu e-mail:
+              W sprawach związanych z niniejszą Polityką prywatności, przetwarzaniem danych osobowych lub realizacją praw Użytkownika można skontaktować się z Administratorem za pośrednictwem adresu e-mail:
               <a href="mailto:kontakt@kp-code.pl" class="legal__link">kontakt@kp-code.pl</a>
               .
             </p>
-            <p>Administrator udziela odpowiedzi w możliwie najkrótszym terminie, z uwzględnieniem charakteru zgłoszenia oraz obowiązujących przepisów prawa.</p>
-            <!-- 10 Zmiany Polityki prywatnośći -->
-            <h2 id="tos-10">10. Zmiany Polityki prywatności</h2>
-            <p>
-              Administrator zastrzega sobie prawo do wprowadzania zmian w niniejszej Polityce prywatności w szczególności w przypadku zmian przepisów prawa, aktualizacji funkcjonalności Serwisu lub
-              zmiany sposobu przetwarzania danych.
-            </p>
-            <p>Aktualna wersja Polityki prywatności publikowana jest w Serwisie. Zmiany wchodzą w życie z dniem ich opublikowania, o ile nie wskazano innego terminu obowiązywania.</p>
-
+            <p>Administrator udziela odpowiedzi bez zbędnej zwłoki, z uwzględnieniem charakteru żądania oraz terminów wynikających z obowiązujących przepisów.</p>
             <p>
               <small>
                 Data ostatniej aktualizacji:
-                <time datetime="2026-01-22">22.01.2026</time>
+                <time datetime="2026-08-22">22.08.2026</time>
               </small>
             </p>
           </article>
@@ -369,9 +447,25 @@
             <li><a href="/#faq">FAQ</a></li>
           </ul>
         </nav>
+        <div class="site-footer__column" aria-labelledby="site-footer__contact">
+          <h3 id="site-footer__contact" class="site-footer__title">Kontakt</h3>
+          <ul class="site-footer__contact" aria-label="Dane kontaktowe">
+            <li>
+              <span class="site-footer__contact-icon" data-icon="clock" aria-hidden="true"></span>
+              wt–nd: 17:00 — 23:00
+            </li>
+            <li>
+              <span class="site-footer__contact-icon" data-icon="phone" aria-hidden="true"></span>
+              <a href="tel:+48533537091" aria-label="Zadzwoń: +48 533 537 091">+48 533 537 091</a>
+            </li>
+            <li>
+              <span class="site-footer__contact-icon" data-icon="envelope" aria-hidden="true"></span>
+              <a href="mailto:kontakt@kp-code.pl">kontakt@kp-code.pl</a>
+            </li>
+          </ul>
+        </div>
         <div class="site-footer__column" aria-labelledby="ft-findus">
           <h3 id="ft-findus" class="site-footer__title">Tu nas znajdziesz</h3>
-
           <address class="site-footer__address">
             <div class="site-footer__address-row">
               <p>
@@ -382,92 +476,41 @@
                 Polska
               </p>
             </div>
-            <p>NIP 000-000-00-00</p>
           </address>
           <div class="site-footer__map">
             <iframe
               title="Mapa lokalizacji – Ambre Restauracja"
-              src="https://www.google.com/maps?q=ul.+Marynarki+Wojennej+12,+33-100+Tarnów,+Polska&z=15&output=embed"
+              data-map-src="https://www.google.com/maps?q=ul.+Marynarki+Wojennej+12,+33-100+Tarnów,+Polska&z=15&output=embed"
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
               allowfullscreen
               width="100%"
               height="260"
+              hidden
               class="map-embed"></iframe>
+            <button class="site-footer__map-loader" type="button" data-map-load hidden>Załaduj interaktywną mapę</button>
+            <noscript>
+              <a class="site-footer__map-fallback" href="https://www.google.com/maps/search/?api=1&amp;query=ul.+Marynarki+Wojennej+12,+33-100+Tarnów,+Polska" target="_blank" rel="noopener noreferrer">Otwórz lokalizację w Google Maps</a>
+            </noscript>
           </div>
         </div>
-        <div class="site-footer__column" aria-labelledby="site-footer__contact">
-          <h3 id="site-footer__contact" class="site-footer__title">Kontakt</h3>
-          <ul class="site-footer__contact" aria-label="Dane kontaktowe">
-            <li>
-              <span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-13a.75.75 0 0 0-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 0 0 0-1.5h-3.25V5Z" clip-rule="evenodd" />
-                </svg>
-              </span>
-              wt–nd: 17:00 — 23:00
-            </li>
-            <li>
-              <span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
-                  <path
-                    fill-rule="evenodd"
-                    d="M2 3.5A1.5 1.5 0 0 1 3.5 2h1.148a1.5 1.5 0 0 1 1.465 1.175l.716 3.223a1.5 1.5 0 0 1-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 0 0 6.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 0 1 1.767-1.052l3.223.716A1.5 1.5 0 0 1 18 15.352V16.5a1.5 1.5 0 0 1-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 0 1 2.43 8.326 13.019 13.019 0 0 1 2 5V3.5Z"
-                    clip-rule="evenodd" />
-                </svg>
-              </span>
-              <a href="tel:+48533537091" aria-label="Zadzwoń: +48 533 537 091">+48 533 537 091</a>
-            </li>
-            <li>
-              <span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M3 4a2 2 0 0 0-2 2v1.161l8.441 4.221a1.25 1.25 0 0 0 1.118 0L19 7.162V6a2 2 0 0 0-2-2H3Z" />
-                  <path d="m19 8.839-7.77 3.885a2.75 2.75 0 0 1-2.46 0L1 8.839V14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.839Z" />
-                </svg>
-              </span>
-              <a href="mailto:kontakt@kp-code.pl">kontakt@kp-code.pl</a>
-            </li>
-          </ul>
-          <h3 class="site-footer__title site-footer__title--sub">Social Media</h3>
-          <ul class="site-footer__social site-footer__social--bare" aria-label="Linki społecznościowe">
-            <li>
-              <a class="site-button site-button--social" href="https://www.facebook.com/kpkrol85" aria-label="Facebook" rel="me external noopener noreferrer" target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path
-                    d="M18 2a1 1 0 0 1 .993 .883l.007 .117v4a1 1 0 0 1 -.883 .993l-.117 .007h-3v1h3a1 1 0 0 1 .991 1.131l-.02 .112l-1 4a1 1 0 0 1 -.858 .75l-.113 .007h-2v6a1 1 0 0 1 -.883 .993l-.117 .007h-4a1 1 0 0 1 -.993 -.883l-.007 -.117v-6h-2a1 1 0 0 1 -.993 -.883l-.007 -.117v-4a1 1 0 0 1 .883 -.993l.117 -.007h2v-1a6 6 0 0 1 5.775 -5.996l.225 -.004h3z" />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a class="site-button site-button--social" href="https://github.com/KPKrol85" aria-label="GitHub" rel="me external noopener noreferrer" target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path
-                    d="M5.315 2.1c.791 -.113 1.9 .145 3.333 .966l.272 .161l.16 .1l.397 -.083a13.3 13.3 0 0 1 4.59 -.08l.456 .08l.396 .083l.161 -.1c1.385 -.84 2.487 -1.17 3.322 -1.148l.164 .008l.147 .017l.076 .014l.05 .011l.144 .047a1 1 0 0 1 .53 .514a5.2 5.2 0 0 1 .397 2.91l-.047 .267l-.046 .196l.123 .163c.574 .795 .93 1.728 1.03 2.707l.023 .295l.007 .272c0 3.855 -1.659 5.883 -4.644 6.68l-.245 .061l-.132 .029l.014 .161l.008 .157l.004 .365l-.002 .213l-.003 3.834a1 1 0 0 1 -.883 .993l-.117 .007h-6a1 1 0 0 1 -.993 -.883l-.007 -.117v-.734c-1.818 .26 -3.03 -.424 -4.11 -1.878l-.535 -.766c-.28 -.396 -.455 -.579 -.589 -.644l-.048 -.019a1 1 0 0 1 .564 -1.918c.642 .188 1.074 .568 1.57 1.239l.538 .769c.76 1.079 1.36 1.459 2.609 1.191l.001 -.678l-.018 -.168a5.03 5.03 0 0 1 -.021 -.824l.017 -.185l.019 -.12l-.108 -.024c-2.976 -.71 -4.703 -2.573 -4.875 -6.139l-.01 -.31l-.004 -.292a5.6 5.6 0 0 1 .908 -3.051l.152 -.222l.122 -.163l-.045 -.196a5.2 5.2 0 0 1 .145 -2.642l.1 -.282l.106 -.253a1 1 0 0 1 .529 -.514l.144 -.047l.154 -.03z" />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a class="site-button site-button--social" href="https://x.com" aria-label="X" rel="me external noopener noreferrer" target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path
-                    d="M8.267 3a1 1 0 0 1 .73 .317l.076 .092l4.274 5.828l5.946 -5.944a1 1 0 0 1 1.497 1.32l-.083 .094l-6.163 6.162l6.262 8.54a1 1 0 0 1 -.697 1.585l-.109 .006h-4.267a1 1 0 0 1 -.73 -.317l-.076 -.092l-4.276 -5.829l-5.944 5.945a1 1 0 0 1 -1.497 -1.32l.083 -.094l6.161 -6.163l-6.26 -8.539a1 1 0 0 1 .697 -1.585l.109 -.006h4.267z" />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a class="site-button site-button--social" href="https://linkedin.com" aria-label="LinkedIn" rel="me external noopener noreferrer" target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path
-                    d="M17 2a5 5 0 0 1 5 5v10a5 5 0 0 1 -5 5h-10a5 5 0 0 1 -5 -5v-10a5 5 0 0 1 5 -5zm-9 8a1 1 0 0 0 -1 1v5a1 1 0 0 0 2 0v-5a1 1 0 0 0 -1 -1m6 0a3 3 0 0 0 -1.168 .236l-.125 .057a1 1 0 0 0 -1.707 .707v5a1 1 0 0 0 2 0v-3a1 1 0 0 1 2 0v3a1 1 0 0 0 2 0v-3a3 3 0 0 0 -3 -3m-6 -3a1 1 0 0 0 -.993 .883l-.007 .127a1 1 0 0 0 1.993 .117l.007 -.127a1 1 0 0 0 -1 -1" />
-                </svg>
-              </a>
-            </li>
-          </ul>
-        </div>
+      </div>
+      <div class="container site-footer__socialbar">
+        <h3 class="site-footer__title site-footer__title--sub">Social Media</h3>
+        <ul class="site-footer__social site-footer__social--bare" aria-label="Linki społecznościowe">
+          <li>
+            <a class="site-button site-button--social" data-icon="facebook" href="https://www.facebook.com/kpkrol85" aria-label="Facebook" rel="me external noopener noreferrer" target="_blank"></a>
+          </li>
+          <li>
+            <a class="site-button site-button--social" data-icon="github" href="https://github.com/KPKrol85" aria-label="GitHub" rel="me external noopener noreferrer" target="_blank"></a>
+          </li>
+          <li>
+            <a class="site-button site-button--social" data-icon="x" href="https://x.com/KP_Code_85" aria-label="X" rel="me external noopener noreferrer" target="_blank"></a>
+          </li>
+          <li>
+            <a class="site-button site-button--social" data-icon="linkedin" href="https://www.linkedin.com/in/kp-code" aria-label="LinkedIn" rel="me external noopener noreferrer" target="_blank"></a>
+          </li>
+        </ul>
       </div>
       <div class="site-footer__legalbar" aria-label="Informacje prawne">
         <div class="container">
@@ -498,8 +541,8 @@
     </div>
 
     <!-- Scroll to top -->
-    <button class="scroll-btn scroll-up" data-testid="scroll-up" type="button" aria-label="Przewiń na górę" title="Na górę" aria-hidden="true" tabindex="-1" hidden>
-      <img src="/assets/icons/icons-svg/chevron-up-black.svg" alt="" width="16" height="16" decoding="async" />
+      <button class="scroll-btn scroll-up" data-testid="scroll-up" type="button" aria-label="Przewiń na górę" title="Na górę" aria-hidden="true" tabindex="-1" hidden>
+      <span class="scroll-btn__icon" data-icon="arrow-up" aria-hidden="true"></span>
     </button>
 
     <!-- Mobile drawer -->
@@ -511,7 +554,7 @@
     <!-- Script -->
     <script src="/js/sw-register.js" defer></script>
     <script src="/js/pwa-install.js" defer></script>
-    <script type="module" src="/js/script.min.js"></script>
+    <script type="module" src="/js/script.js"></script>
 
 
     <!-- Demo Legal Modal -->

@@ -1,6 +1,8 @@
+
 .no-js .site-header__nav-toggle {
   display: none;
 }
+
 .no-js .site-header__nav {
   display: block;
   position: static;

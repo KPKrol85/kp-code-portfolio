@@ -1,0 +1,142 @@
+.kanban {
+  display: grid;
+  gap: var(--space-20);
+}
+
+@media (min-width: 64rem) {
+  .kanban {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.kanban__column {
+  display: grid;
+  align-content: start;
+  gap: var(--space-12);
+  min-width: 0;
+  background: var(--bg-elev);
+  border-radius: var(--radius-lg);
+  padding: var(--space-16);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+/* The heading and its count were two inline spans, so the number floated straight after the
+   label instead of reading as a column indicator. They now sit on one row with the count pinned
+   to the trailing edge. */
+.kanban__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
+  line-height: 1.3;
+  margin: 0;
+}
+
+.kanban__title-label {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* .data-count already supplies the pill. Tabular figures keep one-, two- and three-digit counts
+   the same optical width, and the pill grows from its min-width for longer values. */
+.kanban__count {
+  flex: 0 0 auto;
+  font-variant-numeric: tabular-nums;
+}
+
+.kanban__card {
+  padding: var(--space-12);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  display: grid;
+  gap: var(--space-6);
+  line-height: 1.4;
+  min-width: 0;
+  font-size: var(--fs-14);
+  transition:
+    background-color var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard);
+}
+
+.kanban__card > * {
+  min-width: 0;
+}
+
+/* The strongest information in the card, at the size and weight the Clients list gives a record
+   name. It replaces a browser-bold <strong> nested inside the link. */
+.kanban__card-title {
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+/* Three readable levels instead of two. The client and the due date share the .data-meta size and
+   sit directly under the title as one metadata block; the due date keeps full-strength text and a
+   medium weight because it is the actionable value of the card. */
+.kanban__card-due {
+  color: var(--text);
+  font-weight: var(--fw-medium);
+}
+
+/* The badge row is state, not metadata, so it is separated from the two metadata lines above it
+   rather than sitting flush against them. */
+.kanban__card-badges {
+  margin-top: var(--space-2);
+}
+
+/* The action area spans the full card width and is separated from the content by the same
+   tokenized divider used elsewhere. .kanban__card is a stretched single-column grid, so the
+   footer already fills the card and only needs its own row layout. */
+.kanban__card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-6);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--border);
+}
+
+/* Size, weight and icon dimensions come from the shared .btn--micro contract; the hover, active,
+   focus-visible and destructive treatments still come from .btn, .btn--ghost and
+   .btn--destructive. Nothing about the action is declared twice here. */
+.kanban__card-action {
+  flex: 0 0 auto;
+}
+
+/* An empty column is a deliberate state, not a missing card: the copy is centred in the space a
+   card would occupy so the four columns keep a common rhythm. */
+.kanban__column-empty {
+  margin: 0;
+  padding: var(--space-16) var(--space-12);
+  text-align: center;
+}
+
+@media (min-width: 64rem) {
+  .kanban {
+    gap: var(--space-24);
+  }
+
+  /* The shared toolbar gives the filter group a `1fr` column, so three equal tracks stretched
+     across the whole row. Capping each track keeps the group compact and left-aligned, and the
+     space it no longer takes becomes the separation from the right-aligned action. */
+  .projects-toolbar {
+    column-gap: var(--space-32);
+  }
+
+  .projects-toolbar__filters {
+    grid-template-columns: repeat(3, minmax(0, 16rem));
+  }
+}
+
+@media (min-width: 80rem) {
+  .kanban {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "name": "outlandgear",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static multi-page e-commerce front-end built with HTML, CSS, and vanilla JavaScript.",
+  "author": "KP_Code Digital Studio",
+  "license": "SEE LICENSE IN LICENSE",
+  "homepage": "https://e-commerce-pr02-outlandgear.netlify.app/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KPKrol85/DS-ecommerce-pr02-OutlandgGear.git"
+  },
+  "keywords": [
+    "frontend",
+    "html",
+    "css",
+    "javascript",
+    "ecommerce",
+    "static-site",
+    "pwa"
+  ],
+  "engines": {
+    "node": ">=20 <23"
+  },
+  "scripts": {
+    "clean:dist": "node scripts/build-dist.mjs clean",
+    "build:prepare": "node scripts/build-dist.mjs prepare",
+    "build:css": "node scripts/build-dist.mjs css",
+    "build:js": "node scripts/build-dist.mjs js",
+    "build:images": "node scripts/optimize-images.mjs --clean",
+    "build:html": "node scripts/build-dist.mjs html",
+    "build:assets": "node scripts/build-dist.mjs assets",
+    "build:seo": "node scripts/build-dist.mjs seo",
+    "build": "node scripts/build-dist.mjs",
+    "build:preview": "npm run build && node scripts/preview-dist.mjs",
+    "qa:a11y": "playwright test --config=playwright.config.js tests/a11y",
+    "test:build": "node --test tests/build/html-transforms.test.mjs tests/build/template-contract.test.mjs",
+    "watch:css": "npm run build:prepare && postcss css/main.css -o dist/css/main.min.css --watch",
+    "watch:js": "npm run build:prepare && esbuild js/app.js --bundle --minify --outfile=dist/js/app.min.js --watch",
+    "images:optimize": "node scripts/optimize-images.mjs --clean",
+    "lint:js": "eslint js scripts tests",
+    "lint:css": "stylelint \"css/**/*.css\"",
+    "lint": "npm run lint:js && npm run lint:css",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.11.1",
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.59.1",
+    "cssnano": "^7.0.7",
+    "esbuild": "^0.25.11",
+    "eslint": "^10.8.0",
+    "globals": "^17.7.0",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "postcss-import": "^16.1.1",
+    "prettier": "^3.9.6",
+    "sharp": "^0.35.3",
+    "stylelint": "^17.14.1",
+    "stylelint-config-standard": "^40.0.0"
+  }
+}

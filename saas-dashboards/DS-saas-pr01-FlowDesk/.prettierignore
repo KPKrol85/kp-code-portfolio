@@ -1,0 +1,9 @@
+node_modules/
+dist/
+assets/fonts/
+README.md
+plan.md
+FLOWDESK-CONTEXT.md
+test-results/
+playwright-report/
+coverage/

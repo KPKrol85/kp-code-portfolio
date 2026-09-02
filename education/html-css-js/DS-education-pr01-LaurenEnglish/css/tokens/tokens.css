@@ -1,0 +1,161 @@
+:root {
+  /* Colors */
+  --color-bg: #f6f7f9;
+  --color-surface: #ffffff;
+  --color-surface-soft: #eef7f4;
+  --color-surface-overlay: #ffffff;
+  --color-modal-backdrop: rgba(15, 23, 42, 0.56);
+  --color-modal-veil: rgba(15, 23, 42, 0.34);
+  --color-glass-surface: rgba(255, 255, 255, 0.78);
+  --color-glass-border: rgba(255, 255, 255, 0.66);
+  --color-glass-shadow: rgba(15, 23, 42, 0.16);
+  --color-header-overlay: rgba(246, 247, 249, 0.92);
+  --color-hero-surface-start: #f6f7f9;
+  --color-hero-surface-end: #eef7f4;
+  --color-primary: #1b7f6c;
+  --color-primary-dark: #116254;
+  --color-accent: #f3b43f;
+  --color-text: #1b1f2a;
+  --color-text-muted: #52616b;
+  --color-text-on-primary: #ffffff;
+  --color-border: #e0e6eb;
+  --color-control-border: #6f7f89;
+  --color-interactive-surface: #e1f1ec;
+  --color-disabled-surface: #e0e6eb;
+  --color-disabled-text: #52616b;
+  --color-disabled-border: #6f7f89;
+  --color-status-success-surface: #d9f0e9;
+  --color-status-success-text: #0d5d4f;
+  --color-status-success-border: #347e6d;
+  --color-access-premium-surface: #fff1cc;
+  --color-access-premium-text: #6b4700;
+  --color-access-premium-border: #9a6a12;
+  --color-focus-ring: #0b4f44;
+  --color-focus-guard: #ffffff;
+  --color-shadow: rgba(15, 23, 42, 0.08);
+
+  /* Typography */
+  --font-family-heading: "Literata", serif;
+  --font-family-body: "Inter", sans-serif;
+  --line-height-relaxed: 1.6;
+
+  /* Radius */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow-sm: 0 8px 24px var(--color-shadow);
+  --shadow-md: 0 16px 40px var(--color-shadow);
+  --shadow-glass: 0 24px 60px var(--color-glass-shadow);
+
+  /* Blur */
+  --blur-veil: 6px;
+  --blur-glass: 16px;
+
+  /* Spacing */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+
+  /* Layout */
+  --layout-container-max: 70rem;
+  --layout-header-max: 80rem;
+  --content-measure: 42rem;
+  --content-measure-narrow: 32rem;
+
+  /* Font sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-2sm: 0.9375rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: 2.5rem;
+  --text-4xl: 3.25rem;
+
+  /* Z-index */
+  --z-header: 1000;
+  --transition-fast: 160ms ease;
+  --transition-base: 240ms ease;
+  --transition-discrete: 160ms step-start;
+  --size-1px: 1px;
+  --control-min-size: 44px;
+  --brand-logo-size: 40px;
+  --brand-logo-size-footer: 52px;
+  --anchor-scroll-offset: calc(
+    var(--brand-logo-size) + var(--space-md) + var(--space-md) + var(--space-xs)
+  );
+}
+
+[data-theme="dark"] {
+  --color-bg: #0f1316;
+  --color-surface: #161b1f;
+  --color-surface-soft: #1c2429;
+  --color-surface-overlay: #1c2429;
+  --color-modal-backdrop: rgba(0, 0, 0, 0.64);
+  --color-modal-veil: rgba(0, 0, 0, 0.46);
+  --color-glass-surface: rgba(22, 27, 31, 0.82);
+  --color-glass-border: rgba(255, 255, 255, 0.14);
+  --color-glass-shadow: rgba(0, 0, 0, 0.55);
+  --color-header-overlay: rgba(15, 19, 22, 0.92);
+  --color-hero-surface-start: #10191a;
+  --color-hero-surface-end: #152522;
+  --color-primary: #3cc4a5;
+  --color-primary-dark: #2aa187;
+  --color-accent: #f3b43f;
+  --color-text: #f5f7f9;
+  --color-text-muted: #a2b0b8;
+  --color-text-on-primary: #071b16;
+  --color-border: #27313a;
+  --color-control-border: #71808a;
+  --color-interactive-surface: #18352f;
+  --color-disabled-surface: #27313a;
+  --color-disabled-text: #a2b0b8;
+  --color-disabled-border: #71808a;
+  --color-status-success-surface: #163a32;
+  --color-status-success-text: #86e6ce;
+  --color-status-success-border: #4abf9f;
+  --color-access-premium-surface: #3a2d12;
+  --color-access-premium-text: #ffd979;
+  --color-access-premium-border: #d7a935;
+  --color-focus-ring: #ffd166;
+  --color-focus-guard: #0f1316;
+  --color-shadow: rgba(0, 0, 0, 0.4);
+}
+
+@media (min-width: 480px) {
+  :root {
+    --text-3xl: 2.75rem;
+  }
+}
+
+@media (min-width: 780px) {
+  :root {
+    --text-3xl: 3rem;
+    --text-4xl: 3.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --text-4xl: 4rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --anchor-scroll-offset: calc(
+      var(--brand-logo-size) + var(--space-lg) + var(--space-lg) +
+        var(--space-xs)
+    );
+  }
+}

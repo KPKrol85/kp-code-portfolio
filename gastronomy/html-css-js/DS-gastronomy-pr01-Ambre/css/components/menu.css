@@ -1,12 +1,15 @@
 /* Menu */
+
 .menu__tabs {
   max-width: var(--menu-col-max);
   margin-inline: auto;
 }
+
 .tabs__tab:focus-visible {
   outline: 3px solid var(--c-accent-contrast);
   outline-offset: 3px;
 }
+
 .menu__grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -14,6 +17,7 @@
   text-align: left;
   justify-items: center;
 }
+
 .dish {
   border: 1px solid var(--c-border);
   border-radius: var(--radius-xs);
@@ -28,9 +32,11 @@
   background: color-mix(in oklab, var(--c-surface), white 6%);
   inline-size: 100%;
 }
+
 .menu__grid .dish[hidden] {
   display: none;
 }
+
 .dish__head {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -38,10 +44,12 @@
   gap: var(--space-04);
   margin: var(--space-02) 0;
 }
+
 .dish__title {
   position: relative;
   padding: var(--space-03) 0;
 }
+
 .dish__title::after {
   content: "";
   position: absolute;
@@ -53,12 +61,14 @@
   background: color-mix(in oklab, var(--c-ink), transparent 80%);
   pointer-events: none;
 }
+
 .dish__price {
   font-weight: 700;
   white-space: nowrap;
   font-size: var(--fs-lg);
   padding-right: var(--space-02);
 }
+
 .dish__desc {
   margin: var(--space-02) 0;
   font-size: var(--fs-md);
@@ -67,6 +77,7 @@
   opacity: 0.9;
   text-wrap: pretty;
 }
+
 .dish__thumb {
   padding: 0;
   border: 1px solid var(--c-border);
@@ -78,6 +89,7 @@
   aspect-ratio: 16 / 9;
   block-size: auto;
 }
+
 .dish__thumb picture,
 .dish__thumb img {
   display: block;
@@ -86,20 +98,24 @@
   object-fit: cover;
   border-radius: inherit;
 }
+
 .dish img {
   transition:
     transform 0.3s ease,
     filter 0.3s ease;
 }
+
 .dish__thumb:focus-visible {
   outline: 3px solid var(--c-accent-contrast);
   outline-offset: 3px;
 }
+
 .menu__actions {
   display: flex;
   justify-content: center;
   margin-top: var(--space-06);
 }
+
 @media (min-width: 480px) {
   .dish--has-thumb {
     display: grid;
@@ -131,11 +147,7 @@
     grid-area: desc;
   }
 }
-@media (min-width: 1024px) {
-  .menu--home .menu__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+
 @media (hover: hover) {
   .dish:hover .dish__thumb img {
     transform: scale(1.05);
@@ -147,11 +159,215 @@
     border-color: color-mix(in oklab, var(--c-border), var(--c-accent-contrast) 30%);
   }
 }
+
 @media (prefers-reduced-motion: reduce) {
   .dish {
     transition: none;
   }
   .dish img {
     transition: none;
+  }
+}
+
+/* Menu — refined dish cards and category tabs
+   One treatment shared by the homepage preview (`.menu--home`) and the full
+   menu page (`.page-menu`), so the four dishes on the homepage and the whole
+   card speak the same language. Page-level composition — how many columns, how
+   the expandable details sit in the card — stays with each page. */
+
+:is(.menu--home, .page-menu) {
+  /* Card: a hairline and a calm surface a step away from the page, never a
+     lifted panel — the photograph is what should carry the section. */
+  --dish-radius: var(--radius-sm);
+  --dish-surface: color-mix(in oklab, var(--c-surface), var(--c-bg) 35%);
+  --dish-pad: var(--space-04);
+
+  /* The media column keeps the shared 40% share but now bleeds to the card
+     edges and stands taller, so the dish gains the padding and the frame it
+     used to sit inside without crowding the text column. */
+  --dish-media-min-h: 190px;
+  --dish-media-radius: calc(var(--dish-radius) - var(--border-thin));
+}
+
+/* Filters read as category tabs, not controls: the label carries the state and
+   an accent rule marks the active one — the same hairline-and-accent grammar
+   the section's own CTA uses, so both ends of the section speak with one voice. */
+:is(.menu--home, .page-menu) .menu__tabs {
+  /* Wide columns space the labels; the tighter row gap keeps the wrapped row
+     on narrow screens reading as one control. */
+  gap: var(--space-02) var(--space-05);
+  margin-block: var(--space-05) var(--space-06);
+}
+
+:is(.menu--home, .page-menu) .tabs__tab {
+  --menu-tab-gap: var(--space-02);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: var(--menu-tab-gap) var(--space-01);
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--c-muted);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: var(--lh-normal);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  transition: color var(--dur-normal) var(--ease-standard);
+}
+
+:is(.menu--home, .page-menu) .tabs__tab::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: var(--menu-tab-gap);
+  height: var(--border-medium);
+  border-radius: var(--radius-xs);
+  background: var(--c-accent);
+  transform: scaleX(0);
+  transform-origin: 50% 100%;
+  transition: transform var(--dur-normal) var(--ease-standard);
+  pointer-events: none;
+}
+
+:is(.menu--home, .page-menu) .tabs__tab[aria-pressed="true"] {
+  color: var(--c-accent-contrast);
+}
+
+:is(.menu--home, .page-menu) .tabs__tab[aria-pressed="true"]::after {
+  transform: scaleX(1);
+}
+
+:is(.menu--home, .page-menu) .menu__grid {
+  gap: var(--space-05);
+}
+
+:is(.menu--home, .page-menu) .dish {
+  padding: 0;
+  border-radius: var(--dish-radius);
+  background: var(--dish-surface);
+  box-shadow: var(--shadow-xs);
+  transition:
+    border-color var(--dur-normal) var(--ease-standard),
+    box-shadow var(--dur-normal) var(--ease-standard);
+}
+
+:is(.menu--home, .page-menu) .dish__thumb {
+  border: 0;
+  border-radius: var(--dish-media-radius) var(--dish-media-radius) 0 0;
+  aspect-ratio: 3 / 2;
+}
+
+/* Title and price share a baseline; the price stays plain type, one step down
+   from the title so the pair reads as one line of a menu. */
+:is(.menu--home, .page-menu) .dish__head {
+  align-items: baseline;
+  gap: var(--space-03);
+  margin: 0;
+  padding: var(--dish-pad) var(--dish-pad) 0;
+}
+
+:is(.menu--home, .page-menu) .dish__title {
+  padding: 0 0 var(--space-03);
+}
+
+:is(.menu--home, .page-menu) .dish__title::after {
+  width: var(--space-05);
+  height: var(--border-thin);
+  background: color-mix(in oklab, var(--c-border), var(--c-accent) 55%);
+}
+
+:is(.menu--home, .page-menu) .dish__price {
+  padding-right: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  letter-spacing: var(--ls-sm);
+}
+
+:is(.menu--home, .page-menu) .dish__desc {
+  margin: 0;
+  padding: var(--space-03) var(--dish-pad) var(--dish-pad);
+  color: var(--c-muted);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-relaxed);
+  opacity: 1;
+}
+
+@media (min-width: 480px) {
+  /* Two content rows between two elastic spacers: the title and the copy stay
+     together and sit centred against the photograph, instead of being spread
+     apart by the height the photograph asks for. */
+  :is(.menu--home, .page-menu) .dish--has-thumb {
+    grid-template-rows: 1fr auto auto 1fr;
+    grid-template-areas:
+      "thumb ."
+      "thumb head"
+      "thumb desc"
+      "thumb .";
+
+    /* No column gap: the text column's own inline padding is the gutter, so the
+       photograph and the right edge of the card are inset by the same amount. */
+    column-gap: 0;
+  }
+
+  :is(.menu--home, .page-menu) .dish--has-thumb .dish__thumb {
+    min-block-size: var(--dish-media-min-h);
+    border-radius: var(--dish-media-radius) 0 0 var(--dish-media-radius);
+  }
+}
+
+@media (min-width: 1024px) {
+  :is(.menu--home, .page-menu) .menu__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (pointer: coarse) {
+  :is(.menu--home, .page-menu) .tabs__tab {
+    --menu-tab-gap: var(--space-03);
+
+    min-height: 44px;
+  }
+}
+
+@media (hover: hover) {
+  :is(.menu--home, .page-menu) .tabs__tab:hover {
+    color: var(--c-ink);
+  }
+  :is(.menu--home, .page-menu) .tabs__tab:hover::after {
+    transform: scaleX(1);
+    background: color-mix(in oklab, var(--c-accent), transparent 55%);
+  }
+  :is(.menu--home, .page-menu) .tabs__tab[aria-pressed="true"]:hover::after {
+    background: var(--c-accent);
+  }
+
+  /* Warming the hairline is the whole hover — no lift, no glossy panel. */
+  :is(.menu--home, .page-menu) .dish:hover {
+    transform: none;
+    border-color: color-mix(in oklab, var(--c-border), var(--c-accent-contrast) 30%);
+    box-shadow: var(--shadow-sm);
+  }
+  :is(.menu--home, .page-menu) .dish:hover .dish__thumb img {
+    transform: scale(1.03);
+    filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :is(.menu--home, .page-menu) .tabs__tab,
+  :is(.menu--home, .page-menu) .tabs__tab::after,
+  :is(.menu--home, .page-menu) .dish {
+    transition: none;
+  }
+  :is(.menu--home, .page-menu) .dish:hover .dish__thumb img {
+    transform: none;
   }
 }

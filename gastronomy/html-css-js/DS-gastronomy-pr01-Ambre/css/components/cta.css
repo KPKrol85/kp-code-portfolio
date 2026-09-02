@@ -1,4 +1,5 @@
 /* CTA */
+
 .cta.l-section {
   padding-block: var(--block-y-lg);
   padding-inline: var(--space-06);
@@ -17,25 +18,30 @@
     box-shadow 0.25s ease,
     border-color 0.25s ease;
 }
+
 .cta__box:hover {
   transform: translateY(-2px);
   border-color: color-mix(in oklab, var(--c-border), var(--c-accent-contrast) 25%);
   box-shadow: var(--shadow-md);
 }
+
 .cta__lead a {
   font-weight: 600;
   text-decoration: none;
   transition: color 0.2s ease;
   letter-spacing: var(--ls-normal);
 }
+
 .cta__lead a:hover,
 .cta__lead a:focus-visible {
   color: color-mix(in oklab, var(--c-accent-contrast), #000 20%);
 }
+
 .cta__actions {
   justify-content: center;
   margin: var(--space-06) 0;
 }
+
 .cta__actions .site-button {
   width: 100%;
   max-width: 420px;
@@ -55,6 +61,85 @@ html[data-theme="dark"] .cta__box {
 
 @media (prefers-reduced-motion: reduce) {
   .cta__box {
+    transition: none;
+  }
+}
+
+/* Section CTA — lightweight text link closing the Menu / Gallery sections */
+
+.section-cta {
+  --section-cta-gap: var(--space-02);
+
+  position: relative;
+  display: inline-block;
+  padding-block: var(--section-cta-gap);
+  color: var(--c-ink);
+  font-size: var(--fs-md);
+  font-weight: 500;
+  line-height: var(--lh-normal);
+  letter-spacing: var(--ls-normal);
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: color var(--dur-normal) var(--ease-standard);
+}
+
+.section-cta::before,
+.section-cta::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: var(--section-cta-gap);
+  border-radius: var(--radius-xs);
+  pointer-events: none;
+}
+
+.section-cta::before {
+  height: var(--border-thin);
+  background: color-mix(in oklab, var(--c-ink), transparent 72%);
+}
+
+.section-cta::after {
+  height: var(--border-medium);
+  background: var(--c-accent);
+  transform: scaleX(0);
+  transform-origin: 50% 100%;
+  transition: transform var(--dur-normal) var(--ease-standard);
+}
+
+.section-cta:focus-visible {
+  color: var(--c-accent-contrast);
+  outline: 2px solid var(--c-accent-contrast);
+  outline-offset: 4px;
+  border-radius: var(--radius-xs);
+}
+
+.section-cta:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.section-cta:active {
+  color: var(--c-accent-contrast);
+}
+
+@media (pointer: coarse) {
+  .section-cta {
+    --section-cta-gap: var(--space-03);
+  }
+}
+
+@media (hover: hover) {
+  .section-cta:hover {
+    color: var(--c-accent-contrast);
+  }
+  .section-cta:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-cta,
+  .section-cta::after {
     transition: none;
   }
 }

@@ -1,4 +1,4 @@
-import { mkdir, readFile, rm, writeFile, copyFile, cp } from "node:fs/promises";
+import { access, mkdir, readFile, rm, writeFile, copyFile, cp } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
@@ -66,6 +66,37 @@ async function copyRelativeDirectory(relativePath) {
   await cp(sourcePath, targetPath, { recursive: true });
 }
 
+async function assertNoSourceMinifiedAssets() {
+  const obsoleteAssets = ["css/style.min.css", "js/script.min.js"];
+  const presentAssets = [];
+
+  for (const relativePath of obsoleteAssets) {
+    try {
+      await access(resolveFromRoot(relativePath));
+      presentAssets.push(relativePath);
+    } catch {}
+  }
+
+  if (presentAssets.length > 0) {
+    throw new Error(`Obsolete source minified assets found: ${presentAssets.join(", ")}`);
+  }
+}
+
+async function copyHtmlFile(relativePath) {
+  const sourcePath = resolveFromRoot(relativePath);
+  const targetPath = resolveFromDist(relativePath);
+  const sourceHtml = await readFile(sourcePath, "utf8");
+  const builtHtml = sourceHtml
+    .replace('href="/css/style.css"', 'href="/css/style.min.css"')
+    .replace('src="/js/script.js"', 'src="/js/script.min.js"');
+
+  if (builtHtml === sourceHtml) {
+    throw new Error(`${relativePath} does not reference canonical source CSS and JavaScript assets`);
+  }
+
+  await writeFile(targetPath, builtHtml);
+}
+
 async function buildCss() {
   const sourcePath = resolveFromRoot("css", "style.css");
   const targetPath = resolveFromDist("css", "style.min.css");
@@ -120,6 +151,7 @@ async function buildServiceWorker() {
 }
 
 async function main() {
+  await assertNoSourceMinifiedAssets();
   await rm(distDir, { recursive: true, force: true });
   await Promise.all([
     ensureDirectory(distDir),
@@ -130,7 +162,7 @@ async function main() {
   await buildCss();
   await buildJs();
 
-  await Promise.all(htmlFiles.map(copyRelativeFile));
+  await Promise.all(htmlFiles.map(copyHtmlFile));
   await Promise.all(staticFiles.map(copyRelativeFile));
   await Promise.all(runtimeFiles.map(copyRelativeFile));
   await Promise.all(staticDirectories.map(copyRelativeDirectory));

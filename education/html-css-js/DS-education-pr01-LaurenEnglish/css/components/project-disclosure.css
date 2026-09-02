@@ -1,0 +1,99 @@
+.project-disclosure {
+  width: min(calc(100% - var(--space-lg)), var(--content-measure-narrow));
+  max-width: 100%;
+  max-height: calc(100dvh - var(--space-xl));
+  padding: 0;
+  margin: auto;
+  overflow: auto;
+  color: var(--color-text);
+  background: var(--color-glass-surface);
+  border: var(--size-1px) solid var(--color-glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glass);
+  backdrop-filter: blur(var(--blur-glass));
+}
+
+.project-disclosure::backdrop {
+  background: var(--color-modal-veil);
+  backdrop-filter: blur(var(--blur-veil));
+}
+
+/* Opaque fallback keeps the copy readable without backdrop-filter support. */
+@supports not (backdrop-filter: blur(1px)) {
+  .project-disclosure {
+    background: var(--color-surface);
+    border-color: var(--color-border);
+  }
+
+  .project-disclosure::backdrop {
+    background: var(--color-modal-backdrop);
+  }
+}
+
+.project-disclosure__content {
+  display: grid;
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+}
+
+.project-disclosure__intro {
+  display: grid;
+  gap: var(--space-2xs);
+}
+
+.project-disclosure__eyebrow {
+  margin: 0;
+}
+
+.project-disclosure__title {
+  margin: 0;
+  font-size: var(--text-xl);
+}
+
+.project-disclosure__copy {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.project-disclosure__link-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-md);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.project-disclosure__link {
+  color: var(--color-primary);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.project-disclosure__link:hover {
+  text-decoration: underline;
+}
+
+.project-disclosure__actions .button {
+  width: 100%;
+}
+
+html.has-project-disclosure {
+  overflow: hidden;
+}
+
+@media (min-width: 480px) {
+  .project-disclosure__content {
+    padding: var(--space-xl);
+  }
+
+  .project-disclosure__actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .project-disclosure__actions .button {
+    width: auto;
+  }
+}

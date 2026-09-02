@@ -1,83 +1,131 @@
-/* Page Menu */
+/* Page Menu
+   The full card reuses the refined dish + tab treatment from
+   `components/menu.css`; what lives here is the composition the longer list
+   needs — a wider measure, two columns from the desktop breakpoint, and the
+   expandable dish details folded into the card's text column. */
+
 .page-menu {
-  --menu-shell-bg: color-mix(in oklab, var(--c-bg), white 6%);
-  --menu-shell-border: color-mix(in oklab, var(--c-ink), transparent 88%);
-  --menu-shell-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
   --menu-col-max: 680px;
+
+  /* Shorter photographs than the homepage preview: the card carries a third
+     content row here, so the dish still leads without stretching the list. */
+  --dish-media-min-h: 180px;
   padding-top: 0;
   padding-bottom: var(--block-y-lg);
 }
 
-:root[data-theme="light"] .page-menu {
-  --menu-shell-bg: color-mix(in oklab, var(--c-bg), var(--c-surface) 10%);
-  --menu-shell-border: color-mix(in oklab, var(--c-ink), transparent 86%);
-  --menu-shell-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
-}
+/* The page is the surface. The shell only sets the reading measure — no panel
+   behind the cards, so the list is one level of container, not three. */
 .page-menu .page-shell {
-  max-width: min(960px, 92vw);
-  margin: var(--space-08) auto;
-  background: var(--menu-shell-bg);
-  border: 1px solid var(--menu-shell-border);
-  box-shadow: var(--menu-shell-shadow);
-  border-radius: var(--radius-xs);
-  padding: var(--space-08) var(--space-02);
-  transition:
-    background-color 0.3s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;
+  max-width: var(--container-lg);
+  margin-block: var(--space-07) 0;
+  padding-block: 0;
 }
+
 .page-menu .section-head {
-  margin: var(--space-02);
+  margin: 0;
   text-align: center;
 }
+
 .page-menu .menu {
-  padding: var(--space-04) 0;
+  padding: 0;
 }
+
+/* The description hands its closing space to the disclosure below it. */
+.page-menu .dish__desc {
+  padding-bottom: 0;
+}
+
+/* Expandable details: a plain hairline closes the description and opens the
+   detail, so the panel reads as part of the card instead of a second card
+   nested inside it — and the card keeps one accent, the title separator. */
 .page-menu .dish-more {
-  margin: var(--space-03) 0 0;
-  display: inline-block;
-  padding: var(--space-01) var(--space-03);
-  border-radius: var(--radius-xs);
-  border: 1px solid color-mix(in oklab, var(--c-border), transparent 75%);
-  background: color-mix(in oklab, var(--c-surface), transparent 60%);
-  transition:
-    border-color 0.25s ease,
-    background-color 0.25s ease;
+  margin: var(--space-03) var(--dish-pad) var(--dish-pad);
+  padding: var(--space-02) 0 0;
+  border: 0;
+  border-top: var(--border-thin) solid color-mix(in oklab, var(--c-border), transparent 25%);
+  background: none;
+  transition: border-color var(--dur-normal) var(--ease-standard);
 }
-.page-menu .dish-more:hover {
-  border-color: color-mix(in oklab, var(--c-bodziękujęrder), transparent 55%);
-  background: color-mix(in oklab, var(--c-surface), var(--c-ink) 2%);
-}
+
 .page-menu .dish-more__summary {
+  padding-block: var(--space-02);
+  padding-inline: 0;
+  color: var(--c-muted);
   font-size: var(--fs-xs);
-  padding: var(--space-01) var(--space-02);
+  font-weight: 600;
+  letter-spacing: var(--ls-normal);
+  cursor: pointer;
+  transition: color var(--dur-normal) var(--ease-standard);
 }
+
+.page-menu .dish-more__summary:focus-visible {
+  outline: 3px solid var(--c-accent-contrast);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
+}
+
 .page-menu .dish-more__content {
   margin-top: var(--space-02);
-  padding: var(--space-02) 0 0;
-  border-top: 1px solid color-mix(in oklab, var(--c-border), transparent 75%);
+  padding: 0;
+  border: 0;
   background: transparent;
-  line-height: var(--lh-relaxed);
-  font-size: var(--fs-sm);
   color: var(--c-muted);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-relaxed);
+  text-wrap: pretty;
 }
+
 .page-menu .dish-more__content strong {
+  color: var(--c-ink);
   letter-spacing: var(--ls-wide);
 }
+
 @media (min-width: 480px) {
+  /* Three content rows between the elastic spacers — title, description and
+     the disclosure — all inside the text column, so the photograph keeps the
+     full height of the card and nothing spans underneath it. */
   .page-menu .dish--has-thumb {
+    /* A slightly narrower media column than the homepage preview — the denser
+       card carries a third row of copy, so the text column is given the width
+       back. The longest dish name still takes two balanced lines, and the row
+       keeps a single height because the cards stretch together. */
+    grid-template-columns: 36% 1fr;
+    grid-template-rows: 1fr auto auto auto 1fr;
     grid-template-areas:
+      "thumb ."
       "thumb head"
       "thumb desc"
-      "more more";
+      "thumb more"
+      "thumb .";
   }
+
   .page-menu .dish--has-thumb .dish-more {
     grid-area: more;
-    justify-self: start;
   }
 }
-@media (min-width: 1024px) {
-  .page-menu .menu .menu__grid {
-    grid-template-columns: 1fr;
+
+@media (pointer: coarse) {
+  .page-menu .dish-more__summary {
+    padding-block: var(--space-03);
+  }
+}
+
+@media (hover: hover) {
+  /* Warming the hairline and the label is the whole hover — the disclosure has
+     no box of its own to light up any more. */
+  .page-menu .dish-more:hover {
+    border-top-color: color-mix(in oklab, var(--c-border), var(--c-accent) 55%);
+  }
+
+  .page-menu .dish-more__summary:hover {
+    color: var(--c-accent-contrast);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-menu .dish-more,
+  .page-menu .dish-more__summary {
+    transition: none;
   }
 }

@@ -1,3 +1,4 @@
+import assert from "node:assert/strict";
 import fs from "fs";
 import http from "http";
 import path from "path";
@@ -71,10 +72,25 @@ const run = async () => {
   let browser;
   let context;
   let page;
+  const interceptedPosts = [];
 
   try {
     browser = await chromium.launch({ headless: true });
     context = await browser.newContext({ javaScriptEnabled: false });
+    await context.route("**/*", async (route) => {
+      const request = route.request();
+      if (request.method() !== "POST") {
+        await route.continue();
+        return;
+      }
+
+      interceptedPosts.push(request);
+      await route.fulfill({
+        status: 200,
+        contentType: "text/html; charset=utf-8",
+        body: "<!doctype html><title>Intercepted</title>"
+      });
+    });
     page = await context.newPage();
 
     const baseUrl = `http://${host}:${port}`;
@@ -128,6 +144,40 @@ const run = async () => {
       await form.locator('input[name="phone"][required]').waitFor();
       await form.locator('input[name="date"][required]').waitFor();
       await form.locator('input[name="time"][required]').waitFor();
+      await form.locator('select[name="guests"][required]').waitFor();
+      await form.locator('input[name="consent"][required]').waitFor();
+    });
+
+    await runStep("block an invalid empty booking submission natively", async () => {
+      const form = page.locator("#booking-form");
+      const nameInput = form.locator("#name");
+      const pageUrl = page.url();
+      const nativeValidationEnabled = await form.evaluate((element) => !element.noValidate);
+
+      await form.locator('button[type="submit"]').focus();
+      await page.keyboard.press("Enter");
+
+      assert.equal(interceptedPosts.length, 0, "An invalid empty form must not initiate a POST request");
+      assert.equal(nativeValidationEnabled, true, "The no-JavaScript form must retain native validation");
+      assert.equal(page.url(), pageUrl, "An invalid empty form must not navigate away");
+      assert.equal(await form.evaluate((element) => element.checkValidity()), false, "The empty form must expose an invalid native state");
+      assert.deepEqual(
+        await nameInput.evaluate((element) => ({
+          focused: document.activeElement === element,
+          invalid: element.matches(":invalid"),
+          valid: element.validity.valid,
+          valueMissing: element.validity.valueMissing,
+          willValidate: element.willValidate
+        })),
+        {
+          focused: true,
+          invalid: true,
+          valid: false,
+          valueMissing: true,
+          willValidate: true
+        },
+        "Native validation must focus and expose the first missing required field"
+      );
     });
 
     await runStep("validate footer legal links", async () => {
@@ -160,6 +210,39 @@ const run = async () => {
         await page.waitForURL(`**${legalLink.expectedPath}`, { timeout: 10000 });
         await page.getByRole("heading", { level: 1, name: legalLink.expectedHeading }).waitFor();
       }
+    });
+
+    await runStep("intercept a valid native booking submission", async () => {
+      await page.goto(`${baseUrl}/index.html#rezerwacja`, { waitUntil: "domcontentloaded", timeout: 15000 });
+      const form = page.locator("#booking-form");
+      await form.locator("#name").fill("Jan Kowalski");
+      await form.locator("#phone").fill("123456789");
+      await form.locator("#date").fill("2026-12-12");
+      await form.locator("#time").fill("18:00");
+      await form.locator("#guests").selectOption("2");
+      await form.locator("#notes").fill("Stolik przy oknie");
+      await form.locator("#consent").check();
+
+      assert.equal(await form.evaluate((element) => element.checkValidity()), true, "The completed no-JavaScript form must be natively valid");
+
+      const [request] = await Promise.all([
+        page.waitForRequest((candidate) => candidate.method() === "POST"),
+        form.locator('button[type="submit"]').click()
+      ]);
+
+      assert.equal(interceptedPosts.length, 1, "The valid native submission must be intercepted exactly once");
+      assert.equal(new URL(request.url()).pathname, "/index.html");
+      assert.match((await request.headerValue("content-type")) || "", /^application\/x-www-form-urlencoded/);
+
+      const submission = new URLSearchParams(request.postData() || "");
+      assert.equal(submission.get("form-name"), "reservation");
+      assert.equal(submission.get("name"), "Jan Kowalski");
+      assert.equal(submission.get("phone"), "123456789");
+      assert.equal(submission.get("date"), "2026-12-12");
+      assert.equal(submission.get("time"), "18:00");
+      assert.equal(submission.get("guests"), "2");
+      assert.equal(submission.get("notes"), "Stolik przy oknie");
+      assert.equal(submission.get("consent"), "on");
     });
 
     console.log("QA NO-JS E2E: PASS");

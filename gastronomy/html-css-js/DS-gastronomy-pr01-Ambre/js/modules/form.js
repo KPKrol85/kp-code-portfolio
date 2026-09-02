@@ -26,6 +26,8 @@ const formatPhone = (value) => {
 
 const isValidPhone = (value) => normalizePhone(value).length === 9;
 
+const DELIVERY_ERROR_MESSAGE = "Nie udało się wysłać formularza. Sprawdź połączenie i spróbuj ponownie.";
+
 export function initReservationForm() {
   const form = byTestId("booking-form") || $(".booking-form") || $("#booking-form");
   const formMsg = $("#form-msg") || form?.querySelector(".booking-form__message--status");
@@ -137,14 +139,18 @@ export function initReservationForm() {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(new FormData(form)).toString()
       })
-        .then(() => {
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Reservation delivery rejected with status ${response.status}`);
+          }
+
           formMsg.textContent = "Dziękujemy! Oddzwonimy, aby potwierdzić rezerwację.";
           form.reset();
           if (phoneInput) phoneInput.value = "";
           clearErrors();
         })
         .catch(() => {
-          form.submit();
+          formMsg.textContent = DELIVERY_ERROR_MESSAGE;
         })
         .finally(() => {
           setLoading(false);
@@ -153,5 +159,5 @@ export function initReservationForm() {
   });
 
   log();
+  form.noValidate = true;
 }
-

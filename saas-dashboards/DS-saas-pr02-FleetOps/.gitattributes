@@ -1,0 +1,33 @@
+# FleetOps line-ending policy
+#
+# This file is the canonical contract for line endings in this repository.
+# It overrides any local `core.autocrlf` / `core.eol` setting, so every
+# checkout produces identical bytes and diffs stay reviewable.
+
+# Default: detect text, store LF in the repository, check out LF.
+* text=auto eol=lf
+
+# Text sources — declared explicitly so the policy does not rely on detection.
+*.html   text eol=lf
+*.css    text eol=lf
+*.js     text eol=lf
+*.json   text eol=lf
+*.md     text eol=lf
+*.txt    text eol=lf
+*.xml    text eol=lf
+*.svg    text eol=lf
+*.webmanifest text eol=lf
+
+# Windows shell scripts must keep CRLF in the working tree.
+*.bat    text eol=crlf
+*.cmd    text eol=crlf
+
+# Binary assets — never line-ending normalized or diffed as text.
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.webp   binary
+*.avif   binary
+*.ico    binary
+*.woff   binary
+*.woff2  binary

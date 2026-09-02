@@ -1,0 +1,97 @@
+<header class="site-header">
+  <div class="container header-bar">
+    <a
+      class="brand"
+      href="{{home}}#top"
+      aria-label="Strona główna — SolidCraft"
+    >
+      <picture class="brand-logo">
+        <img
+          src="{{base}}assets/img/logo/logo-light.svg"
+          width="512"
+          height="512"
+          alt=""
+          aria-hidden="true"
+          class="ft-logo logo--light"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+        <img
+          src="{{base}}assets/img/logo/logo-dark.svg"
+          width="512"
+          height="512"
+          alt=""
+          aria-hidden="true"
+          class="ft-logo logo--dark"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </picture>
+      <span class="brand-name">SolidCraft</span>
+    </a>
+    <nav class="nav" aria-label="Główna nawigacja">
+      <ul id="navMenu" class="nav-menu">
+        <li>
+          <a href="{{home}}#top" class="scroll-top"{{#if active-home}} aria-current="page"{{/if}}>Strona główna</a>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a
+            id="dd-oferta-trigger"
+            href="{{home}}#oferta"
+            class="nav-link dropdown-trigger"
+            aria-expanded="false"
+            aria-haspopup="true"
+            aria-controls="dd-oferta"
+          >
+            Oferta
+            <span class="caret" aria-hidden="true">▾</span>
+          </a>
+          <ul
+            id="dd-oferta"
+            class="dropdown"
+            aria-label="Podmenu: Oferta"
+            aria-labelledby="dd-oferta-trigger"
+          >
+            <li><a href="{{base}}oferta/lazienki.html">Łazienki</a></li>
+            <li>
+              <a href="{{base}}oferta/malowanie.html">Malowanie &amp; gładzie</a>
+            </li>
+            <li><a href="{{base}}oferta/kafelkowanie.html">Kafelkowanie</a></li>
+            <li><a href="{{base}}oferta/elektryka.html">Elektryka</a></li>
+            <li><a href="{{base}}oferta/hydraulika.html">Hydraulika</a></li>
+            <li><a href="{{base}}oferta/remonty.html">Remonty</a></li>
+          </ul>
+        </li>
+        <li><a href="{{home}}#realizacje">Klienci</a></li>
+        <li><a href="{{home}}#opinie">Opinie</a></li>
+        <li><a href="{{home}}#faq">FAQ</a></li>
+        <li><a href="{{home}}#kontakt">Kontakt</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button
+        class="theme-toggle"
+        type="button"
+        aria-pressed="false"
+        aria-label="Przełącz tryb"
+        title="Przełącz tryb"
+      >
+        <span class="icon-sun" data-icon="sun" aria-hidden="true"></span>
+        <span class="icon-moon" data-icon="moon" aria-hidden="true"></span>
+      </button>
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="navMenu"
+        aria-label="Otwórz menu"
+      >
+        <span class="nav-line"></span>
+        <span class="nav-line"></span>
+        <span class="nav-line"></span>
+      </button>
+    </div>
+  </div>
+</header>

@@ -1,58 +1,170 @@
-/* Gallery */
+/* Gallery — photography-led tiles and category filters
+   One treatment shared by the homepage preview (`.gallery--home`) and the full
+   gallery page (`.page-gallery`), so four photographs on the homepage and
+   eleven on the gallery page are framed, cropped and lit the same way. How many
+   columns each grid runs — and the rhythm around it — stays with its surface. */
+
+:is(.gallery--home, .page-gallery) {
+  /* A hairline frame on a calm surface, never a lifted card: the photograph is
+     what should carry the section, so the tile adds no chrome of its own. */
+  --gallery-gap: var(--space-04);
+  --gallery-radius: var(--radius-sm);
+  --gallery-frame: var(--c-border);
+  --gallery-frame-hover: color-mix(in oklab, var(--c-border), var(--c-accent-contrast) 30%);
+}
+
 .gallery__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: var(--space-04);
-  justify-items: center;
-  margin-top: var(--space-06);
+  grid-template-columns: 1fr;
+  gap: var(--gallery-gap);
 }
-.gallery__item[hidden] {
-  display: none !important;
-}
+
 .gallery__item {
   display: block;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: var(--radius-xs);
   overflow: hidden;
-  border: 1px solid var(--c-border);
+
+  /* The sources are square, so the frame crops nothing — the ratio holds every
+     row to one height and keeps the grid steady while a filter re-flows it. */
+  aspect-ratio: 1 / 1;
+  border: var(--border-thin) solid var(--gallery-frame);
+  border-radius: var(--gallery-radius);
   background: var(--c-surface);
+  box-shadow: var(--shadow-xs);
   cursor: pointer;
-  box-shadow: var(--shadow-md);
   transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    transform 0.2s ease;
+    border-color var(--dur-normal) var(--ease-standard),
+    box-shadow var(--dur-normal) var(--ease-standard);
 }
+
+.gallery__item[hidden] {
+  display: none;
+}
+
 .gallery__item img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  border-radius: inherit;
+  transition: transform var(--dur-slow) var(--ease-standard);
 }
+
 .gallery__item:focus-visible {
   outline: 3px solid var(--c-accent-contrast);
   outline-offset: 3px;
 }
+
+/* Homepage preview: a compact two-by-two that opens into a single row of four
+   on desktop — a taste of the gallery, never the gallery itself. */
+.gallery--home .gallery__grid {
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: var(--space-06);
+}
+
 .gallery__actions {
   display: flex;
   justify-content: center;
   margin-top: var(--space-06);
 }
-@media (hover: hover) {
-  .gallery__item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
-    border-color: color-mix(in oklab, var(--c-border), var(--c-accent-contrast) 30%);
-  }
-  .gallery__item:hover img {
-    transform: scale(1.04);
+
+/* Category filters read as tabs, not controls: the label carries the state and
+   an accent rule marks the active one — the hairline-and-accent grammar the
+   refined menu tabs and the section CTA already speak. */
+.gallery__tabs {
+  gap: var(--space-02) var(--space-05);
+  margin-block: var(--space-05) var(--space-06);
+}
+
+.gallery__tabs .tabs__tab {
+  --gallery-tab-gap: var(--space-02);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: var(--gallery-tab-gap) var(--space-01);
+  border: 0;
+  background: none;
+  color: var(--c-muted);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: var(--lh-normal);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  transition: color var(--dur-normal) var(--ease-standard);
+}
+
+.gallery__tabs .tabs__tab::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: var(--gallery-tab-gap);
+  height: var(--border-medium);
+  border-radius: var(--radius-xs);
+  background: var(--c-accent);
+  transform: scaleX(0);
+  transform-origin: 50% 100%;
+  transition: transform var(--dur-normal) var(--ease-standard);
+  pointer-events: none;
+}
+
+.gallery__tabs .tabs__tab[aria-pressed="true"] {
+  color: var(--c-accent-contrast);
+}
+
+.gallery__tabs .tabs__tab[aria-pressed="true"]::after {
+  transform: scaleX(1);
+}
+
+/* The same laptop step the full gallery opens its third column on, so both
+   surfaces change composition on one line. */
+@media (min-width: 900px) {
+  .gallery--home .gallery__grid {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
+
+@media (pointer: coarse) {
+  .gallery__tabs .tabs__tab {
+    --gallery-tab-gap: var(--space-03);
+
+    min-height: 44px;
+  }
+}
+
+@media (hover: hover) {
+  .gallery__tabs .tabs__tab:hover {
+    color: var(--c-ink);
+  }
+  .gallery__tabs .tabs__tab:hover::after {
+    transform: scaleX(1);
+    background: color-mix(in oklab, var(--c-accent), transparent 55%);
+  }
+  .gallery__tabs .tabs__tab[aria-pressed="true"]:hover::after {
+    background: var(--c-accent);
+  }
+
+  /* Warming the frame is the whole hover — no lift, no overlay, no label; the
+     photograph leans in by a hair and nothing else moves. */
+  .gallery__item:hover {
+    border-color: var(--gallery-frame-hover);
+    box-shadow: var(--shadow-sm);
+  }
+  .gallery__item:hover img {
+    transform: scale(1.03);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .gallery__tabs .tabs__tab,
+  .gallery__tabs .tabs__tab::after,
   .gallery__item,
   .gallery__item img {
     transition: none;
+  }
+  .gallery__item:hover img {
+    transform: none;
   }
 }

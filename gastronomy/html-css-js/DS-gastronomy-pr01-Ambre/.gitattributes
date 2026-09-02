@@ -1,0 +1,4 @@
+# Enforce LF in the working tree on every platform.
+# CSP inline-script hashes are computed from exact file bytes, so CRLF
+# checkouts would produce hashes that disagree with CI and production.
+* text=auto eol=lf

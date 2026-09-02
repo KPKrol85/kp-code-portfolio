@@ -1,0 +1,59 @@
+/*
+  X-Robots-Tag: all
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()
+  Cross-Origin-Resource-Policy: same-origin
+  Cache-Control: no-cache
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; frame-src https://www.google.com/recaptcha/; base-uri 'self'; form-action 'self'
+
+# Production bundles emitted by `npm run build` at the deployment root.
+# Fixed names: a deploy replaces them under the same URL, so they are cached
+# for a short, finite window and revalidated afterwards -- never `immutable`.
+
+/style.min.css
+  Cache-Control: public, max-age=300, must-revalidate
+
+/script.min.js
+  Cache-Control: public, max-age=300, must-revalidate
+
+# Canonical sources copied into `dist/` by `build:dist`. Fixed, unversioned
+# URLs whose contents can change between deploys. Production pages still load
+# `/js/theme-init.js` directly, so this group follows the bundle policy.
+
+/css/*
+  Cache-Control: public, max-age=300, must-revalidate
+
+/js/*
+  Cache-Control: public, max-age=300, must-revalidate
+
+# Self-hosted font releases. The URL carries the release version in both the
+# directory and the filename (`lato-v25-latin/lato-v25-latin-regular.woff2`),
+# so a new release lands on a new URL. This is the only versioned asset group.
+
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Images use fixed names that encode dimensions, not content, and can be
+# replaced under the same URL. Each response stays fresh for one week before
+# becoming stale.
+
+/assets/img/*
+  Cache-Control: public, max-age=604800
+
+/manifest.webmanifest
+  Cache-Control: public, max-age=86400
+
+/sw.js
+  Cache-Control: no-cache
+
+/robots.txt
+  Cache-Control: public, max-age=86400
+
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+
+/*.html
+  Cache-Control: no-cache, no-store, must-revalidate

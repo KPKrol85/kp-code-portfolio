@@ -3,6 +3,7 @@
   left: -9999px;
   top: 0;
 }
+
 .skip-link:focus-visible {
   left: 1rem;
   top: 1rem;
@@ -26,10 +27,12 @@
   text-decoration: none;
   font: inherit;
 }
+
 [data-install-pwa]:focus-visible {
   outline: 2px solid var(--c-link);
   outline-offset: 2px;
 }
+
 [data-install-pwa]:not([hidden]):hover {
   background: color-mix(in oklab, var(--c-surface) 85%, transparent);
 }
@@ -66,6 +69,7 @@ a {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+
 a:hover {
   text-decoration-thickness: 2px;
 }
@@ -101,6 +105,7 @@ button,
   margin-bottom: var(--space-05);
   text-align: center;
 }
+
 .section-title::after {
   content: "";
   position: absolute;

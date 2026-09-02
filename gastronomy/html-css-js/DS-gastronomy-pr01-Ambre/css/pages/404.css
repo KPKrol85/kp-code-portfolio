@@ -1,9 +1,11 @@
+
 .error-404 {
   min-height: calc(100vh - var(--header-height, 80px));
   display: grid;
   place-items: center;
   padding: var(--space-06) var(--space-04);
 }
+
 .error-404__panel {
   width: 100%;
   max-width: 32rem;
@@ -14,28 +16,33 @@
   box-shadow: var(--shadow-sm);
   text-align: center;
 }
+
 .error-404__title {
   font-size: var(--fs-xl);
   line-height: var(--lh-tight);
   margin-bottom: var(--space-02);
 }
+
 .error-404__subtitle {
   font-size: var(--fs-sm);
   color: var(--c-muted);
   margin-bottom: var(--space-04);
 }
+
 .error-404__text {
   font-size: var(--fs-sm);
   line-height: var(--lh-normal);
   margin-bottom: var(--space-05);
   padding: 0 var(--space-02);
 }
+
 .error-404__button {
   justify-content: center;
   width: fit-content;
   align-self: center;
   min-width: unset;
 }
+
 @media (min-width: 760px) {
   .error-404 {
     padding: var(--block-y-xl) var(--space-06);

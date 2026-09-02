@@ -11,7 +11,7 @@
     <meta name="description" content="Regulamin serwisu Ambre: zasady korzystania ze strony, informacje o odpowiedzialności oraz dane kontaktowe." />
     <meta name="author" content="Kamil Król | KP_Code_" />
     <meta name="color-scheme" content="light dark" />
-    <link rel="canonical" href="https://gastronomy-project-01.netlify.app/regulamin.html" />
+    <link rel="canonical" href="https://gastronomy-pr01-ambre.netlify.app/regulamin.html" />
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0f0f0f" media="(prefers-color-scheme: dark)" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -21,8 +21,8 @@
     <meta property="og:site_name" content="Ambre – Restauracja Fine Dining" />
     <meta property="og:title" content="Regulamin serwisu | Ambre" />
     <meta property="og:description" content="Regulamin serwisu Ambre: zasady korzystania ze strony, informacje o odpowiedzialności oraz dane kontaktowe." />
-    <meta property="og:url" content="https://gastronomy-project-01.netlify.app/regulamin.html" />
-    <meta property="og:image" content="https://gastronomy-project-01.netlify.app/assets/img/og-img/og-1200x630.jpg" />
+    <meta property="og:url" content="https://gastronomy-pr01-ambre.netlify.app/regulamin.html" />
+    <meta property="og:image" content="https://gastronomy-pr01-ambre.netlify.app/assets/img/og-img/og-1200x630.jpg" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -31,7 +31,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Regulamin serwisu | Ambre" />
     <meta name="twitter:description" content="Regulamin serwisu Ambre: zasady korzystania ze strony, informacje o odpowiedzialności oraz dane kontaktowe." />
-    <meta name="twitter:image" content="https://gastronomy-project-01.netlify.app/assets/img/og-img/og-1200x630.jpg" />
+    <meta name="twitter:image" content="https://gastronomy-pr01-ambre.netlify.app/assets/img/og-img/og-1200x630.jpg" />
     <meta name="twitter:image:alt" content="Ambre – logo restauracji i hasła: autorska kuchnia, sezonowe menu, kameralna atmosfera" />
     <!-- Favicons + manifest -->
     <link rel="icon" href="/assets/icons/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
@@ -46,7 +46,7 @@
     <link rel="preload" href="/assets/fonts/poppins-v24-latin-600.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/assets/fonts/source-sans-3-v19-latin-regular.woff2" as="font" type="font/woff2" crossorigin />
     <!-- Styles -->
-    <link rel="stylesheet" href="/css/style.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
     <!-- JSON-LD -->
     <script type="application/ld+json">
       {
@@ -54,48 +54,50 @@
         "@graph": [
           {
             "@type": "WebSite",
-            "@id": "https://gastronomy-project-01.netlify.app/#website",
-            "url": "https://gastronomy-project-01.netlify.app/",
-            "name": "Ambre – Restauracja Fine Dining",
+            "@id": "https://gastronomy-pr01-ambre.netlify.app/#website",
+            "url": "https://gastronomy-pr01-ambre.netlify.app/",
+            "name": "Ambre – demonstracyjny projekt restauracji fine dining",
+            "description": "Demonstracyjna strona internetowa fikcyjnej restauracji Ambre, przygotowana w celach prezentacyjnych i portfolio.",
             "inLanguage": "pl-PL",
             "publisher": {
-              "@id": "https://gastronomy-project-01.netlify.app/#restaurant"
+              "@id": "https://gastronomy-pr01-ambre.netlify.app/#operator"
+            },
+            "about": {
+              "@id": "https://gastronomy-pr01-ambre.netlify.app/#project"
             }
           },
           {
-            "@type": "Restaurant",
-            "@id": "https://gastronomy-project-01.netlify.app/#restaurant",
+            "@type": "Organization",
+            "@id": "https://gastronomy-pr01-ambre.netlify.app/#operator",
+            "name": "KP_Code Digital Studio",
+            "url": "https://kp-code.pl/"
+          },
+          {
+            "@type": "CreativeWork",
+            "@id": "https://gastronomy-pr01-ambre.netlify.app/#project",
             "name": "Ambre",
-            "url": "https://gastronomy-project-01.netlify.app/",
-            "image": ["https://gastronomy-project-01.netlify.app/assets/img/og-img/og-1200x630.jpg"],
-            "telephone": "+48533537091",
-            "email": "kontakt@kp-code.pl",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "ul. Marynarki Wojennej 12",
-              "postalCode": "33-100",
-              "addressLocality": "Tarnów",
-              "addressCountry": "PL"
-            },
-            "servesCuisine": ["Fine Dining", "Polska", "Europejska"],
-            "priceRange": "$$",
-            "description": "Kameralna restauracja fine dining z autorskim, sezonowym menu degustacyjnym i starannie dobraną selekcją win."
+            "url": "https://gastronomy-pr01-ambre.netlify.app/",
+            "image": ["https://gastronomy-pr01-ambre.netlify.app/assets/img/og-img/og-1200x630.jpg"],
+            "description": "Demonstracyjny projekt front-endowy przedstawiający fikcyjną restaurację fine dining, przygotowany w celach prezentacyjnych i portfolio.",
+            "creator": {
+              "@id": "https://gastronomy-pr01-ambre.netlify.app/#operator"
+            }
           },
           {
             "@type": "WebPage",
-            "@id": "https://gastronomy-project-01.netlify.app/regulamin.html",
-            "url": "https://gastronomy-project-01.netlify.app/regulamin.html",
+            "@id": "https://gastronomy-pr01-ambre.netlify.app/regulamin.html#webpage",
+            "url": "https://gastronomy-pr01-ambre.netlify.app/regulamin.html",
             "name": "Regulamin serwisu | Ambre",
-            "description": "Regulamin serwisu Ambre: zasady korzystania ze strony, informacje o odpowiedzialności oraz dane kontaktowe.",
+            "description": "Regulamin demonstracyjnego serwisu Ambre, opisujący zasady korzystania z projektu, jego funkcjonalności i odpowiedzialność operatora.",
             "isPartOf": {
-              "@id": "https://gastronomy-project-01.netlify.app/#website"
+              "@id": "https://gastronomy-pr01-ambre.netlify.app/#website"
             },
             "about": {
-              "@id": "https://gastronomy-project-01.netlify.app/#restaurant"
+              "@id": "https://gastronomy-pr01-ambre.netlify.app/#project"
             },
             "primaryImageOfPage": {
               "@type": "ImageObject",
-              "url": "https://gastronomy-project-01.netlify.app/assets/img/og-img/og-1200x630.jpg"
+              "url": "https://gastronomy-pr01-ambre.netlify.app/assets/img/og-img/og-1200x630.jpg"
             },
             "inLanguage": "pl-PL"
           }
@@ -149,18 +151,23 @@
             <span class="site-header__phone">+48&nbsp;533&nbsp;537&nbsp;091</span>
           </a>
           <button class="site-header__theme-toggle" data-testid="site-header__theme-toggle" type="button" aria-label="Przełącz motyw" aria-pressed="false" title="Motyw">
-            <span aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon icon--sun" aria-hidden="true">
-                <path
-                  d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.061-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z" />
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon icon--moon" aria-hidden="true">
-                <path
-                  fill-rule="evenodd"
-                  d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z"
-                  clip-rule="evenodd" />
-              </svg>
-            </span>
+            <svg class="theme-switch" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+              <mask id="theme-switch-cutout" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+                <rect x="0" y="0" width="24" height="24" fill="#ffffff" />
+                <circle class="theme-switch__cutout" cx="24" cy="9" r="6.5" fill="#000000" />
+              </mask>
+              <circle class="theme-switch__core" cx="12" cy="12" r="5" fill="currentColor" mask="url(#theme-switch-cutout)" />
+              <g class="theme-switch__rays" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                <line x1="12" y1="1.7" x2="12" y2="4.5" />
+                <line x1="12" y1="22.3" x2="12" y2="19.5" />
+                <line x1="22.3" y1="12" x2="19.5" y2="12" />
+                <line x1="1.7" y1="12" x2="4.5" y2="12" />
+                <line x1="19.28" y1="4.72" x2="17.3" y2="6.7" />
+                <line x1="4.72" y1="19.28" x2="6.7" y2="17.3" />
+                <line x1="19.28" y1="19.28" x2="17.3" y2="17.3" />
+                <line x1="4.72" y1="4.72" x2="6.7" y2="6.7" />
+              </g>
+            </svg>
           </button>
           <button class="site-header__nav-toggle" data-testid="site-header__nav-toggle" type="button" aria-controls="site-header-nav" aria-expanded="false" aria-label="Menu">
             <span aria-hidden="true">
@@ -193,168 +200,186 @@
           <p class="legal__eyebrow">Informacje prawne</p>
           <h1 id="legal-title" class="legal__title">Regulamin serwisu</h1>
           <p class="legal__lead">
-            Niniejszy dokument określa zasady korzystania z demonstracyjnej wersji projektu strony internetowej dla branży gastronomicznej „Ambre”, opracowanej przez
+            Niniejszy Regulamin określa zasady korzystania z demonstracyjnego projektu strony internetowej „Ambre”, opracowanego przez
             <a href="https://kp-code.pl" class="legal__link">KP_Code Digital Studio</a>
-            . Serwis ma charakter marketingowy i prezentacyjny.
+            . Serwis służy przedstawieniu koncepcji projektowej, interfejsu użytkownika oraz rozwiązań front-end związanych z restauracją fine dining.
           </p>
           <!-- Spis treści -->
           <nav class="legal__toc" aria-label="Spis treści">
             <ol class="legal__toc-list">
-              <li class="legal__toc-item"><a class="legal__toc-link" href="#tos-1">Definicje</a></li>
-              <li class="legal__toc-item"><a class="legal__toc-link" href="#tos-2">Postanowienia ogolne</a></li>
-              <li class="legal__toc-item"><a class="legal__toc-link" href="#tos-3">Charakter projektu</a></li>
-              <li class="legal__toc-item"><a class="legal__toc-link" href="#tos-4">Funkcjonalnosci demonstracyjne</a></li>
-              <li class="legal__toc-item"><a class="legal__toc-link" href="#tos-5">Wlasnosc intelektualna</a></li>
-              <li class="legal__toc-item"><a class="legal__toc-link" href="#tos-6">Formularz kontaktowy</a></li>
-              <li class="legal__toc-item"><a class="legal__toc-link" href="#tos-7">Odpowiedzialnosc</a></li>
-              <li class="legal__toc-item"><a class="legal__toc-link" href="#tos-8">Linki zewnetrzne</a></li>
-              <li class="legal__toc-item"><a class="legal__toc-link" href="#tos-9">Zgloszenia i kontakt</a></li>
-              <li class="legal__toc-item"><a class="legal__toc-link" href="#tos-10">Bezpieczenstwo</a></li>
-              <li class="legal__toc-item"><a class="legal__toc-link" href="#tos-11">Zmiany Regulaminu</a></li>
-              <li class="legal__toc-item"><a class="legal__toc-link" href="#tos-12">Postanowienia koncowe</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#terms-1">Operator i definicje</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#terms-2">Postanowienia ogólne</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#terms-3">Charakter demonstracyjny</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#terms-4">Informacje w Serwisie</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#terms-5">Funkcjonalności</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#terms-6">Wymagania techniczne</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#terms-7">Zasady korzystania</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#terms-8">Usługi elektroniczne</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#terms-9">Formularze i komunikacja</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#terms-10">Własność intelektualna</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#terms-11">Usługi zewnętrzne</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#terms-12">Dostępność i odpowiedzialność</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#terms-13">Reklamacje</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#terms-14">Dane i pamięć przeglądarki</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#terms-15">Zmiany Regulaminu</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#terms-16">Kontakt</a></li>
+              <li class="legal__toc-item"><a class="legal__toc-link" href="#terms-17">Postanowienia końcowe</a></li>
             </ol>
           </nav>
-          <!-- Tresc Regulaminu -->
+          <!-- Treść Regulaminu -->
           <article class="legal__doc">
-            <!-- 1 Definicje -->
-            <h2 id="tos-1">1. Definicje</h2>
+            <h2 id="terms-1">1. Operator i definicje</h2>
             <p>Na potrzeby niniejszego Regulaminu przyjmuje się następujące znaczenie pojęć:</p>
             <ul>
-              <li>
-                <strong>Serwis</strong>
-                – demonstracyjna strona internetowa projektu gastronomicznego „Ambre”, udostępniona publicznie w celach marketingowych i prezentacyjnych.
-              </li>
-              <li>
-                <strong>Projekt</strong>
-                – koncepcja strony internetowej dla branży gastronomicznej, opracowana jako przykład realizacji komercyjnej przez
-                <a href="https://kp-code.pl" class="legal__link">KP_Code Digital Studio</a>
-                .
-              </li>
-              <li>
-                <strong>Operator</strong>
-                – autor oraz właściciel praw do Projektu, działający pod marką
-                <a href="https://kp-code.pl" class="legal__link">KP_Code Digital Studio</a>
-                , tj. Kamil Król, odpowiedzialny za opracowanie koncepcji, projektu graficznego oraz kodu źródłowego Serwisu (kontakt:
-                <a class="legal__link" href="mailto:kontakt@kp-code.pl">kontakt@kp-code.pl</a>
-                ).
-              </li>
-              <li>
-                <strong>Użytkownik</strong>
-                – każda osoba odwiedzająca Serwis i korzystająca z jego treści.
-              </li>
-              <li>
-                <strong>Funkcjonalności</strong>
-                – elementy interfejsu i rozwiązania techniczne prezentowane w ramach Projektu (np. menu, galeria, formularze, sekcje informacyjne), mające charakter demonstracyjny.
-              </li>
+              <li><strong>Serwis</strong> – demonstracyjna strona internetowa „Ambre”, dostępna pod adresem <a href="https://gastronomy-pr01-ambre.netlify.app/" class="legal__link">https://gastronomy-pr01-ambre.netlify.app/</a>.</li>
+              <li><strong>Projekt</strong> – koncepcja oraz implementacja strony internetowej przygotowana w celach prezentacyjnych i portfolio.</li>
+              <li><strong>Operator</strong> lub <strong>Usługodawca</strong> – Kamil Król, działający pod marką KP_Code Digital Studio, odpowiedzialny za prowadzenie Serwisu i udostępnianie jego funkcjonalności.</li>
+              <li><strong>Adres Operatora</strong> – ul. Marynarki Wojennej 12/31, 33-100 Tarnów, Polska.</li>
+              <li><strong>Adres e-mail Operatora</strong> – <a href="mailto:kontakt@kp-code.pl" class="legal__link">kontakt@kp-code.pl</a>.</li>
+              <li><strong>Użytkownik</strong> – każda osoba odwiedzająca Serwis lub korzystająca z jego funkcjonalności.</li>
+              <li><strong>Usługa elektroniczna</strong> – funkcjonalność świadczona za pośrednictwem Serwisu bez jednoczesnej obecności stron, na indywidualne żądanie Użytkownika.</li>
+              <li><strong>Funkcjonalności</strong> – elementy interfejsu i rozwiązania techniczne udostępnione w Serwisie, w tym nawigacja, menu, galeria, przełącznik motywu, funkcje PWA oraz formularz rezerwacji.</li>
+              <li><strong>Formularz</strong> – formularz rezerwacji dostępny w Serwisie.</li>
+              <li><strong>Regulamin</strong> – niniejszy dokument określający zasady korzystania z Serwisu.</li>
             </ul>
-            <!-- 2 Postanowienia ogolne -->
-            <h2 id="tos-2">2. Postanowienia ogólne</h2>
-            <p>
-              Niniejszy Regulamin określa zasady korzystania z demonstracyjnego Serwisu opracowanego przez
-              <a href="https://kp-code.pl" class="legal__link">KP_Code Digital Studio</a>
-              w celach marketingowych oraz prezentacyjnych. Serwis stanowi przykład realizacji projektu strony internetowej dla branży gastronomicznej.
-            </p>
-            <p>Korzystanie z Serwisu oznacza akceptację niniejszego Regulaminu oraz zobowiązanie do korzystania z niego zgodnie z jego przeznaczeniem i obowiązującymi przepisami prawa.</p>
-            <!-- 3 Charakter projektu -->
-            <h2 id="tos-3">3. Charakter projektu</h2>
-            <p>
-              „Ambre” stanowi fikcyjną markę stworzoną wyłącznie na potrzeby demonstracyjnego projektu strony internetowej opracowanego przez
-              <a href="https://kp-code.pl" class="legal__link">KP_Code Digital Studio</a>
-              . Serwis nie reprezentuje rzeczywistego podmiotu gospodarczego ani realnie działającej restauracji.
-            </p>
+
+            <h2 id="terms-2">2. Postanowienia ogólne</h2>
+            <p>Serwis jest udostępniany w celach:</p>
             <ul>
-              <li>Wszelkie nazwy, opisy, treści, ceny, dane kontaktowe oraz procesy przedstawione w Serwisie mają charakter przykładowy.</li>
-              <li>Prezentowane treści nie stanowią oferty w rozumieniu przepisów Kodeksu cywilnego.</li>
-              <li>Serwis nie umożliwia zawierania umów ani składania rzeczywistych zamówień czy rezerwacji.</li>
+              <li>prezentacji projektu wykonanego przez KP_Code Digital Studio,</li>
+              <li>przedstawienia rozwiązań z zakresu projektowania interfejsów i implementacji front-end,</li>
+              <li>prezentacji funkcjonalności charakterystycznych dla serwisu restauracji fine dining,</li>
+              <li>przedstawienia Projektu w portfolio Operatora,</li>
+              <li>umożliwienia kontaktu z Operatorem za pośrednictwem aktywnego Formularza lub danych kontaktowych.</li>
             </ul>
-            <!-- 4 Funkcjonalnosci demonstracyjne -->
-            <h2 id="tos-4">4. Funkcjonalności demonstracyjne</h2>
-            <p>
-              Serwis może zawierać elementy funkcjonalne charakterystyczne dla stron internetowych branży gastronomicznej, takie jak menu, galeria, sekcje informacyjne, przyciski CTA, formularz
-              kontaktowy lub rezerwacyjny.
-            </p>
+            <p>Regulamin jest udostępniany nieodpłatnie w sposób umożliwiający jego wyświetlenie, zapisanie i odtworzenie.</p>
+            <p>Użytkownik powinien korzystać z Serwisu zgodnie z obowiązującymi przepisami prawa, postanowieniami Regulaminu, przeznaczeniem funkcjonalności oraz z poszanowaniem praw Operatora, innych Użytkowników i podmiotów trzecich.</p>
+
+            <h2 id="terms-3">3. Charakter demonstracyjny Projektu</h2>
+            <p>Serwis „Ambre” stanowi demonstracyjny projekt opracowany przez KP_Code Digital Studio. Marka „Ambre” jest przykładową koncepcją przygotowaną na potrzeby Projektu.</p>
             <ul>
-              <li>Wskazane elementy służą wyłącznie prezentacji rozwiązań projektowych, interfejsu użytkownika (UI) oraz implementacji front-end.</li>
-              <li>Dane wprowadzane przez Użytkownika w formularzach mają charakter testowy i demonstracyjny.</li>
-              <li>Wysłanie formularza nie skutkuje zawarciem umowy, dokonaniem rezerwacji ani powstaniem jakiegokolwiek zobowiązania po stronie Operatora.</li>
+              <li>Serwis nie reprezentuje rzeczywistego przedsiębiorstwa działającego pod prezentowaną nazwą.</li>
+              <li>Przedstawione osoby, opisy, ceny, dane kontaktowe, opinie, harmonogramy i pozostałe informacje mogą mieć charakter przykładowy.</li>
+              <li>Prezentowane procesy służą pokazaniu sposobu działania interfejsu.</li>
+              <li>Funkcjonalności nie powinny być traktowane jako rzeczywiste usługi gastronomiczne, o ile wyraźnie nie wskazano inaczej.</li>
             </ul>
-            <!-- 5 Wlasnosc intelektualna -->
-            <h2 id="tos-5">5. Własność intelektualna</h2>
-            <p>
-              Układ graficzny, struktura Serwisu, elementy wizualne, treści, koncepcja projektu oraz kod źródłowy stanowią utwór w rozumieniu przepisów prawa autorskiego i podlegają ochronie prawnej.
-              Prawa autorskie do Projektu przysługują jego autorowi – Kamilowi Królowi, działającemu pod marką
-              <a href="https://kp-code.pl" class="legal__link">KP_Code Digital Studio</a>
-              , o ile nie wskazano inaczej.
-            </p>
+            <p>Prawdziwe dane Operatora, aktywny Formularz oraz rzeczywiste odnośniki do profili KP_Code Digital Studio działają zgodnie ze swoim opisanym przeznaczeniem.</p>
+
+            <h2 id="terms-4">4. Informacje prezentowane w Serwisie</h2>
+            <p>Treści dostępne w Serwisie mają charakter informacyjny, prezentacyjny lub demonstracyjny.</p>
+            <p>O ile wyraźnie nie wskazano inaczej:</p>
             <ul>
-              <li>Zabronione jest kopiowanie, rozpowszechnianie, modyfikowanie lub wykorzystywanie Projektu w całości lub w części w celach komercyjnych bez uprzedniej zgody autora.</li>
-              <li>Dopuszczalne jest przeglądanie Serwisu w celach informacyjnych i zapoznania się z prezentowanymi rozwiązaniami.</li>
+              <li>treści nie stanowią oferty w rozumieniu art. 66 § 1 Kodeksu cywilnego,</li>
+              <li>ceny, opisy usług i przyciski CTA nie umożliwiają automatycznego zawarcia umowy,</li>
+              <li>wysłanie zapytania nie oznacza przyjęcia oferty ani zawarcia umowy,</li>
+              <li>prezentowane ceny nie stanowią zobowiązania Operatora do wykonania usługi za wskazaną kwotę,</li>
+              <li>Serwis nie umożliwia składania wiążących zamówień, dokonywania płatności ani automatycznej rezerwacji terminów.</li>
             </ul>
-            <!-- 6 Formularz kontaktowy -->
-            <h2 id="tos-6">6. Formularz kontaktowy</h2>
-            <ol>
-              <li>Serwis może udostępniać formularz kontaktowy lub rezerwacyjny w celu demonstracji funkcjonalności interfejsu oraz symulacji procesu zapytania.</li>
-              <li>Podanie danych przez Użytkownika jest dobrowolne i ma charakter testowy w ramach działania projektu demonstracyjnego.</li>
-              <li>
-                Zasady przetwarzania danych zostały opisane w dokumentach
-                <a href="polityka-prywatnosci.html" class="legal__link">Polityka prywatności</a>
-                oraz
-                <a href="cookies.html" class="legal__link">Cookies</a>
-                .
-              </li>
-            </ol>
-            <!-- 7 Odpowiedzialnosc -->
-            <h2 id="tos-7">7. Odpowiedzialność</h2>
+            <p>Ewentualne zawarcie rzeczywistej umowy z Operatorem wymaga odrębnych ustaleń między stronami.</p>
+
+            <h2 id="terms-5">5. Rodzaje i zakres funkcjonalności</h2>
+            <p>Serwis udostępnia w szczególności:</p>
             <ul>
-              <li>Operator dokłada należytej staranności, aby Serwis działał prawidłowo, jednak udostępniany jest on w aktualnym stanie technicznym („as is”).</li>
-              <li>Operator nie ponosi odpowiedzialności za decyzje podejmowane na podstawie treści prezentowanych w ramach projektu demonstracyjnego.</li>
-              <li>Operator nie odpowiada za czasowe przerwy w działaniu Serwisu wynikające z przyczyn technicznych, konserwacyjnych lub innych okoliczności niezależnych od Operatora.</li>
+              <li>przeglądanie publicznie dostępnych treści i informacji dotyczących Projektu,</li>
+              <li>korzystanie z elementów interaktywnych interfejsu, w tym menu, galerii i filtrów treści,</li>
+              <li>zmianę motywu wyglądu strony,</li>
+              <li>lokalne zapisywanie wybranych ustawień w przeglądarce,</li>
+              <li>korzystanie z wybranych funkcji w trybie offline,</li>
+              <li>przesłanie wiadomości za pośrednictwem Formularza,</li>
+              <li>przejście do zewnętrznych stron i profili wskazanych w Serwisie.</li>
             </ul>
-            <!-- 8 Linki zewnetrzne -->
-            <h2 id="tos-8">8. Linki zewnętrzne</h2>
-            <p>Serwis może zawierać odnośniki do zewnętrznych stron internetowych, w tym serwisów społecznościowych, map, narzędzi analitycznych lub innych usług podmiotów trzecich.</p>
-            <p>
-              Operator nie ponosi odpowiedzialności za treść, dostępność ani zasady przetwarzania danych obowiązujące w tych serwisach. Korzystanie z zewnętrznych stron odbywa się na zasadach
-              określonych przez ich administratorów.
-            </p>
-            <!-- 9 Zgloszenia i kontakt -->
-            <h2 id="tos-9">9. Zgłoszenia i kontakt</h2>
-            <p>
-              Uwagi dotyczące działania Serwisu, pytania związane z Projektem lub współpracą można kierować na adres:
-              <a href="mailto:kontakt@kp-code.pl" class="legal__link">kontakt@kp-code.pl</a>
-              .
-            </p>
-            <p>Odpowiedź zostanie udzielona w rozsądnym terminie, z uwzględnieniem dostępności Operatora.</p>
-            <!-- 10 Bezpieczenstwo -->
-            <h2 id="tos-10">10. Bezpieczeństwo</h2>
+            <p>Niektóre funkcjonalności wykorzystują <code>localStorage</code>, Cache Storage i Service Worker. Dane zapisane wyłącznie lokalnie pozostają na urządzeniu Użytkownika, chyba że Użytkownik wyśle Formularz.</p>
+
+            <h2 id="terms-6">6. Wymagania techniczne</h2>
+            <p>Do prawidłowego korzystania z Serwisu wymagane są:</p>
             <ul>
-              <li>Operator stosuje odpowiednie środki techniczne i organizacyjne mające na celu zapewnienie bezpieczeństwa Serwisu oraz ochrony przetwarzanych danych.</li>
-              <li>Użytkownik powinien korzystać z aktualnej przeglądarki internetowej oraz dbać o bezpieczeństwo swojego urządzenia i połączenia sieciowego.</li>
-              <li>
-                Zabronione są działania zmierzające do naruszenia bezpieczeństwa Serwisu, w szczególności próby obejścia zabezpieczeń, nieuprawniony dostęp do zasobów lub nadużycia funkcjonalności
-                formularzy.
-              </li>
+              <li>urządzenie z dostępem do Internetu,</li>
+              <li>aktualna przeglądarka internetowa obsługująca standardy HTML, CSS i JavaScript,</li>
+              <li>włączona obsługa protokołu HTTPS,</li>
+              <li>aktywny adres e-mail, jeżeli Użytkownik korzysta z funkcji wymagającej korespondencji,</li>
+              <li>włączona obsługa pamięci przeglądarki, jeżeli wymaga jej określona funkcjonalność.</li>
             </ul>
-            <!-- 11 Zmiany Regulaminu -->
-            <h2 id="tos-11">11. Zmiany Regulaminu</h2>
-            <ol>
-              <li>
-                Operator zastrzega sobie prawo do wprowadzania zmian w niniejszym Regulaminie z ważnych przyczyn, w szczególności w przypadku zmian technicznych, aktualizacji treści Projektu lub
-                względów związanych z bezpieczeństwem.
-              </li>
-              <li>Zmiany wchodzą w życie z dniem ich publikacji w Serwisie, o ile nie wskazano innego terminu obowiązywania.</li>
-            </ol>
-            <!-- 12 Postanowienia koncowe -->
-            <h2 id="tos-12">12. Postanowienia końcowe</h2>
+            <p>Wyłączenie JavaScriptu, pamięci przeglądarki, Service Workera, plików cookies lub innych mechanizmów technicznych może ograniczyć działanie niektórych funkcjonalności, przy czym podstawowe treści pozostają dostępne w zakresie możliwym bez tych mechanizmów.</p>
+            <p>Korzystanie z Internetu wiąże się z typowymi zagrożeniami technicznymi. Użytkownik powinien korzystać z aktualnego oprogramowania, odpowiednich zabezpieczeń oraz zaufanego połączenia sieciowego.</p>
+
+            <h2 id="terms-7">7. Zasady korzystania z Serwisu</h2>
+            <p>Zabronione jest korzystanie z Serwisu w sposób:</p>
             <ul>
-              <li>W sprawach nieuregulowanych niniejszym Regulaminem zastosowanie mają odpowiednie przepisy prawa.</li>
-              <li>Niniejszy Regulamin dotyczy wyłącznie demonstracyjnego charakteru Serwisu i ma charakter informacyjny.</li>
+              <li>niezgodny z prawem,</li>
+              <li>naruszający prawa Operatora lub podmiotów trzecich,</li>
+              <li>zakłócający prawidłowe działanie Serwisu lub infrastruktury technicznej,</li>
+              <li>prowadzący do nieuprawnionego dostępu do danych lub zasobów,</li>
+              <li>polegający na obchodzeniu zabezpieczeń,</li>
+              <li>powodujący nadmierne lub zautomatyzowane obciążenie infrastruktury,</li>
+              <li>służący rozpowszechnianiu złośliwego oprogramowania,</li>
+              <li>wykorzystujący Formularz do przesyłania spamu lub niezamówionych informacji handlowych.</li>
             </ul>
-            <!-- Data ostatniej aktualizacji -->
+            <p>Użytkownik nie może przekazywać za pośrednictwem Serwisu treści bezprawnych, naruszających dobra osobiste, prawa autorskie lub inne prawa własności intelektualnej, zawierających złośliwy kod albo dane osób trzecich bez odpowiedniej podstawy.</p>
+
+            <h2 id="terms-8">8. Rozpoczęcie i zakończenie korzystania z usług elektronicznych</h2>
+            <p>Korzystanie z publicznie dostępnych treści rozpoczyna się w chwili wyświetlenia wybranej strony lub uruchomienia określonej funkcjonalności.</p>
+            <p>Korzystanie z danej funkcjonalności kończy się w szczególności przez opuszczenie Serwisu, zamknięcie strony lub przeglądarki, rezygnację z wysłania Formularza albo usunięcie lokalnie zapisanych danych.</p>
+            <p>Usługi dostępne bez konta i bez określonego czasu obowiązywania są świadczone przez czas korzystania z danej funkcjonalności. Użytkownik może w każdej chwili zaprzestać korzystania z nieodpłatnej usługi elektronicznej.</p>
+
+            <h2 id="terms-9">9. Formularze i komunikacja</h2>
+            <p>Serwis udostępnia Formularz umożliwiający przesłanie wiadomości do Operatora za pośrednictwem Netlify Forms. Skorzystanie z Formularza jest dobrowolne.</p>
+            <p>Użytkownik powinien podać wyłącznie dane wymagane przez Formularz, prawdziwe i aktualne, niezbędne do obsługi zapytania oraz dotyczące jego samego albo przekazywane z odpowiednią podstawą.</p>
+            <p>Wysłanie Formularza:</p>
+            <ul>
+              <li>rozpoczyna proces przekazania i obsługi wiadomości,</li>
+              <li>nie prowadzi automatycznie do zawarcia umowy,</li>
+              <li>nie stanowi zamówienia ani rezerwacji,</li>
+              <li>nie powoduje obowiązku dokonania płatności,</li>
+              <li>nie gwarantuje podjęcia współpracy przez Operatora.</li>
+            </ul>
+            <p>Usługa przesłania Formularza zostaje zakończona po przekazaniu danych do systemu obsługującego wiadomość. Zasady przetwarzania danych osobowych opisuje <a href="polityka-prywatnosci.html" class="legal__link">Polityka prywatności</a>.</p>
+
+            <h2 id="terms-10">10. Własność intelektualna i licencje</h2>
+            <p>Oryginalne elementy Projektu mogą podlegać ochronie wynikającej z przepisów prawa autorskiego, w szczególności autorski układ i struktura Serwisu, oryginalne elementy interfejsu, teksty, grafiki wykonane na potrzeby Projektu, kod źródłowy i dokumentacja.</p>
+            <p>Prawa do oryginalnych elementów stworzonych przez Kamila Króla przysługują ich autorowi, o ile nie zostały przeniesione na inny podmiot, udostępnione na podstawie odrębnej licencji albo nie wskazano innego właściciela praw.</p>
+            <p>Serwis wykorzystuje również materiały i narzędzia podmiotów trzecich, w tym fonty, ikony, biblioteki, zdjęcia, ilustracje, fragmenty kodu oraz narzędzia deweloperskie. Prawa do nich pozostają przy ich twórcach lub uprawnionych podmiotach, a korzystanie odbywa się zgodnie z właściwymi warunkami licencyjnymi.</p>
+            <p>Kod źródłowy Projektu jest objęty <a href="https://github.com/KPKrol85/DS-gastronomy-pr01-Ambre/blob/main/LICENSE" class="legal__link">Własnościową Licencją Projektu KP_CODE</a>. Postanowienia niniejszego Regulaminu nie ograniczają praw przyznanych przez tę licencję.</p>
+            <p>Samo publiczne udostępnienie Serwisu nie oznacza udzielenia zgody na wykorzystywanie chronionych nazw, znaków, zdjęć, treści lub innych zasobów poza zakresem wynikającym z prawa albo właściwej licencji.</p>
+
+            <h2 id="terms-11">11. Linki i usługi zewnętrzne</h2>
+            <p>Serwis zawiera aktywną, osadzoną mapę Google Maps oraz odnośniki do zewnętrznych stron, w tym serwisów społecznościowych, GitHub i Google.</p>
+            <p>Wybranie odnośnika zewnętrznego może spowodować opuszczenie Serwisu. Zewnętrzne strony i usługi działają na zasadach określonych przez ich operatorów, w tym zgodnie z ich regulaminami i politykami prywatności.</p>
+            <p>Operator nie kontroluje bieżącej treści, dostępności ani późniejszych zmian wprowadzanych w zewnętrznych serwisach. Samo umieszczenie odnośnika nie oznacza zatwierdzenia wszystkich treści zewnętrznej strony, przejęcia odpowiedzialności za jej funkcjonowanie ani powstania współpracy z jej operatorem.</p>
+
+            <h2 id="terms-12">12. Dostępność Serwisu i odpowiedzialność</h2>
+            <p>Operator dokłada należytej staranności, aby Serwis działał prawidłowo i był utrzymywany w bezpiecznym stanie technicznym.</p>
+            <p>Ze względu na demonstracyjny charakter Projektu Operator nie gwarantuje nieprzerwanej dostępności Serwisu, braku wszystkich błędów technicznych, zgodności z każdym urządzeniem lub przeglądarką, stałej dostępności usług zewnętrznych ani zachowania lokalnie zapisanych danych po wyczyszczeniu pamięci przeglądarki, zmianie urządzenia lub aktualizacji funkcjonalności.</p>
+            <p>Działanie Serwisu może zostać czasowo ograniczone z powodu konserwacji, aktualizacji, awarii hostingu lub infrastruktury sieciowej, problemów po stronie dostawców zewnętrznych, działań związanych z bezpieczeństwem lub zdarzeń pozostających poza uzasadnioną kontrolą Operatora.</p>
+            <p>Operator odpowiada na zasadach wynikających z obowiązujących przepisów prawa. Żadne postanowienie Regulaminu nie wyłącza ani nie ogranicza odpowiedzialności, której nie można skutecznie wyłączyć lub ograniczyć na podstawie przepisów prawa.</p>
+
+            <h2 id="terms-13">13. Reklamacje dotyczące usług elektronicznych</h2>
+            <p>Użytkownik może zgłosić reklamację dotyczącą działania Serwisu lub usługi świadczonej drogą elektroniczną na adres <a href="mailto:kontakt@kp-code.pl" class="legal__link">kontakt@kp-code.pl</a>.</p>
+            <p>Zgłoszenie powinno w miarę możliwości zawierać opis problemu, nazwę funkcjonalności, której dotyczy, adres podstrony, datę i przybliżoną godzinę wystąpienia problemu, informacje umożliwiające odtworzenie błędu oraz adres e-mail umożliwiający udzielenie odpowiedzi.</p>
+            <p>Operator rozpatruje reklamację bez zbędnej zwłoki, z uwzględnieniem charakteru zgłoszenia i obowiązujących przepisów. Odpowiedź jest przesyłana na adres e-mail podany w zgłoszeniu.</p>
+
+            <h2 id="terms-14">14. Dane osobowe, cookies i pamięć przeglądarki</h2>
+            <p>Zasady przetwarzania danych osobowych w związku z działaniem Serwisu określa <a href="polityka-prywatnosci.html" class="legal__link">Polityka prywatności</a>.</p>
+            <p>Zasady wykorzystywania plików cookies i podobnych technologii określa <a href="cookies.html" class="legal__link">Polityka cookies</a>.</p>
+            <p>Dokumenty te opisują aktywny Formularz, hosting, <code>localStorage</code>, Cache Storage, Service Worker oraz usługi zewnętrzne rzeczywiście wykorzystywane w aktualnej wersji Serwisu.</p>
+            <p>Użytkownik nie powinien przekazywać za pośrednictwem Serwisu danych wrażliwych ani informacji poufnych, które nie są konieczne do obsługi konkretnej funkcjonalności.</p>
+
+            <h2 id="terms-15">15. Zmiany Regulaminu</h2>
+            <p>Operator może wprowadzać zmiany w Regulaminie w szczególności w przypadku zmian obowiązujących przepisów prawa, zmiany danych Operatora, dodania, usunięcia lub modyfikacji funkcjonalności, aktualizacji infrastruktury technicznej, wdrożenia nowych usług zewnętrznych, konieczności zwiększenia bezpieczeństwa Serwisu albo poprawienia błędów lub niejasności dokumentu.</p>
+            <p>Aktualna wersja Regulaminu jest publikowana w Serwisie wraz z datą ostatniej aktualizacji. W przypadku usług jednorazowych lub dostępnych bez konta zmieniony Regulamin ma zastosowanie do korzystania z Serwisu po jego opublikowaniu.</p>
+
+            <h2 id="terms-16">16. Kontakt</h2>
+            <p>Pytania dotyczące działania Serwisu, Regulaminu, Projektu, praw do treści lub kodu oraz współpracy z KP_Code Digital Studio można kierować na adres <a href="mailto:kontakt@kp-code.pl" class="legal__link">kontakt@kp-code.pl</a>.</p>
+            <p>Operator odpowiada w możliwie najkrótszym terminie, z uwzględnieniem charakteru zgłoszenia i swojej dostępności.</p>
+
+            <h2 id="terms-17">17. Postanowienia końcowe</h2>
+            <p>W sprawach nieuregulowanych Regulaminem zastosowanie mają odpowiednie przepisy prawa polskiego, w szczególności przepisy Kodeksu cywilnego, ustawy o świadczeniu usług drogą elektroniczną, ustawy o prawach konsumenta – jeżeli ma zastosowanie, ustawy o prawie autorskim i prawach pokrewnych oraz przepisy dotyczące ochrony danych osobowych.</p>
+            <p>Wybór prawa polskiego nie pozbawia konsumenta ochrony przyznanej mu przez bezwzględnie obowiązujące przepisy właściwe dla jego miejsca zamieszkania, jeżeli takie przepisy mają zastosowanie.</p>
+            <p>Ewentualne spory są rozstrzygane przez sąd właściwy zgodnie z obowiązującymi przepisami. Regulamin nie narzuca konsumentowi sądu innego niż wynikający z przepisów prawa.</p>
+            <p>Niniejszy Regulamin dotyczy demonstracyjnego charakteru Serwisu oraz rzeczywiście udostępnionych funkcjonalności. Nie zastępuje regulaminu sprzedaży, rezerwacji, świadczenia odpłatnych usług ani innych procesów, które nie zostały wdrożone w Serwisie.</p>
             <p>
               <small>
                 Data ostatniej aktualizacji:
-                <time datetime="2026-02-22">22.02.2026</time>
+                <time datetime="2026-08-22">22.08.2026</time>
               </small>
             </p>
           </article>
@@ -389,9 +414,25 @@
             <li><a href="/#faq">FAQ</a></li>
           </ul>
         </nav>
+        <div class="site-footer__column" aria-labelledby="site-footer__contact">
+          <h3 id="site-footer__contact" class="site-footer__title">Kontakt</h3>
+          <ul class="site-footer__contact" aria-label="Dane kontaktowe">
+            <li>
+              <span class="site-footer__contact-icon" data-icon="clock" aria-hidden="true"></span>
+              wt–nd: 17:00 — 23:00
+            </li>
+            <li>
+              <span class="site-footer__contact-icon" data-icon="phone" aria-hidden="true"></span>
+              <a href="tel:+48533537091" aria-label="Zadzwoń: +48 533 537 091">+48 533 537 091</a>
+            </li>
+            <li>
+              <span class="site-footer__contact-icon" data-icon="envelope" aria-hidden="true"></span>
+              <a href="mailto:kontakt@kp-code.pl">kontakt@kp-code.pl</a>
+            </li>
+          </ul>
+        </div>
         <div class="site-footer__column" aria-labelledby="ft-findus">
           <h3 id="ft-findus" class="site-footer__title">Tu nas znajdziesz</h3>
-
           <address class="site-footer__address">
             <div class="site-footer__address-row">
               <p>
@@ -402,92 +443,41 @@
                 Polska
               </p>
             </div>
-            <p>NIP 000-000-00-00</p>
           </address>
           <div class="site-footer__map">
             <iframe
               title="Mapa lokalizacji – Ambre Restauracja"
-              src="https://www.google.com/maps?q=ul.+Marynarki+Wojennej+12,+33-100+Tarnów,+Polska&z=15&output=embed"
+              data-map-src="https://www.google.com/maps?q=ul.+Marynarki+Wojennej+12,+33-100+Tarnów,+Polska&z=15&output=embed"
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
               allowfullscreen
               width="100%"
               height="260"
+              hidden
               class="map-embed"></iframe>
+            <button class="site-footer__map-loader" type="button" data-map-load hidden>Załaduj interaktywną mapę</button>
+            <noscript>
+              <a class="site-footer__map-fallback" href="https://www.google.com/maps/search/?api=1&amp;query=ul.+Marynarki+Wojennej+12,+33-100+Tarnów,+Polska" target="_blank" rel="noopener noreferrer">Otwórz lokalizację w Google Maps</a>
+            </noscript>
           </div>
         </div>
-        <div class="site-footer__column" aria-labelledby="site-footer__contact">
-          <h3 id="site-footer__contact" class="site-footer__title">Kontakt</h3>
-          <ul class="site-footer__contact" aria-label="Dane kontaktowe">
-            <li>
-              <span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-13a.75.75 0 0 0-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 0 0 0-1.5h-3.25V5Z" clip-rule="evenodd" />
-                </svg>
-              </span>
-              wt–nd: 17:00 — 23:00
-            </li>
-            <li>
-              <span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
-                  <path
-                    fill-rule="evenodd"
-                    d="M2 3.5A1.5 1.5 0 0 1 3.5 2h1.148a1.5 1.5 0 0 1 1.465 1.175l.716 3.223a1.5 1.5 0 0 1-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 0 0 6.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 0 1 1.767-1.052l3.223.716A1.5 1.5 0 0 1 18 15.352V16.5a1.5 1.5 0 0 1-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 0 1 2.43 8.326 13.019 13.019 0 0 1 2 5V3.5Z"
-                    clip-rule="evenodd" />
-                </svg>
-              </span>
-              <a href="tel:+48533537091" aria-label="Zadzwoń: +48 533 537 091">+48 533 537 091</a>
-            </li>
-            <li>
-              <span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M3 4a2 2 0 0 0-2 2v1.161l8.441 4.221a1.25 1.25 0 0 0 1.118 0L19 7.162V6a2 2 0 0 0-2-2H3Z" />
-                  <path d="m19 8.839-7.77 3.885a2.75 2.75 0 0 1-2.46 0L1 8.839V14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.839Z" />
-                </svg>
-              </span>
-              <a href="mailto:kontakt@kp-code.pl">kontakt@kp-code.pl</a>
-            </li>
-          </ul>
-          <h3 class="site-footer__title site-footer__title--sub">Social Media</h3>
-          <ul class="site-footer__social site-footer__social--bare" aria-label="Linki społecznościowe">
-            <li>
-              <a class="site-button site-button--social" href="https://www.facebook.com/kpkrol85" aria-label="Facebook" rel="me external noopener noreferrer" target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path
-                    d="M18 2a1 1 0 0 1 .993 .883l.007 .117v4a1 1 0 0 1 -.883 .993l-.117 .007h-3v1h3a1 1 0 0 1 .991 1.131l-.02 .112l-1 4a1 1 0 0 1 -.858 .75l-.113 .007h-2v6a1 1 0 0 1 -.883 .993l-.117 .007h-4a1 1 0 0 1 -.993 -.883l-.007 -.117v-6h-2a1 1 0 0 1 -.993 -.883l-.007 -.117v-4a1 1 0 0 1 .883 -.993l.117 -.007h2v-1a6 6 0 0 1 5.775 -5.996l.225 -.004h3z" />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a class="site-button site-button--social" href="https://github.com/KPKrol85" aria-label="GitHub" rel="me external noopener noreferrer" target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path
-                    d="M5.315 2.1c.791 -.113 1.9 .145 3.333 .966l.272 .161l.16 .1l.397 -.083a13.3 13.3 0 0 1 4.59 -.08l.456 .08l.396 .083l.161 -.1c1.385 -.84 2.487 -1.17 3.322 -1.148l.164 .008l.147 .017l.076 .014l.05 .011l.144 .047a1 1 0 0 1 .53 .514a5.2 5.2 0 0 1 .397 2.91l-.047 .267l-.046 .196l.123 .163c.574 .795 .93 1.728 1.03 2.707l.023 .295l.007 .272c0 3.855 -1.659 5.883 -4.644 6.68l-.245 .061l-.132 .029l.014 .161l.008 .157l.004 .365l-.002 .213l-.003 3.834a1 1 0 0 1 -.883 .993l-.117 .007h-6a1 1 0 0 1 -.993 -.883l-.007 -.117v-.734c-1.818 .26 -3.03 -.424 -4.11 -1.878l-.535 -.766c-.28 -.396 -.455 -.579 -.589 -.644l-.048 -.019a1 1 0 0 1 .564 -1.918c.642 .188 1.074 .568 1.57 1.239l.538 .769c.76 1.079 1.36 1.459 2.609 1.191l.001 -.678l-.018 -.168a5.03 5.03 0 0 1 -.021 -.824l.017 -.185l.019 -.12l-.108 -.024c-2.976 -.71 -4.703 -2.573 -4.875 -6.139l-.01 -.31l-.004 -.292a5.6 5.6 0 0 1 .908 -3.051l.152 -.222l.122 -.163l-.045 -.196a5.2 5.2 0 0 1 .145 -2.642l.1 -.282l.106 -.253a1 1 0 0 1 .529 -.514l.144 -.047l.154 -.03z" />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a class="site-button site-button--social" href="https://x.com" aria-label="X" rel="me external noopener noreferrer" target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path
-                    d="M8.267 3a1 1 0 0 1 .73 .317l.076 .092l4.274 5.828l5.946 -5.944a1 1 0 0 1 1.497 1.32l-.083 .094l-6.163 6.162l6.262 8.54a1 1 0 0 1 -.697 1.585l-.109 .006h-4.267a1 1 0 0 1 -.73 -.317l-.076 -.092l-4.276 -5.829l-5.944 5.945a1 1 0 0 1 -1.497 -1.32l.083 -.094l6.161 -6.163l-6.26 -8.539a1 1 0 0 1 .697 -1.585l.109 -.006h4.267z" />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a class="site-button site-button--social" href="https://linkedin.com" aria-label="LinkedIn" rel="me external noopener noreferrer" target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path
-                    d="M17 2a5 5 0 0 1 5 5v10a5 5 0 0 1 -5 5h-10a5 5 0 0 1 -5 -5v-10a5 5 0 0 1 5 -5zm-9 8a1 1 0 0 0 -1 1v5a1 1 0 0 0 2 0v-5a1 1 0 0 0 -1 -1m6 0a3 3 0 0 0 -1.168 .236l-.125 .057a1 1 0 0 0 -1.707 .707v5a1 1 0 0 0 2 0v-3a1 1 0 0 1 2 0v3a1 1 0 0 0 2 0v-3a3 3 0 0 0 -3 -3m-6 -3a1 1 0 0 0 -.993 .883l-.007 .127a1 1 0 0 0 1.993 .117l.007 -.127a1 1 0 0 0 -1 -1" />
-                </svg>
-              </a>
-            </li>
-          </ul>
-        </div>
+      </div>
+      <div class="container site-footer__socialbar">
+        <h3 class="site-footer__title site-footer__title--sub">Social Media</h3>
+        <ul class="site-footer__social site-footer__social--bare" aria-label="Linki społecznościowe">
+          <li>
+            <a class="site-button site-button--social" data-icon="facebook" href="https://www.facebook.com/kpkrol85" aria-label="Facebook" rel="me external noopener noreferrer" target="_blank"></a>
+          </li>
+          <li>
+            <a class="site-button site-button--social" data-icon="github" href="https://github.com/KPKrol85" aria-label="GitHub" rel="me external noopener noreferrer" target="_blank"></a>
+          </li>
+          <li>
+            <a class="site-button site-button--social" data-icon="x" href="https://x.com/KP_Code_85" aria-label="X" rel="me external noopener noreferrer" target="_blank"></a>
+          </li>
+          <li>
+            <a class="site-button site-button--social" data-icon="linkedin" href="https://www.linkedin.com/in/kp-code" aria-label="LinkedIn" rel="me external noopener noreferrer" target="_blank"></a>
+          </li>
+        </ul>
       </div>
       <div class="site-footer__legalbar" aria-label="Informacje prawne">
         <div class="container">
@@ -517,9 +507,9 @@
       </picture>
     </div>
 
-    <!-- Scroll Up -->
-    <button class="scroll-btn scroll-up" data-testid="scroll-up" type="button" aria-label="Przewiń na górę" title="Na górę" aria-hidden="true" tabindex="-1" hidden>
-      <img src="/assets/icons/icons-svg/chevron-up-black.svg" alt="" width="16" height="16" decoding="async" />
+    <!-- Scroll to top -->
+      <button class="scroll-btn scroll-up" data-testid="scroll-up" type="button" aria-label="Przewiń na górę" title="Na górę" aria-hidden="true" tabindex="-1" hidden>
+      <span class="scroll-btn__icon" data-icon="arrow-up" aria-hidden="true"></span>
     </button>
 
     <!-- Nav Drawer -->
@@ -531,7 +521,7 @@
     <!-- Script -->
     <script src="/js/sw-register.js" defer></script>
     <script src="/js/pwa-install.js" defer></script>
-    <script type="module" src="/js/script.min.js"></script>
+    <script type="module" src="/js/script.js"></script>
 
 
     <!-- Demo Legal Modal -->

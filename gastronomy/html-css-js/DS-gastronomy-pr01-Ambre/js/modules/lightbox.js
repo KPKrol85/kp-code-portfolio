@@ -84,30 +84,49 @@ export function initLightbox() {
     }
   };
 
+  const MODE_GALLERY = "gallery";
+  const MODE_SINGLE = "single";
+
+  // Trigger contract: a trigger opens in the mode declared by its nearest
+  // [data-lightbox-mode] scope, falling back to the default of its own type.
+  // Gallery triggers browse their group; menu dish triggers stay isolated.
+  const TRIGGERS = [
+    { selector: ".dish__thumb", groupRoot: ".menu__grid", defaultMode: MODE_SINGLE },
+    { selector: ".gallery__item", groupRoot: ".gallery__grid", defaultMode: MODE_GALLERY }
+  ];
+
   let index = -1;
   let items = [];
+  let mode = MODE_GALLERY;
   let lastActive = null;
   let scrollY = 0;
   let prevPosition = "";
   let prevTop = "";
   let prevWidth = "";
   let prevHash = "";
+  let prevRootScrollBehavior = "";
+  let documentStateLocked = false;
 
-  const getGalleryItems = (root) =>
+  const readDeclaredMode = (node) => {
+    const scope = node?.closest?.("[data-lightbox-mode]");
+    const declared = (scope?.getAttribute("data-lightbox-mode") || "").trim().toLowerCase();
+    return declared === MODE_GALLERY || declared === MODE_SINGLE ? declared : "";
+  };
+
+  const getVisibleItems = (root, selector) =>
     root
-      ? Array.from(root.querySelectorAll(".gallery__item")).filter(
+      ? Array.from(root.querySelectorAll(selector)).filter(
           (item) => !item.hidden && item.offsetParent !== null
         )
       : [];
 
-  const getDishItems = () =>
-    Array.from(document.querySelectorAll(".dish__thumb")).filter(
-      (item) => !item.hidden && item.offsetParent !== null
-    );
+  const getGalleryItems = (root) => getVisibleItems(root, ".gallery__item");
+
+  const canNavigate = () => mode === MODE_GALLERY && items.length > 1;
 
   const updateCounter = () => {
     const total = items.length;
-    if (!counter || total <= 1 || index < 0) {
+    if (!counter || mode === MODE_SINGLE || total <= 1 || index < 0) {
       counter.hidden = true;
       counter.textContent = "";
       return;
@@ -119,39 +138,51 @@ export function initLightbox() {
     counter.textContent = label;
   };
 
-  const open = (src, alt, startIndex = -1, scopeItems = []) => {
+  const open = (src, alt, startIndex = -1, scopeItems = [], requestedMode = MODE_GALLERY) => {
     if (!src) return;
 
     lastActive = document.activeElement;
-    items = Array.isArray(scopeItems) && scopeItems.length
-      ? scopeItems
-      : getGalleryItems(document.querySelector(".gallery__grid"));
+    mode = requestedMode === MODE_SINGLE ? MODE_SINGLE : MODE_GALLERY;
 
-    if (!items.length) items = getDishItems();
-
+    const scoped = Array.isArray(scopeItems) ? scopeItems : [];
     const normalized = normalizeUrl(src);
     setImage(normalized, alt);
 
-    if (typeof startIndex === "number" && startIndex >= 0) {
-      index = startIndex;
+    if (mode === MODE_SINGLE) {
+      // A dish preview is isolated: the session never holds sibling images.
+      items = scoped.slice(0, 1);
+      index = items.length ? 0 : -1;
     } else {
-      index = items.findIndex((item) => {
-        const itemSrc = getFull(item) || "";
-        return itemSrc && normalizeUrl(itemSrc) === normalized;
-      });
+      items = scoped.length ? scoped : getGalleryItems(document.querySelector(".gallery__grid"));
+
+      if (typeof startIndex === "number" && startIndex >= 0) {
+        index = startIndex;
+      } else {
+        index = items.findIndex((item) => {
+          const itemSrc = getFull(item) || "";
+          return itemSrc && normalizeUrl(itemSrc) === normalized;
+        });
+      }
+
+      if (index === -1 && items.length) index = 0;
     }
 
-    if (index === -1 && items.length) index = 0;
+    applyMode();
 
     prevHash = location.hash || "";
     if (prevHash) {
       history.replaceState(null, "", location.pathname + location.search);
     }
 
-    scrollY = window.scrollY;
-    prevPosition = document.body.style.position;
-    prevTop = document.body.style.top;
-    prevWidth = document.body.style.width;
+    if (!documentStateLocked) {
+      scrollY = window.scrollY;
+      prevPosition = document.body.style.position;
+      prevTop = document.body.style.top;
+      prevWidth = document.body.style.width;
+      prevRootScrollBehavior = document.documentElement.style.scrollBehavior;
+      documentStateLocked = true;
+    }
+
     document.documentElement.style.scrollBehavior = "auto";
     document.body.style.position = "fixed";
     document.body.style.top = `-${scrollY}px`;
@@ -175,6 +206,32 @@ export function initLightbox() {
     preload(-1);
   };
 
+  const restoreDocumentState = () => {
+    if (!documentStateLocked) return;
+    documentStateLocked = false;
+
+    if (prevHash) {
+      history.replaceState(null, "", location.pathname + location.search + prevHash);
+    }
+
+    document.body.style.position = prevPosition;
+    document.body.style.top = prevTop;
+    document.body.style.width = prevWidth;
+    window.scrollTo(0, scrollY);
+    document.documentElement.style.scrollBehavior = prevRootScrollBehavior;
+
+    if (lastActive && typeof lastActive.focus === "function") lastActive.focus();
+
+    index = -1;
+    items = [];
+    mode = MODE_GALLERY;
+    applyMode();
+    if (counter) {
+      counter.hidden = true;
+      counter.textContent = "";
+    }
+  };
+
   const close = () => {
     if (isDialog) {
       if (box.open) box.close();
@@ -189,27 +246,11 @@ export function initLightbox() {
       }, 170);
     }
 
-    if (prevHash) {
-      history.replaceState(null, "", location.pathname + location.search + prevHash);
-    }
-
-    document.body.style.position = prevPosition;
-    document.body.style.top = prevTop;
-    document.body.style.width = prevWidth;
-    window.scrollTo(0, scrollY);
-
-    if (lastActive && typeof lastActive.focus === "function") lastActive.focus();
-
-    index = -1;
-    items = [];
-    if (counter) {
-      counter.hidden = true;
-      counter.textContent = "";
-    }
+    restoreDocumentState();
   };
 
   const showAt = (nextIndex) => {
-    if (!items.length) return;
+    if (!canNavigate()) return;
     index = (nextIndex + items.length) % items.length;
     const node = items[index];
     const src = getFull(node) || "";
@@ -219,7 +260,7 @@ export function initLightbox() {
   };
 
   const preload = (step) => {
-    if (!items.length || index === -1) return;
+    if (!canNavigate() || index === -1) return;
     const nextIndex = (index + step + items.length) % items.length;
     const node = items[nextIndex];
     const src = getFull(node) || "";
@@ -237,28 +278,23 @@ export function initLightbox() {
   };
 
   document.addEventListener("click", (event) => {
-    const dish = event.target.closest(".dish__thumb");
-    if (dish) {
-      const src = getFull(dish);
-      const alt =
-        dish.querySelector("img")?.alt || dish.getAttribute("aria-label") || "";
-      if (event.target.closest("a")) event.preventDefault();
-      const dishItems = getDishItems();
-      const dishIndex = dishItems.indexOf(dish);
-      open(src, alt, dishIndex >= 0 ? dishIndex : -1, dishItems);
-      return;
-    }
+    for (const trigger of TRIGGERS) {
+      const node = event.target.closest(trigger.selector);
+      if (!node) continue;
 
-    const item = event.target.closest(".gallery__item");
-    if (item) {
-      const src = getFull(item);
+      const src = getFull(node);
       const alt =
-        item.querySelector("img")?.alt || item.getAttribute("aria-label") || "";
+        node.querySelector("img")?.alt || node.getAttribute("aria-label") || "";
       if (event.target.closest("a")) event.preventDefault();
-      const grid = item.closest(".gallery__grid");
-      const gridItems = getGalleryItems(grid);
-      const gridIndex = gridItems.indexOf(item);
-      open(src, alt, gridIndex >= 0 ? gridIndex : -1, gridItems);
+
+      const triggerMode = readDeclaredMode(node) || trigger.defaultMode;
+      const scopeItems =
+        triggerMode === MODE_SINGLE
+          ? [node]
+          : getVisibleItems(node.closest(trigger.groupRoot), trigger.selector);
+
+      open(src, alt, scopeItems.indexOf(node), scopeItems, triggerMode);
+      return;
     }
   });
 
@@ -303,18 +339,18 @@ export function initLightbox() {
     if (event.key === "ArrowLeft") {
       const isOpen = isDialog ? box.open : box.classList.contains("site-lightbox--open");
       const activeInside = box.contains(document.activeElement);
-      if (!isOpen || !activeInside) return;
+      if (!isOpen || !activeInside || !canNavigate()) return;
       event.preventDefault();
-      if (items.length) showAt(index === -1 ? 0 : index - 1);
+      showAt(index === -1 ? 0 : index - 1);
       return;
     }
 
     if (event.key === "ArrowRight") {
       const isOpen = isDialog ? box.open : box.classList.contains("site-lightbox--open");
       const activeInside = box.contains(document.activeElement);
-      if (!isOpen || !activeInside) return;
+      if (!isOpen || !activeInside || !canNavigate()) return;
       event.preventDefault();
-      if (items.length) showAt(index === -1 ? 0 : index + 1);
+      showAt(index === -1 ? 0 : index + 1);
       return;
     }
 
@@ -354,14 +390,26 @@ export function initLightbox() {
     box.appendChild(nextButton);
   }
 
+  const applyMode = () => {
+    box.dataset.lightboxMode = mode;
+    const navigable = canNavigate();
+    [prevButton, nextButton].forEach((button) => {
+      if (!button) return;
+      button.hidden = !navigable;
+      button.disabled = !navigable;
+    });
+  };
+
+  applyMode();
+
   prevButton.addEventListener("click", (event) => {
     event.stopPropagation();
-    if (items.length) showAt(index === -1 ? 0 : index - 1);
+    if (canNavigate()) showAt(index === -1 ? 0 : index - 1);
   });
 
   nextButton.addEventListener("click", (event) => {
     event.stopPropagation();
-    if (items.length) showAt(index === -1 ? 0 : index + 1);
+    if (canNavigate()) showAt(index === -1 ? 0 : index + 1);
   });
 
   (function enableSwipe() {
@@ -421,7 +469,7 @@ export function initLightbox() {
       if (!tracking) return;
       tracking = false;
 
-      if (horizontal && Math.abs(deltaX) > 60 && items.length) {
+      if (horizontal && Math.abs(deltaX) > 60 && canNavigate()) {
         const direction = deltaX < 0 ? 1 : -1;
         if (prefersReducedMotion) {
           showAt(index === -1 ? 0 : index + direction);
@@ -537,6 +585,7 @@ export function initLightbox() {
   box.addEventListener("close", () => {
     zoomOut();
     setFullscreenClass(false);
+    restoreDocumentState();
   });
 
   document.addEventListener("fullscreenchange", () => setFullscreenClass(isFullscreen()));
