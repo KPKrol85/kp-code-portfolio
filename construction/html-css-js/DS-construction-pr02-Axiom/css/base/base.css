@@ -1,6 +1,7 @@
 /* Accessibility utility classes
    Primary convention: utilities prefixed with "u-"
    Non-prefixed aliases kept for compatibility and readability */
+
 .u-visually-hidden,
 .visually-hidden,
 .u-visually-hidden-focusable,
@@ -16,6 +17,7 @@
   padding: 0;
   margin: -1px;
 }
+
 .u-visually-hidden-focusable:active,
 .u-visually-hidden-focusable:focus,
 .visually-hidden-focusable:active,
@@ -35,6 +37,7 @@
   background: var(--surface-1, #fff);
   color: var(--text-dark, #1c1c1c);
 }
+
 .u-sr-only,
 .sr-only {
   position: absolute;
@@ -91,15 +94,19 @@ h3 {
   margin: var(--space-3) auto;
   line-height: var(--lh-heading);
 }
+
 h1 {
   font-size: var(--fs-2);
 }
+
 h2 {
   font-size: var(--fs-4);
 }
+
 h3 {
   font-size: var(--fs-5);
 }
+
 p {
   color: var(--text-body);
   line-height: var(--lh-body);
@@ -111,6 +118,7 @@ section {
   scroll-margin-top: clamp(64px, 8vh, 96px);
   padding: var(--section-py-lg) var(--section-px-sm);
 }
+
 .section__title {
   position: relative;
   display: inline-block;
@@ -118,6 +126,7 @@ section {
   padding-bottom: var(--space-2);
   font-size: var(--fs-5);
 }
+
 .section__title::after {
   content: "";
   position: absolute;
@@ -132,6 +141,7 @@ section {
   transform-origin: center;
   animation: underlineGrow 0.6s ease forwards;
 }
+
 .lead {
   font-size: var(--fs-7);
 }
@@ -145,6 +155,7 @@ section {
   grid-template-columns: 1fr;
   max-width: 480px;
 }
+
 .features__item {
   display: grid;
   gap: var(--space-1);

@@ -24,9 +24,6 @@ export default defineConfig([
       sourceType: "module",
       globals: {
         ...globals.browser,
-        // Optional analytics tags, called only behind a typeof guard.
-        gtag: "readonly",
-        fbq: "readonly",
       },
     },
   },

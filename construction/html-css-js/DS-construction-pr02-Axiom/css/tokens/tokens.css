@@ -10,7 +10,7 @@
   --bg-dark: #121212;
   --modal-overlay-bg: rgba(12, 16, 24, 0.36);
   --bg-modal: rgba(255, 255, 255, 0.85);
- --bg-legal-card: rgba(252, 250, 246, 0.92);
+  --bg-legal-card: rgba(252, 250, 246, 0.92);
 
   /* status colors */
   --success: #2ecc71;
@@ -98,6 +98,7 @@
   /* ---  */
   --edge-pad: 12px;
 }
+
 :root[data-theme="dark"] {
   /* text colors */
   --text-title: #ffffff;
@@ -120,7 +121,7 @@
   --feature-border: color-mix(in srgb, var(--text-body) 12%, transparent);
   --feature-accent: var(--accent);
   --feature-shadow: color-mix(in srgb, var(--text-body) 10%, transparent);
-  --feature-hover-bg: color-mix(in srgb, var(--surface-2) 94%);
+  --feature-hover-bg: color-mix(in srgb, var(--surface-2) 94%, var(--feature-accent) 6%);
 }
 
 @font-face {
@@ -130,6 +131,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: "Montserrat";
   src: url("../../assets/fonts/montserrat-v31-latin/montserrat-v31-latin-600.woff2") format("woff2");
@@ -137,6 +139,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: "Lato";
   src: url("../../assets/fonts/lato-v25-latin/lato-v25-latin-regular.woff2") format("woff2");
@@ -144,6 +147,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: "Lato";
   src: url("../../assets/fonts/lato-v25-latin/lato-v25-latin-700.woff2") format("woff2");

@@ -1,5 +1,4 @@
 /*
-  X-Robots-Tag: all
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
@@ -9,24 +8,28 @@
   Cache-Control: no-cache
   Content-Security-Policy: default-src 'self'; script-src 'self' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; frame-src https://www.google.com/recaptcha/; base-uri 'self'; form-action 'self'
 
-# Production bundles emitted by `npm run build` at the deployment root.
-# Fixed names: a deploy replaces them under the same URL, so they are cached
-# for a short, finite window and revalidated afterwards -- never `immutable`.
+# Production bundles emitted by `npm run build` at the deployment root. Their
+# filenames carry a SHA-256 digest of their own bytes, so the exact rules are
+# only known per build. build:dist replaces everything between the markers
+# below with the rules for the bundles that build actually produced; this
+# canonical file declares the block and nothing else. Keep exactly one block.
 
-/style.min.css
+# >>> AXIOM PRODUCTION BUNDLE CACHE RULES >>>
+# Replaced by build:dist from dist/build-manifest.json. No rule here: the
+# repository root serves css/main.css and js/main.js directly, and no hashed
+# bundle exists until a release build names one.
+# <<< AXIOM PRODUCTION BUNDLE CACHE RULES <<<
+
+# The standalone source scripts `build:dist` publishes beside the bundles, and
+# the only unversioned source URLs the deployment serves: every stylesheet layer
+# and every module of the `js/main.js` graph reaches production inside a
+# content-addressed bundle instead. These two keep fixed URLs whose contents can
+# change between deploys, so each response stays fresh briefly, then revalidates.
+
+/js/theme-init.js
   Cache-Control: public, max-age=300, must-revalidate
 
-/script.min.js
-  Cache-Control: public, max-age=300, must-revalidate
-
-# Canonical sources copied into `dist/` by `build:dist`. Fixed, unversioned
-# URLs whose contents can change between deploys. Production pages still load
-# `/js/theme-init.js` directly, so this group follows the bundle policy.
-
-/css/*
-  Cache-Control: public, max-age=300, must-revalidate
-
-/js/*
+/js/offline.js
   Cache-Control: public, max-age=300, must-revalidate
 
 # Self-hosted font releases. The URL carries the release version in both the

@@ -5,17 +5,20 @@
   content-visibility: auto;
   contain-intrinsic-size: 800px;
 }
+
 .testimonials__inner {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--space-1);
 }
+
 .testimonials__container {
   margin: var(--space-6) auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: var(--space-4);
 }
+
 .testimonials__card {
   background: var(--surface-1);
   padding: var(--space-6);
@@ -27,10 +30,12 @@
     box-shadow 0.3s ease;
   max-width: 320px;
 }
+
 .testimonials__card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 18px color-mix(in srgb, black 18%, transparent);
 }
+
 .testimonials__quote {
   font-size: var(--fs-7);
   font-style: italic;
@@ -41,11 +46,13 @@
   opacity: 0.9;
   margin: 0 auto;
 }
+
 .form__client-info h3 {
   margin: var(--space-5);
   font-size: var(--fs-6);
   color: var(--text-title);
 }
+
 .form__client-info p {
   color: var(--text-muted);
   font-size: var(--fs-8);

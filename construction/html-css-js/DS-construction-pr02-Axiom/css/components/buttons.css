@@ -1,4 +1,5 @@
 /* Btn */
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -15,62 +16,79 @@
   -webkit-tap-highlight-color: transparent;
   transition: transform 0.15s ease;
 }
+
 .btn:hover {
   transform: translateY(-1px);
 }
+
 .btn:active {
   transform: translateY(0);
 }
+
 .btn[disabled],
 .btn:disabled {
   opacity: 0.6;
   pointer-events: none;
 }
+
 .btn svg,
 .btn .icon {
   width: 1.1em;
   height: 1.1em;
   flex-shrink: 0;
 }
+
 .btn .icon-left {
   margin-right: var(--space-1);
 }
+
 .btn .icon-right {
   margin-left: var(--space-1);
 }
 
 /* btn-primary */
+
 .btn-primary {
+
   text-transform: uppercase;
-  color: var(--text-inverse);
+  color: #fff;
   border: none;
   background-size: 200% 100%;
   background-position: 0 0;
-  background-image: linear-gradient(90deg, var(--primary-400), var(--accent-400));
+    background-image: linear-gradient(
+    90deg,
+    var(--primary-400),
+    color-mix(in srgb, var(--accent) 70%, var(--primary-600))
+  );
   transition:
     background-position 0.35s ease,
     transform 0.15s ease,
     box-shadow 0.15s ease;
 }
+
 .btn-primary:hover {
   background-position: 100% 0;
   transform: translateY(-2px);
 }
+
 .btn-primary:focus-visible {
   outline: 3px solid var(--accent-400);
   outline-offset: 3px;
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent);
 }
+
 .btn-primary:active {
   transform: translateY(0);
 }
+
 a.btn-primary:hover,
 a.btn-primary:focus-visible {
   text-decoration: none;
-  color: var(--text-inverse);
+  color: #fff;
 }
 
 /* btn-secondary */
+
 .btn-secondary {
   background: transparent;
   color: inherit;
@@ -82,15 +100,18 @@ a.btn-primary:focus-visible {
     color 0.2s ease,
     border-color 0.2s ease;
 }
+
 .btn-secondary:hover {
   background: color-mix(in srgb, currentColor 10%, transparent);
 }
+
 .btn-secondary:focus-visible {
   outline: 3px solid var(--accent-400);
   outline-offset: 3px;
 }
 
 /* btn-ghost */
+
 .btn-ghost {
   text-transform: uppercase;
   background: transparent;
@@ -103,23 +124,28 @@ a.btn-primary:focus-visible {
     box-shadow 0.15s ease,
     border-color 0.2s ease;
 }
+
 .btn-ghost:hover {
   background: color-mix(in srgb, var(--primary) 8%, transparent);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 12%, transparent);
 }
+
 .btn-ghost:focus-visible {
   outline: 3px solid var(--accent-400);
   outline-offset: 3px;
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent);
 }
+
 .btn-ghost:active {
   transform: translateY(0);
   box-shadow: none;
 }
+
 :root[data-theme="dark"] body .btn-ghost {
   border-color: color-mix(in srgb, var(--accent) 60%, transparent);
 }
+
 :root[data-theme="dark"] body .btn-ghost:hover {
   color: var(--text-light);
   background: color-mix(in srgb, var(--accent) 8%, transparent);

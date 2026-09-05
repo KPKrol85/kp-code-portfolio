@@ -3,75 +3,69 @@
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://construction-project-02.netlify.app/</loc>
+    <loc>https://construction-pr02-axiom.netlify.app/</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://construction-project-02.netlify.app/services/budowa-domow.html</loc>
+    <loc>https://construction-pr02-axiom.netlify.app/services/budowa-domow.html</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://construction-project-02.netlify.app/services/remonty-mieszkan.html</loc>
+    <loc>https://construction-pr02-axiom.netlify.app/services/remonty-mieszkan.html</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://construction-project-02.netlify.app/services/adaptacje-poddaszy.html</loc>
+    <loc>https://construction-pr02-axiom.netlify.app/services/adaptacje-poddaszy.html</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://construction-project-02.netlify.app/services/wykonczenia-wnetrz.html</loc>
+    <loc>https://construction-pr02-axiom.netlify.app/services/wykonczenia-wnetrz.html</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://construction-project-02.netlify.app/services/instalacje-sanitarne.html</loc>
+    <loc>https://construction-pr02-axiom.netlify.app/services/instalacje-sanitarne.html</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://construction-project-02.netlify.app/services/instalacje-elektryczne.html</loc>
+    <loc>https://construction-pr02-axiom.netlify.app/services/instalacje-elektryczne.html</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://construction-project-02.netlify.app/legal/polityka-prywatnosci.html</loc>
+    <loc>https://construction-pr02-axiom.netlify.app/legal/polityka-prywatnosci.html</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://construction-project-02.netlify.app/legal/polityka-cookies.html</loc>
+    <loc>https://construction-pr02-axiom.netlify.app/legal/polityka-cookies.html</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://construction-project-02.netlify.app/legal/regulamin.html</loc>
+    <loc>https://construction-pr02-axiom.netlify.app/legal/regulamin.html</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://construction-project-02.netlify.app/legal/kariera.html</loc>
-    <lastmod>2025-10-22</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://construction-project-02.netlify.app/legal/certyfikaty.html</loc>
+    <loc>https://construction-pr02-axiom.netlify.app/legal/kariera.html</loc>
     <lastmod>2025-10-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>

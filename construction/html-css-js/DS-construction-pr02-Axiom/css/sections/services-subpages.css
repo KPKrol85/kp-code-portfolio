@@ -1,9 +1,11 @@
 .service-intro {
   background: var(--surface-1);
 }
+
 .service-details {
   background: var(--surface-2);
 }
+
 .service-intro__inner,
 .service-details__inner,
 .gallery__inner {
@@ -11,6 +13,7 @@
   margin: 0 auto;
   padding: 0;
 }
+
 .service-intro__inner,
 .service-details__inner {
   display: grid;
@@ -18,18 +21,22 @@
   gap: var(--space-4);
   text-align: center;
 }
+
 .service-intro__inner {
   grid-template-areas:
     "title"
     "media"
     "copy";
 }
+
 .service-intro__inner > .section__title {
   grid-area: title;
 }
+
 .service-intro__copy {
   grid-area: copy;
 }
+
 .service-intro__media {
   grid-area: media;
   overflow: hidden;
@@ -39,6 +46,7 @@
   max-width: 80%;
   margin: var(--space-2) auto;
 }
+
 .service-intro__media img {
   width: 100%;
   height: auto;
@@ -47,9 +55,11 @@
   max-width: 480px;
   margin: 0 auto;
 }
+
 .service-intro__media:hover img {
   transform: scale(1.05);
 }
+
 .service-intro__copy .lead {
   max-width: 45ch;
   margin: var(--space-4) auto;
@@ -58,16 +68,19 @@
   overflow-wrap: break-word;
   hyphens: auto;
 }
+
 .checklist {
   max-width: 42ch;
   margin: var(--space-6) auto;
   padding: var(--space-4) 0 var(--space-4) var(--space-5);
   text-align: left;
 }
+
 .checklist li {
   margin-block: var(--space-2);
   line-height: var(--lh-body);
 }
+
 .service-intro__cta {
   margin: var(--space-6) auto 0;
   display: flex;
@@ -75,21 +88,26 @@
   justify-content: center;
   gap: var(--space-4);
 }
+
 .service-intro__cta .btn {
   max-width: 180px;
   margin: 0;
 }
+
 .features__item h3 {
   transition: color 0.22s ease;
   font-size: var(--fs-6);
 }
+
 .features__item p {
   font-size: var(--fs-7);
 }
+
 .cta {
   background: var(--surface-2);
   text-align: center;
 }
+
 .cta p {
   max-width: 45ch;
   margin: var(--space-4) auto;
@@ -98,6 +116,7 @@
   overflow-wrap: break-word;
   hyphens: auto;
 }
+
 .cta__row {
   margin: var(--space-6) auto 0;
   display: flex;
@@ -105,6 +124,7 @@
   justify-content: center;
   gap: var(--space-4);
 }
+
 .cta__row .btn {
   width: 180px;
   margin: 0;

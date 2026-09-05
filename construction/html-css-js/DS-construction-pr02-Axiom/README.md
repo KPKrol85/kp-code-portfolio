@@ -44,7 +44,7 @@ Warstwa buildowa to własne skrypty Node uruchamiane przez npm scripts (minifika
 - `lighthouse` 12.8.2 i `@lhci/cli` 0.15.1 — audyty Lighthouse
 - `pa11y` 8.0.0 — automatyczne audyty dostępności
 - `eslint` 10.9.1 — statyczna analiza JavaScriptu (`npm run lint`)
-- `vitest` 4.1.11 i `jsdom` 30.0.1 — skupione testy DOM formularza kontaktowego i lightboxa (`npm test`)
+- `vitest` 4.1.11 i `jsdom` 30.0.1 — skupione testy DOM formularza kontaktowego, lightboxa, nawigacji i modala informacji o projekcie/cookies (`npm test`)
 
 ### Architektura
 
@@ -83,7 +83,7 @@ Warstwa buildowa to własne skrypty Node uruchamiane przez npm scripts (minifika
 │   ├── qa/                     # Lighthouse, pa11y, kontrola odwołań
 │   ├── release/                # czyszczenie i składanie dist/
 │   └── templates/              # head.partial.html + pages.meta.json
-├── tests/                      # skupione testy Vitest (formularz, lightbox)
+├── tests/                      # 4 skupione zestawy Vitest dla komponentów DOM
 ├── sw.template.js              # jedyne ręcznie edytowane źródło Service Workera
 ├── sw.js                       # Service Worker generowany z szablonu (profil lokalny)
 ├── manifest.webmanifest
@@ -93,7 +93,13 @@ Warstwa buildowa to własne skrypty Node uruchamiane przez npm scripts (minifika
 ├── package.json
 ├── vitest.config.mjs           # konfiguracja Vitest (środowisko jsdom)
 ├── settings.md                 # opis skryptów npm
-├── CHANGELOG.md
+├── docs/
+│   ├── CHANGELOG.md
+│   └── archive/
+│       ├── audits/
+│       │   └── daily-AUDIT-2026-09-02.md
+│       └── plans/
+│           └── PLAN-2026-09-02.md
 ├── LICENSE
 └── README.md
 ```
@@ -120,18 +126,19 @@ Serwer `http-server` startuje na `http://localhost:8080` z wyłączonym cache (`
 
 - `npm run serve` — lokalny serwer katalogu roboczego na porcie 8080.
 - `npm run serve:dist` — ten sam serwer dla katalogu `dist/`.
-- `npm run build` — pełny build: `build:clean` → `build:css` → `build:js` → `build:sw` → `build:dist`.
+- `npm run build` — pełny build: `build:clean` → `build:css` → `build:js` → `build:hash` → `build:sw` → `build:dist`.
 - `npm run build:clean` — usuwa i tworzy na nowo katalog `dist/`.
-- `npm run build:css` — scala `@import` z `css/main.css` i minifikuje wynik do `dist/style.min.css`.
-- `npm run build:js` — rozwiązuje importy modułów od `js/main.js` i minifikuje wynik do `dist/script.min.js`.
-- `npm run build:sw` — generuje z `sw.template.js` oba Service Workery: `sw.js` w katalogu głównym (profil lokalny) i `dist/sw.js` (profil produkcyjny); każdy profil ma własną listę precache i własną rewizję cache liczoną z zasobów, które precache’uje.
-- `npm run build:dist` — kopiuje pliki statyczne do `dist/` i przepisuje odwołania w HTML na `style.min.css` oraz `script.min.js`.
+- `npm run build:css` — scala `@import` z `css/main.css` i minifikuje wynik do pośredniego `dist/style.min.css`.
+- `npm run build:js` — rozwiązuje importy modułów od `js/main.js` i minifikuje wynik do pośredniego `dist/script.min.js`; kolejność modułów w bundlu jest deterministyczna.
+- `npm run build:hash` — liczy SHA-256 z finalnych zminifikowanych bajtów obu bundli, skraca skrót do 16 znaków szesnastkowych i zmienia nazwy plików pośrednich na `style.<hash>.min.css` oraz `script.<hash>.min.js` w katalogu głównym wdrożenia; zapisuje `dist/build-manifest.json` — jedyne źródło finalnych nazw dla kolejnych kroków.
+- `npm run build:sw` — generuje z `sw.template.js` oba Service Workery: `sw.js` w katalogu głównym (profil lokalny, niezmieniony) i `dist/sw.js` (profil produkcyjny, który precache’uje dokładne nazwy bundli odczytane z `dist/build-manifest.json`); każdy profil ma własną listę precache i własną rewizję cache liczoną z zasobów, które precache’uje.
+- `npm run build:dist` — kopiuje pliki statyczne do `dist/`, przepisuje odwołania w HTML na nazwy bundli z `dist/build-manifest.json` i zastępuje blok znaczników w `dist/_headers` dokładnymi regułami cache dla tych dwóch adresów.
 - `npm run build:head` — generuje sekcje `<head>` na podstawie `tools/templates/head.partial.html` i `tools/templates/pages.meta.json`.
 - `npm run img:build` — generuje w `assets/img/_optimized/` warianty WebP i AVIF wyłącznie dla źródeł i szerokości zadeklarowanych w `tools/images/build-images.mjs` na podstawie `srcset` utrzymywanych stron; `npm run img:clean` usuwa ten katalog.
 - `npm run qa:lighthouse`, `npm run qa:a11y`, `npm run qa` — audyty Lighthouse i pa11y; każdy skrypt sam startuje i zatrzymuje lokalny serwer QA.
-- `npm run qa:references` — statyczna kontrola spójności odwołań lokalnych; nie wymaga serwera ani przeglądarki.
+- `npm run qa:references` — statyczna kontrola spójności odwołań lokalnych i kontraktu bundli produkcyjnych; nie wymaga serwera, przeglądarki ani katalogu `dist/`. Gdy `dist/build-manifest.json` istnieje, weryfikuje dodatkowo wygenerowany release.
 - `npm run lint` — ESLint dla `js/`, `tools/`, `tests/`, `sw.template.js` i `vitest.config.mjs`.
-- `npm test` — skupiony zestaw testów Vitest w środowisku jsdom dla formularza kontaktowego i lightboxa; nie wymaga serwera ani przeglądarki.
+- `npm test` — skupiony zestaw testów Vitest w środowisku jsdom dla formularza kontaktowego, lightboxa, nawigacji i modala informacji o projekcie/cookies; nie wymaga serwera ani przeglądarki.
 
 ### Build produkcyjny
 
@@ -140,9 +147,9 @@ npm run build
 npm run serve:dist
 ```
 
-Build zapisuje wynik do `dist/`: zminifikowane `style.min.css` i `script.min.js`, wygenerowany `sw.js`, skopiowane `assets/`, `services/`, `legal/`, `js/`, `css/` oraz pliki z katalogu głównego (`index.html`, `404.html`, `offline.html`, `success.html`, `manifest.webmanifest`, `robots.txt`, `sitemap.xml`, `_headers`, `LICENSE`). Katalog `dist/` powstaje lokalnie i nie jest przechowywany w repozytorium.
+Build zapisuje wynik do `dist/`: bundle produkcyjne o nazwach zawierających skrót treści (`style.<hash>.min.css`, `script.<hash>.min.js`), `build-manifest.json` z ich finalnymi nazwami, wygenerowany `sw.js` (profil produkcyjny), wygenerowany `_headers` z dokładnymi regułami cache dla obu bundli, skopiowane `assets/`, `services/`, `legal/` oraz pliki z katalogu głównego (`index.html`, `404.html`, `offline.html`, `success.html`, `manifest.webmanifest`, `robots.txt`, `sitemap.xml`, `LICENSE`). Kanoniczne drzewa `css/` i `js/` nie są kopiowane w całości: warstwy CSS oraz graf modułów `js/main.js` docierają do produkcji wyłącznie jako bundle adresowane treścią, więc pod `dist/js/` trafiają tylko dwa samodzielne skrypty ładowane bezpośrednio przez strony — `js/theme-init.js` i `js/offline.js`. Katalog `dist/` powstaje lokalnie i nie jest przechowywany w repozytorium.
 
-Build nie był uruchamiany w ramach przygotowania tej dokumentacji — powyższy opis pochodzi z konfiguracji skryptów.
+Sekwencja `npm run build` była uruchamiana wielokrotnie na czystym `dist/` podczas weryfikacji O-01: identyczne źródła dają identyczne nazwy bundli produkcyjnych oraz identyczne wygenerowane pliki `sw.js` i `_headers`.
 
 ### Testy i walidacja
 
@@ -152,9 +159,11 @@ Skupiony zestaw testów jednostkowych i komponentowych uruchamia jedna komenda; 
 npm test
 ```
 
-- `test` uruchamia Vitest w środowisku jsdom dla `tests/contact-form.test.js` i `tests/lightbox.test.js` — łącznie 20 testów; konfigurację zawiera `vitest.config.mjs`.
+- `test` uruchamia Vitest w środowisku jsdom dla 4 plików: `tests/contact-form.test.js`, `tests/lightbox.test.js`, `tests/navigation.test.js` i `tests/cookies.test.js` — łącznie 33 testy; konfigurację zawiera `vitest.config.mjs`.
 - Formularz kontaktowy: walidacja pól wymaganych, dostępne podsumowanie błędów, limit 500 znaków wiadomości oraz zapis, odtworzenie i usunięcie po udanym wysłaniu wersji roboczej przechowywanej pod kluczem `contactFormMessage`.
 - Lightbox: otwarcie i przeniesienie fokusu, pułapka fokusu obejmująca dynamicznie tworzone przyciski nawigacji, powrót fokusu do elementu otwierającego oraz nawigacja klawiszami `ArrowRight` i `ArrowLeft`.
+- Nawigacja: stan zwinięty i otwarty na urządzeniach mobilnych, synchronizacja ARIA/`inert`/klas i blokady przewijania, przeniesienie i powrót fokusu, zamknięcie przez Escape, aktywację linku i wskaźnik poza menu oraz synchronizacja po przejściu do widoku desktopowego.
+- Modal informacji o projekcie/cookies: obsługa zapisanej zgody, blokada przewijania, fokus początkowy i jego pułapka, zablokowany Escape bez zamykania, zapis zgody w `localStorage` i ciasteczku oraz przywrócenie przewijania i fokusu.
 - Testy nie wykonują zapytań sieciowych. Repozytorium nie zawiera testów e2e.
 
 Dostępne są też dwie kontrole statyczne, które nie wymagają serwera ani przeglądarki:
@@ -165,7 +174,7 @@ npm run qa:references
 ```
 
 - `lint` uruchamia ESLint dla `js/`, `tools/`, `tests/`, `sw.template.js` i `vitest.config.mjs`.
-- `qa:references` rozwiązuje odwołania lokalne deklarowane przez strony HTML, `css/**/*.css`, `manifest.webmanifest` i kanoniczną listę precache z `tools/sw/build-sw.mjs`; nierozwiązane odwołanie kończy przebieg kodem różnym od zera.
+- `qa:references` rozwiązuje odwołania lokalne deklarowane przez strony HTML, `css/**/*.css`, `manifest.webmanifest` i stałą listę precache z `tools/sw/build-sw.mjs`, a dodatkowo sprawdza kontrakt bundli produkcyjnych: kto jest właścicielem nazw, czy żaden skrypt nie zapisuje nazwy ze skrótem na sztywno i czy kanoniczny `_headers` zawiera dokładnie jeden blok znaczników. Gdy istnieje `dist/build-manifest.json`, weryfikuje też wygenerowany release — bundle, przepisany HTML, pliki źródłowe publikowane obok bundli, `dist/sw.js` i `dist/_headers`. Nierozwiązane odwołanie lub naruszony kontrakt kończy przebieg kodem różnym od zera.
 
 Dodatkowo dostępne są dwa audyty, które samodzielnie startują i zatrzymują lokalny serwer QA:
 
@@ -182,11 +191,11 @@ Każdy z tych skryptów startuje i zatrzymuje własny serwer lokalny, więc `npm
 
 Repozytorium jest przygotowane pod hosting statyczny (konfiguracja w formacie Netlify):
 
-- `_headers` — nagłówki bezpieczeństwa (CSP, HSTS, `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`) oraz polityka cache: bundle produkcyjne o stałych nazwach (`style.min.css`, `script.min.js`) oraz niewersjonowane pliki z `css/` i `js/` mają skończony czas świeżości z rewalidacją, wersjonowane ścieżki fontów zachowują długotrwałe `immutable`, obrazy i pliki metadanych mają skończony czas świeżości, a `sw.js` i strony HTML pozostają poza długotrwałym cache (`no-cache`).
+- `_headers` — nagłówki bezpieczeństwa (CSP, HSTS, `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`) oraz polityka cache. Plik w katalogu głównym jest kanoniczny i zawiera blok znaczników przeznaczony na reguły bundli produkcyjnych; `build:dist` zastępuje ten blok wyłącznie w `dist/_headers` dokładnymi regułami dla nazw z bieżącego builda (`Cache-Control: public, max-age=31536000, immutable`), ponieważ te adresy niosą skrót własnej treści. Dwa samodzielne skrypty źródłowe publikowane obok bundli — `js/theme-init.js` i `js/offline.js`, ładowane bezpośrednio przez strony produkcyjne — zachowują skończony czas świeżości z rewalidacją, wersjonowane ścieżki fontów zachowują długotrwałe `immutable`, obrazy i pliki metadanych mają skończony czas świeżości, a `sw.js` i strony HTML pozostają poza długotrwałym cache (`no-cache`).
 - Formularz kontaktowy korzysta z Netlify Forms i reCAPTCHA; CSP w `_headers` dopuszcza domeny reCAPTCHA.
 - Katalogiem wyjściowym wdrożenia jest `dist/`.
 
-Kanoniczny origin zapisany w metadanych stron, `sitemap.xml` i `robots.txt` to `https://construction-project-02.netlify.app`. Repozytorium nie potwierdza, czy pod tym adresem działa aktualna wersja projektu.
+Kanoniczny origin zapisany w metadanych stron, `sitemap.xml` i `robots.txt` to `https://construction-pr02-axiom.netlify.app`. Repozytorium nie potwierdza, czy pod tym adresem działa aktualna wersja projektu.
 
 ### Dostępność
 
@@ -217,7 +226,7 @@ Repozytorium nie zawiera wyników audytu potwierdzających zgodność z konkretn
 - Service Worker jest rejestrowany w `js/core/service-worker.js` dla `/sw.js` z zakresem `/`.
 - Strategie: dokumenty — network-first z fallbackiem na cache i `offline.html`; style i skrypty — stale-while-revalidate; obrazy — cache-first.
 - Podczas `activate` usuwane są cache o nieaktualnej rewizji; Service Worker używa `skipWaiting()` i `clients.claim()`.
-- `sw.template.js` jest jedynym ręcznie edytowanym źródłem Service Workera; `npm run build:sw` generuje z niego zarówno `sw.js` w katalogu głównym (profil lokalny, precache źródeł serwowanych przez `npm run serve`), jak i `dist/sw.js` (profil produkcyjny, precache bundli z `dist/`).
+- `sw.template.js` jest jedynym ręcznie edytowanym źródłem Service Workera; `npm run build:sw` generuje z niego zarówno `sw.js` w katalogu głównym (profil lokalny, precache źródeł serwowanych przez `npm run serve`), jak i `dist/sw.js` (profil produkcyjny, precache dokładnych nazw bundli odczytanych z `dist/build-manifest.json`).
 
 Repozytorium nie zawiera weryfikacji instalowalności ani testów działania offline.
 
@@ -251,11 +260,11 @@ Dostęp do `localStorage` jest opakowany w `try/catch` (`js/utils/storage.js`), 
 - Zmiany w Service Workerze wprowadzaj w `sw.template.js`, a następnie uruchom `npm run build:sw`; nie edytuj wygenerowanych plików `sw.js` ręcznie.
 - Metadane stron aktualizuj w `tools/templates/pages.meta.json` i regeneruj przez `npm run build:head`.
 - Warianty obrazów w `assets/img/_optimized/` pochodzą z `npm run img:build`; listę źródeł i szerokości deklaruje `tools/images/build-images.mjs` zgodnie z `srcset` na stronach — po zmianie `srcset` zaktualizuj tę deklarację i uruchom skrypt ponownie.
-- Opis wszystkich skryptów npm znajduje się w `settings.md`, historia istotnych zmian w `CHANGELOG.md`.
+- Opis wszystkich skryptów npm znajduje się w `settings.md`, historia istotnych zmian w `docs/CHANGELOG.md`.
 
 ### Roadmap
 
-- Brak otwartych pozycji roadmapy; opcjonalne usprawnienia są prowadzone w `PLAN.md`.
+- Brak otwartych pozycji roadmapy; opcjonalne usprawnienia są prowadzone w `docs/archive/plans/PLAN-2026-09-02.md`.
 
 ### Licencja
 
@@ -264,7 +273,7 @@ Projekt jest objęty własnościową licencją KP_Code (Własnościowa Licencja 
 ### Atrybucje
 
 - Licencje zależności deweloperskich są wypisane w sekcji 8 pliku [LICENSE](LICENSE).
-- Fonty Lato, Montserrat i Poppins są hostowane lokalnie w `assets/fonts/`; repozytorium nie zawiera plików licencyjnych tych fontów.
+- Fonty Lato i Montserrat są hostowane lokalnie w `assets/fonts/` na licencji SIL Open Font License 1.1; atrybucje oraz ścieżki do przechowywanych tekstów licencji zbiera plik [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
 
 ## EN
 
@@ -310,7 +319,7 @@ The build layer consists of custom Node scripts executed through npm scripts (CS
 - `lighthouse` 12.8.2 and `@lhci/cli` 0.15.1 — Lighthouse audits
 - `pa11y` 8.0.0 — automated accessibility audits
 - `eslint` 10.9.1 — JavaScript static analysis (`npm run lint`)
-- `vitest` 4.1.11 and `jsdom` 30.0.1 — focused DOM tests for the contact form and the lightbox (`npm test`)
+- `vitest` 4.1.11 and `jsdom` 30.0.1 — focused DOM tests for the contact form, lightbox, navigation, and project-information/cookie modal (`npm test`)
 
 ### Architecture
 
@@ -349,7 +358,7 @@ The build layer consists of custom Node scripts executed through npm scripts (CS
 │   ├── qa/                     # Lighthouse, pa11y, reference check
 │   ├── release/                # dist cleanup and assembly
 │   └── templates/              # head.partial.html + pages.meta.json
-├── tests/                      # focused Vitest suites (contact form, lightbox)
+├── tests/                      # 4 focused Vitest suites for DOM components
 ├── sw.template.js              # the only hand-edited service worker source
 ├── sw.js                       # service worker generated from the template (local profile)
 ├── manifest.webmanifest
@@ -359,7 +368,13 @@ The build layer consists of custom Node scripts executed through npm scripts (CS
 ├── package.json
 ├── vitest.config.mjs           # Vitest configuration (jsdom environment)
 ├── settings.md                 # npm script reference
-├── CHANGELOG.md
+├── docs/
+│   ├── CHANGELOG.md
+│   └── archive/
+│       ├── audits/
+│       │   └── daily-AUDIT-2026-09-02.md
+│       └── plans/
+│           └── PLAN-2026-09-02.md
 ├── LICENSE
 └── README.md
 ```
@@ -386,18 +401,19 @@ npm run serve
 
 - `npm run serve` — local server for the working directory on port 8080.
 - `npm run serve:dist` — the same server for the `dist/` directory.
-- `npm run build` — full build: `build:clean` → `build:css` → `build:js` → `build:sw` → `build:dist`.
+- `npm run build` — full build: `build:clean` → `build:css` → `build:js` → `build:hash` → `build:sw` → `build:dist`.
 - `npm run build:clean` — removes and recreates the `dist/` directory.
-- `npm run build:css` — inlines the `@import` chain from `css/main.css` and minifies the result to `dist/style.min.css`.
-- `npm run build:js` — resolves module imports from `js/main.js` and minifies the result to `dist/script.min.js`.
-- `npm run build:sw` — generates both service workers from `sw.template.js`: the root `sw.js` (local profile) and `dist/sw.js` (production profile); each profile carries its own precache list and its own cache revision hashed from the assets that profile precaches.
-- `npm run build:dist` — copies static files into `dist/` and rewrites HTML references to `style.min.css` and `script.min.js`.
+- `npm run build:css` — inlines the `@import` chain from `css/main.css` and minifies the result to the fixed intermediate `dist/style.min.css`.
+- `npm run build:js` — resolves module imports from `js/main.js` and minifies the result to the fixed intermediate `dist/script.min.js`; module emission order is deterministic.
+- `npm run build:hash` — hashes the final minified bytes of both bundles with SHA-256, truncates the digest to 16 hexadecimal characters, and renames the intermediates to `style.<hash>.min.css` and `script.<hash>.min.js` at the deployment root; writes `dist/build-manifest.json`, the single source of the final names for the steps that follow.
+- `npm run build:sw` — generates both service workers from `sw.template.js`: the root `sw.js` (local profile, unchanged) and `dist/sw.js` (production profile, precaching the exact bundle names read from `dist/build-manifest.json`); each profile carries its own precache list and its own cache revision hashed from the assets that profile precaches.
+- `npm run build:dist` — copies static files into `dist/`, rewrites the HTML references to the bundle names from `dist/build-manifest.json`, and replaces the marker block in `dist/_headers` with the exact cache rules for those two URLs.
 - `npm run build:head` — generates `<head>` sections from `tools/templates/head.partial.html` and `tools/templates/pages.meta.json`.
 - `npm run img:build` — generates WebP and AVIF variants in `assets/img/_optimized/` only for the sources and widths declared in `tools/images/build-images.mjs` from the `srcset` declarations of the maintained pages; `npm run img:clean` removes that directory.
 - `npm run qa:lighthouse`, `npm run qa:a11y`, `npm run qa` — Lighthouse and pa11y audits; each script starts and stops its own local QA server.
-- `npm run qa:references` — static local reference-integrity check; needs no server and no browser.
+- `npm run qa:references` — static local reference and production bundle contract check; needs no server, no browser, and no `dist/`. When `dist/build-manifest.json` exists, it additionally verifies the generated release.
 - `npm run lint` — ESLint for `js/`, `tools/`, `tests/`, `sw.template.js`, and `vitest.config.mjs`.
-- `npm test` — the focused Vitest suite in a jsdom environment for the contact form and the lightbox; needs no server and no browser.
+- `npm test` — the focused Vitest suite in a jsdom environment for the contact form, lightbox, navigation, and project-information/cookie modal; needs no server and no browser.
 
 ### Production Build
 
@@ -406,9 +422,9 @@ npm run build
 npm run serve:dist
 ```
 
-The build writes its output to `dist/`: minified `style.min.css` and `script.min.js`, a generated `sw.js`, copies of `assets/`, `services/`, `legal/`, `js/`, `css/`, and the root files (`index.html`, `404.html`, `offline.html`, `success.html`, `manifest.webmanifest`, `robots.txt`, `sitemap.xml`, `_headers`, `LICENSE`). The `dist/` directory is produced locally and is not stored in the repository.
+The build writes its output to `dist/`: the content-addressed production bundles (`style.<hash>.min.css`, `script.<hash>.min.js`), `build-manifest.json` recording their final names, a generated `sw.js` (production profile), a generated `_headers` carrying the exact cache rules for both bundles, copies of `assets/`, `services/`, `legal/`, and the root files (`index.html`, `404.html`, `offline.html`, `success.html`, `manifest.webmanifest`, `robots.txt`, `sitemap.xml`, `LICENSE`). The canonical `css/` and `js/` trees are not copied wholesale: the stylesheet layers and the `js/main.js` module graph reach production only as the content-addressed bundles, so `dist/js/` holds just the two standalone scripts the pages load directly — `js/theme-init.js` and `js/offline.js`. The `dist/` directory is produced locally and is not stored in the repository.
 
-The build was not executed while preparing this documentation — the description above comes from the script configuration.
+The `npm run build` sequence was run repeatedly from a clean `dist/` while verifying O-01: identical sources produce identical production bundle filenames and identical generated `sw.js` and `_headers`.
 
 ### Testing and Validation
 
@@ -418,9 +434,11 @@ The focused unit and component suite runs from a single command; the tests need 
 npm test
 ```
 
-- `test` runs Vitest in a jsdom environment over `tests/contact-form.test.js` and `tests/lightbox.test.js` — 20 tests in total; the configuration lives in `vitest.config.mjs`.
+- `test` runs Vitest in a jsdom environment over 4 files: `tests/contact-form.test.js`, `tests/lightbox.test.js`, `tests/navigation.test.js`, and `tests/cookies.test.js` — 33 tests in total; the configuration lives in `vitest.config.mjs`.
 - Contact form: required-field validation, the accessible error summary, the 500-character message limit, and the draft stored under `contactFormMessage` being saved, restored, and removed after a successful submission.
 - Lightbox: opening and initial focus, the focus trap including the dynamically created navigation controls, focus return to the triggering element, and `ArrowRight` / `ArrowLeft` navigation.
+- Navigation: collapsed and open mobile states, ARIA/`inert`/class and scroll-lock synchronization, focus transfer and return, closing through Escape, link activation, and an outside pointer interaction, plus synchronization when switching to the desktop breakpoint.
+- Project-information/cookie modal: stored-consent handling, scroll locking, initial focus and focus trapping, blocked Escape without dismissal, consent persistence in `localStorage` and a cookie, and scroll/focus restoration.
 - The tests make no network requests. The repository contains no end-to-end tests.
 
 Two static checks are also available that need no server and no browser:
@@ -431,7 +449,7 @@ npm run qa:references
 ```
 
 - `lint` runs ESLint for `js/`, `tools/`, `tests/`, `sw.template.js`, and `vitest.config.mjs`.
-- `qa:references` resolves the local references declared by the HTML pages, `css/**/*.css`, `manifest.webmanifest`, and the canonical precache list owned by `tools/sw/build-sw.mjs`; an unresolved reference exits the run non-zero.
+- `qa:references` resolves the local references declared by the HTML pages, `css/**/*.css`, `manifest.webmanifest`, and the static precache list owned by `tools/sw/build-sw.mjs`, and additionally checks the production bundle contract: who owns the names, that no script hardcodes a hashed filename, and that the canonical `_headers` carries exactly one marker block. When `dist/build-manifest.json` exists, it also verifies the generated release — the bundles, the rewritten HTML, the source files published beside the bundles, `dist/sw.js`, and `dist/_headers`. An unresolved reference or a violated contract exits the run non-zero.
 
 In addition, two audits start and stop their own local QA server:
 
@@ -448,11 +466,11 @@ Each of those scripts starts and stops its own local server, so `npm run qa` run
 
 The repository is prepared for static hosting (Netlify-format configuration):
 
-- `_headers` — security headers (CSP, HSTS, `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`) and the cache policy: the fixed-name production bundles (`style.min.css`, `script.min.js`) and the unversioned files under `css/` and `js/` use a finite freshness window with revalidation, the versioned font paths keep long-lived `immutable` caching, images and metadata files use finite caching, and `sw.js` and the HTML pages stay outside long-lived caching (`no-cache`).
+- `_headers` — security headers (CSP, HSTS, `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`) and the cache policy. The root file is canonical and carries a marker block reserved for the production bundle rules; `build:dist` replaces that block only in `dist/_headers` with the exact rules for the current build's filenames (`Cache-Control: public, max-age=31536000, immutable`), because those URLs carry a digest of their own content. The two standalone source scripts published beside the bundles — `js/theme-init.js` and `js/offline.js`, which production pages load directly — keep a finite freshness window with revalidation, the versioned font paths keep long-lived `immutable` caching, images and metadata files use finite caching, and `sw.js` and the HTML pages stay outside long-lived caching (`no-cache`).
 - The contact form uses Netlify Forms and reCAPTCHA; the CSP in `_headers` allows the reCAPTCHA domains.
 - The deployment output directory is `dist/`.
 
-The canonical origin recorded in page metadata, `sitemap.xml`, and `robots.txt` is `https://construction-project-02.netlify.app`. The repository does not confirm whether the current version of the project is live at that address.
+The canonical origin recorded in page metadata, `sitemap.xml`, and `robots.txt` is `https://construction-pr02-axiom.netlify.app`. The repository does not confirm whether the current version of the project is live at that address.
 
 ### Accessibility
 
@@ -483,7 +501,7 @@ The repository contains no audit results confirming conformance with a specific 
 - The service worker is registered in `js/core/service-worker.js` for `/sw.js` with scope `/`.
 - Strategies: documents — network-first with a cache and `offline.html` fallback; styles and scripts — stale-while-revalidate; images — cache-first.
 - On `activate`, caches with an outdated revision are removed; the service worker uses `skipWaiting()` and `clients.claim()`.
-- `sw.template.js` is the only hand-edited service worker source; `npm run build:sw` generates both the root `sw.js` (local profile, precaching the sources served by `npm run serve`) and `dist/sw.js` (production profile, precaching the built bundles from `dist/`) from it.
+- `sw.template.js` is the only hand-edited service worker source; `npm run build:sw` generates both the root `sw.js` (local profile, precaching the sources served by `npm run serve`) and `dist/sw.js` (production profile, precaching the exact bundle names read from `dist/build-manifest.json`) from it.
 
 The repository contains no installability verification and no offline behavior tests.
 
@@ -517,11 +535,11 @@ State kept in the browser:
 - Make service worker changes in `sw.template.js` and then run `npm run build:sw`; do not edit generated `sw.js` files by hand.
 - Update page metadata in `tools/templates/pages.meta.json` and regenerate it through `npm run build:head`.
 - Image variants in `assets/img/_optimized/` come from `npm run img:build`; `tools/images/build-images.mjs` declares the sources and widths to match the `srcset` declarations on the pages — after changing a `srcset`, update that declaration and run the script again.
-- All npm scripts are described in `settings.md`, and significant changes are recorded in `CHANGELOG.md`.
+- All npm scripts are described in `settings.md`, and significant changes are recorded in `docs/CHANGELOG.md`.
 
 ### Roadmap
 
-- No open roadmap items; optional improvements are tracked in `PLAN.md`.
+- No open roadmap items; optional improvements are tracked in `docs/archive/plans/PLAN-2026-09-02.md`.
 
 ### License
 
@@ -530,4 +548,4 @@ The project is covered by the KP_Code proprietary project license (KP_CODE Propr
 ### Attributions
 
 - Licenses of the development dependencies are listed in section 8 of [LICENSE](LICENSE).
-- The Lato, Montserrat, and Poppins fonts are self-hosted in `assets/fonts/`; the repository does not include license files for those fonts.
+- The Lato and Montserrat fonts are self-hosted in `assets/fonts/` under the SIL Open Font License 1.1; the attributions and the paths to the stored license texts are collected in [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).

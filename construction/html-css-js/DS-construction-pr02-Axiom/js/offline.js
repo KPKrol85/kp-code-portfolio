@@ -1,8 +1,14 @@
 (function () {
   const btn = document.getElementById("retryBtn");
-  if (btn) btn.addEventListener("click", () => location.reload());
-  window.addEventListener("online", () => location.reload());
+  const status = document.getElementById("netStatus");
+  const reload = () => window.location.reload();
+
+  if (btn) btn.addEventListener("click", reload);
+  window.addEventListener("online", () => {
+    if (status) status.textContent = "Połączenie przywrócone. Odświeżam stronę.";
+    reload();
+  });
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") location.reload();
+    if (e.key === "Escape") reload();
   });
 })();

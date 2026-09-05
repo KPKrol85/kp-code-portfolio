@@ -1,7 +1,6 @@
 export const SELECTORS = {
   hidden: ".u-hidden, .hidden",
   themeToggleDesktop: "#themeToggleDesktop",
-  themeToggleMobile: "#themeToggleMobile",
   navToggle: "#nav-toggle",
   primaryNav: "#primaryNav",
   scrollTopButton: "#powrot-na-gore, .powrot-na-gore",

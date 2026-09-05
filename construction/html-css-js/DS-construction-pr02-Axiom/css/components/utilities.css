@@ -4,29 +4,31 @@ body[data-current="services"] .site-nav__link[href$="#uslugi"] {
   font-weight: 700;
   text-decoration: none;
 }
+
 #primaryNav .site-nav__link[aria-current="page"]::after {
   content: none !important;
   display: none !important;
 }
+
 #primaryNav .site-nav__link[aria-current="page"]:hover {
   transform: none;
   box-shadow: none;
   background: transparent;
 }
 
-@media (prefers-color-scheme: dark) {
-  #primaryNav .site-nav__link[aria-current="page"] {
-    color: var(--accent-400);
-  }
+:root[data-theme="dark"] #primaryNav .site-nav__link[aria-current="page"] {
+  color: var(--accent-400);
 }
 
 /* Aria Current */
+
 a[aria-current="page"] {
   color: var(--accent);
   opacity: 1;
   pointer-events: none;
   position: relative;
 }
+
 a[aria-current="page"]::after {
   content: "";
   position: absolute;
@@ -37,18 +39,21 @@ a[aria-current="page"]::after {
   background: currentColor;
   opacity: 0.5;
 }
+
 a:not([aria-current="page"]):hover,
 a:not([aria-current="page"]):focus-visible {
   color: var(--accent);
   opacity: 0.9;
   text-decoration: none;
 }
+
 footer .footer__section a[aria-current="page"],
 footer .footer__section li[aria-current="page"] {
   color: var(--accent);
   font-weight: 400;
   position: relative;
 }
+
 footer .footer__section a[aria-current="page"]::after,
 footer .footer__section li[aria-current="page"]::after {
   content: "";
@@ -60,11 +65,10 @@ footer .footer__section li[aria-current="page"]::after {
   background: currentColor;
   opacity: 0.5;
 }
+
 footer .footer__section li[aria-current="page"] {
   display: inline-block;
 }
-
-
 
 .skip__link {
   position: fixed;
@@ -74,6 +78,7 @@ footer .footer__section li[aria-current="page"] {
   height: 1px;
   overflow: hidden;
 }
+
 .skip__link:focus-visible {
   left: 1rem;
   top: 1rem;
@@ -89,15 +94,29 @@ footer .footer__section li[aria-current="page"] {
   text-decoration: none;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+
 #main {
   scroll-margin-top: 80px;
 }
-.u-hidden,
-.hidden {
+
+/* Host of the SVG icon registry, inserted once per document by
+   js/components/icons.js. Its <symbol> children are never rendered, so the
+   host only has to stay out of the layout for the sprite to be invisible. */
+
+.icon-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+:where(html.js) .u-hidden,
+:where(html.js) .hidden {
   opacity: 0;
   transform: translateY(50px);
   transition: all 0.6s ease;
 }
+
 .u-show,
 .show {
   opacity: 1;
@@ -105,6 +124,7 @@ footer .footer__section li[aria-current="page"] {
 }
 
 /* scroll to top */
+
 .scroll-top {
   position: fixed;
   bottom: 20px;
@@ -133,6 +153,7 @@ footer .footer__section li[aria-current="page"] {
     box-shadow 0.3s ease,
     visibility 0s linear 0.25s;
 }
+
 .scroll-top.is-visible {
   opacity: 1;
   visibility: visible;
@@ -140,48 +161,58 @@ footer .footer__section li[aria-current="page"] {
   transform: translateY(0) scale(1);
   transition-delay: 0s;
 }
+
 .scroll-top:hover {
   background: rgba(40, 40, 40, 0.65);
   transform: translateY(-2px);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
 }
+
 .scroll-top:focus-visible {
   outline: 3px solid var(--accent-400);
   outline-offset: 4px;
 }
+
 .scroll-top:active {
   background: rgba(40, 40, 40, 0.8);
   transform: scale(0.94);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
+
 /* nav open */
+
 body.nav-open .scroll-top {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
+
 .scroll-top__icon {
   width: 16px;
   height: 16px;
 }
 
 /* interactions */
+
 .service,
 .testimonials__card,
 .gallery__item {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
+
 .service:hover,
 .testimonials__card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
 }
+
 #uslugi,
 #galeria,
 #onas,
 #kontakt {
   scroll-margin-top: var(--header-h);
 }
+
 :where(.features__item, .about__highlights > li, .interactive-card):not(.no-interaction) {
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
@@ -195,17 +226,20 @@ body.nav-open .scroll-top {
   will-change: transform;
   pointer-events: auto;
 }
+
 :where(.features__item, .about__highlights > li, .interactive-card):not(.no-interaction) :is(a, button):focus-visible {
   outline: 3px solid var(--accent-400);
   outline-offset: 3px;
   border-radius: 8px;
 }
+
 :where(.features__item, .about__highlights > li, .interactive-card):not(.no-interaction):hover {
   transform: translateY(-2px);
   border-color: color-mix(in srgb, var(--feature-accent) 45%, transparent);
   box-shadow: 0 8px 22px var(--feature-shadow);
   background: var(--feature-hover-bg);
 }
+
 :where(.features__item, .about__highlights > li, .interactive-card):not(.no-interaction):hover :is(h3, strong) {
   color: var(--feature-accent);
 }

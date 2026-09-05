@@ -3,6 +3,7 @@
 **Audit date:** 2026-08-30
 **Project type:** Static multi-page front-end website (vanilla HTML/CSS/JS) with a Node build pipeline and static-hosting configuration
 **Audit mode:** Static repository review
+**Archived:** 2026-09-02
 
 ## Status review — 2026-09-01
 
@@ -16,6 +17,15 @@ Everything below this section is the original audit as written on 2026-08-30. Th
 - RESOLVED: 8
 - PARTIALLY RESOLVED: 0
 - OPEN: 0
+
+## Status review — 2026-09-02
+
+**Status review date:** 2026-09-02
+**Review mode:** status verification of the optional improvement "Content-hashed filenames for production bundles" against the current implementation; no new audit was performed.
+
+That optional improvement, listed under **Extra quality improvements**, is now implemented and verified; its `Status:` and `Resolution:` lines describe the repository as of 2026-09-02. Nothing else in this document changed — the 2026-08-30 audit, the 2026-09-01 status review, and the counters above are unaffected. Those counters cover the eight original 2026-08-30 findings only; the optional improvements are listed separately and were never counted among them.
+
+One consequence is worth naming so the two dates are not read as one: the `P1-01` resolution below describes the cache policy as verified on 2026-09-01, when the production bundles still had fixed names and finite revalidated rules. Those two URLs no longer exist. The production bundles are now content-addressed and receive one-year `immutable` rules generated per build, while `/css/*` and `/js/*` — `js/theme-init.js` included — keep the finite revalidated caching `P1-01` established. The finding itself remains resolved; only the URLs it named changed.
 
 ## Overall assessment
 
@@ -134,7 +144,8 @@ None detected.
 
 ### Content-hashed filenames for production bundles
 
-- **Status:** OPEN — optional
+- **Status:** RESOLVED — implemented, verified, and recorded in CHANGELOG.md on 2026-09-02
+- **Resolution:** `build:hash` hashes the final minified CSS and JavaScript bytes with SHA-256 truncated to 16 lowercase hexadecimal characters and emits deterministic content-addressed production filenames; `dist/build-manifest.json` owns those names and drives both the production HTML rewrite and the production service-worker precache; `build:dist` generates exact `Cache-Control: public, max-age=31536000, immutable` rules for the two bundle URLs into `dist/_headers` while `/css/*` and `/js/*` keep finite revalidated caching; and `npm run qa:references` verifies the resulting release (PLAN task `O-01`).
 - **Evidence:** `tools/css/build-css.mjs`, `tools/js/build-js.mjs` emit fixed names `style.min.css` and `script.min.js`.
 - **Potential value:** Stable filenames are what forces the cache policy into the all-or-nothing choice behind P1-01; hashed names would make long-lived immutable caching safe for the main bundles.
 - **Scope boundary:** Optional and larger than the P1-01 fix, which can be resolved with header rules alone.

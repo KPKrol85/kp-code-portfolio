@@ -5,7 +5,6 @@ import { safeGetItem, safeSetItem } from "../utils/storage.js";
 export const initThemeToggle = () => {
   const root = document.documentElement;
   const btnDesktop = qs(SELECTORS.themeToggleDesktop);
-  const btnMobile = qs(SELECTORS.themeToggleMobile);
 
   const mq = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
   const setLogo = (isDark) => {
@@ -24,10 +23,6 @@ export const initThemeToggle = () => {
       btnDesktop.setAttribute("aria-pressed", pressed);
       btnDesktop.setAttribute("aria-label", label);
     }
-    if (btnMobile) {
-      btnMobile.setAttribute("aria-pressed", pressed);
-      btnMobile.setAttribute("aria-label", label);
-    }
   };
   const setTheme = (mode, persist = true) => {
     const isDark = mode === "dark";
@@ -42,7 +37,6 @@ export const initThemeToggle = () => {
   else setTheme(mq && mq.matches ? "dark" : "light", false);
   const onToggle = () => setTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark", true);
   if (btnDesktop) btnDesktop.addEventListener("click", onToggle);
-  if (btnMobile) btnMobile.addEventListener("click", onToggle);
   if (!saved && mq) {
     const onSystemChange = (e) => setTheme(e.matches ? "dark" : "light", false);
     if (mq.addEventListener) mq.addEventListener("change", onSystemChange);

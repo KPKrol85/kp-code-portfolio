@@ -1,5 +1,6 @@
 
 .project-modal {
+
   position: fixed;
   inset: 0;
   z-index: 1000;
@@ -7,6 +8,7 @@
   place-items: center;
   padding: var(--section-py-lg) var(--section-px-sm);
 }
+
 .project-modal__overlay {
   position: absolute;
   inset: 0;
@@ -14,6 +16,7 @@
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 }
+
 .project-modal__content {
   position: relative;
   z-index: 1;
@@ -27,23 +30,28 @@
   box-shadow: var(--feature-shadow);
   padding: var(--space-5);
 }
+
 .project-modal__text {
   margin: var(--space-4) 0;
   font-size: var(--fs-7);
 }
+
 .project-modal__text a {
   text-decoration: none;
   color: var(--text-body);
   transition: color 0.3s ease;
 }
+
 .project-modal__text a:hover,
 .project-modal__text a:focus-visible {
   color: var(--text-link);
 }
+
 .project-modal__text a:focus-visible {
   outline: 2px solid var(--accent-400);
   outline-offset: 2px;
 }
+
 .project-modal__links {
   margin: var(--space-2) 0 0;
   display: flex;
@@ -56,14 +64,17 @@
   font-weight: 600;
   transition: color 0.3s ease;
 }
+
 .project-modal__links a:hover,
 .project-modal__links a:focus-visible {
   color: var(--text-link);
 }
+
 .project-modal__links a:focus-visible {
   outline: 2px solid var(--accent-400);
   outline-offset: 2px;
 }
+
 .project-modal__actions {
   margin-top: var(--space-5);
   display: flex;

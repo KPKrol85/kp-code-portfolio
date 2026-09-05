@@ -3,10 +3,12 @@
   border-top: 1px solid color-mix(in srgb, var(--text-body) 10%, transparent);
   text-align: center;
 }
+
 :root[data-theme="dark"] .services__section {
   background: var(--surface-3);
   border-top: 1px solid color-mix(in srgb, var(--text-inverse) 10%, transparent);
 }
+
 .services {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(var(--card-min), 1fr));
@@ -14,6 +16,7 @@
   max-width: 1200px;
   margin: var(--space-6) auto;
 }
+
 .service {
   background: var(--text-inverse);
   padding: var(--space-3);
@@ -24,20 +27,24 @@
     transform 0.3s ease,
     box-shadow 0.3s ease;
 }
+
 :root[data-theme="dark"] .service {
   background: var(--surface-2);
 }
+
 .service:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 22px color-mix(in srgb, black 18%, transparent);
   cursor: pointer;
 }
+
 .service picture {
   display: block;
   width: 100%;
   overflow: hidden;
   border-radius: var(--radius-2);
 }
+
 .service img {
   display: block;
   width: 100%;
@@ -48,23 +55,28 @@
     transform 0.4s ease,
     opacity 0.4s ease;
 }
+
 .service:hover img {
   transform: scale(1.03);
   opacity: 0.97;
 }
+
 .service h3 {
   margin: var(--space-5) auto;
   color: var(--text-title);
   transition: color 0.3s ease;
 }
+
 .service a:hover h3,
 .service a:focus h3 {
   color: var(--primary-400);
 }
+
 :root[data-theme="dark"] body .service a:hover h3,
 :root[data-theme="dark"] body .service a:focus h3 {
   color: var(--accent-400);
 }
+
 .service p {
   color: var(--text-body);
   opacity: 0.8;
@@ -76,6 +88,7 @@
   letter-spacing: var(--ls-wide);
   line-height: var(--lh-body);
 }
+
 .service a {
   display: block;
   color: inherit;

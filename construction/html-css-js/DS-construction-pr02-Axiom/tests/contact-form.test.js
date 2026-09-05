@@ -45,7 +45,7 @@ const FORM_FIXTURE = `
     <div class="form__group form__consent">
       <label class="form__consent-label" for="consent">
         <input type="checkbox" id="consent" name="consent" required />
-        <span>Wyrażam zgodę na przetwarzanie moich danych osobowych.</span>
+        <span>Potwierdzam zapoznanie się z <a href="legal/polityka-prywatnosci.html">Polityką prywatności</a>.</span>
       </label>
     </div>
     <p id="formNote" class="form__note">Pola powyżej są wymagane.</p>

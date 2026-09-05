@@ -2,8 +2,8 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
-    // The contact form and the lightbox are DOM components, so the focused
-    // suite runs against jsdom instead of a real browser.
+    // The contact form, lightbox, navigation, and project-information modal
+    // are DOM components, so the focused suite runs against jsdom.
     environment: "jsdom",
     environmentOptions: {
       jsdom: {

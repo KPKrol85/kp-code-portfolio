@@ -8,7 +8,9 @@ const projectRoot = path.resolve(__dirname, "../..");
 
 const templatePath = path.join(projectRoot, "tools/templates/head.partial.html");
 const metaPath = path.join(projectRoot, "tools/templates/pages.meta.json");
-const defaultOgImage = "https://construction-project-02.netlify.app/assets/img/og/og-1200x630.jpg";
+// Page metadata uses root-relative paths resolved against this public origin.
+const siteOrigin = "https://construction-pr02-axiom.netlify.app";
+const defaultOgImage = "/assets/img/og/og-1200x630.jpg";
 
 const template = fs.readFileSync(templatePath, "utf8").trimEnd();
 const pageMeta = JSON.parse(fs.readFileSync(metaPath, "utf8"));
@@ -49,19 +51,31 @@ const renderHead = (filePath, meta) => {
       throw new Error(`Missing required metadata value for ${token} in ${filePath}`);
     }
 
-    return output.replaceAll(token, escapeAttr(value));
+    const renderedValue = ["{{CANONICAL}}", "{{OG_URL}}", "{{OG_IMAGE}}"].includes(token)
+      ? new URL(value, siteOrigin).href
+      : value;
+
+    return output.replaceAll(token, escapeAttr(renderedValue));
   }, template);
 };
 
 const indentBlock = (block, spaces = 4) => {
   const prefix = " ".repeat(spaces);
-  const lines = block.trim().split("\n");
-  const nonEmpty = lines.filter((line) => line.trim().length > 0);
-  const minIndent = nonEmpty.length > 0 ? Math.min(...nonEmpty.map((line) => line.match(/^\s*/)[0].length)) : 0;
+  const [firstLine, ...restLines] = block.trim().split("\n");
+  // The retained block is matched from `<script` onwards, so its first line never
+  // carries the source indentation. Measuring the dedent baseline across every line
+  // therefore always yields zero and stacks another prefix onto the continuation
+  // lines on each run, so the baseline is measured on the continuation lines only.
+  const contentLines = restLines.filter((line) => line.trim().length > 0);
+  const baseIndent =
+    contentLines.length > 0 ? Math.min(...contentLines.map((line) => line.match(/^[ \t]*/)[0].length)) : 0;
+  const outerIndent = new RegExp(`^[ \\t]{0,${baseIndent}}`);
 
-  return lines
-    .map((line) => `${prefix}${line.slice(minIndent)}`)
-    .join("\n");
+  const normalized = restLines.map((line) =>
+    line.trim().length > 0 ? `${prefix}${line.replace(outerIndent, "")}` : line
+  );
+
+  return [`${prefix}${firstLine.replace(/^[ \t]+/, "")}`, ...normalized].join("\n");
 };
 
 const extractHeadExtras = (headInner) => {
@@ -96,7 +110,10 @@ for (const [filePath, meta] of Object.entries(pageMeta)) {
   const generatedHead = renderHead(filePath, meta);
 
   const headSections = [generatedHead, ...extraBlocks];
-  const nextHeadInner = `\n${headSections.join("\n\n")}\n  `;
+  // The template and each page carry the repository line endings, so the assembled
+  // head is normalised back to the page's own convention to keep runs byte-stable.
+  const eol = html.includes("\r\n") ? "\r\n" : "\n";
+  const nextHeadInner = `\n${headSections.join("\n\n")}\n  `.replace(/\r\n|\n/g, eol);
 
   const updatedHtml = html.replace(headMatch[0], `<head>${nextHeadInner}</head>`);
 

@@ -86,9 +86,20 @@ const transformModule = async (filePath) => {
   return module;
 };
 
+// Discovery stays concurrent, so moduleCache insertion order follows whichever
+// file read finished first - scheduling, not source. Emission is ordered here by
+// the stable normalized module id instead, so identical sources always produce
+// identical bundle bytes and therefore an identical content hash. Registration
+// order carries no meaning at runtime: every module is stored as a closure and
+// nothing executes until the trailing __require(entry) call below.
+//
+// Compared by code point rather than localeCompare, so the order cannot vary
+// with the machine's locale.
+const byModuleId = (a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
+
 const build = async () => {
   await transformModule(entryFile);
-  const modules = Array.from(moduleCache.values());
+  const modules = Array.from(moduleCache.values()).sort(byModuleId);
   const moduleEntries = modules
     .map((mod) => {
       return `__modules["${mod.id}"] = { exports: {}, executed: false, fn: (__exports) => {\n${mod.code}\n} };`;
