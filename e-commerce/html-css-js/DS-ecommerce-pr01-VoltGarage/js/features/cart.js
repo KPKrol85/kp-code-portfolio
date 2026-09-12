@@ -7,17 +7,31 @@ import { logError } from '../core/errors.js';
 const CART_KEY = 'volt_cart';
 const FREE_SHIPPING = 300;
 const SHIPPING_FEE = 20;
+const ADDED_FEEDBACK_MS = 1200;
 
 const getCart = () => {
   const raw = safeStorage.get(CART_KEY);
   if (!raw) return [];
   try {
-    return JSON.parse(raw) || [];
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    return parsed.filter(
+      (item) =>
+        item !== null &&
+        typeof item === 'object' &&
+        !Array.isArray(item) &&
+        typeof item.id === 'string' &&
+        item.id.trim().length > 0 &&
+        Number.isInteger(item.qty) &&
+        item.qty > 0
+    );
   } catch (error) {
     logError('cart:parse', error);
     return [];
   }
 };
+
+export const hasCartItems = () => getCart().length > 0;
 
 const saveCart = (items) => {
   try {
@@ -52,6 +66,11 @@ export const initCart = () => {
   window.addEventListener('cart:updated', updateCount);
 };
 
+// Przyczyna: powtórny klik w oknie potwierdzenia zapamiętywał "Dodano" jako etykietę wyjściową.
+// Stan trzymany per przycisk: etykieta czytana raz, a każdy klik restartuje pojedynczy timer.
+const originalLabels = new WeakMap();
+const restoreTimers = new WeakMap();
+
 export const initAddToCartButtons = () => {
   document.addEventListener('click', (event) => {
     const button = event.target.closest('[data-add-to-cart]');
@@ -61,13 +80,20 @@ export const initAddToCartButtons = () => {
     if (!id) return;
     const qtySelect = document.querySelector('[data-qty-select]');
     const qty = qtySelect ? Number(qtySelect.value) : 1;
-    const originalLabel = button.textContent;
+    if (!originalLabels.has(button)) {
+      originalLabels.set(button, button.textContent);
+    }
+    clearTimeout(restoreTimers.get(button));
 
     addToCart(id, qty);
     button.textContent = 'Dodano';
-    setTimeout(() => {
-      button.textContent = originalLabel;
-    }, 1200);
+    restoreTimers.set(
+      button,
+      setTimeout(() => {
+        restoreTimers.delete(button);
+        button.textContent = originalLabels.get(button);
+      }, ADDED_FEEDBACK_MS)
+    );
   });
 };
 
@@ -122,6 +148,11 @@ const updateSummary = (summary, totals) => {
   if (totalEl) totalEl.textContent = `${totals.total.toFixed(0)} zł`;
 };
 
+const revealSummary = (summary) => {
+  if (!summary) return;
+  summary.hidden = false;
+};
+
 export const initCartPage = async () => {
   const container = document.querySelector('[data-cart-items]');
   if (!container) return;
@@ -134,6 +165,8 @@ export const initCartPage = async () => {
   } catch (error) {
     logError('cart:load-products', error);
     renderState(container, 'error', 'Nie udało się wczytać produktów koszyka.');
+    // Nothing has been calculated, so the summary stays hidden rather than standing next to
+    // the error with figures no catalog backed.
     return;
   }
 
@@ -141,14 +174,16 @@ export const initCartPage = async () => {
     const cart = getCart();
     if (!cart.length) {
       renderState(container, 'empty', 'Koszyk jest pusty. Dodaj produkty ze sklepu.');
-      const summary = document.querySelector('[data-cart-summary]');
-      updateSummary(summary, calculateTotals(cart, products));
-      return;
+    } else {
+      container.innerHTML = buildCartItems(cart, products);
     }
 
-    container.innerHTML = buildCartItems(cart, products);
+    // The summary ships hidden so an unscripted visit is never shown 0 zł next to a checkout
+    // call to action. It is only unhidden here, once the catalog has loaded and the figures it
+    // prints have been calculated from the cart that was just read and rendered.
     const summary = document.querySelector('[data-cart-summary]');
     updateSummary(summary, calculateTotals(cart, products));
+    revealSummary(summary);
     initReveal();
   };
 

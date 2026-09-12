@@ -2,16 +2,8 @@
   <a class="skip-link" href="#main">Przejdź do treści</a>
   <div class="container header-inner">
     <a class="brand" href="{{rootPrefix}}index.html">
-      <img
-        class="brand-logo"
-        src="{{rootPrefix}}assets/images/logo/logo.svg"
-        alt=""
-        aria-hidden="true"
-        width="120"
-        height="32"
-        decoding="async"
-      />
-      <span class="brand-text">VOLT GARAGE</span>
+      <span class="brand-logo" aria-hidden="true"></span>
+      <span class="brand-text visually-hidden">VOLT GARAGE</span>
     </a>
     <nav aria-label="Główne">
       <ul class="nav" id="primary-nav">
@@ -52,8 +44,6 @@
           </button>
           <ul class="dropdown-menu" data-dropdown-menu>
             <li><a class="dropdown-subitem" href="{{pagesPrefix}}contact.html">Formularz</a></li>
-            <li><a class="dropdown-subitem" href="{{pagesPrefix}}checkout.html">Dostawa</a></li>
-            <li><a class="dropdown-subitem" href="{{pagesPrefix}}cart.html">Zwroty</a></li>
           </ul>
         </li>
         <li class="nav-item" data-dropdown>
@@ -83,9 +73,8 @@
         class="theme-toggle"
         id="theme-toggle"
         data-theme-toggle
-        title="Toggle theme"
-        aria-label="auto"
-        aria-live="polite"
+        title="Przełącz motyw"
+        aria-label="Przełącz motyw"
         aria-pressed="false"
         type="button"
       >
@@ -118,21 +107,13 @@
         <span class="cart-link__icon">
           <svg
             class="cart-link__svg"
-            xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            viewBox="0 0 32 32"
+            aria-hidden="true"
+            focusable="false"
           >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M4 19a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-            <path d="M15 19a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-            <path d="M17 17h-11v-14h-2" />
-            <path d="M6 5l14 1l-1 7h-13" />
+            <use href="#icon-cart"></use>
           </svg>
         </span>
         <span class="cart-count" data-cart-count>0</span>

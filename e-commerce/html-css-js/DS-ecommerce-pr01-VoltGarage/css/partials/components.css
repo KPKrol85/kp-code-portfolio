@@ -12,6 +12,7 @@
   background: var(--color-ink);
   color: var(--color-surface);
   font-size: var(--fs-02);
+  letter-spacing: var(--ls-03);
   text-transform: uppercase;
   font-weight: var(--fw-02);
   transition:
@@ -19,6 +20,7 @@
     box-shadow var(--transition-fast),
     background var(--transition-fast);
 }
+
 .btn:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-sm);
@@ -26,26 +28,28 @@
 
 .btn-outline {
   border-color: color-mix(in srgb, var(--color-border) 72%, transparent);
-  color: color-mix(in srgb, white 92%, transparent);
   color: var(--color-ink);
   background: color-mix(in srgb, white 4%, transparent);
   backdrop-filter: blur(8px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
 }
+
 .btn-outline:hover {
   background: color-mix(in srgb, white 7%, transparent);
   border-color: color-mix(in srgb, var(--color-border) 84%, transparent);
   transform: translateY(-1px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
+
 .btn-outline:active {
   transform: translateY(0);
   background: color-mix(in srgb, white 9%, transparent);
   border-color: color-mix(in srgb, var(--color-border) 88%, transparent);
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.18);
 }
+
 .btn-outline:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--color-accent) 80%, white);
+  outline: 2px solid color-mix(in srgb, var(--color-accent-ink) 80%, white);
   outline-offset: 3px;
 }
 
@@ -60,6 +64,7 @@
     0 10px 26px rgba(0, 0, 0, 0.18),
     inset 0 1px 0 rgba(255, 255, 255, 0.35);
 }
+
 .btn-accent:hover {
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)),
@@ -69,14 +74,16 @@
       color-mix(in srgb, var(--color-accent) 92%, black)
     );
 }
+
 .btn-accent:active {
   transform: translateY(0);
   box-shadow:
     0 8px 18px rgba(0, 0, 0, 0.18),
     inset 0 2px 6px rgba(0, 0, 0, 0.22);
 }
+
 .btn-accent:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--color-accent) 70%, white);
+  outline: 2px solid color-mix(in srgb, var(--color-accent-ink) 70%, white);
   outline-offset: 3px;
 }
 
@@ -88,8 +95,8 @@
   margin: var(--space-02) 0;
   padding: var(--space-02) var(--space-04);
   border-radius: var(--radius-badge);
-  background: color-mix(in srgb, var(--color-accent) 3%, transparent);
-  color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+  color: var(--color-accent-ink);
   font-size: var(--fs-01);
   letter-spacing: var(--ls-04);
   text-transform: uppercase;
@@ -108,28 +115,34 @@
   gap: var(--space-02);
   height: 100%;
 }
+
 .card img {
   border-radius: var(--radius-md);
 }
+
 .card .badge {
   justify-self: start;
 }
+
 .card-title {
   font-size: var(--fs-04);
   text-align: left;
 }
+
 .card-text {
   font-size: var(--fs-03);
   letter-spacing: var(--ls-04);
   max-width: 42ch;
   opacity: 0.9;
 }
+
 .product-category {
   text-transform: uppercase;
   letter-spacing: var(--ls-03);
   font-size: var(--fs-02);
   font-weight: var(--fw-03);
 }
+
 .card-meta {
   display: flex;
   align-items: center;
@@ -141,6 +154,7 @@
   padding: var(--space-01) 0;
   margin-bottom: var(--space-03);
 }
+
 .card-meta::after {
   content: '';
   position: absolute;
@@ -150,6 +164,7 @@
   height: 1px;
   background: color-mix(in srgb, var(--color-accent) 15%, transparent);
 }
+
 .card picture {
   position: relative;
   display: block;
@@ -160,6 +175,7 @@
   background: var(--color-surface-alt);
   box-shadow: var(--shadow-md);
 }
+
 .card picture img {
   display: block;
   width: 100%;
@@ -169,6 +185,7 @@
     transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1),
     filter var(--transition-slow);
 }
+
 .card picture::after {
   content: '';
   position: absolute;
@@ -178,21 +195,26 @@
   transition: opacity var(--transition-slow);
   pointer-events: none;
 }
+
 .card:hover picture img {
   transform: scale(1.06);
   filter: brightness(1.01) contrast(1.02);
 }
+
 .card:hover picture::after {
   opacity: 1;
 }
+
 .card .tag-list > .btn {
   flex: 0 0 120px;
   text-align: center;
 }
+
 .card .stacked {
   list-style: none;
   padding-left: 0;
 }
+
 .card .stacked li::before {
   content: '– ';
   margin-right: var(--space-02);
@@ -205,11 +227,13 @@
 .card--feature {
   padding: var(--space-04);
 }
+
 .card--feature .card-title {
   font-size: var(--fs-04);
-  color: var(--color-accent);
+  color: var(--color-accent-ink);
   text-transform: uppercase;
 }
+
 .card--feature p {
   letter-spacing: var(--ls-02);
 }
@@ -237,12 +261,14 @@
   border-radius: var(--radius-sm);
   color: var(--color-text);
 }
+
 .price-old {
   text-decoration: line-through;
   color: var(--color-ink-muted);
 }
+
 .price-new {
-  color: var(--color-accent);
+  color: var(--color-accent-ink);
 }
 
 /* Theme Toggle */
@@ -263,41 +289,52 @@
     box-shadow var(--transition-fast),
     color var(--transition-fast);
 }
+
 .theme-toggle .sun-and-moon {
   width: 18px;
   height: 18px;
 }
+
 .sun-and-moon > :is(.moon, .sun, .sun-beams) {
   transform-origin: center;
 }
+
 .sun-and-moon > :is(.moon, .sun) {
   fill: var(--icon-fill);
 }
+
 .theme-toggle:is(:hover, :focus-visible) > .sun-and-moon > :is(.moon, .sun) {
   fill: var(--icon-fill-hover);
 }
+
 .sun-and-moon > .sun-beams {
   stroke: var(--icon-fill);
   stroke-width: 2px;
 }
+
 .theme-toggle:is(:hover, :focus-visible) .sun-and-moon > .sun-beams {
   stroke: var(--icon-fill-hover);
 }
+
 [data-theme='dark'] .sun-and-moon > .sun {
   transform: scale(1.75);
 }
+
 [data-theme='dark'] .sun-and-moon > .sun-beams {
   opacity: 0;
 }
+
 [data-theme='dark'] .sun-and-moon > .moon > circle {
   transform: translateX(-7px);
 }
+
 @supports (cx: 1) {
   [data-theme='dark'] .sun-and-moon > .moon > circle {
     cx: 17;
     transform: translateX(0);
   }
 }
+
 @media (prefers-reduced-motion: no-preference) {
   .sun-and-moon > .sun {
     transition: transform 0.5s var(--ease-elastic-3);
@@ -340,7 +377,7 @@
   padding: var(--space-02) var(--space-03);
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
-  color: var(--color-accent);
+  color: var(--color-accent-ink);
   background: var(--color-surface);
   transition:
     border-color var(--transition-base),
@@ -348,23 +385,27 @@
     transform var(--transition-fast),
     background-color var(--transition-base);
 }
+
 @media (hover: hover) and (pointer: fine) {
   .cart-link:hover {
     border-color: var(--color-border-strong);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
   }
 }
+
 .cart-link:focus-visible {
   outline: none;
-  border-color: var(--color-accent);
+  border-color: var(--color-accent-ink);
   box-shadow:
     0 0 0 2px color-mix(in srgb, var(--color-accent) 35%, transparent),
     0 2px 6px rgba(0, 0, 0, 0.12);
 }
+
 .cart-link:active {
   transform: translateY(1px);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
 }
+
 .cart-link__icon {
   display: inline-flex;
   align-items: center;
@@ -621,29 +662,123 @@
   display: flex;
   gap: var(--space-02);
 }
+/* The display above outranks the user-agent rule for the hidden attribute, so without this the
+   toast stays painted after hideToast() marks it hidden - and the install offer below, which
+   steps aside only for a toast that is still shown, would clear a notification nobody can see. */
+.toast[hidden] {
+  display: none !important;
+}
 
 /* Install CTA */
 
+/* The wrapper is only ever as wide as the state it shows, so it parks against the bottom-right
+   edge without covering the product grid behind it. */
 .install-cta {
+  --install-cta-inline: var(--space-05);
+  --install-cta-block: var(--space-05);
+  --install-cta-toast-clearance: 0px;
+
   position: fixed;
-  inset: auto var(--space-04) calc(var(--space-04) + 68px) var(--space-04);
+  right: var(--install-cta-inline);
+  bottom: calc(var(--install-cta-block) + var(--install-cta-toast-clearance));
   z-index: 850;
+  display: flex;
+  justify-content: flex-end;
+  /* On narrow screens the wrapper spans the bottom band, so only the visible state itself may
+     take pointer input; the empty remainder must never swallow taps meant for the page. */
+  pointer-events: none;
+}
+.install-cta__card,
+.install-cta__chip {
+  pointer-events: auto;
+}
+.install-cta[hidden],
+.install-cta__card[hidden],
+.install-cta__chip[hidden] {
+  display: none !important;
+}
+.install-cta__card {
   display: grid;
-  gap: var(--space-02);
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--space-02) var(--space-03);
+  width: min(320px, calc(100vw - var(--install-cta-inline) * 2));
   padding: var(--space-03);
-  max-width: min(520px, calc(100vw - var(--space-06)));
   border-radius: var(--radius-md);
   background: color-mix(in srgb, var(--color-surface-alt) 95%, var(--color-bg));
   border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
+}
+.install-cta__mark {
+  width: 28px;
+  height: auto;
+}
+.install-cta__text {
+  margin: 0;
+  font-size: var(--fs-03);
+  line-height: var(--lh-02);
+  color: var(--color-ink);
 }
 .install-cta__actions {
-  display: inline-flex;
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
   gap: var(--space-02);
   flex-wrap: wrap;
 }
-.install-cta[hidden] {
-  display: none !important;
+.install-cta__actions .btn {
+  height: 32px;
+  padding: var(--space-02) var(--space-04);
+}
+.install-cta__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-02);
+  height: 34px;
+  padding: 0 var(--space-03);
+  border-radius: var(--radius-pill);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 45%, var(--color-border));
+  background: color-mix(in srgb, var(--color-surface-alt) 95%, var(--color-bg));
+  color: var(--color-ink);
+  font-size: var(--fs-02);
+  font-weight: var(--fw-02);
+  letter-spacing: var(--ls-04);
+  text-transform: uppercase;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+.install-cta__chip:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--color-accent) 70%, var(--color-border));
+  box-shadow: var(--shadow-md);
+}
+.install-cta__chip:focus-visible {
+  outline: 2px solid var(--color-accent-ink);
+  outline-offset: 3px;
+}
+.install-cta__chip .install-cta__mark {
+  width: 18px;
+}
+
+/* Below this width the toast shares the bottom band, so the offer steps above it. */
+@media (max-width: 1023px) {
+  body:has(.toast:not([hidden])) .install-cta {
+    --install-cta-toast-clearance: 96px;
+  }
+}
+@media (max-width: 719px) {
+  .install-cta {
+    --install-cta-inline: var(--space-04);
+    --install-cta-block: calc(var(--space-04) + env(safe-area-inset-bottom, 0px));
+
+    left: var(--install-cta-inline);
+  }
+  .install-cta__card {
+    width: 100%;
+  }
 }
 
 /* Cart item */
@@ -695,16 +830,23 @@
   justify-self: center;
   text-align: left;
 }
+.total-panel h2,
 .total-panel h3 {
+  font-size: 1.17em;
   display: inline-flex;
   align-items: center;
   gap: var(--space-03);
 }
 .total-panel .total-panel__icon {
-  color: var(--color-accent);
+  color: var(--color-accent-ink);
 }
 .total-panel strong {
-  color: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+/* The panel sets its own display, so the cart summary needs this to stay out of the document
+   while the runtime has not yet verified the totals it prints. */
+.total-panel[hidden] {
+  display: none !important;
 }
 
 /* Form */
@@ -715,23 +857,28 @@
   width: 100%;
   min-width: 0;
 }
+
 .form-grid > * {
   min-width: 0;
 }
+
 .form-row {
   display: grid;
   gap: var(--space-03);
   grid-template-columns: 1fr;
 }
+
 .form-grid .input-group {
   gap: var(--space-02);
 }
+
 .form-grid .input-group span {
   color: var(--color-ink-muted);
   font-size: var(--fs-03);
   font-weight: var(--fw-01);
   letter-spacing: var(--ls-01);
 }
+
 .form-grid :is(input, select, textarea):not([type='hidden']) {
   width: 100%;
   min-width: 0;
@@ -817,70 +964,197 @@
     opacity var(--transition-base),
     visibility var(--transition-base);
 }
+
+/* The page stays recognizable behind the disclosure: a moderate scrim and a light blur keep the
+   panel unmistakably in front without burying the hero under a heavy frosted sheet. */
 .project-modal__backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(9, 12, 18, 0.62);
-  backdrop-filter: blur(6px);
+  background: rgba(9, 12, 18, 0.46);
+  backdrop-filter: blur(3px);
 }
+
 .project-modal.is-visible {
   opacity: 1;
   visibility: visible;
 }
+
 .project-modal__panel {
   position: relative;
-  max-width: 480px;
+  max-width: 520px;
   width: 100%;
-  background: color-mix(in srgb, var(--color-surface) 90%, var(--color-bg));
-  border: 1px solid color-mix(in srgb, var(--color-border) 75%, transparent);
+  /* The grid area already excludes the container padding, so this keeps short viewports scrollable
+     instead of pushing the acknowledgement below the fold. */
+  max-height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: var(--space-06);
-  box-shadow: var(--shadow-lg);
+  padding: var(--space-07);
+  box-shadow: var(--shadow-md), var(--shadow-lg);
   display: grid;
   gap: var(--space-03);
 }
+
+/* Brand lockup: the existing storefront mark plus the wordmark, signed off by a six-segment racing
+   tick. Segments run 36/28/22/17/13/10px with 6px gaps, so the motif tapers like a velocity trail
+   and closes at 156px — the width the mark and wordmark above it occupy across the whole clamp
+   range (147-161px). Painted as one background gradient, so the accent adds nothing to the markup
+   and nothing to the accessibility tree. */
+.project-modal__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-03);
+  margin-bottom: var(--space-02);
+  padding-bottom: var(--space-03);
+  background: linear-gradient(
+      90deg,
+      var(--color-accent) 0 36px,
+      transparent 36px 42px,
+      color-mix(in srgb, var(--color-accent) 88%, transparent) 42px 70px,
+      transparent 70px 76px,
+      color-mix(in srgb, var(--color-accent) 76%, transparent) 76px 98px,
+      transparent 98px 104px,
+      color-mix(in srgb, var(--color-accent) 64%, transparent) 104px 121px,
+      transparent 121px 127px,
+      color-mix(in srgb, var(--color-accent) 52%, transparent) 127px 140px,
+      transparent 140px 146px,
+      color-mix(in srgb, var(--color-accent) 40%, transparent) 146px 156px
+    )
+    bottom left / 156px 2px no-repeat;
+}
+
+.project-modal__mark {
+  width: 34px;
+  height: auto;
+}
+
+.project-modal__wordmark {
+  font-family: var(--font-display);
+  font-size: var(--fs-04);
+  font-weight: var(--fw-03);
+  letter-spacing: var(--ls-04);
+  line-height: var(--lh-01);
+}
+
 .project-modal__panel h2 {
   margin: 0;
-  font-size: var(--fs-06);
-  text-align: center;
-  text-transform: uppercase;
+  font-size: var(--fs-07);
+  letter-spacing: var(--ls-01);
 }
+
 .project-modal__panel p {
   margin: 0;
   color: var(--color-ink-muted);
 }
+
+.project-modal__note {
+  font-size: var(--fs-03);
+}
+
 .project-modal__actions {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-03);
-  margin: var(--space-02) auto;
+  margin-top: var(--space-03);
 }
-.project-modal .btn {
-  justify-self: start;
-  width: 180px;
+
+.project-modal__cta {
+  min-width: 200px;
+  height: 44px;
+  padding-inline: var(--space-06);
 }
+
+/* Links sit inside muted copy, so they carry ink weight: never colour alone. */
 .project-modal__panel a {
-  color: inherit;
+  color: var(--color-ink);
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, var(--color-ink-muted) 45%, transparent);
+  text-underline-offset: 3px;
+  transition:
+    color var(--transition-fast),
+    text-decoration-color var(--transition-fast);
 }
+
+/* The legal row is navigation, so it reads as navigation at rest. */
+.project-modal__links a {
+  text-decoration-line: underline;
+}
+
+/* The studio credit runs mid-sentence: weight carries it at rest, so no rule cuts the paragraph.
+   Its underline arrives with hover and focus, where the link is being acted on. */
+.project-modal__studio {
+  font-weight: var(--fw-02);
+}
+
 @media (hover: hover) and (pointer: fine) {
   .project-modal__panel a:hover {
-    color: var(--color-accent);
+    color: var(--color-accent-ink);
+    text-decoration-line: underline;
+    text-decoration-color: currentcolor;
   }
 }
+
 .project-modal__panel a:focus-visible {
-  color: var(--color-accent);
+  color: var(--color-accent-ink);
+  text-decoration-line: underline;
+  text-decoration-color: currentcolor;
+  border-radius: var(--radius-sm);
 }
+
 .project-modal__links {
   display: flex;
   flex-wrap: wrap;
-  text-align: center;
-  margin: 0 auto;
-  gap: var(--space-02);
+  align-items: center;
+  gap: var(--space-02) var(--space-03);
+  margin-top: var(--space-03);
+  padding-top: var(--space-04);
+  border-top: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
   font-size: var(--fs-03);
   color: var(--color-ink-muted);
 }
+
+.project-modal__separator {
+  color: var(--color-border-strong);
+}
+
 .project-modal-open {
   overflow: hidden;
+}
+
+/* The panel settles into place; the container fade carries the entrance when motion is reduced. */
+@media (prefers-reduced-motion: no-preference) {
+  .project-modal__panel {
+    transform: translateY(8px);
+    transition: transform var(--transition-base) var(--ease-out-5);
+  }
+  .project-modal.is-visible .project-modal__panel {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .project-modal {
+    padding: var(--space-04);
+  }
+  .project-modal__panel {
+    padding: var(--space-05);
+  }
+  .project-modal__cta {
+    width: 100%;
+  }
+}
+
+/* Under this width the row cannot hold all three destinations, and wrapping it would strand a
+   separator at the end of a line. The bullets step aside and spacing carries the separation. */
+@media (max-width: 359px) {
+  .project-modal__links {
+    gap: var(--space-02) var(--space-04);
+  }
+  .project-modal__separator {
+    display: none;
+  }
 }
 
 /* Tags */
@@ -1044,6 +1318,21 @@
 
 /* Animations */
 
+/* A single short rise when a state appears; no fill mode, so the chip keeps its own hover lift
+   and nothing loops for attention afterwards. */
+@keyframes install-cta-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .install-cta__card,
+  .install-cta__chip {
+    animation: install-cta-in 220ms var(--ease-out-5);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .btn:hover,
   .btn-outline:hover,
@@ -1051,7 +1340,8 @@
   [data-checkout-form] .btn-accent:hover,
   .card:hover picture img,
   .category-pill:hover,
-  .cart-link:active {
+  .cart-link:active,
+  .install-cta__chip:hover {
     transform: none;
   }
 }

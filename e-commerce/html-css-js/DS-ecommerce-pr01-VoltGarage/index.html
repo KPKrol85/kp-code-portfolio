@@ -65,7 +65,7 @@
     <!-- Preloads -->
     <link
       rel="preload"
-      href="/assets/fonts/space-grotesk/SpaceGrotesk-700.woff2"
+      href="/assets/fonts/space-grotesk/SpaceGrotesk-Variable.woff2"
       as="font"
       type="font/woff2"
       crossorigin
@@ -99,8 +99,7 @@
           "https://www.facebook.com/kpkrol85",
           "https://x.com/KP_Code_85",
           "https://github.com/KPKrol85",
-          "https://www.instagram.com/kpkrol85/",
-          "https://www.linkedin.com/in/kamil-krol-256522279/"
+          "https://www.instagram.com/kpkrol85/"
         ]
       }
     </script>
@@ -131,27 +130,27 @@
           <source
             type="image/avif"
             srcset="
-              assets/images/_optimized/hero/hero-05-800x600.avif    800w,
-              assets/images/_optimized/hero/hero-05-1280x720.avif  1280w,
-              assets/images/_optimized/hero/hero-05-1920x1080.avif 1920w
+              /assets/images/_optimized/hero/hero-05-800x600.avif    800w,
+              /assets/images/_optimized/hero/hero-05-1280x720.avif  1280w,
+              /assets/images/_optimized/hero/hero-05-1920x1080.avif 1920w
             "
             sizes="100vw"
           />
           <source
             type="image/webp"
             srcset="
-              assets/images/_optimized/hero/hero-05-800x600.webp    800w,
-              assets/images/_optimized/hero/hero-05-1280x720.webp  1280w,
-              assets/images/_optimized/hero/hero-05-1920x1080.webp 1920w
+              /assets/images/_optimized/hero/hero-05-800x600.webp    800w,
+              /assets/images/_optimized/hero/hero-05-1280x720.webp  1280w,
+              /assets/images/_optimized/hero/hero-05-1920x1080.webp 1920w
             "
             sizes="100vw"
           />
           <img
-            src="assets/images/hero/hero-05-1280x720.jpg"
+            src="/assets/images/hero/hero-05-1280x720.jpg"
             srcset="
-              assets/images/hero/hero-05-800x600.jpg    800w,
-              assets/images/hero/hero-05-1280x720.jpg  1280w,
-              assets/images/hero/hero-05-1920x1080.jpg 1920w
+              /assets/images/hero/hero-05-800x600.jpg    800w,
+              /assets/images/hero/hero-05-1280x720.jpg  1280w,
+              /assets/images/hero/hero-05-1920x1080.jpg 1920w
             "
             sizes="100vw"
             width="1920"
@@ -178,24 +177,20 @@
             </div>
           </div>
           <div class="hero-card" data-reveal>
-            <h3>Pakiet startowy VOLT</h3>
+            <h2>Pakiet startowy VOLT</h2>
             <p>Limitowany zestaw akcesoriów, który od razu buduje charakter auta.</p>
             <div class="stats">
               <div class="stat">
-                <strong>42</strong>
-                <p>Nowe produkty</p>
+                <strong>12</strong>
+                <p>Produktów w katalogu</p>
               </div>
               <div class="stat">
-                <strong>42</strong>
-                <p>Nowe produkty</p>
+                <strong>6</strong>
+                <p>Kategorii</p>
               </div>
               <div class="stat">
-                <strong>4.9/5</strong>
-                <p>Ocena klientów</p>
-              </div>
-              <div class="stat">
-                <strong>48h</strong>
-                <p>Wysyłka ekspresowa</p>
+                <strong>2</strong>
+                <p>Nowości</p>
               </div>
             </div>
           </div>
@@ -265,20 +260,17 @@
         </div>
       </section>
 
-      <!-- Newsletter -->
+      <!-- News -->
       <section>
         <div class="container promo" data-reveal>
           <div>
-            <h2>Zapisz się do biuletynu</h2>
-            <p>Dostęp do premier, dropów i limitowanych akcesoriów.</p>
+            <h2>Nowości VOLT GARAGE</h2>
+            <p>
+              Zapisy do newslettera nie są obsługiwane w tej wersji demonstracyjnej. Aktualne premiery
+              i nowe produkty znajdziesz w katalogu nowości.
+            </p>
           </div>
-          <form class="footer-form" aria-label="Biuletyn">
-            <label class="promo-input">
-              <span>E-mail</span>
-              <input id="newsletter-email" type="email" placeholder="kontakt@kp-code.pl" required />
-            </label>
-            <button class="btn btn-accent" type="submit">Dołączam</button>
-          </form>
+          <a class="btn btn-accent" href="pages/new-arrivals.html">Zobacz nowości</a>
         </div>
       </section>
     </main>

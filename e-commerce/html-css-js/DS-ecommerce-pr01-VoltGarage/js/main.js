@@ -1,4 +1,5 @@
 // Entry point: bootstrap site modules.
+import { mountIconSprite } from '../icons.js';
 import { initHeader } from './ui/header.js';
 import { initTheme } from './ui/theme.js';
 import { initReveal } from './ui/reveal.js';
@@ -8,11 +9,13 @@ import { initGlobalErrorHandling } from './core/errors.js';
 import { emit, events, on } from './core/events.js';
 import { injectBreadcrumbJsonLd } from './ui/structured-data.js';
 import { initPwaPrompts } from './ui/pwa-prompts.js';
+import { initOfflineRetry } from './ui/offline-retry.js';
 import {
   initCart,
   initCartPage,
   initAddToCartButtons,
   initCheckoutSummary,
+  hasCartItems,
 } from './features/cart.js';
 import {
   initFeaturedProducts,
@@ -54,10 +57,38 @@ const initForms = () => {
 
   const validators = {
     email: (field, value) => (value && !isEmail(value) ? 'Podaj poprawny adres e-mail.' : ''),
-    tel: (field, value) =>
-      value && field.pattern && !new RegExp(field.pattern).test(value)
-        ? 'Podaj poprawny numer telefonu.'
-        : '',
+  };
+
+  // A declared `pattern` is read back from the field's own ValidityState so the custom UI and
+  // the browser keep one interpretation of the expression, for every input type that carries
+  // one. Wording comes from the field's `title` guidance; a type keeps its own fuller sentence
+  // where the project already publishes one.
+  const patternMessages = {
+    tel: 'Podaj poprawny numer telefonu, np. 533 537 091 lub +48 533 537 091.',
+  };
+
+  const patternMessage = (field) => {
+    if (patternMessages[field.type]) return patternMessages[field.type];
+    const guidance = (field.title || '').trim();
+    return guidance
+      ? `Podaj wartość w poprawnym formacie. ${guidance}`
+      : 'Podaj wartość w poprawnym formacie.';
+  };
+
+  // These types keep the trimmed-value reading they had before declared patterns became
+  // generic: surrounding whitespace never decided a phone number. The constraint is still the
+  // browser's own, applied to the same declared expression through a detached copy of the
+  // field, so the visitor's value is never touched and the pattern keeps one interpretation.
+  const trimmedPatternTypes = new Set(['tel']);
+
+  const hasPatternMismatch = (field, value) => {
+    if (!field.pattern) return false;
+    if (value === field.value || !trimmedPatternTypes.has(field.type)) {
+      return Boolean(field.validity?.patternMismatch);
+    }
+    const probe = field.cloneNode(false);
+    probe.value = value;
+    return Boolean(probe.validity?.patternMismatch);
   };
 
   const validateField = (field) => {
@@ -71,6 +102,10 @@ const initForms = () => {
     if (!message) {
       const validator = validators[field.type];
       if (validator) message = validator(field, value);
+    }
+
+    if (!message && value && hasPatternMismatch(field, value)) {
+      message = patternMessage(field);
     }
 
     if (!message && field.minLength > 0 && value && value.length < field.minLength) {
@@ -124,6 +159,7 @@ const initForms = () => {
     };
 
     form.addEventListener('submit', (event) => {
+      if (handlesSubmissionInJs) event.preventDefault();
       const fields = Array.from(form.querySelectorAll('input, textarea, select'));
       const results = fields.map((field) => validateField(field));
       const isValid = results.every(Boolean);
@@ -141,9 +177,16 @@ const initForms = () => {
         return;
       }
 
-      event.preventDefault();
+      if (!hasCartItems()) {
+        if (status) {
+          status.textContent =
+            'Koszyk jest pusty. Dodaj co najmniej jeden produkt przed kontynuowaniem zamówienia.';
+        }
+        return;
+      }
       if (status) {
-        status.textContent = 'Dziękujemy! Twoje zgłoszenie zostało przyjęte.';
+        status.textContent =
+          'Symulacja checkoutu zakończyła się pomyślnie. Zamówienie nie zostało wysłane ani zapisane.';
       }
       form.reset();
       fields.forEach((field) => validateField(field));
@@ -155,6 +198,12 @@ const initForms = () => {
       if (!['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName)) return;
       validateField(target);
     });
+
+    // Checkout stays disabled in HTML until its simulation handler is installed.
+    if (handlesSubmissionInJs) {
+      const submitButton = form.querySelector('button[type="submit"]');
+      if (submitButton) submitButton.disabled = false;
+    }
   });
 };
 
@@ -167,44 +216,59 @@ const initCopyrightYear = () => {
   });
 };
 
+const runInitializer = (source, initializer) => {
+  const reportError = (error) => emit(events.app.error, { source, error });
+  try {
+    Promise.resolve(initializer()).catch(reportError);
+  } catch (error) {
+    reportError(error);
+  }
+};
+
 const initApp = () => {
-  initGlobalErrorHandling();
   on(events.app.error, ({ source, error }) => {
     if (error) {
       console.error('[VOLT][app]', source, error);
     }
   });
 
+  runInitializer('initGlobalErrorHandling', initGlobalErrorHandling);
   emit(events.app.error, { source: 'init:ready', error: null });
 
   const has = (selector) => document.querySelector(selector);
 
-  if (document.body) initAccessibility();
-  if (has('[data-header]')) initHeader();
-  if (has('[data-theme-toggle]')) initTheme();
-  if (has('[data-reveal]')) initReveal();
-  if (has('[data-cart-count]')) initCart();
-  if (has('[data-products="featured"]')) initFeaturedProducts();
-  if (has('[data-products="shop"]')) initFilters();
-  if (has('[data-products="new"]')) initNewArrivalsProducts();
-  if (has('[data-products="related"]')) initRelatedProducts();
-  if (has('[data-products="sale"]')) initSaleProducts();
-  if (has('[data-product-details]')) initProductDetails();
-  if (has('[data-cart-items]')) initCartPage();
-  if (has('[data-checkout-summary]')) initCheckoutSummary();
-  if (has('[data-contact-form], [data-checkout-form]')) initForms();
-  if (has('.breadcrumbs')) injectBreadcrumbJsonLd();
+  if (document.body) runInitializer('mountIconSprite', mountIconSprite);
+  if (document.body) runInitializer('initAccessibility', initAccessibility);
+  if (has('[data-header]')) runInitializer('initHeader', initHeader);
+  if (has('[data-theme-toggle]')) runInitializer('initTheme', initTheme);
+  if (has('[data-reveal]')) runInitializer('initReveal', initReveal);
+  if (has('[data-cart-count]')) runInitializer('initCart', initCart);
+  if (has('[data-products="featured"]'))
+    runInitializer('initFeaturedProducts', initFeaturedProducts);
+  if (has('[data-products="shop"]')) runInitializer('initFilters', initFilters);
+  if (has('[data-products="new"]'))
+    runInitializer('initNewArrivalsProducts', initNewArrivalsProducts);
+  if (has('[data-products="related"]')) runInitializer('initRelatedProducts', initRelatedProducts);
+  if (has('[data-products="sale"]')) runInitializer('initSaleProducts', initSaleProducts);
+  if (has('[data-product-details]')) runInitializer('initProductDetails', initProductDetails);
+  if (has('[data-cart-items]')) runInitializer('initCartPage', initCartPage);
+  if (has('[data-checkout-summary]')) runInitializer('initCheckoutSummary', initCheckoutSummary);
+  if (has('[data-contact-form], [data-checkout-form]')) runInitializer('initForms', initForms);
+  if (has('[data-offline-retry]')) runInitializer('initOfflineRetry', initOfflineRetry);
+  if (has('.breadcrumbs')) runInitializer('injectBreadcrumbJsonLd', injectBreadcrumbJsonLd);
   // Przyczyna: przyciski są renderowane po async load produktów, więc selektor na starcie zwraca null.
   // Delegacja klików musi być podpięta zawsze, niezależnie od chwili renderu.
-  initAddToCartButtons();
-  initProjectModal();
-  if ('serviceWorker' in navigator) {
-    const registrationPromise = navigator.serviceWorker
-      .register('/sw.js')
-      .catch((error) => console.error('[VOLT][sw]', error));
-    initPwaPrompts(registrationPromise);
+  runInitializer('initAddToCartButtons', initAddToCartButtons);
+  runInitializer('initProjectModal', initProjectModal);
+  if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+    runInitializer('initPwaPrompts', () => {
+      const registrationPromise = navigator.serviceWorker
+        .register('/sw.js', { updateViaCache: 'none' })
+        .catch((error) => console.error('[VOLT][sw]', error));
+      return initPwaPrompts(registrationPromise);
+    });
   }
-  if (has('[data-current-year]')) initCopyrightYear();
+  if (has('[data-current-year]')) runInitializer('initCopyrightYear', initCopyrightYear);
 };
 
 if (document.readyState === 'loading') {

@@ -42,9 +42,11 @@ svg {
   max-width: 100%;
   display: block;
 }
+
 img {
   height: auto;
 }
+
 svg {
   flex-shrink: 0;
 }
@@ -64,9 +66,11 @@ h4 {
   margin: 0 0 var(--space-03);
   text-wrap: balance;
 }
+
 h1 {
   font-size: var(--fs-h1);
 }
+
 h2 {
   font-size: var(--fs-h2);
 }
@@ -96,15 +100,17 @@ textarea {
   font: inherit;
   color: inherit;
 }
+
 button {
   cursor: pointer;
 }
+
 textarea {
   resize: vertical;
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-accent-ink);
   outline-offset: 3px;
 }
 
@@ -113,7 +119,7 @@ textarea {
   top: -48px;
   left: 24px;
   background: var(--color-accent);
-  color: var(--color-text);
+  color: var(--color-hero);
   padding: var(--space-02) var(--space-04);
   border-radius: var(--radius-sm);
   z-index: 1000;
@@ -167,4 +173,11 @@ html.reveal-ready [data-reveal].is-visible {
     transition: none;
     transform: none;
   }
+}
+
+/* Keep sprite definitions available without occupying layout space. */
+#volt-icon-sprite {
+  position: absolute;
+  overflow: hidden;
+  pointer-events: none;
 }

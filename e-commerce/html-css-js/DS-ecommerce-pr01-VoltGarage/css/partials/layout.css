@@ -12,12 +12,15 @@
   display: grid;
   gap: var(--space-05);
 }
+
 .grid-3 {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
+
 .grid-4 {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
+
 @media (min-width: 1024px) {
   .grid-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -32,9 +35,11 @@
   z-index: 2;
   grid-template-columns: 1fr;
 }
+
 .hero-grid > * {
   min-width: 0;
 }
+
 @media (min-width: 900px) {
   .hero-grid {
     grid-template-columns: 1.1fr 0.9fr;
@@ -49,6 +54,7 @@
   gap: var(--space-09);
   grid-template-columns: 1fr;
 }
+
 @media (min-width: 480px) {
   .footer-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -70,6 +76,7 @@
 main > section {
   padding: var(--section-py-lg) 0;
 }
+
 .section-title {
   display: flex;
   flex-direction: column;
@@ -78,10 +85,12 @@ main > section {
   margin-bottom: var(--space-06);
   text-align: left;
 }
+
 .section-title h2 {
   width: 100%;
   font-size: var(--fs-06);
 }
+
 .section-title .btn {
   width: 140px;
 }
@@ -119,8 +128,10 @@ main > section {
   backdrop-filter: blur(16px);
   background: color-mix(in srgb, var(--color-surface) 85%, transparent);
   border-bottom: 1px solid var(--color-border);
+  box-shadow: none;
   transition: box-shadow var(--transition-base);
 }
+
 .site-header::before {
   content: '';
   position: absolute;
@@ -129,12 +140,13 @@ main > section {
   z-index: 0;
   background: linear-gradient(
     to right,
-    color-mix(in srgb, var(--color-accent) 10%, transparent),
-    transparent 18%,
-    transparent 82%,
-    color-mix(in srgb, var(--color-accent) 10%, transparent)
+    color-mix(in srgb, var(--color-accent) 5%, transparent),
+    transparent 12%,
+    transparent 88%,
+    color-mix(in srgb, var(--color-accent) 5%, transparent)
   );
 }
+
 .header-inner {
   display: flex;
   align-items: center;
@@ -144,26 +156,35 @@ main > section {
   position: relative;
   z-index: 1;
 }
+
+.site-header.shrink {
+  box-shadow: var(--shadow-sm);
+}
+
 .site-header.shrink .header-inner {
   padding: var(--space-02) 0;
 }
+
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 0;
-  font-family: var(--font-display);
-  font-size: var(--fs-04);
-  font-weight: var(--fw-03);
-  letter-spacing: var(--ls-03);
+  min-width: 0;
 }
+
+/* The lockup already sets the wordmark, so the header paints one asset instead of a mark beside
+   live text. The theme picks the file through --brand-lockup, which keeps the switch declarative
+   and lets the no-JavaScript dark fallback in themes.css reach it. aspect-ratio reserves the box
+   from the 262 × 48 artwork, so nothing reflows once the file arrives; min-width lets a header
+   narrower than the token scale the whole lockup down instead of pushing the controls out of the
+   container. */
 .brand-logo {
-  height: var(--logo-header-size);
-  width: auto;
-  flex-shrink: 0;
+  display: block;
+  width: var(--logo-header-size);
+  aspect-ratio: 262 / 48;
+  min-width: 0;
+  background: var(--brand-lockup) center / contain no-repeat;
 }
-.brand-text {
-  display: none;
-}
+
 .nav {
   position: absolute;
   right: var(--space-01);
@@ -179,6 +200,7 @@ main > section {
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
   border: 1px solid var(--color-border);
+  visibility: hidden;
   opacity: 0;
   pointer-events: none;
   transform: translateY(-10px);
@@ -186,11 +208,14 @@ main > section {
     opacity var(--transition-base),
     transform var(--transition-base);
 }
+
 .nav.is-open {
+  visibility: visible;
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
 }
+
 .nav a,
 .nav button {
   font-size: var(--fs-03);
@@ -201,30 +226,37 @@ main > section {
   cursor: pointer;
   text-transform: uppercase;
 }
+
 .nav a[aria-current='page'] {
   color: var(--color-ink);
   font-weight: var(--fw-02);
 }
+
 .nav a:focus-visible,
 .nav .nav-button:focus-visible {
-  color: var(--color-accent);
-  outline: 2px solid var(--color-accent);
+  color: var(--color-accent-ink);
+  outline: 2px solid var(--color-accent-ink);
   outline-offset: 4px;
   border-radius: var(--radius-md);
 }
+
 .nav a[aria-current='page']:focus-visible {
   color: var(--color-ink);
 }
+
 .nav a:active,
 .nav .nav-button:active {
-  color: color-mix(in srgb, var(--color-accent) 85%, var(--color-ink));
+  color: color-mix(in srgb, var(--color-accent-ink) 85%, var(--color-ink));
 }
+
 .nav a[aria-current='page']:active {
   color: var(--color-ink);
 }
+
 .nav-item {
   position: relative;
 }
+
 .dropdown-menu {
   position: static;
   list-style: none;
@@ -238,38 +270,46 @@ main > section {
   box-shadow: none;
   display: none;
 }
+
 .dropdown-menu a {
   display: block;
   padding: var(--space-02) var(--space-04);
   border-radius: var(--radius-md);
   color: var(--color-ink-muted);
 }
+
 .dropdown-menu a:hover,
 .dropdown-menu a:focus-visible {
   color: var(--color-ink);
   background: var(--color-surface-alt);
 }
+
 .nav-item:hover .dropdown-menu {
   display: none;
 }
+
 .nav-item.is-open .dropdown-menu,
 .nav-item:focus-within .dropdown-menu {
   display: block;
 }
+
 .dropdown-menu .dropdown-subitem {
   font-size: var(--fs-03);
   color: color-mix(in srgb, var(--color-ink) 70%, transparent);
   opacity: 0.92;
 }
+
 .dropdown-menu .dropdown-subitem:hover,
 .dropdown-menu .dropdown-subitem:focus-visible {
   background: color-mix(in srgb, var(--color-surface-alt) 80%, transparent);
   color: var(--color-ink);
 }
+
 .nav.is-open .dropdown-menu .dropdown-subitem {
   position: relative;
   padding-left: calc(var(--space-02) + 18px);
 }
+
 .nav.is-open .dropdown-menu .dropdown-subitem::before {
   content: '';
   position: absolute;
@@ -281,11 +321,15 @@ main > section {
   background: color-mix(in srgb, var(--color-accent) 45%, transparent);
   opacity: 0.6;
 }
+
 .header-actions {
   display: flex;
   align-items: center;
   gap: var(--space-03);
+  /* The controls hold their hit areas; the brand lockup beside them is what gives width back. */
+  flex-shrink: 0;
 }
+
 .nav-toggle {
   display: inline-flex;
   align-items: center;
@@ -300,29 +344,24 @@ main > section {
   height: 24px;
   display: block;
 }
+
 .nav-toggle__icon .line {
   transform-origin: 12px 12px;
   transition:
     transform var(--transition-base),
     opacity var(--transition-base);
 }
+
 .nav-toggle[aria-expanded='true'] .line--top {
   transform: translateY(5.25px) rotate(45deg);
 }
+
 .nav-toggle[aria-expanded='true'] .line--middle {
   opacity: 0;
 }
+
 .nav-toggle[aria-expanded='true'] .line--bottom {
   transform: translateY(-5.25px) rotate(-45deg);
-}
-
-@media (min-width: 480px) {
-  .brand {
-    gap: var(--space-02);
-  }
-  .brand-text {
-    display: inline;
-  }
 }
 
 @media (min-width: 900px) {
@@ -334,6 +373,7 @@ main > section {
     border-radius: 0;
     box-shadow: none;
     border: 0;
+    visibility: visible;
     opacity: 1;
     pointer-events: auto;
     transform: none;
@@ -350,6 +390,14 @@ main > section {
     border: 1px solid var(--color-border);
     box-shadow: var(--shadow-md);
     display: none;
+  }
+  .dropdown-menu::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 100%;
+    height: var(--space-04);
   }
   .nav-item:hover .dropdown-menu,
   .nav-item:focus-within .dropdown-menu,
@@ -374,7 +422,7 @@ main > section {
 @media (hover: hover) and (pointer: fine) {
   .nav a:hover,
   .nav-item:hover .nav-button {
-    color: var(--color-accent);
+    color: var(--color-accent-ink);
   }
   .nav a[aria-current='page']:hover {
     color: var(--color-ink);
@@ -386,18 +434,21 @@ main > section {
 :root {
   --hero-card-inner-inset: 6px;
 }
+
 .hero {
   background: var(--gradient-hero);
   color: var(--color-hero-text);
   position: relative;
   overflow: hidden;
-  --hero-overlay: linear-gradient(120deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02));
-  --hero-image-filter: saturate(1.05) contrast(1.02) brightness(1.03);
+  --hero-overlay: linear-gradient(120deg, rgba(9, 13, 20, 0.38), rgba(9, 13, 20, 0.06));
+  --hero-image-filter: saturate(0.98) contrast(1.05) brightness(1.02);
 }
+
 [data-theme='dark'] .hero {
   --hero-overlay: linear-gradient(120deg, rgba(7, 10, 16, 0.55), rgba(7, 10, 16, 0.2));
   --hero-image-filter: saturate(0.92) contrast(1.05) brightness(0.82);
 }
+
 .hero::after {
   content: '';
   position: absolute;
@@ -406,50 +457,60 @@ main > section {
   background: var(--hero-overlay);
   z-index: 1;
 }
+
 .hero .badge {
   backdrop-filter: blur(8px);
-  border: 1px solid color-mix(in srgb, white 5%, transparent);
+  background: color-mix(in srgb, var(--color-accent) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 34%, transparent);
   color: var(--color-hero-text);
 }
+
 .hero-title {
   font-size: var(--fs-h1);
 }
+
 .hero p {
   max-width: 52ch;
   color: color-mix(in srgb, var(--color-hero-text) 88%, transparent);
   line-height: var(--lh-02);
   margin: var(--space-04) 0;
 }
+
 .hero-media {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
 }
+
 .hero-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   filter: var(--hero-image-filter);
 }
+
 .hero .tag-list {
   justify-content: left;
   margin-top: var(--space-08);
 }
+
 .hero .tag-list .btn {
   width: 180px;
-  justify-content: center;
   text-align: center;
 }
+
 .hero .btn-outline {
   color: color-mix(in srgb, var(--color-hero-text) 88%, transparent);
   border-color: color-mix(in srgb, var(--color-hero-text) 38%, transparent);
 }
+
 .hero .btn-outline:hover {
   color: var(--color-hero-text);
   border-color: color-mix(in srgb, var(--color-hero-text) 52%, transparent);
   background: color-mix(in srgb, black 20%, transparent);
 }
+
 .hero-card {
   position: relative;
   background: color-mix(in srgb, black 38%, transparent);
@@ -459,6 +520,7 @@ main > section {
   box-shadow: var(--shadow-lg);
   text-align: center;
 }
+
 .hero-card::before {
   content: '';
   position: absolute;
@@ -468,37 +530,44 @@ main > section {
   border: 1px solid color-mix(in srgb, white 55%, transparent);
   opacity: 0.35;
 }
+
 [data-theme='dark'] .hero-card {
   border-color: color-mix(in srgb, var(--color-accent) 18%, transparent);
   box-shadow:
     var(--shadow-lg),
     0 0 0 1px color-mix(in srgb, var(--color-accent) 10%, transparent);
 }
+
 [data-theme='dark'] .hero-card::before {
   border: 1px solid color-mix(in srgb, var(--color-accent) 12%, transparent);
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-accent) 6%, transparent) inset;
 }
-.hero-card h3 {
+
+.hero-card h2 {
   letter-spacing: var(--ls-03);
   font-size: var(--fs-06);
 }
+
 .hero-card > p {
   text-align: center;
 }
+
 .hero-card .stat {
   color: var(--color-accent);
 }
+
 [data-theme='dark'] .hero-card .stat {
   border-color: color-mix(in srgb, var(--color-accent) 14%, transparent);
 }
+
 .hero-card .stats {
   margin-top: var(--space-04);
 }
-.stat:nth-child(3) {
-  grid-column: auto;
-  justify-self: stretch;
-  max-width: none;
+
+.hero-card .stat:last-child {
+  grid-column: 1 / -1;
 }
+
 .hero-card .stat p {
   color: var(--color-hero-text);
   display: inline-block;
@@ -514,7 +583,7 @@ main > section {
   padding: var(--section-py-lg) 0 var(--section-footer-bottom);
   text-align: left;
 }
-.footer-col h4 {
+.footer-col h2 {
   text-transform: uppercase;
   font-size: var(--fs-04);
 }
@@ -560,18 +629,14 @@ main > section {
   gap: var(--space-03);
   margin-bottom: var(--space-02);
 }
+/* The footer plate is dark in both themes, so the markup names the dark-surface lockup outright.
+   The token is a width here: height follows the artwork, and max-width from base.css lets the
+   lockup shrink with the brand column on the narrower footer grids. */
 .footer-logo {
   width: var(--logo-footer-size);
   height: auto;
   flex-shrink: 0;
   margin-bottom: var(--space-02);
-  transform: translateY(1px);
-}
-.footer-brand-text {
-  font-family: var(--font-display);
-  font-weight: var(--fw-03);
-  font-size: var(--fs-05);
-  letter-spacing: var(--ls-04);
 }
 .footer-brand p {
   max-width: 32ch;

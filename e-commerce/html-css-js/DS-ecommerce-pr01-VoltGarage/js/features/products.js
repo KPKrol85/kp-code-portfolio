@@ -2,6 +2,7 @@ import { initReveal } from '../ui/reveal.js';
 import { renderState } from '../ui/state.js';
 import { fetchProducts } from '../services/products.js';
 import { logError } from '../core/errors.js';
+import { productImageVariants } from '../core/product-images.js';
 import {
   STORE_ID,
   injectBreadcrumbJsonLd,
@@ -13,7 +14,7 @@ import {
 
 const getPrefix = () => (window.location.pathname.includes('/pages/') ? '../' : '');
 const formatPrice = (value) => `${value.toFixed(0)} zł`;
-const isNewProduct = (product) => product.badge?.toLowerCase().includes('nowo');
+export const isNewProduct = (product) => product.badge?.toLowerCase().includes('nowo');
 
 const productLink = (id) => {
   const prefix = getPrefix();
@@ -22,42 +23,22 @@ const productLink = (id) => {
 
 const productImage = (path) => `${getPrefix()}${path}`;
 
+// Product cards, sale cards, and the product detail all render through here, so the catalog
+// `image` path is the only source of the raster fallback and of its optimized variants.
 const productPicture = (path, alt, loading = 'lazy') => {
-  const src = productImage(path);
-  const optimizedSrc = src.replace('assets/images/', 'assets/images/_optimized/');
-  const base = optimizedSrc.replace(/\.(jpe?g|png)$/i, '');
+  const { avif, webp } = productImageVariants(path);
   return `
     <picture>
-      <source srcset="${base}.avif" type="image/avif" />
-      <source srcset="${base}.webp" type="image/webp" />
-      <img src="${src}" alt="${alt}" loading="${loading}" decoding="async" width="800" height="600" />
-    </picture>
-  `;
-};
-
-const cardPicture = (product) => {
-  if (!product.imageBase) {
-    return productPicture(product.image, product.name);
-  }
-
-  const base = product.imageBase;
-  const fallbackSrc = product.image
-    ? productImage(product.image)
-    : `${getPrefix()}assets/images/products/${base}.jpg`;
-
-  return `
-    <picture>
-      <source srcset="${getPrefix()}assets/images/_optimized/products/${base}.avif" type="image/avif" />
-      <source srcset="${getPrefix()}assets/images/_optimized/products/${base}.webp" type="image/webp" />
-      <img src="${fallbackSrc}" alt="${product.name}" loading="lazy" decoding="async" width="800" height="600" />
+      <source srcset="${productImage(avif)}" type="image/avif" />
+      <source srcset="${productImage(webp)}" type="image/webp" />
+      <img src="${productImage(path)}" alt="${alt}" loading="${loading}" decoding="async" width="800" height="600" />
     </picture>
   `;
 };
 
 const renderCard = (product) => `
   <article class="card" aria-label="${product.name}" data-reveal>
-    <!-- CHANGED: img -> picture -->
-    ${cardPicture(product)}
+    ${productPicture(product.image, product.name)}
     <span class="badge">${product.badge}</span>
     <h3 class="card-title">${product.name}</h3>
     <p class="card-text">${product.description}</p>
@@ -76,7 +57,6 @@ const renderSaleCard = (product) => {
   const oldPrice = product.oldPrice ?? product.price;
   return `
   <article class="card" aria-label="${product.name}" data-reveal>
-    <!-- CHANGED: img -> picture -->
     ${productPicture(product.image, product.name)}
     <span class="badge">Promocja</span>
     <h3 class="card-title">${product.name}</h3>
@@ -153,23 +133,6 @@ export const initFeaturedProducts = async () => {
   } catch (error) {
     logError('products:featured', error);
     renderState(container, 'error', 'Nie udało się załadować polecanych.');
-  }
-};
-
-export const initShopProducts = async () => {
-  const container = document.querySelector('[data-products="shop"]');
-  if (!container) return;
-  renderProductsLoading(container, 'Ładowanie produktów...');
-  try {
-    const products = await fetchProducts();
-    if (!products.length) {
-      renderState(container, 'empty', 'Brak produktów w sklepie.');
-      return;
-    }
-    renderGrid(container, products);
-  } catch (error) {
-    logError('products:shop', error);
-    renderState(container, 'error', 'Nie udało się załadować listy produktów.');
   }
 };
 
@@ -256,8 +219,20 @@ export const initProductDetails = async () => {
   try {
     const products = await fetchProducts();
     const params = new URLSearchParams(window.location.search);
-    const currentId = params.get('id') || products[0].id;
-    const product = products.find((item) => item.id === currentId) || products[0];
+    // Three route states share this document. A missing or blank `id` is the published generic
+    // route and keeps its first-catalog-entry behaviour; an id that matches a catalog entry
+    // renders that entry; an id that matches nothing gets its own not-found state, because
+    // substituting an unrelated product would publish that product's canonical, metadata, and
+    // structured data at a URL that does not describe it.
+    const requestedId = params.get('id')?.trim() ?? '';
+    const matched = requestedId ? products.find((item) => item.id === requestedId) : null;
+
+    if (requestedId && !matched) {
+      renderState(container, 'empty', 'Nie znaleziono produktu o podanym identyfikatorze.');
+      return;
+    }
+
+    const product = requestedId ? matched : products[0];
 
     const canonical = document.querySelector('link[rel="canonical"]');
     const canonicalUrl = `${window.location.origin}${window.location.pathname}?id=${product.id}`;
