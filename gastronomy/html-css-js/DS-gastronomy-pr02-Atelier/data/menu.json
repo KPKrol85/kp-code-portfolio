@@ -413,6 +413,11 @@
             "formats": ["avif", "webp", "jpg"]
           },
           {
+            "width": 720,
+            "height": 480,
+            "formats": ["avif", "webp", "jpg"]
+          },
+          {
             "width": 960,
             "height": 640,
             "formats": ["avif", "webp", "jpg"]

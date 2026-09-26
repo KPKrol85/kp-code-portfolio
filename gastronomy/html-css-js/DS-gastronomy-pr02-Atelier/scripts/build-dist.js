@@ -1,43 +1,10 @@
 const fs = require("node:fs");
 const path = require("node:path");
 
-const rootDir = process.cwd();
-const distDir = path.join(rootDir, "dist");
-
-const htmlPages = [
-  "index.html",
-  "about.html",
-  "menu.html",
-  "gallery.html",
-  "contact.html",
-  "cookies.html",
-  "polityka-prywatnosci.html",
-  "regulamin.html",
-  "offline.html",
-  "thank-you.html",
-  "404.html",
-];
-
-const rootFiles = [
-  ...htmlPages,
-  "manifest.webmanifest",
-  "robots.txt",
-  "sitemap.xml",
-  "sw.js",
-  "_headers",
-  "_redirects",
-];
-
-const assetEntries = [
-  "css/style.min.css",
-  "js/script.min.js",
-  "js/core.min.js",
-  "data/menu.json",
-  "assets/docs",
-  "assets/fonts",
-  "assets/icons",
-  "assets/img-optimized",
-];
+const {
+  rootDir, distDir, htmlPages, rootFiles, assetEntries,
+  composePage, productionHtml, productionWorker,
+} = require("./build-config.js");
 
 function assertSourceExists(relativePath) {
   const sourcePath = path.join(rootDir, relativePath);
@@ -65,12 +32,20 @@ function copyEntry(relativePath) {
 }
 
 function buildDist() {
+  // Check the complete copy inventory and compose every page before replacing the previous package.
+  [...htmlPages, ...rootFiles, ...assetEntries].forEach(assertSourceExists);
+  const pages = htmlPages.map((page) => [page, productionHtml(composePage(page))]);
   fs.rmSync(distDir, { recursive: true, force: true });
-  fs.mkdirSync(distDir, { recursive: true });
+  ["css", "js"].forEach((directory) =>
+    fs.mkdirSync(path.join(distDir, directory), { recursive: true }),
+  );
 
   [...rootFiles, ...assetEntries].forEach(copyEntry);
+  pages.forEach(([page, html]) => fs.writeFileSync(path.join(distDir, page), html));
+  const worker = fs.readFileSync(path.join(rootDir, "sw.js"), "utf8");
+  fs.writeFileSync(path.join(distDir, "sw.js"), productionWorker(worker));
 
-  console.log(`Dist build complete: ${path.relative(rootDir, distDir)}`);
+  console.log("Production structure with composed pages prepared in dist/; CSS and JS builds follow.");
 }
 
 buildDist();

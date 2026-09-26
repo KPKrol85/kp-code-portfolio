@@ -5,7 +5,7 @@ export function initGalleryPage() {
     pageClass: "page--gallery",
     ids: ["wnetrza", "dania", "desery", "napoje"],
     listSelector: '.gallery-tabs__list a[href^="#"]',
-    stickySelector: ".gallery-tabs",
+    stickySelector: ".gallery-navigation",
     bottomPercent: "-55%",
     bottomPercentMobile: "-65%",
   });

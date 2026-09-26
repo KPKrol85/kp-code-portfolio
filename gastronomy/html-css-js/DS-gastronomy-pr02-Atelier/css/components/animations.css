@@ -21,13 +21,21 @@
 }
 .reveal {
   opacity: 0;
-  transform: translateY(12px);
+  transform: translate(var(--rx), var(--ry));
   will-change: opacity, transform;
 }
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate(0, 0);
   transition:
-    transform 0.4s ease,
-    opacity 0.4s ease;
+    transform 0.4s ease var(--reveal-delay),
+    opacity 0.4s ease var(--reveal-delay);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

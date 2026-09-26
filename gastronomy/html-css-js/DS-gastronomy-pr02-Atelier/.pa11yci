@@ -20,11 +20,27 @@
     "http://127.0.0.1:5173/about.html",
     "http://127.0.0.1:5173/menu.html",
     "http://127.0.0.1:5173/gallery.html",
+    "http://127.0.0.1:5173/contact.html",
     "http://127.0.0.1:5173/cookies.html",
     "http://127.0.0.1:5173/polityka-prywatnosci.html",
     "http://127.0.0.1:5173/regulamin.html",
     "http://127.0.0.1:5173/offline.html",
     "http://127.0.0.1:5173/thank-you.html",
-    "http://127.0.0.1:5173/404.html"
+    "http://127.0.0.1:5173/404.html",
+    {
+      "url": "http://127.0.0.1:5173/contact.html?a11y=form-errors",
+      "actions": [
+        "wait for element #demo-legal-modal.is-open to be added",
+        "click element #demo-legal-modal [data-demo-legal-accept]",
+        "wait for element #demo-legal-modal:not(.is-open) to be added",
+        "click element #name",
+        "click element #email",
+        "click element #message",
+        "click element #contact-title",
+        "wait for element #name[aria-invalid=true] ~ #error-name:not(:empty) to be added",
+        "wait for element #email[aria-invalid=true] + #error-email:not(:empty) to be added",
+        "wait for element #message[aria-invalid=true] ~ #error-message:not(:empty) to be added"
+      ]
+    }
   ]
 }

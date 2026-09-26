@@ -179,6 +179,10 @@ html:not(.js) .nav-toggle {
   display: none;
 }
 
+html:not(.js) .nav__dropdown-toggle {
+  display: none;
+}
+
 .nav__dropdown-toggle {
   display: inline-flex;
   align-items: center;
@@ -223,8 +227,8 @@ html:not(.js) .nav-toggle {
   transform: translateY(0);
   pointer-events: auto;
 }
-.nav__item--dropdown:hover .nav__dropdown,
-.nav__item--dropdown:focus-within .nav__dropdown {
+html:not(.js) .nav__item--dropdown:hover .nav__dropdown,
+html:not(.js) .nav__item--dropdown:focus-within .nav__dropdown {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -315,7 +319,10 @@ html:not(.js) .nav-toggle {
     padding-inline: 0;
   }
   .nav__dropdown-toggle {
-    display: none;
+    min-width: 28px;
+    min-height: 28px;
+    padding: var(--space-1);
+    margin-left: 0;
   }
   .nav__list > li:not(.nav__item--dropdown)::after {
     content: none;
@@ -341,8 +348,8 @@ html:not(.js) .nav-toggle {
   .nav__item--dropdown.is-open .nav__dropdown {
     display: block;
   }
-  .nav__item--dropdown:hover .nav__dropdown,
-  .nav__item--dropdown:focus-within .nav__dropdown {
+  html:not(.js) .nav__item--dropdown:hover .nav__dropdown,
+  html:not(.js) .nav__item--dropdown:focus-within .nav__dropdown {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);

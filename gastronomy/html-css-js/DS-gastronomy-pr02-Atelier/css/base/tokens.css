@@ -30,7 +30,7 @@
   --input-border: rgba(0, 0, 0, 0.15);
   /* Shadows */
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  --shodow-box-sm: 0 4px 14px rgba(0, 0, 0, 0.1);
+  --shadow-box-sm: 0 4px 14px rgba(0, 0, 0, 0.1);
   --shadow-box-md: 0 6px 18px rgba(0, 0, 0, 0.5);
   --shadow-box-lg: 0 8px 22px rgba(0, 0, 0, 0.9);
   /* Tabs */

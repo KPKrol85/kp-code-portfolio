@@ -8,8 +8,9 @@ import { initGalleryPage } from "../features/gallery.js";
 import { initLightbox } from "../features/lightbox.js";
 import { initForm } from "../features/form.js";
 import { initMisc } from "../features/misc.js";
+import { initIcons } from "../features/icons.js";
 
-var COMMON_INITIALIZERS = [initMisc, initNetworkStatusBanner, initDemoLegalModal, initNav, initReveal, initThemeToggle];
+var COMMON_INITIALIZERS = [initIcons, initMisc, initNetworkStatusBanner, initDemoLegalModal, initNav, initReveal, initThemeToggle];
 
 var PAGE_INITIALIZERS = {
   home: [initImageFallbacks, initForm, renderHomeFeaturedMenu, initLightbox],

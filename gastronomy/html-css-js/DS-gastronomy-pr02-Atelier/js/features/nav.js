@@ -30,14 +30,31 @@ function syncNavA11y(nav, expanded) {
   }
 }
 
+function writeDropdownState(item, expanded) {
+  if (!item) return;
+  /* ".is-open" and "aria-expanded" are two views of one state and are always written together. */
+  item.classList.toggle("is-open", expanded);
+  var toggle = item.querySelector(".nav__dropdown-toggle");
+  toggle && toggle.setAttribute("aria-expanded", String(expanded));
+}
+
 function closeNavDropdowns(scope) {
   var rootEl = scope || document;
   var openItems = rootEl.querySelectorAll(".nav__item--dropdown.is-open");
   openItems.forEach(function (item) {
-    item.classList.remove("is-open");
-    var toggle = item.querySelector(".nav__dropdown-toggle");
-    toggle && toggle.setAttribute("aria-expanded", "false");
+    writeDropdownState(item, false);
   });
+}
+
+function setNavDropdown(item, expanded, scope) {
+  if (!item) return;
+  /*
+   Single dropdown transition point for every width.
+   Expanding one submenu collapses the others, so the accordion
+   contract is the same on mobile and on desktop.
+  */
+  if (expanded) closeNavDropdowns(scope);
+  writeDropdownState(item, expanded);
 }
 
 function lockScroll() {
@@ -99,6 +116,7 @@ export function initNav() {
   var nav = q("#primary-nav");
   var dropdownToggles = nav ? nav.querySelectorAll(".nav__dropdown-toggle") : [];
   var isMenuOpen = navToggle && navToggle.getAttribute("aria-expanded") === "true";
+  var wasNavMobile = isNavMobile();
   var outsideHandler = null;
   var trapHandler = null;
 
@@ -220,19 +238,25 @@ export function initNav() {
   if (nav) {
     syncNavA11y(nav, navToggle && navToggle.getAttribute("aria-expanded") === "true");
     dropdownToggles.forEach(function (toggle) {
+      var item = toggle.closest(".nav__item--dropdown");
+      if (!item) return;
+      /* Dropdowns behave like an accordion at every width: one expanded item at a time. */
       toggle.addEventListener("click", function (event) {
-        if (!isNavMobile()) return;
-        /* Mobile dropdowns behave like an accordion: one expanded item at a time. */
+        /* The toggle is the disclosure control on mobile and on desktop, and never navigates. */
         event.preventDefault();
         event.stopPropagation();
-        var item = toggle.closest(".nav__item--dropdown");
-        if (!item) return;
-        var isOpen = item.classList.contains("is-open");
-        closeNavDropdowns(nav);
-        if (!isOpen) {
-          item.classList.add("is-open");
-          toggle.setAttribute("aria-expanded", "true");
-        }
+        setNavDropdown(item, !item.classList.contains("is-open"), nav);
+      });
+      item.addEventListener("focusout", function (event) {
+        /*
+         Focus leaving the whole dropdown collapses it.
+         Pointer hover never writes dropdown state when JavaScript is active,
+         so the toggle stays the only control that expands a submenu.
+        */
+        if (isNavMobile()) return;
+        if (!item.classList.contains("is-open")) return;
+        if (event.relatedTarget && item.contains(event.relatedTarget)) return;
+        setNavDropdown(item, false, nav);
       });
     });
     nav.addEventListener("click", function (event) {
@@ -247,7 +271,14 @@ export function initNav() {
        Resize can move across mobile/desktop breakpoints.
        Normalize nav state so hidden mobile-only state does not persist on desktop.
       */
+      var nowNavMobile = isNavMobile();
+      var crossedBreakpoint = nowNavMobile !== wasNavMobile;
+      wasNavMobile = nowNavMobile;
       syncNavA11y(nav, navToggle && navToggle.getAttribute("aria-expanded") === "true");
+      if (crossedBreakpoint) {
+        /* Dropdown state is width-specific, so nothing stays expanded across a breakpoint change. */
+        closeNavDropdowns(nav);
+      }
       if (!isNavMobile()) {
         closeNavDropdowns(nav);
         if (getMenuOpen()) {
@@ -271,6 +302,13 @@ export function initNav() {
     if (getMenuOpen()) {
       setMenuState(false);
       return;
+    }
+    /* Hand focus back to the owning toggle before its submenu becomes unfocusable. */
+    var active = document.activeElement;
+    var openItem = active && active.closest ? active.closest(".nav__item--dropdown.is-open") : null;
+    if (openItem) {
+      var openToggle = openItem.querySelector(".nav__dropdown-toggle");
+      openToggle && openToggle.focus();
     }
     closeNavDropdowns(nav);
   });

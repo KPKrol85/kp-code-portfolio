@@ -12,6 +12,14 @@
   font-style: normal;
 }
 
+.page--contact .contact__detail--address {
+  flex-direction: column;
+  gap: 0;
+}
+.page--contact .contact__detail--address .contact__text {
+  margin-top: 0;
+}
+
 /* map */
 .page--contact .contact-map {
   padding-top: 0;

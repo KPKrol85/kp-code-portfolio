@@ -1,3 +1,5 @@
+const UNAVAILABLE_TEXT = "Nie udało się wczytać zdjęcia.";
+
 export function initLightbox() {
   const html = document.documentElement;
   const hasGalleryLinks = document.querySelector(".gallery__link");
@@ -10,6 +12,8 @@ export function initLightbox() {
     overlay.setAttribute("role", "dialog");
     overlay.setAttribute("aria-modal", "true");
     overlay.setAttribute("aria-label", "Podgląd zdjęcia");
+    overlay.setAttribute("aria-describedby", "lb-caption");
+    overlay.setAttribute("aria-keyshortcuts", "Esc ArrowLeft ArrowRight F");
 
     const modal = document.createElement("div");
     modal.className = "lb-modal";
@@ -22,8 +26,14 @@ export function initLightbox() {
     img.decoding = "async";
     img.loading = "eager";
 
+    const status = document.createElement("p");
+    status.className = "lb-status";
+    status.hidden = true;
+    status.textContent = UNAVAILABLE_TEXT;
+
     const caption = document.createElement("figcaption");
     caption.className = "lb-caption";
+    caption.id = "lb-caption";
 
     const controls = document.createElement("div");
     controls.className = "lb-controls";
@@ -31,6 +41,7 @@ export function initLightbox() {
     prevBtn.type = "button";
     prevBtn.className = "lb-btn lb-prev";
     prevBtn.setAttribute("aria-label", "Poprzednie zdjęcie");
+    prevBtn.setAttribute("title", "Poprzednie zdjęcie");
     prevBtn.textContent = "←";
     const counter = document.createElement("span");
     counter.className = "lb-counter";
@@ -39,48 +50,35 @@ export function initLightbox() {
     nextBtn.type = "button";
     nextBtn.className = "lb-btn lb-next";
     nextBtn.setAttribute("aria-label", "Następne zdjęcie");
+    nextBtn.setAttribute("title", "Następne zdjęcie");
     nextBtn.textContent = "→";
     const fullBtn = document.createElement("button");
     fullBtn.type = "button";
     fullBtn.className = "lb-btn lb-full";
     fullBtn.setAttribute("aria-label", "Pełny ekran");
+    fullBtn.setAttribute("title", "Pełny ekran");
     fullBtn.textContent = "⤢";
     const closeBtn = document.createElement("button");
     closeBtn.type = "button";
     closeBtn.className = "lb-btn lb-close";
     closeBtn.setAttribute("aria-label", "Zamknij podgląd");
+    closeBtn.setAttribute("title", "Zamknij podgląd");
     closeBtn.textContent = "×";
     controls.append(prevBtn, counter, nextBtn, fullBtn, closeBtn);
-    try {
-      prevBtn.textContent = "←";
-      nextBtn.textContent = "→";
-      closeBtn.textContent = "×";
-      prevBtn.setAttribute("aria-label", "Poprzednie zdjęcie");
-      prevBtn.setAttribute("title", "Poprzednie zdjęcie");
-      nextBtn.setAttribute("aria-label", "Następne zdjęcie");
-      nextBtn.setAttribute("title", "Następne zdjęcie");
-      fullBtn.setAttribute("aria-label", "Pełny ekran");
-      fullBtn.setAttribute("title", "Pełny ekran");
-      closeBtn.setAttribute("aria-label", "Zamknij podgląd");
-      closeBtn.setAttribute("title", "Zamknij podgląd");
-      caption.id = "lb-caption";
-      overlay.setAttribute("aria-label", "Podgląd zdjęcia");
-      overlay.setAttribute("aria-describedby", "lb-caption");
-      overlay.setAttribute("aria-keyshortcuts", "Esc ArrowLeft ArrowRight F");
-    } catch (e) {}
 
     const live = document.createElement("div");
     live.className = "visually-hidden";
     live.id = "lb-live";
     live.setAttribute("aria-live", "polite");
 
-    figure.append(img, caption);
+    figure.append(img, status, caption);
     modal.append(figure, controls, live);
     overlay.append(modal);
     document.body.appendChild(overlay);
   }
 
   const imgEl = overlay.querySelector("img");
+  const statusEl = overlay.querySelector(".lb-status");
   const captionEl = overlay.querySelector(".lb-caption");
   const closeBtn = overlay.querySelector(".lb-close");
   const prevBtn = overlay.querySelector(".lb-prev");
@@ -129,19 +127,43 @@ export function initLightbox() {
   let group = [];
   let index = 0;
   let lastTrigger = null;
+  let groupLabel = "";
+
+  function getGroupLabel(link) {
+    const section = link && link.closest("section[aria-labelledby]");
+    if (!section) return "";
+    const headingId = section.getAttribute("aria-labelledby");
+    const heading = headingId && document.getElementById(headingId);
+    return heading ? heading.textContent.trim() : "";
+  }
 
   function placeArrows() {
     if (!imgEl || !prevBtn || !nextBtn) return;
-    const rect = imgEl.getBoundingClientRect();
+    /* In the unavailable state the arrows line up with the message instead of the hidden image. */
+    const rect = (imgEl.hidden && statusEl ? statusEl : imgEl).getBoundingClientRect();
     if (!rect || !rect.height) return;
     const mid = rect.top + rect.height / 2;
     prevBtn.style.top = mid + "px";
     nextBtn.style.top = mid + "px";
   }
 
-  function updateCounter() {
-    counterEl.textContent = index + 1 + "/" + group.length;
-    if (liveEl) liveEl.textContent = "Obraz " + (index + 1) + " z " + group.length;
+  function updateCounter(status) {
+    const position = index + 1 + "/" + group.length;
+    counterEl.textContent = groupLabel ? groupLabel + " · " + position : position;
+    if (liveEl) {
+      const positionAnnouncement = "Obraz " + (index + 1) + " z " + group.length;
+      liveEl.textContent = (groupLabel ? groupLabel + ". " : "") + positionAnnouncement + (status ? ". " + status : groupLabel ? "." : "");
+    }
+  }
+  function getThumbnailSrc(link, failedSrc) {
+    /*
+     The trigger's thumbnail counts only once it has really loaded a photograph: currentSrc follows the
+     <picture>/srcset choice, and the "Brak obrazu" placeholder from initImageFallbacks() is excluded.
+    */
+    const thumb = link.querySelector("img");
+    if (!thumb || thumb.dataset.fallbackApplied || !thumb.complete || !thumb.naturalWidth) return "";
+    const src = thumb.currentSrc || thumb.src;
+    return src && src !== failedSrc ? src : "";
   }
   function prefetch(i) {
     /* Preload neighboring slides for smoother next/previous navigation. */
@@ -157,9 +179,29 @@ export function initLightbox() {
   function render(i) {
     const a = group[i];
     if (!a) return;
+    /*
+     Every render resets the error state and binds fresh handlers. Replacing src makes the browser drop
+     the previous request's pending load/error events, so these handlers only ever see this image.
+    */
+    let fallbackTried = false;
     imgEl.classList.remove("is-ready");
+    imgEl.hidden = false;
+    if (statusEl) statusEl.hidden = true;
     imgEl.onload = function () {
       imgEl.classList.add("is-ready");
+      placeArrows();
+    };
+    imgEl.onerror = function () {
+      /* Fall back to the thumbnail once; if that is unusable too, show and announce the message. */
+      const thumbSrc = fallbackTried ? "" : getThumbnailSrc(a, imgEl.src);
+      fallbackTried = true;
+      if (thumbSrc) {
+        imgEl.src = thumbSrc;
+        return;
+      }
+      imgEl.hidden = true;
+      if (statusEl) statusEl.hidden = false;
+      updateCounter(UNAVAILABLE_TEXT);
       placeArrows();
     };
     imgEl.src = a.getAttribute("href");
@@ -176,6 +218,7 @@ export function initLightbox() {
     lastTrigger = a;
     const gName = a.getAttribute("data-lightbox") || "gallery";
     group = Array.prototype.slice.call(document.querySelectorAll(".gallery__link" + (gName ? '[data-lightbox="' + gName + '"]' : "")));
+    groupLabel = getGroupLabel(a);
     index = Math.max(0, group.indexOf(a));
     html.classList.add("lb-open");
     render(index);
@@ -186,10 +229,11 @@ export function initLightbox() {
   function closeLightbox() {
     html.classList.remove("lb-open");
     imgEl.removeAttribute("src");
-    if (lastTrigger) lastTrigger.focus();
     if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
 
     setPageInert(false);
+    /* Focus is restored only after the background landmarks are interactive again. */
+    if (lastTrigger) lastTrigger.focus();
   }
   function next() {
     index = (index + 1) % group.length;
@@ -199,10 +243,6 @@ export function initLightbox() {
     index = (index - 1 + group.length) % group.length;
     render(index);
   }
-
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay) return;
-  });
 
   document.addEventListener("keydown", (e) => {
     if (!html.classList.contains("lb-open")) return;

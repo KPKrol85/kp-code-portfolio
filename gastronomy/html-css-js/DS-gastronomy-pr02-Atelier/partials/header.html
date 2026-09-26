@@ -1,0 +1,64 @@
+<header class="site-header" aria-label="Nagłówek strony z nawigacją">
+  <div class="container header__inner">
+    <a class="brand" href="index.html#hero" aria-label="Atelier No.02 — Strona główna">
+      <img src="assets/img-optimized/logo/logo-and-name/header-logo-light.svg" alt="" class="brand__logo brand__logo--light" width="40" height="30" />
+      <img src="assets/img-optimized/logo/logo-and-name/header-logo-dark.svg" alt="" class="brand__logo brand__logo--dark" width="40" height="30" />
+    </a>
+    <div class="header__actions">
+      <!-- hamburger -->
+      <button type="button" class="nav-toggle" aria-label="Otwórz menu" aria-controls="primary-nav" aria-expanded="false">
+        <svg class="nav-toggle__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path class="line line--top" d="M3.75 6.75h16.5" />
+          <path class="line line--middle" d="M3.75 12h16.5" />
+          <path class="line line--bottom" d="M3.75 17.25h16.5" />
+        </svg>
+      </button>
+      <!-- nav -->
+      <nav class="nav" id="primary-nav" aria-label="Nawigacja główna">
+        <ul class="nav__list">
+          <li class="nav__item nav__item--dropdown">
+            <a class="nav__link" href="index.html#about">O nas</a>
+            <button class="nav__dropdown-toggle" id="nav-dd-about-trigger" type="button" aria-expanded="false" aria-controls="nav-dd-about" aria-label="Pokaż więcej: O nas">
+              <svg class="nav__chevron" aria-hidden="true" viewBox="0 0 16 16" focusable="false">
+                <path d="M3.25 5.75L8 10.5l4.75-4.75" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+            <ul class="nav__dropdown" id="nav-dd-about" aria-labelledby="nav-dd-about-trigger">
+              <li><a href="about.html">Poznaj nas</a></li>
+            </ul>
+          </li>
+          <li class="nav__item nav__item--dropdown">
+            <a class="nav__link" href="index.html#menu">Menu</a>
+            <button class="nav__dropdown-toggle" id="nav-dd-menu-trigger" type="button" aria-expanded="false" aria-controls="nav-dd-menu" aria-label="Pokaż więcej: Menu">
+              <svg class="nav__chevron" aria-hidden="true" viewBox="0 0 16 16" focusable="false">
+                <path d="M3.25 5.75L8 10.5l4.75-4.75" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+            <ul class="nav__dropdown" id="nav-dd-menu" aria-labelledby="nav-dd-menu-trigger">
+              <li><a href="menu.html">Pełne menu</a></li>
+            </ul>
+          </li>
+          <li class="nav__item nav__item--dropdown">
+            <a class="nav__link" href="index.html#gallery">Galeria</a>
+            <button class="nav__dropdown-toggle" id="nav-dd-gallery-trigger" type="button" aria-expanded="false" aria-controls="nav-dd-gallery" aria-label="Pokaż więcej: Galeria">
+              <svg class="nav__chevron" aria-hidden="true" viewBox="0 0 16 16" focusable="false">
+                <path d="M3.25 5.75L8 10.5l4.75-4.75" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+            <ul class="nav__dropdown" id="nav-dd-gallery" aria-labelledby="nav-dd-gallery-trigger">
+              <li><a href="gallery.html">Pełna galeria</a></li>
+            </ul>
+          </li>
+          <li><a href="index.html#testimonials">Opinie</a></li>
+          <li><a href="contact.html">Kontakt</a></li>
+        </ul>
+      </nav>
+      <!-- theme toggle -->
+      <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Przełącz tryb ciemny">
+        <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true"><img src="assets/icons/svg-icon/icon-sun.svg" alt="" width="24" height="24" /></span>
+        <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true"><img src="assets/icons/svg-icon/icon-moon.svg" alt="" width="24" height="24" /></span>
+        <span class="visually-hidden">Przełącz tryb ciemny</span>
+      </button>
+    </div>
+  </div>
+</header>

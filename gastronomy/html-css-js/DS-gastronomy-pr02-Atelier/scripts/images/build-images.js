@@ -9,7 +9,6 @@ const OUT_DIR = path.join(ROOT, "assets", "img-optimized");
 const LEGACY_DIR = path.join(ROOT, "assets", "img");
 
 const RASTER_EXTS = new Set([".jpg", ".jpeg", ".png"]);
-const COPY_EXTS = new Set([".jpg", ".jpeg", ".png", ".svg"]);
 
 async function pathExists(p) {
   try {

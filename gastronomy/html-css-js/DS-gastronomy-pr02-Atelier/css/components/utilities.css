@@ -81,3 +81,16 @@
     content: none;
   }
 }
+
+/* Author-address caption */
+.address-caption {
+  display: block;
+  margin: 0 0 var(--space-1);
+  font-size: var(--fs-xxs);
+  font-weight: 400;
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-normal);
+  text-transform: none;
+  color: var(--text-subtle);
+  text-wrap: balance;
+}

@@ -46,15 +46,17 @@
   border: none;
   background: color-mix(in srgb, var(--surface-overlay) 40%, transparent);
 }
-.tabs-nav__list a[aria-current="true"] {
+.tabs-nav__list a.is-active,
+.tabs-nav__list a[aria-current="location"] {
   outline: none;
   border-width: 1px;
   border-color: var(--tab-active-border);
   background: var(--tab-active-bg);
   transform: translateY(-1px);
-  box-shadow: var(--shadow-box);
+  box-shadow: var(--shadow);
 }
-[data-theme="dark"] .tabs-nav__list a[aria-current="true"] {
+[data-theme="dark"] .tabs-nav__list a.is-active,
+[data-theme="dark"] .tabs-nav__list a[aria-current="location"] {
   border-color: var(--tab-active-border);
   background: var(--tab-active-bg);
   color: var(--burgundy);

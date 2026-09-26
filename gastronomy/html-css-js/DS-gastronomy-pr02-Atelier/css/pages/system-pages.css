@@ -69,9 +69,18 @@
 }
 
 /* thank-you.html */
-.page--thank-you .btn {
+.page--thank-you .page-hero__actions {
+  display: grid;
+  gap: var(--space-3);
   width: 100%;
   max-width: 360px;
   margin-top: var(--space-6);
   margin-inline: auto;
+}
+.page--thank-you .page-hero__actions .btn {
+  width: 100%;
+}
+.page--thank-you .page-hero__actions .btn:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
 }

@@ -85,7 +85,7 @@
     {
       "name": "Kontakt",
       "short_name": "Kontakt",
-      "description": "Rezerwacje i kontakt z restauracją",
+      "description": "Formularz i dane kontaktowe projektu Atelier No.02",
       "url": "/contact.html",
       "icons": [
         {

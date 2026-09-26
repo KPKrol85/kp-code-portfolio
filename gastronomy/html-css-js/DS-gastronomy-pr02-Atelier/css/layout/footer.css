@@ -92,6 +92,8 @@
 .footer__contact-item--address {
   max-width: 22ch;
   margin: var(--space-2) auto;
+  flex-direction: column;
+  gap: 0;
 }
 .footer__contact-item a {
   color: inherit;
@@ -109,8 +111,8 @@
 }
 .footer__contact-icon {
   flex-shrink: 0;
-  width: 1.1rem;
-  height: 1.1rem;
+  width: 1.2rem;
+  height: 1.2rem;
   color: var(--c-accent);
   transition: color 0.2s ease;
 }
@@ -146,6 +148,11 @@
   display: block;
   color: inherit;
 }
+/* Registered icons sit on a 640-unit grid with wider margins than the inline LinkedIn icon. */
+.footer__social svg[data-icon] {
+  width: 1.25rem;
+  height: 1.25rem;
+}
 @media (hover: hover) and (pointer: fine) {
   .footer__social a:hover {
     transform: translateY(-2px);
@@ -164,6 +171,26 @@
   .footer__social a:hover {
     transform: none;
   }
+}
+/* Without JavaScript the registered icons never render, so those links show their labels instead. */
+html:not(.js) .footer__social .footer__list {
+  flex-wrap: wrap;
+}
+html:not(.js) .footer__social a {
+  width: auto;
+  min-width: 2.25rem;
+  line-height: inherit;
+}
+html:not(.js) .footer__social svg[data-icon] {
+  display: none;
+}
+html:not(.js) .footer__social svg[data-icon] + .visually-hidden {
+  position: static !important;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
 }
 .footer__legal {
   border-top: 1px solid var(--footer-border);

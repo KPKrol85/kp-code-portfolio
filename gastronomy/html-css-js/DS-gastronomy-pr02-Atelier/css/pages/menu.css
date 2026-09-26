@@ -58,8 +58,7 @@
   background: var(--c-surface-1);
   color: var(--ink);
   font-weight: 600;
-  letter-spacing: var(--ls-widest);
-  font-size: var(--fs-xxxs);
+  letter-spacing: var(--ls-wider);
   line-height: var(--lh-snug);
 }
 .page--menu .menu-filters__btn.is-active {
@@ -77,6 +76,13 @@
   margin-top: var(--space-3);
   color: var(--text-muted);
   text-align: center;
+}
+.page--menu .menu-filters__reset {
+  display: flex;
+  margin: var(--space-2) auto 0;
+}
+.page--menu .menu-filters__reset[hidden] {
+  display: none;
 }
 /* Cards menu */
 .page--menu .section-menu__title {
@@ -140,6 +146,18 @@
   text-decoration-thickness: 2px;
 }
 /* Anchor */
+/* The control is a sibling of its heading, so the heading's accessible name stays its own text. */
+.page--menu .anchor-group {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+.page--menu .menu-card__heading .anchor-group {
+  margin: var(--space-1) auto;
+}
+.page--menu .menu-card__heading .anchor-group .card__title {
+  margin: 0;
+}
 .page--menu .anchor {
   display: inline-block;
   width: 1rem;
@@ -153,14 +171,12 @@
   content: "\1F517";
   font-size: 0.85rem;
 }
-.page--menu .section__title:hover .anchor,
-.page--menu .section__title:focus-within .anchor,
-.page--menu .card__title:hover .anchor,
-.page--menu .card__title:focus-within .anchor {
+.page--menu .anchor-group:hover .anchor,
+.page--menu .anchor-group:focus-within .anchor {
   opacity: 0.65;
 }
-.page--menu .anchor:hover,
-.page--menu .anchor:focus-visible {
+.page--menu .anchor-group .anchor:hover,
+.page--menu .anchor-group .anchor:focus-visible {
   opacity: 1;
 }
 

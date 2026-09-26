@@ -1,6 +1,7 @@
 .page-hero {
   position: relative;
   background: linear-gradient(135deg, color-mix(in srgb, var(--cream) 85%, white), color-mix(in srgb, var(--burgundy) 15%, var(--cream)));
+  padding-block: var(--section-y-lg);
   isolation: isolate;
 }
 .page-hero::after {

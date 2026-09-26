@@ -1,60 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-  xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="https://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://gastronomy-project-02.netlify.app/</loc>
-    <lastmod>2025-10-26</lastmod>
+    <loc>https://gastronomy-pr02-atelier.netlify.app/</loc>
+    <lastmod>2026-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://gastronomy-project-02.netlify.app/about.html</loc>
-    <lastmod>2025-10-26</lastmod>
+    <loc>https://gastronomy-pr02-atelier.netlify.app/about.html</loc>
+    <lastmod>2026-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://gastronomy-project-02.netlify.app/menu.html</loc>
-    <lastmod>2025-10-26</lastmod>
+    <loc>https://gastronomy-pr02-atelier.netlify.app/menu.html</loc>
+    <lastmod>2026-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://gastronomy-project-02.netlify.app/gallery.html</loc>
-    <lastmod>2025-10-26</lastmod>
+    <loc>https://gastronomy-pr02-atelier.netlify.app/gallery.html</loc>
+    <lastmod>2026-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://gastronomy-project-02.netlify.app/contact.html</loc>
-    <lastmod>2025-10-26</lastmod>
+    <loc>https://gastronomy-pr02-atelier.netlify.app/contact.html</loc>
+    <lastmod>2026-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://gastronomy-project-02.netlify.app/cookies.html</loc>
-    <lastmod>2025-10-26</lastmod>
+    <loc>https://gastronomy-pr02-atelier.netlify.app/cookies.html</loc>
+    <lastmod>2026-09-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
 
   <url>
-    <loc>https://gastronomy-project-02.netlify.app/polityka-prywatnosci.html</loc>
-    <lastmod>2025-10-26</lastmod>
+    <loc>https://gastronomy-pr02-atelier.netlify.app/polityka-prywatnosci.html</loc>
+    <lastmod>2026-09-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
 
   <url>
-    <loc>https://gastronomy-project-02.netlify.app/regulamin.html</loc>
-    <lastmod>2025-11-03</lastmod>
+    <loc>https://gastronomy-pr02-atelier.netlify.app/regulamin.html</loc>
+    <lastmod>2026-09-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>

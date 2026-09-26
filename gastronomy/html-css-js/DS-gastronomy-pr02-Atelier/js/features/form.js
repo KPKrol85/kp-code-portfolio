@@ -11,7 +11,7 @@ export function initForm() {
   function shouldShowHostFallback(hostname) {
     if (!hostname) return true;
     if (hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1") return true;
-    return hostname !== "gastronomy-project-02.netlify.app";
+    return hostname !== "gastronomy-pr02-atelier.netlify.app";
   }
 
   if (hostFallback && shouldShowHostFallback(window.location.hostname)) {
@@ -85,12 +85,12 @@ export function initForm() {
       if (validateField(field, false)) validCount++;
     });
     var remaining = fields.length - validCount;
-    if (remaining <= 0) {
-      progress.textContent = "Formularz gotowy do wysłania.";
-      return;
+    var nextMessage = "Formularz gotowy do wysłania.";
+    if (remaining > 0) {
+      var label = pluralize(remaining, "pole", "pola", "pól");
+      nextMessage = "Uzupełnij " + remaining + " " + label + ", aby wysłać.";
     }
-    var label = pluralize(remaining, "pole", "pola", "pól");
-    progress.textContent = "Uzupełnij " + remaining + " " + label + ", aby wysłać.";
+    if (progress.textContent !== nextMessage) progress.textContent = nextMessage;
   }
 
   fields.forEach(function (field) {
@@ -114,6 +114,11 @@ export function initForm() {
       event.preventDefault();
       status && (status.classList.remove("visually-hidden"), (status.textContent = "Uzupełnij poprawnie wyróżnione pola."));
       result.firstInvalid && result.firstInvalid.focus();
+      return;
+    }
+    if (!navigator.onLine) {
+      event.preventDefault();
+      status && (status.classList.remove("visually-hidden"), (status.textContent = "Jesteś offline. Połącz się z internetem, aby wysłać wiadomość."));
       return;
     }
     status && (status.classList.remove("visually-hidden"), (status.textContent = "Wysyłanie…"));

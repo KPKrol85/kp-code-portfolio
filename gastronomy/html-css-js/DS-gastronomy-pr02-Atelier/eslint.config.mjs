@@ -1,7 +1,11 @@
+const sharedRules = {
+  'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+  'no-undef': 'error'
+};
+
 export default [
   {
     files: ['js/**/*.js'],
-    ignores: ['js/script.min.js'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
@@ -27,9 +31,37 @@ export default [
         Image: 'readonly'
       }
     },
-    rules: {
-      'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
-      'no-undef': 'error'
-    }
+    rules: sharedRules
+  },
+  {
+    files: ['sw.js'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'script',
+      globals: {
+        self: 'readonly',
+        caches: 'readonly',
+        fetch: 'readonly',
+        URL: 'readonly',
+        Response: 'readonly'
+      }
+    },
+    rules: sharedRules
+  },
+  {
+    files: ['scripts/**/*.js'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'commonjs',
+      globals: {
+        require: 'readonly',
+        module: 'readonly',
+        __dirname: 'readonly',
+        process: 'readonly',
+        console: 'readonly',
+        URL: 'readonly'
+      }
+    },
+    rules: sharedRules
   }
 ];

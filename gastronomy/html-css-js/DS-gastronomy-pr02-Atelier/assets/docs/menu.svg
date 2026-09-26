@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1100" viewBox="0 0 800 1100" role="img" aria-labelledby="title desc">
-  <title id="title">Sample Menu Document</title>
-  <desc id="desc">Placeholder menu document in SVG format.</desc>
-  <rect width="800" height="1100" fill="#f7f7f5"/>
-  <rect x="48" y="48" width="704" height="1004" fill="#ffffff" stroke="#d9d9d4" stroke-width="2" rx="12"/>
-  <text x="400" y="520" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" fill="#2f2f2f">Sample Menu Document</text>
-  <text x="400" y="580" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#666666">assets/docs/menu.svg</text>
-</svg>

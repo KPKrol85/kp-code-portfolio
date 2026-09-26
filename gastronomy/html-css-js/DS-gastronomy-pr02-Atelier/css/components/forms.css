@@ -35,13 +35,17 @@
 }
 .form input:focus-visible,
 .form textarea:focus-visible {
-  outline: 2px solid color-mix(in oklab, var(--burgundy) 30%, white);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
 .form input.is-invalid,
 .form textarea.is-invalid {
   border-color: color-mix(in oklab, var(--burgundy) 60%, white);
   box-shadow: 0 0 0 3px color-mix(in oklab, var(--burgundy) 22%, white);
+}
+.form__hint {
+  font-size: var(--fs-xxs);
+  color: var(--text-muted);
 }
 .form__error {
   font-size: var(--fs-xxs);
