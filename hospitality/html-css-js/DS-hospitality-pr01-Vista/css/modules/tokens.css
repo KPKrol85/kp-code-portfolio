@@ -22,6 +22,11 @@
   --border-dark: #1b2433;
   --primary-dark: #34d1b2;
 
+  /* Focus ring */
+  --focus-ring-color: var(--primary);
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+
   /* Decorations */
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
   --elev: var(--shadow);
@@ -45,9 +50,7 @@
   --fs-1000: clamp(2.4rem, 2.6vw + 1.4rem, 3.8rem);
 
   /* Buttons */
-  --fs-btn-sm: 0.4rem;
   --fs-btn: 0.8rem;
-  --fs-btn-lg: 1.05rem;
 
   /* Spacing */
   --space-2xs: clamp(0.25rem, 0.2vw, 0.375rem);

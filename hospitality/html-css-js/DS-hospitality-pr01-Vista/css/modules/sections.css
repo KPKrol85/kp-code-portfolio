@@ -53,9 +53,6 @@
   gap: var(--space-md);
   margin: var(--space-2xl) auto;
 }
-.hero__cta .btn {
-  width: 180px;
-}
 .hero__media {
   overflow: hidden;
   border-radius: var(--radius-md);
@@ -165,13 +162,9 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   border-color: color-mix(in oklab, var(--border) 60%, var(--focus) 40%);
 }
-.benefit:focus-visible {
-  outline: 2px solid var(--focus);
-  outline-offset: 2px;
-}
 .benefit__title {
   margin: 0 0 var(--space-md);
-  font-size: var(--fs-300);
+  font-size: var(--fs-400);
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -233,7 +226,6 @@
 }
 .highlight__body .btn {
   justify-self: start;
-  width: 180px;
   margin-left: var(--space-lg);
 }
 @media (min-width: 760px) {
@@ -284,10 +276,6 @@
   color: var(--muted);
   font-size: var(--fs-200);
 }
-.testimonial:focus-within {
-  outline: 2px solid var(--focus);
-  outline-offset: 4px;
-}
 
 /* Sections */
 
@@ -302,6 +290,9 @@
   font-size: var(--fs-500);
   margin: 0 0 var(--space-2xs);
   text-align: center;
+}
+h1.section-title {
+  font-size: var(--fs-800);
 }
 .section-title::after {
   content: "";

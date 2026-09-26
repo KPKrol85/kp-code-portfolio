@@ -1,0 +1,57 @@
+# Changelog
+
+All significant changes to this project are documented in this file.
+
+## [Unreleased]
+
+### Added
+
+- Imported the existing Vista static multi-page site into its dedicated repository, including room, offer, gallery, contact, legal, error, and offline pages.
+- Included room and gallery filters, tabs, a keyboard-operated lightbox, and light/dark/auto theme preferences stored in `localStorage`.
+- Included mobile navigation with keyboard focus handling, visible focus styles, reduced-motion rules, and a project-demo notice whose dismissal is stored in `localStorage`.
+- Included a Netlify Forms-configured contact inquiry form with client-side validation and date constraints; the form does not make a reservation.
+- Included a web app manifest and service worker with cached assets, cached HTML, and an offline page fallback.
+- Included per-page metadata, sitemap and robots files, and embedded JSON-LD fallbacks with optional page-specific payloads.
+- Included Netlify redirect and response-header configuration, including a custom 404 route.
+
+### Documentation
+
+- Aligned the terms, privacy policy, and cookies policy with the site's demonstrational scope and the implemented contact form, browser storage, offline caching, and embedded map.
+- Replaced the root `LICENSE` with project-specific Polish and English KP_Code proprietary terms.
+- Aligned Polish and English README accessibility descriptions with the implemented reveal behavior and form validation.
+
+### Build and Tooling
+
+- Added ignore rules for generated output, dependencies, local configuration, and test reports while retaining project sources and the lockfile.
+- Established modular CSS and JavaScript sources, PostCSS and esbuild asset builds, and a `dist` pipeline that rewrites HTML asset references and generates a content-versioned service worker.
+- Included a Sharp-based image pipeline and responsive image assets in AVIF, WebP, and fallback formats.
+- Moved CSS and JavaScript production bundles into disposable `dist/` output; both `build` and `build:dist` now rebuild a clean package from current sources, while standalone bundle commands preserve other distribution files. Set Netlify to run the full build and publish `dist/`.
+- Limited service worker registration to production-marked HTML, added scoped cleanup of prior Vista registrations and caches during development, and generated the production worker from packaged assets.
+- Added a lightweight `npm run dev` server with live reload, secure source-file serving, and no changes to the production build.
+- Added `qa:fast` with link-integrity, JavaScript syntax, and JSON syntax checks for everyday verification.
+- Moved accessibility checks to project-managed Playwright and axe-core dependencies and synchronized npm and Deno lockfiles.
+
+### Fixed
+
+- Made reveal-marked content visible without JavaScript or when reveal initialization fails, while preserving scroll animations and reduced-motion support.
+- Restored native contact-form validation without JavaScript while preserving enhanced error messages and Netlify Forms submission.
+- Contained keyboard focus within project and gallery dialogs, isolated background interactions, and restored focus after dismissal.
+- Aligned Vista package license metadata with the proprietary `LICENSE` while preserving third-party dependency licenses.
+- Updated image UI cache headers to revalidate same-URL assets and prevent stale images after future deployments.
+- Restored interactive map visibility after delayed iframe loads while preserving the static fallback, accessible loading states, and external Google Maps link.
+- Removed closed mobile navigation links from keyboard focus order while preserving menu interactions, desktop navigation, and the no-JavaScript fallback.
+- Fixed past-arrival date validation and Netlify Forms submission; verified Edge Function rejection of past dates and collection of valid inquiries.
+- Aligned Vista's structured data, metadata, and legal disclosures with its demonstrational scope while preserving real author contact details and adding discreet contact attribution.
+- Gave the main contact section a distinct accessible landmark name while preserving its visible heading and form behavior.
+- Updated accessibility scenarios to handle the project notice and test the current Deluxe room filter.
+- Refined heading typography across subpages and cards using existing type-scale tokens, corrected responsive offer titles, and aligned offer metadata with the defined muted colour.
+- Unified button border and minimum-size handling across variants, preserved responsive CTA layouts, corrected section-header link sizing, and removed unused button typography tokens.
+- Standardized native control font inheritance so contact form fields and room filter buttons use the project's Inter typeface without changing component sizing or interaction behavior.
+- Unified room and gallery filter selected-state styling through existing ARIA attributes, distinguished selected controls from hover, and removed obsolete room-filter tab presentation rules.
+- Consolidated keyboard focus indicators through shared theme-aware ring tokens, removed redundant focus declarations, and preserved card focus geometry and invalid-field styling.
+
+### Testing
+
+- Included local-link integrity checking and a Playwright/axe accessibility audit script.
+- Verified clean production builds and source-to-dist behavior for room filters, project notice, reveal animations, contact validation, and modal focus management.
+- Verified all eight Playwright/axe accessibility scenarios with no reported violations.
