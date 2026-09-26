@@ -102,7 +102,7 @@
       })();
     </script>
     <!-- Styles -->
-    <link rel="stylesheet" href="css/style.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
   </head>
 
   <!-- Body -->
@@ -275,20 +275,22 @@
                   id="phone"
                   name="phone"
                   type="tel"
-                  pattern="^[0-9+\\-\\s]{7,}$"
+                  pattern="^(?=(?:[\s\-]*[0-9+]){7})\+?[0-9\s\-]*$"
                   placeholder="+48 600 900 700"
                   aria-describedby="error-phone"
-                  title="Podaj numer telefonu w formacie międzynarodowym, minimum 7 znaków." />
+                  title="Podaj numer telefonu: cyfry, opcjonalnie znak + na początku, spacje i myślniki (min. 7 znaków, nie licząc spacji i myślników)." />
                 <p id="error-phone" class="form__error" aria-live="polite"></p>
               </div>
               <div class="form__field">
                 <label for="tour">Wybrana wycieczka *</label>
                 <select id="tour" name="tour" required aria-describedby="error-tour">
                   <option value="">Wybierz opcję</option>
-                  <option value="tokio">Tokio &amp; Kyoto Private Edition</option>
+                  <option value="tokio-kyoto">Tokio &amp; Kyoto Private Edition</option>
                   <option value="malediwy">Malediwy Lagoon Escape</option>
                   <option value="patagonia">Patagonia Signature Expedition</option>
-                  <option value="nyc">New York City Break Platinum</option>
+                  <option value="nowy-jork">New York City Break Platinum</option>
+                  <option value="maroko">Maroko Family Discovery</option>
+                  <option value="islandia">Islandia Arctic Wonders</option>
                   <option value="custom">Inna / indywidualna</option>
                 </select>
                 <p id="error-tour" class="form__error" aria-live="polite"></p>
@@ -462,6 +464,6 @@
     </footer>
 
     <!-- Script -->
-    <script src="js/script.min.js"></script>
+    <script type="module" src="js/script.js"></script>
   </body>
 </html>

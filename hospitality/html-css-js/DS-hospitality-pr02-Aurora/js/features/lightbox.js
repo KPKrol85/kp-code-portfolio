@@ -1,3 +1,10 @@
+// Accessible name of a thumbnail button marked with data-lightbox-trigger. Uses the first
+// description that contains text, so a placeholder alt such as "..." falls back to the caption.
+export function getLightboxTriggerLabel(...descriptions) {
+  const description = descriptions.map((text) => (text || "").trim()).find((text) => /[\p{L}\p{N}]/u.test(text));
+  return description ? `Otwórz zdjęcie: ${description}` : "Otwórz zdjęcie";
+}
+
 export function initLightbox() {
   const overlay = document.querySelector("[data-lightbox]");
   if (!overlay) return;
@@ -11,14 +18,15 @@ export function initLightbox() {
   if (!preview || !caption || !closeBtn || !prevBtn || !nextBtn) return;
 
   let images = [];
-  let index = 0;
+  let current = null;
   let lastFocus = null;
   let previousBodyOverflow = "";
 
   const focusable = [closeBtn, prevBtn, nextBtn];
 
+  // Only the images currently shown: the gallery filter hides excluded figures with .is-hidden.
   function collectImages() {
-    images = Array.from(document.querySelectorAll("[data-gallery] img[data-lightbox-src]"));
+    images = Array.from(document.querySelectorAll("[data-gallery] img[data-lightbox-src]")).filter((img) => !img.closest(".is-hidden"));
   }
 
   function lockScroll() {
@@ -30,13 +38,12 @@ export function initLightbox() {
     document.body.style.overflow = previousBodyOverflow;
   }
 
-  function open(newIndex) {
+  function open(img, trigger) {
     collectImages();
-    index = newIndex;
-    const img = images[index];
-    if (!img) return;
+    if (!images.includes(img)) return;
 
-    lastFocus = document.activeElement;
+    current = img;
+    lastFocus = trigger;
     overlay.hidden = false;
     updateContent(img);
     closeBtn.focus();
@@ -51,15 +58,23 @@ export function initLightbox() {
       document.exitFullscreen().catch(() => {});
     }
 
-    if (lastFocus instanceof HTMLElement) {
+    if (lastFocus instanceof HTMLElement && lastFocus.isConnected) {
       lastFocus.focus();
     }
   }
 
+  // Steps from the displayed image through the images visible now, so a filter change
+  // while the lightbox is open cannot leave it on a stale index.
   function navigate(step) {
-    if (!images.length) return;
-    index = (index + step + images.length) % images.length;
-    updateContent(images[index]);
+    collectImages();
+    const position = images.indexOf(current);
+    if (position === -1) {
+      close();
+      return;
+    }
+
+    current = images[(position + step + images.length) % images.length];
+    updateContent(current);
   }
 
   function updateContent(img) {
@@ -81,32 +96,16 @@ export function initLightbox() {
     }
   }
 
+  // Thumbnails are native buttons, so Enter and Space arrive here as a click as well.
   document.addEventListener("click", (event) => {
-    const picture = event.target.closest("picture.tour-gallery__item, picture.gallery-item");
-    if (!picture) return;
+    const trigger = event.target.closest("button[data-lightbox-trigger]");
+    if (!trigger) return;
 
-    const img = picture.querySelector("img[data-lightbox-src]");
+    const img = trigger.querySelector("img[data-lightbox-src]");
     if (!img) return;
     if (!img.closest("[data-gallery]")) return;
 
-    collectImages();
-    const idx = images.indexOf(img);
-    if (idx === -1) return;
-    open(idx);
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key !== "Enter" && event.key !== " ") return;
-    const img = document.activeElement;
-    if (!(img instanceof HTMLImageElement)) return;
-    if (!img.matches("img[data-lightbox-src]")) return;
-    if (!img.closest("[data-gallery]")) return;
-
-    event.preventDefault();
-    collectImages();
-    const idx = images.indexOf(img);
-    if (idx === -1) return;
-    open(idx);
+    open(img, trigger);
   });
 
   closeBtn.addEventListener("click", close);
