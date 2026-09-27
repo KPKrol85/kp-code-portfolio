@@ -36,6 +36,7 @@
 .footer__social a {
   position: relative;
 }
+
 .nav__list a::before,
 .footer__list a::before,
 .btn::before,
@@ -43,6 +44,7 @@
   content: "";
   position: absolute;
 }
+
 .nav__list a::before,
 .footer__list a::before {
   inset: -8px -6px;
@@ -59,16 +61,19 @@
   transform: translateX(-50%);
   transition: width 0.35s ease;
 }
+
 .nav__list a:hover::after,
 .nav__list a:focus-visible::after,
 .footer__list a:hover::after,
 .footer__list a:focus-visible::after {
   width: 100%;
 }
+
 .btn::before {
   inset: -6px -10px;
   border-radius: var(--radius-md);
 }
+
 .footer__social a::before {
   inset: -8px;
 }
@@ -82,7 +87,6 @@
   }
 }
 
-/* Author-address caption */
 .address-caption {
   display: block;
   margin: 0 0 var(--space-1);

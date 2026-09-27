@@ -17,25 +17,16 @@
     opacity 0.2s ease,
     transform 0.2s ease;
 }
+
 .net-status.is-visible {
   opacity: 1;
   transform: translate(-50%, 0);
 }
+
 .net-status.is-offline {
   background: color-mix(in oklab, var(--gold) 12%, var(--surface-overlay));
   border-color: color-mix(in oklab, var(--gold) 35%, var(--surface-overlay-border));
 }
-
-
-
-
-
-
-
-
-
-
-
 
 .nojs {
   position: fixed;

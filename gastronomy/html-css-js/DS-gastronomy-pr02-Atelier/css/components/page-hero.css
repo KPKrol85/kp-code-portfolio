@@ -4,6 +4,7 @@
   padding-block: var(--section-y-lg);
   isolation: isolate;
 }
+
 .page-hero::after {
   content: "";
   position: absolute;
@@ -12,16 +13,19 @@
   pointer-events: none;
   z-index: -1;
 }
+
 .page-hero__inner {
   display: flex;
   justify-content: center;
 }
+
 .page-hero__content {
   max-width: 640px;
   text-align: center;
   display: grid;
   gap: var(--space-4);
 }
+
 .page-hero__eyebrow {
   letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
@@ -29,6 +33,7 @@
   color: var(--burgundy);
   font-weight: 600;
 }
+
 .page-hero__title {
   margin: var(--space-2) 0 var(--space-4);
   font-size: var(--fs-3xl);
@@ -38,6 +43,7 @@
   color: var(--c-ink);
   text-align: center;
 }
+
 .page-hero__lead {
   margin: 0 auto;
   max-width: 38ch;

@@ -1,4 +1,5 @@
 /* gallery.html */
+
 .page--gallery .gallery__grid {
   display: flex;
   gap: var(--gallery-gap);
@@ -11,19 +12,24 @@
   scrollbar-width: thin;
   scrollbar-color: color-mix(in oklab, var(--burgundy) 30%, transparent) transparent;
 }
+
 .page--gallery .section__title {
   margin-bottom: var(--space-2);
 }
+
 .page--gallery .gallery__item {
   flex: 0 0 var(--gallery-slide-basis);
   scroll-snap-align: start;
 }
+
 .page--gallery .gallery__grid::-webkit-scrollbar {
   height: 8px;
 }
+
 .page--gallery .gallery__grid::-webkit-scrollbar-track {
   background: transparent;
 }
+
 .page--gallery .gallery__grid::-webkit-scrollbar-thumb {
   background: color-mix(in oklab, var(--burgundy) 30%, transparent);
   border-radius: var(--radius-md);

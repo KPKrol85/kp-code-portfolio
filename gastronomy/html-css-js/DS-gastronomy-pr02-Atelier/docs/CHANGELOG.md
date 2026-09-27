@@ -25,7 +25,6 @@ All significant changes to this project are documented in this file.
 - Added a direct home-page link to the contact confirmation page while retaining the return-to-form option.
 - Added direct recovery links to the home, menu and gallery pages within the 404 message.
 - Added gallery category names to the lightbox counter and navigation announcements.
-
 - Standardized the site terms and unified legal-page styling, operator information and contact details.
 - Standardized the privacy policy and clarified Netlify Forms processing and embedded Google Maps disclosures, correcting the cookies policy's third-party integration description.
 - Standardized the cookies policy and documented existing `localStorage`, Service Worker and Cache Storage use.
@@ -74,6 +73,7 @@ All significant changes to this project are documented in this file.
 - Made contact-form name and message length requirements visible before entry and associated each hint with its field alongside validation errors.
 - Added focused link and accessibility check selection to the managed QA server runner, preserving the default full-check workflow.
 - Added canonical source locations to composed HTML validation diagnostics, making template and shared partial errors easier to locate without changing generated HTML.
+- Migrated the production domain to `ds-gastronomy-pr02-atelier.netlify.app`, aligning SEO metadata, structured data, sitemap, runtime host detection, validation, and documentation, with the Service Worker cache raised to v1.15.
 
 ### Documentation
 

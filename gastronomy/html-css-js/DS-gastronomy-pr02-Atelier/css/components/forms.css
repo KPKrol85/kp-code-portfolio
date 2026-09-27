@@ -1,4 +1,6 @@
+
 /* Formularze */
+
 .form {
   background: var(--bone);
   padding: var(--space-4);
@@ -6,12 +8,14 @@
   border-radius: var(--radius-md);
   box-shadow: var(--shadow);
 }
+
 .form__row {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
   margin-bottom: var(--space-3);
 }
+
 .form__row label {
   font-size: var(--fs-xxs);
   font-weight: 600;
@@ -19,6 +23,7 @@
   letter-spacing: var(--ls-wide);
   color: var(--text-muted);
 }
+
 .form input,
 .form textarea {
   width: 100%;
@@ -33,29 +38,35 @@
     border-color 0.18s ease,
     box-shadow 0.18s ease;
 }
+
 .form input:focus-visible,
 .form textarea:focus-visible {
   outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
+
 .form input.is-invalid,
 .form textarea.is-invalid {
   border-color: color-mix(in oklab, var(--burgundy) 60%, white);
   box-shadow: 0 0 0 3px color-mix(in oklab, var(--burgundy) 22%, white);
 }
+
 .form__hint {
   font-size: var(--fs-xxs);
   color: var(--text-muted);
 }
+
 .form__error {
   font-size: var(--fs-xxs);
   color: color-mix(in oklab, var(--burgundy) 78%, black);
   min-height: 1.1em;
 }
+
 .form__actions {
   margin: var(--space-4) auto;
   max-width: 380px;
 }
+
 .form__fallback-note {
   padding: var(--space-2) var(--space-4);
   border-radius: var(--radius-md);
@@ -68,6 +79,7 @@
   letter-spacing: var(--ls-wide);
   margin: 0 auto;
 }
+
 .form__progress {
   display: flex;
   align-items: center;
@@ -79,6 +91,7 @@
   color: var(--text-muted);
   font-size: var(--fs-xs);
 }
+
 .form input,
 .form select,
 .form textarea {

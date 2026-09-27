@@ -229,7 +229,7 @@ export function initMenuPage() {
   var onMenuPage = document.body && document.body.classList.contains("page--menu");
   if (!onMenuPage) return;
 
-  initScrollspy({
+  var refreshScrollspy = initScrollspy({
     pageClass: "page--menu",
     ids: ["przystawki", "dania-glowne", "zupy", "kuchnia-szefa", "desery", "drinki"],
     listSelector: '.menu-tabs__list a[href^="#"]',
@@ -246,6 +246,14 @@ export function initMenuPage() {
 
     var buttons = Array.prototype.slice.call(buttonsWrap.querySelectorAll(".menu-filters__btn[data-filter]"));
     var cards = Array.prototype.slice.call(document.querySelectorAll(".menu-card"));
+    var sections = Array.prototype.slice.call(document.querySelectorAll(".menu-section")).map(function (section) {
+      var link = document.querySelector('.menu-tabs__list a[href="#' + section.id + '"]');
+      return {
+        element: section,
+        cards: Array.prototype.slice.call(section.querySelectorAll(".menu-card")),
+        navigationItem: link ? link.closest("li") : null,
+      };
+    });
     var emptyInfo = document.querySelector(".menu-filters__empty");
     var resetButton = document.querySelector(".menu-filters__reset");
     var allButton = buttons.find(function (button) {
@@ -326,6 +334,15 @@ export function initMenuPage() {
         card.style.display = show ? "" : "none";
         if (show) visibleCount++;
       });
+      /* Reuse the card results so sections and category links always reflect the same criteria. */
+      sections.forEach(function (section) {
+        var hasMatches = section.cards.some(function (card) {
+          return card.style.display !== "none";
+        });
+        section.element.hidden = !hasMatches;
+        if (section.navigationItem) section.navigationItem.hidden = !hasMatches;
+      });
+      if (refreshScrollspy) refreshScrollspy();
       reportResults(visibleCount, announce === true);
       if (resetButton) resetButton.hidden = visibleCount !== 0 || (term === "" && activeTag === "*");
     }

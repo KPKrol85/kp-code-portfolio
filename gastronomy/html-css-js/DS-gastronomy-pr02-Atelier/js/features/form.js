@@ -11,7 +11,7 @@ export function initForm() {
   function shouldShowHostFallback(hostname) {
     if (!hostname) return true;
     if (hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1") return true;
-    return hostname !== "gastronomy-pr02-atelier.netlify.app";
+    return hostname !== "ds-gastronomy-pr02-atelier.netlify.app";
   }
 
   if (hostFallback && shouldShowHostFallback(window.location.hostname)) {

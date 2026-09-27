@@ -5,18 +5,22 @@
   font-weight: 500;
   transition: color 0.25s ease;
 }
+
 .nav__list a::after {
   background: linear-gradient(90deg, transparent 0%, color-mix(in oklab, var(--burgundy) 70%, white) 20%, var(--burgundy) 50%, color-mix(in oklab, var(--burgundy) 70%, white) 80%, transparent 100%);
 }
+
 .nav__list a:hover,
 .nav__list a:focus-visible {
   color: var(--burgundy);
 }
+
 .nav__list a,
 .nav__list a:hover,
 .nav__list a:focus-visible {
   text-decoration: none;
 }
+
 .nav-toggle {
   display: inline-flex;
   flex-direction: column;
@@ -36,11 +40,13 @@
     border-color 0.18s ease,
     color 0.18s ease;
 }
+
 .nav-toggle:hover,
 .nav-toggle:focus-visible {
   background: var(--surface-overlay);
   border-color: var(--surface-overlay-border);
 }
+
 html:not(.js) .nav-toggle {
   display: none;
 }
@@ -50,18 +56,22 @@ html:not(.js) .nav-toggle {
   height: 24px;
   display: block;
 }
+
 .nav-toggle__icon .line {
   transform-origin: 12px 12px;
   transition:
     transform 0.25s ease,
     opacity 0.2s ease;
 }
+
 .nav-toggle[aria-expanded="true"] .line--top {
   transform: translateY(5.25px) rotate(45deg);
 }
+
 .nav-toggle[aria-expanded="true"] .line--middle {
   opacity: 0;
 }
+
 .nav-toggle[aria-expanded="true"] .line--bottom {
   transform: translateY(-5.25px) rotate(-45deg);
 }
@@ -82,12 +92,14 @@ html:not(.js) .nav-toggle {
     transform 0.2s ease,
     opacity 0.2s ease;
 }
+
 .js .nav {
   transform: translateY(-8px);
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
 }
+
 .js .nav[data-open="true"] {
   transform: translateY(0);
   opacity: 1;
@@ -109,12 +121,14 @@ html:not(.js) .nav-toggle {
   text-align: center;
   width: 90%;
 }
+
 .nav__list > li {
   display: grid;
   grid-template-columns: 44px 1fr 44px;
   align-items: center;
   justify-items: center;
 }
+
 .nav__list > li > a {
   display: flex;
   align-items: center;
@@ -132,6 +146,7 @@ html:not(.js) .nav-toggle {
   align-items: center;
   gap: var(--space-1);
 }
+
 .nav__item--dropdown::after {
   content: "";
   position: absolute;
@@ -211,14 +226,17 @@ html:not(.js) .nav__dropdown-toggle {
   color: var(--c-ink);
   font-weight: 600;
 }
+
 .nav__dropdown a:hover,
 .nav__dropdown a:focus-visible {
   background: var(--surface-overlay);
   color: var(--burgundy);
 }
+
 .nav__item--dropdown.is-open .nav__chevron {
   transform: rotate(180deg);
 }
+
 .nav__item--dropdown.is-open .nav__dropdown,
 .nav__dropdown-toggle[aria-expanded="true"] + .nav__dropdown {
   display: block;
@@ -227,6 +245,7 @@ html:not(.js) .nav__dropdown-toggle {
   transform: translateY(0);
   pointer-events: auto;
 }
+
 html:not(.js) .nav__item--dropdown:hover .nav__dropdown,
 html:not(.js) .nav__item--dropdown:focus-within .nav__dropdown {
   opacity: 1;
@@ -243,19 +262,17 @@ html:not(.js) .nav__item--dropdown:focus-within .nav__dropdown {
   visibility: hidden;
 }
 
-
-
-
-
 .nav__list a[aria-current="page"] {
   font-weight: 700;
   text-decoration: none;
 }
+
 .nav__list a[aria-current="page"]:focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 3px;
   border-radius: var(--radius-md);
 }
+
 .nav__list a:hover,
 .nav__list a:focus-visible {
   text-underline-offset: 0.35em;

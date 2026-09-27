@@ -1,9 +1,12 @@
 /* Page: About */
+
 .page--about :is(.timeline__cards, .suppliers__cards, .awards__cards, .faq__cards) .card__body {
   display: grid;
   gap: var(--space-2);
 }
+
 /* Timeline cards */
+
 .timeline__year {
   font-size: var(--fs-sm);
   font-weight: 600;
@@ -11,9 +14,11 @@
   text-transform: uppercase;
   color: var(--burgundy);
 }
+
 .timeline__heading {
   margin: var(--space-2) 0;
 }
+
 .timeline__text {
   margin: 0;
   font-size: var(--fs-xs);
@@ -21,78 +26,97 @@
   letter-spacing: var(--ls-wide);
   color: var(--text-subtle);
 }
+
 /* Team Cards */
+
 .team-card figure {
   margin: 0;
 }
+
 .team-card__image {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
+
 .team-card__body {
   display: grid;
   gap: var(--space-1);
 }
+
 .team-card__name {
   font-weight: 600;
 }
+
 .team-card__role {
   margin: 0;
   font-weight: 600;
   color: var(--burgundy);
 }
+
 .team-card__bio {
   margin: var(--space-2) 0;
   color: var(--text-muted);
   font-size: var(--fs-sm);
 }
+
 /* Philosophy cards */
+
 .philosophy__cards .card__body {
   display: grid;
   gap: var(--space-2);
   text-align: left;
 }
+
 .philosophy-card__title {
   margin: var(--space-2) 0;
 }
+
 .philosophy-card__text {
   margin: var(--space-2) 0;
   color: var(--text-muted);
   font-size: var(--fs-sm);
   letter-spacing: var(--ls-wide);
 }
+
 /* Chef cards */
+
 .chef-card {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-4);
   align-items: center;
 }
+
 .chef-card__media {
   padding: 0;
   margin: var(--space-4);
 }
+
 .chef-card__picture {
   display: block;
   height: 100%;
 }
+
 .chef-card__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: var(--radius-md);
 }
+
 .chef-card__body {
   display: grid;
   gap: var(--space-4);
   padding: var(--space-4);
 }
+
 .chef-card__title {
   margin-bottom: var(--space-2);
   font-size: var(--fs-lg);
   text-align: left;
 }
+
 .chef-card__quote {
   margin: 0;
   font-style: italic;
@@ -100,6 +124,7 @@
   font-size: var(--fs-sm);
   letter-spacing: var(--ls-wide-plus);
 }
+
 .chef-card__list {
   display: grid;
   gap: var(--space-1);
@@ -110,12 +135,15 @@
   font-weight: 600;
   letter-spacing: var(--ls-wide-plus);
 }
+
 .chef-card__signature {
   font-weight: 600;
   color: var(--burgundy);
   margin: 0 var(--space-1);
 }
+
 /* Suppliers cards */
+
 .suppliers-card__tag {
   font-weight: 600;
   color: var(--burgundy);
@@ -124,24 +152,30 @@
   font-size: var(--fs-xs);
   margin-bottom: var(--space-2);
 }
+
 .suppliers-card__text {
   margin: var(--space-2) 0;
   color: var(--text-muted);
   font-size: var(--fs-sm);
   letter-spacing: var(--ls-wide);
 }
+
 /* Awards cards */
+
 .awards-card__title {
-  display: inline-flex;
+  display: grid;
   align-items: center;
   gap: var(--space-3);
   font-weight: 600;
+  text-align: center;
   color: var(--charcoal);
 }
+
 .awards-card__icon {
   color: currentColor;
   font-size: var(--fs-sm);
 }
+
 .awards-card__text {
   margin: 0;
   font-size: var(--fs-xs);
@@ -149,27 +183,34 @@
   letter-spacing: var(--ls-wide);
   color: var(--text-subtle);
 }
+
 /* Location card */
+
 .location-card {
   display: grid;
   gap: var(--space-3);
 }
+
 .location-card__title {
   margin: var(--space-4) 0;
 }
+
 .location-card__table {
   width: 100%;
   border-collapse: collapse;
 }
+
 .location-card__day,
 .location-card__hours {
   text-align: left;
   padding: var(--space-1) 0;
   border-bottom: 1px solid var(--border-soft);
 }
+
 .location-card__day {
   font-weight: 600;
 }
+
 .location-card__note {
   margin: var(--space-4) 0;
   color: var(--text-muted);
@@ -177,6 +218,7 @@
   letter-spacing: var(--ls-wide);
   font-weight: 600;
 }
+
 .location-card__address {
   color: var(--text-muted);
   font-size: var(--fs-xs);
@@ -184,18 +226,22 @@
   line-height: var(--lh-relaxed);
   font-style: normal;
 }
+
 .location-card__cta {
   align-self: start;
   font-weight: 600;
   border: 1px solid var(--border-soft);
   margin-top: var(--space-2);
 }
+
 /* FAQ */
+
 .faq__question {
   margin: 0;
   padding-bottom: var(--space-2);
   letter-spacing: var(--ls-widest);
 }
+
 .faq__question::after {
   content: "";
   display: block;
@@ -206,6 +252,7 @@
   border-radius: var(--radius-pill);
   opacity: 0.8;
 }
+
 .faq__answer {
   margin: 0;
   color: var(--text-muted);
@@ -214,7 +261,9 @@
   font-weight: 500;
   line-height: var(--lh-relaxed);
 }
+
 /* CTA */
+
 .cta__wrap {
   text-align: center;
   display: grid;
@@ -222,6 +271,7 @@
   max-width: 640px;
   margin: 0 auto;
 }
+
 .cta__icon {
   display: flex;
   justify-content: center;
@@ -229,6 +279,7 @@
   margin-bottom: var(--space-2);
   color: var(--burgundy);
 }
+
 .cta__svg {
   display: block;
   width: 28px;
@@ -236,16 +287,19 @@
   transform: translateX(1px);
   transition: transform 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
 }
+
 .cta__actions {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-4);
   justify-content: center;
 }
+
 .cta__btn {
-  font-weight: 600;
+  font-weight: 400;
   margin-top: var(--space-2);
 }
+
 .cta__btn.btn--ghost {
   border: 1px solid var(--border-soft);
 }

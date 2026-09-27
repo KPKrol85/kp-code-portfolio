@@ -1,4 +1,5 @@
 /* contact.html */
+
 .page--contact .contact__details {
   flex-direction: column;
   align-items: center;
@@ -6,6 +7,7 @@
   margin-inline: auto;
   gap: var(--space-4);
 }
+
 .page--contact .contact__text {
   text-align: center;
   margin-top: var(--space-2);
@@ -16,20 +18,24 @@
   flex-direction: column;
   gap: 0;
 }
+
 .page--contact .contact__detail--address .contact__text {
   margin-top: 0;
 }
 
 /* map */
+
 .page--contact .contact-map {
   padding-top: 0;
 }
+
 .page--contact .contact-map__embed {
   border: 1px solid var(--border-soft);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow);
   overflow: hidden;
 }
+
 .page--contact .contact-map__embed iframe {
   border: 0;
   display: block;
@@ -37,6 +43,7 @@
   min-height: 320px;
   aspect-ratio: 16 / 9;
 }
+
 .page--contact .contact-map__note {
   margin-top: var(--space-4);
   text-align: center;

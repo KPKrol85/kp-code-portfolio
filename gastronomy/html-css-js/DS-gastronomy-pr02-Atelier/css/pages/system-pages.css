@@ -1,4 +1,5 @@
 /* offline.html */
+
 .page-hero__note {
   margin-top: var(--space-3);
   padding: var(--space-4);
@@ -10,6 +11,7 @@
   box-sizing: border-box;
   text-align: left;
 }
+
 .page-hero__note-intro {
   margin: 0 0 var(--space-2);
   font-size: var(--fs-xs);
@@ -19,6 +21,7 @@
   text-align: center;
   text-transform: uppercase;
 }
+
 .page-hero__note-list {
   margin: 0;
   padding: 0;
@@ -28,10 +31,12 @@
   font-size: var(--fs-xs);
   color: var(--text-muted);
 }
+
 .page-hero__note-list li {
   position: relative;
   padding-left: var(--space-3);
 }
+
 .page-hero__note-list li::before {
   content: "•";
   position: absolute;
@@ -39,6 +44,7 @@
   color: var(--text-muted);
   top: 0.2em;
 }
+
 .page--offline .menu__cta {
   display: flex;
   flex-wrap: wrap;
@@ -46,6 +52,7 @@
   gap: var(--space-3);
   margin-block: var(--space-6);
 }
+
 .page--offline .menu__cta .btn {
   display: inline-block;
   width: fit-content;
@@ -53,13 +60,16 @@
   min-width: min(200px, 100%);
   white-space: nowrap;
 }
+
 .page--offline .card__body {
   padding: var(--space-5);
 }
+
 .page--offline .card__text {
   margin: var(--space-4) auto;
   text-align: center;
 }
+
 .page--offline .card .btn {
   margin-top: var(--space-2);
   width: fit-content;
@@ -69,6 +79,7 @@
 }
 
 /* thank-you.html */
+
 .page--thank-you .page-hero__actions {
   display: grid;
   gap: var(--space-3);
@@ -77,9 +88,11 @@
   margin-top: var(--space-6);
   margin-inline: auto;
 }
+
 .page--thank-you .page-hero__actions .btn {
   width: 100%;
 }
+
 .page--thank-you .page-hero__actions .btn:focus-visible {
   outline: 2px solid var(--focus-ring);
   outline-offset: 2px;

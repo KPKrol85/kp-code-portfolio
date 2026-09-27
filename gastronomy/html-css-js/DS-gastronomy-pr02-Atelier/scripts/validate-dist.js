@@ -32,7 +32,7 @@ const IMAGE_OUTPUTS = "assets/img-optimized";
 const RASTER_SOURCE_FORMATS = [".jpg", ".jpeg", ".png"];
 const DERIVED_RASTER_FORMATS = [".avif", ".webp"];
 const VECTOR_FORMAT = ".svg";
-const PRODUCTION_ORIGIN = "https://gastronomy-pr02-atelier.netlify.app";
+const PRODUCTION_ORIGIN = "https://ds-gastronomy-pr02-atelier.netlify.app";
 const HOME_PAGE = "index.html";
 const BREADCRUMB_TYPE = "BreadcrumbList";
 const JSON_LD_SCRIPT = /<script\b[^>]*\btype=(['"])application\/ld\+json\1[^>]*>([\s\S]*?)<\/script>/gi;

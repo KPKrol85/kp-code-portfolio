@@ -12,7 +12,16 @@ export function initScrollspy(config) {
     if (id) linkMap[id] = a;
   });
 
+  var activeId = "";
+
+  function isVisibleSection(id) {
+    var el = document.getElementById(id);
+    return el && !el.hidden;
+  }
+
   function setActive(id) {
+    if (!isVisibleSection(id)) id = config.ids.find(isVisibleSection) || "";
+    activeId = id;
     links.forEach(function (a) {
       var match = (a.getAttribute("href") || "").replace(/^#/, "") === id;
       if (match) {
@@ -70,7 +79,7 @@ export function initScrollspy(config) {
     if (observer) observer.disconnect();
     observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && !entry.target.hidden) {
           var id = entry.target.getAttribute("id");
           if (id) setActive(id);
         }
@@ -78,11 +87,22 @@ export function initScrollspy(config) {
     }, getObserverOptions());
     config.ids.forEach(function (id) {
       var el = document.getElementById(id);
-      if (el) observer.observe(el);
+      if (el && !el.hidden) observer.observe(el);
     });
   }
 
   updatePositions();
+
+  /* Filtering can change section visibility and sticky navigation geometry without a resize. */
+  function refresh() {
+    updatePositions();
+    if (typeof IntersectionObserver === "function") {
+      setActive(activeId);
+      observeSections();
+    } else {
+      updateActive();
+    }
+  }
 
   if (typeof IntersectionObserver === "function") {
     /*
@@ -90,11 +110,8 @@ export function initScrollspy(config) {
      have a single meaning. The scroll-offset algorithm below is not registered on this path.
     */
     observeSections();
-    window.addEventListener("resize", function () {
-      updatePositions();
-      observeSections();
-    });
-    return;
+    window.addEventListener("resize", refresh);
+    return refresh;
   }
 
   /* Fallback owner, reached only where IntersectionObserver is unavailable. */
@@ -105,10 +122,11 @@ export function initScrollspy(config) {
 
   function getActiveId() {
     var offset = window.scrollY + headerHeight + stickyHeight + 8;
-    var current = config.ids[0];
+    var current = "";
     for (var i = 0; i < config.ids.length; i++) {
       var el = document.getElementById(config.ids[i]);
-      if (!el) continue;
+      if (!el || el.hidden) continue;
+      if (!current) current = config.ids[i];
       if (el.getBoundingClientRect().top + window.scrollY <= offset) {
         current = config.ids[i];
       }
@@ -131,8 +149,6 @@ export function initScrollspy(config) {
 
   setTimeout(updateActive, 0);
   window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", function () {
-    updatePositions();
-    updateActive();
-  });
+  window.addEventListener("resize", refresh);
+  return refresh;
 }

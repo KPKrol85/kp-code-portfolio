@@ -1,4 +1,5 @@
 /* Cards */
+
 .page .cards {
   display: grid;
   grid-template-columns: 1fr;
@@ -7,6 +8,7 @@
   padding: 0;
   list-style: none;
 }
+
 .page .card {
   background: var(--bone);
   border: 1px solid var(--border-soft);
@@ -16,26 +18,31 @@
   display: flex;
   flex-direction: column;
 }
+
 .page .card__image {
   aspect-ratio: 3/2;
   object-fit: cover;
 }
+
 .page .card__image.img-fallback,
 .page .gallery__img.img-fallback {
   background: color-mix(in oklab, var(--surface-overlay) 60%, var(--bone));
   object-fit: contain;
 }
+
 .page .card__body {
   padding: var(--space-4);
   display: flex;
   flex-direction: column;
   flex: 1;
 }
+
 .page .card__title {
   text-align: center;
   margin: var(--space-1) auto;
   position: relative;
 }
+
 .page .card__title::after {
   content: "";
   display: block;
@@ -51,16 +58,19 @@
   );
   opacity: 0.9;
 }
+
 .page .card__text {
   margin: 0;
   color: var(--charcoal);
   font-size: var(--fs-sm);
 }
+
 .page .menu-card article {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
+
 .page .menu-card__figure {
   margin: 0;
   overflow: hidden;
@@ -68,13 +78,16 @@
 .page .menu-card__figure picture {
   display: block;
 }
+
 .page .menu-card__figure img {
   transition: transform 0.35s ease;
 }
+
 .page .menu-card:hover .menu-card__figure img,
 .page .menu-card:focus-within .menu-card__figure img {
   transform: scale(1.03);
 }
+
 .page .menu-card__heading {
   display: flex;
   flex-direction: column;
@@ -82,12 +95,14 @@
   gap: var(--space-4);
   margin-bottom: var(--space-2);
 }
+
 .page .menu-card__price {
   margin-left: 0;
   font-weight: 600;
   color: color-mix(in oklab, var(--burgundy) 90%, black);
   white-space: nowrap;
 }
+
 [data-theme="dark"] .page .menu-card__price {
   color: color-mix(in oklab, var(--burgundy) 86%, white);
 }
@@ -95,6 +110,7 @@
 [data-theme="dark"] .page .menu-card .card__text {
   color: var(--ink);
 }
+
 .page .menu-card__tags {
   margin: 0;
   padding: var(--space-4) 0 0;
@@ -104,7 +120,7 @@
   gap: var(--space-2);
   margin-top: auto;
 }
-/* Same type and burgundy tint as the active menu filter chip (pages/menu.css), minus its border, so it reads as a label rather than a control. */
+
 .page .menu-card__tag {
   padding: var(--space-1) var(--space-3);
   border-radius: var(--radius-md);
@@ -114,22 +130,31 @@
   background: color-mix(in oklab, var(--burgundy) 10%, white);
   color: color-mix(in oklab, var(--burgundy) 92%, black);
 }
+
 [data-theme="dark"] .page .menu-card__tag {
   background: color-mix(in oklab, var(--burgundy) 20%, var(--bone));
   color: var(--burgundy);
 }
+
 .page .menu-card a:focus-visible {
   outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
 @media (min-width: 760px) {
-  .page .cards { grid-template-columns: repeat(2, 1fr); }
-  .page .menu-card__heading { flex-direction: row; }
-  .page .menu-card__price { margin-left: auto; }
+  .page .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .page .menu-card__heading {
+    flex-direction: row;
+  }
+  .page .menu-card__price {
+    margin-left: auto;
+  }
 }
 
 @media (min-width: 1024px) {
-  .page .cards { grid-template-columns: repeat(3, 1fr); }
+  .page .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
-
